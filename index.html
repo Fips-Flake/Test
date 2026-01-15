@@ -4,33 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Willkommen | Kids Pop Art</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Permanent+Marker&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Luckiest+Guy&display=swap" rel="stylesheet">
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; width: 100%; background-color: #00ced1; }
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; }
         .hero {
             height: 100vh;
-            /* Stabilerer Bild-Link */
-            background: linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0.1)), 
-                        url('https://images.unsplash.com/photo-1583244532610-2ae22e06184d?q=80&w=2070') no-repeat center center fixed;
-            background-size: cover;
-            display: flex; justify-content: center; align-items: center; text-align: center;
+            background-color: #00ced1;
+            /* Pop-Art Strahlen-Effekt per Code */
+            background-image: repeating-conic-gradient(from 0deg, #00ced1 0deg 15deg, #00b5b8 15deg 30deg);
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
         }
-        .welcome-box {
-            background: white; border: 8px solid #000; padding: 40px;
-            box-shadow: 20px 20px 0px #ff00ff; transform: rotate(1deg);
+        .welcome-card {
+            background: #fff; border: 8px solid #000; padding: 50px;
+            border-radius: 40px 10px 40px 10px; box-shadow: 20px 20px 0px #ff00ff;
+            transform: rotate(-1deg);
         }
-        h1 { font-family: 'Permanent Marker', cursive; font-size: clamp(3rem, 10vw, 5rem); color: #00ced1; -webkit-text-stroke: 2px black; text-shadow: 6px 6px 0px #fff200; margin: 0; }
+        h1 {
+            font-family: 'Luckiest Guy', cursive; font-size: 6rem; color: #fff200;
+            -webkit-text-stroke: 3px #000; text-shadow: 8px 8px 0px #000; margin: 0;
+        }
         .enter-btn {
-            display: inline-block; background: #ff00ff; color: white; padding: 20px 40px; margin-top: 20px;
-            text-decoration: none; font-family: 'Bangers', cursive; font-size: 2rem; border: 5px solid black; box-shadow: 8px 8px 0px black;
+            display: inline-block; margin-top: 30px; padding: 20px 50px;
+            background: #ff00ff; color: #fff; text-decoration: none;
+            font-family: 'Bangers', cursive; font-size: 2.5rem;
+            border: 5px solid #000; box-shadow: 10px 10px 0px #000; transition: 0.2s;
         }
+        .enter-btn:hover { transform: scale(1.1) rotate(3deg); background: #fff200; color: #000; }
     </style>
 </head>
 <body>
     <div class="hero">
-        <div class="welcome-box">
-            <h1>YO!</h1>
-            <a href="Hauptseite" class="enter-btn">EINTRETEN</a>
+        <div class="welcome-card">
+            <h1>BÄM!</h1>
+            <a href="hauptseite.html" class="enter-btn">EINTRETEN</a>
         </div>
     </div>
 </body>
