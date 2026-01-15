@@ -4,143 +4,140 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ANTON | Official</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #FFD93D;    /* Warmes Gelb */
-            --secondary: #FF6B6B;  /* Fröhliches Koralle */
-            --accent: #4D96FF;     /* Frisches Blau */
-            --dark: #2D3436;
+            --primary: #FFD93D;
+            --secondary: #FF6B6B;
+            --accent: #4D96FF;
+            --bg: #ffffff;
         }
 
         body {
             margin: 0; padding: 0;
             font-family: 'Poppins', sans-serif;
-            background: #fff;
-            color: var(--dark);
+            background-color: var(--bg);
+            transition: background-color 0.5s ease; /* Sanfter Farbwechsel des Hintergrunds */
+            color: #333;
             overflow-x: hidden;
         }
 
-        /* Dynamischer Header */
+        /* Kompakter Header */
         header {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            padding: 60px 20px;
+            padding: 30px 10px;
             text-align: center;
             color: white;
-            clip-path: ellipse(150% 100% at 50% 0%); /* Moderne, geschwungene Kante */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
         .logo {
             font-family: 'Montserrat', sans-serif;
-            font-size: 4.5rem;
-            letter-spacing: -2px;
+            font-size: clamp(3rem, 10vw, 5rem);
             margin: 0;
-            text-shadow: 4px 4px 0px rgba(0,0,0,0.1);
-            animation: bounce 2s infinite ease-in-out;
+            text-transform: uppercase;
+            animation: pulse 2s infinite ease-in-out;
+            display: inline-block;
         }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
-        /* Navigation */
         nav {
+            margin-top: 20px;
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-top: 30px;
             flex-wrap: wrap;
+            gap: 10px;
         }
 
         nav a {
             text-decoration: none;
             color: white;
-            font-weight: 600;
-            padding: 10px 20px;
-            border-radius: 50px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(5px);
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
+            font-weight: 700;
+            padding: 8px 16px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 12px;
+            font-size: 0.9rem;
+            transition: 0.3s;
         }
 
         nav a:hover {
             background: white;
             color: var(--secondary);
-            transform: scale(1.1);
         }
 
-        /* Content Area */
-        .container {
-            max-width: 1000px;
-            margin: -30px auto 50px;
-            padding: 20px;
-        }
-
-        .welcome-card {
-            background: white;
-            padding: 40px;
-            border-radius: 30px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-            text-align: center;
+        /* Main Section */
+        .wrapper {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
         }
 
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
+            gap: 20px;
         }
 
-        .feature-card {
-            padding: 30px;
-            border-radius: 25px;
+        .card {
             background: white;
-            border: 3px solid #f0f0f0;
+            padding: 30px;
+            border-radius: 24px;
+            border: 4px solid #f0f0f0;
+            text-align: center;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
         }
 
-        /* Farb-Wechsel Effekt beim Drüberfahren */
-        .feature-card:hover {
-            transform: translateY(-15px);
+        /* Interaktion: Karte springt und Hintergrund reagiert */
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
             border-color: var(--accent);
-            box-shadow: 0 15px 30px rgba(77, 150, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
 
-        .feature-card h3 {
-            color: var(--accent);
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
+        /* Spezial-Effekt für die zweite Karte */
+        .card.music:hover { border-color: var(--accent); }
+        .card.shows:hover { border-color: var(--secondary); }
 
-        .feature-card:nth-child(2):hover {
-            border-color: var(--secondary);
-            box-shadow: 0 15px 30px rgba(255, 107, 107, 0.2);
-        }
-        .feature-card:nth-child(2) h3 { color: var(--secondary); }
+        h2 { font-family: 'Montserrat', sans-serif; color: var(--secondary); margin-top: 0; }
+        p { color: #666; font-size: 1.1rem; }
 
-        footer {
-            text-align: center;
-            padding: 50px;
-            background: #f9f9f9;
-            color: #bbb;
-        }
-
-        /* Kleine visuelle Highlights ohne Emojis */
-        .dot {
-            height: 12px; width: 12px;
-            background-color: var(--accent);
-            border-radius: 50%;
+        .btn-more {
             display: inline-block;
-            margin-right: 5px;
+            margin-top: 15px;
+            padding: 10px 25px;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .card:hover .btn-more {
+            background: var(--dark);
+            transform: scale(1.1);
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1 class="logo">ANTON</h1>
+    <div class="logo">ANTON</div>
     <nav>
-        <a href="in
+        <a href="index.html">Start</a>
+        <a href="hauptseite.html">Home</a>
+        <a href="ueber-mich.html">Über mich</a>
+        <a href="konzerte.html">Konzerte</a>
+        <a href="social-media.html">Social</a>
+        <a href="kontakt.html">Kontakt</a>
+    </nav>
+</header>
+
+<div class="wrapper">
