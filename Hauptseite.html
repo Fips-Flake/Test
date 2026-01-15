@@ -3,130 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANTON | Kids Pop Art</title>
+    <title>ANTON | Kids Pop</title>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Luckiest+Guy&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --turquois: #00ced1;
-            --pink: #ff00ff;
-            --yellow: #fff200;
-        }
-
+        /* Wir malen den Hintergrund direkt im Browser */
         body {
             margin: 0;
             padding: 0;
-            min-height: 100vh;
-            /* Pop-Art Strahlen-Hintergrund direkt per Code */
-            background-color: var(--turquois);
-            background-image: repeating-conic-gradient(from 0deg, var(--turquois) 0deg 15deg, #00b5b8 15deg 30deg);
+            background-color: #00ced1; /* Türkis als Basis */
+            /* Erzeugt ein krasses Pop-Art Punkt-Muster */
+            background-image: radial-gradient(#ff00ff 20%, transparent 20%),
+                              radial-gradient(#fff200 20%, transparent 20%);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
             font-family: 'Luckiest Guy', cursive;
-            display: flex;
-            flex-direction: column;
+            min-height: 100vh;
         }
 
-        /* Moderne Sticker-Navigation */
         nav {
-            background: #000;
+            background: #fff200;
             padding: 15px;
             display: flex;
             justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            border-bottom: 5px solid var(--pink);
+            border-bottom: 5px solid black;
         }
 
         nav a {
-            color: #000;
+            margin: 0 10px;
             text-decoration: none;
-            background: var(--yellow);
-            padding: 8px 15px;
-            border: 3px solid #000;
+            color: black;
+            font-family: 'Bangers', cursive;
+            background: white;
+            padding: 5px 15px;
+            border: 3px solid black;
             transform: rotate(-2deg);
-            font-size: 1.2rem;
-            transition: 0.2s;
         }
 
-        nav a:hover {
-            transform: rotate(2deg) scale(1.1);
-            background: #fff;
-        }
-
-        /* Die Comic-Box in der Mitte */
-        .comic-panel {
-            max-width: 700px;
-            margin: 60px auto;
-            background: #fff;
-            border: 8px solid #000;
+        .main-box {
+            max-width: 600px;
+            margin: 80px auto;
+            background: white;
+            border: 8px solid black;
             padding: 40px;
-            position: relative;
-            box-shadow: 15px 15px 0px #000;
-            border-radius: 20px;
+            border-radius: 30px;
+            box-shadow: 15px 15px 0px black;
+            text-align: center;
         }
 
-        /* Der Name als Graffiti-Tag */
         h1 {
             font-size: 5rem;
-            text-align: center;
-            margin: 0;
-            margin-top: -90px;
-            color: var(--pink);
-            -webkit-text-stroke: 3px #000;
-            text-shadow: 6px 6px 0px var(--yellow);
+            color: #00ced1;
+            -webkit-text-stroke: 2px black;
+            text-shadow: 5px 5px 0px #ff00ff;
+            margin-top: -80px;
             transform: rotate(-3deg);
-        }
-
-        .text-bubble {
-            font-family: 'Bangers', cursive;
-            font-size: 1.6rem;
-            line-height: 1.4;
-            color: #222;
-            margin-top: 30px;
-            border: 4px solid var(--turquois);
-            padding: 20px;
-            background: #fdfdfd;
-            border-radius: 15px;
-        }
-
-        /* Icons als reiner Code (SVG) */
-        .icon-svg {
-            width: 80px;
-            height: 80px;
-            position: absolute;
-            filter: drop-shadow(4px 4px 0px #000);
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="Hauptseite">Home</a>
-        <a href="Über mich">Über mich</a>
-        <a href="Konzerte">Konzerte</a>
-        <a href="Social Media">Social Media</a>
-        <a href="Kontakt">Kontakt</a>
-        <a href="Datenschutz">Datenschutz</a>
-        <a href="Impressum">Impressum</a>
+        <a href="Hauptseite.html">Home</a>
+        <a href="Über mich.html">Über mich</a>
+        <a href="Konzerte.html">Konzerte</a>
     </nav>
 
-    <div class="comic-panel">
-        <div class="icon-svg" style="top: -40px; right: -30px;">
-            <svg viewBox="0 0 24 24" fill="var(--yellow)" stroke="black" stroke-width="2">
-                <path d="M3 18v-6c0-5 4-9 9-9s9 4 9 9v6h-4v-4h2v-2c0-3.3-2.7-6-6-6s-6 2.7-6 6v2h2v4H3zM19 16h-2v2h2v-2zM7 16H5v2h2v-2z"/>
-            </svg>
-        </div>
-
+    <div class="main-box">
         <h1>ANTON</h1>
-
-        <div class="text-bubble">
-            <p><strong>BÄM! WILLKOMMEN!</strong></p>
-            <p>Check den neuen Sound und meine nächsten Shows. Hier geht die Post ab!</p>
-        </div>
-
-        <div class="icon-svg" style="bottom: -30px; left: -30px; transform: rotate(15deg);">
-            <svg viewBox="0 0 24 24" fill="var(--pink)" stroke="black" stroke-width="2">
-                <path d="M9 18V5l12-2v13M9 18a3 3 0 11-6 0 3 3 0 016 0zm12-2a3 3 0 11-6 0 3 3 0 016 0z"/>
-            </svg>
-        </div>
+        <p style="font-size: 1.5rem;">Bist du bereit für den Street-Beat?</p>
     </div>
 
 </body>
