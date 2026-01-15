@@ -3,74 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANTON | Kids Pop</title>
+    <title>Hauptseite | Kids Pop Art</title>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Luckiest+Guy&display=swap" rel="stylesheet">
     <style>
-        /* Wir malen den Hintergrund direkt im Browser */
         body {
-            margin: 0;
-            padding: 0;
-            background-color: #00ced1; /* Türkis als Basis */
-            /* Erzeugt ein krasses Pop-Art Punkt-Muster */
-            background-image: radial-gradient(#ff00ff 20%, transparent 20%),
+            margin: 0; padding: 0; min-height: 100vh;
+            background-color: #ff00ff;
+            /* Cooles Punkte-Muster für den Pop-Art Look */
+            background-image: radial-gradient(#00ced1 20%, transparent 20%), 
                               radial-gradient(#fff200 20%, transparent 20%);
-            background-size: 40px 40px;
-            background-position: 0 0, 20px 20px;
-            font-family: 'Luckiest Guy', cursive;
-            min-height: 100vh;
+            background-size: 50px 50px; background-position: 0 0, 25px 25px;
+            font-family: 'Arial', sans-serif;
         }
-
+        /* Navigation als Sticker-Leiste */
         nav {
-            background: #fff200;
-            padding: 15px;
-            display: flex;
-            justify-content: center;
-            border-bottom: 5px solid black;
+            background: #000; padding: 15px; display: flex; justify-content: center;
+            flex-wrap: wrap; gap: 10px; border-bottom: 6px solid #fff200; position: sticky; top: 0; z-index: 1000;
         }
-
         nav a {
-            margin: 0 10px;
-            text-decoration: none;
-            color: black;
-            font-family: 'Bangers', cursive;
-            background: white;
-            padding: 5px 15px;
-            border: 3px solid black;
-            transform: rotate(-2deg);
+            font-family: 'Bangers', cursive; color: #000; text-decoration: none;
+            font-size: 1.1rem; padding: 8px 15px; background: #fff200;
+            border: 3px solid #000; transform: rotate(-2deg); transition: 0.2s;
         }
+        nav a:hover { background: #fff; transform: scale(1.1) rotate(2deg); }
 
-        .main-box {
-            max-width: 600px;
-            margin: 80px auto;
-            background: white;
-            border: 8px solid black;
-            padding: 40px;
-            border-radius: 30px;
-            box-shadow: 15px 15px 0px black;
-            text-align: center;
+        /* Das Haupt-Panel */
+        .main-panel {
+            max-width: 800px; margin: 80px auto; background: #fff;
+            border: 10px solid #000; padding: 40px; border-radius: 30px;
+            box-shadow: 25px 25px 0px #000; position: relative;
         }
-
         h1 {
-            font-size: 5rem;
-            color: #00ced1;
-            -webkit-text-stroke: 2px black;
-            text-shadow: 5px 5px 0px #ff00ff;
-            margin-top: -80px;
+            font-family: 'Luckiest Guy', cursive; font-size: 5rem; color: #00ced1;
+            text-align: center; margin: 0; margin-top: -95px;
+            -webkit-text-stroke: 3px #000; text-shadow: 6px 6px 0px #fff200;
             transform: rotate(-3deg);
         }
+        .content-box {
+            font-family: 'Bangers', cursive; font-size: 1.8rem; line-height: 1.4;
+            color: #333; margin-top: 30px; border: 4px dashed #ff00ff;
+            padding: 20px; background: #fdfdfd;
+        }
+        .sticker { position: absolute; font-size: 4rem; filter: drop-shadow(5px 5px 0px #000); }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="Hauptseite.html">Home</a>
-        <a href="Über mich.html">Über mich</a>
-        <a href="Konzerte.html">Konzerte</a>
+        <a href="index.html">Start</a>
+        <a href="hauptseite.html">Home</a>
+        <a href="ueber-mich.html">Über mich</a>
+        <a href="konzerte.html">Konzerte</a>
+        <a href="social-media.html">Social</a>
+        <a href="kontakt.html">Kontakt</a>
+        <a href="impressum.html">Impressum</a>
     </nav>
 
-    <div class="main-box">
+    <div class="main-panel">
+        <div class="sticker" style="top: -40px; right: -20px;">🎧</div>
+        <div class="sticker" style="bottom: -30px; left: -30px;">🎤</div>
+        
         <h1>ANTON</h1>
-        <p style="font-size: 1.5rem;">Bist du bereit für den Street-Beat?</p>
+
+        <div class="content-box">
+            <p>YO! WILLKOMMEN AUF DER SEITE!</p>
+            <p>Hier erfährst du alles über meine Musik, meine nächsten Auftritte und was sonst noch so abgeht. Klick dich oben durch das Menü!</p>
+        </div>
     </div>
 
 </body>
