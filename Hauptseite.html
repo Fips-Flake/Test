@@ -3,34 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hauptseite.html | Kids Pop Art</title>
+    <title>Hauptseite | Kids Pop Art</title>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Permanent+Marker&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --turquois: #00ced1;
-            --pink: #ff00ff;
-            --yellow: #fff200;
-        }
-
         body {
             margin: 0;
             padding: 0;
-            /* Ein wildes, buntes Pop-Art Muster als Hintergrund */
-            background-color: #f0f0f0;
-            background-image: 
-                radial-gradient(var(--pink) 15%, transparent 16%),
-                radial-gradient(var(--turquois) 15%, transparent 16%),
-                linear-gradient(45deg, var(--yellow) 25%, transparent 25%, transparent 75%, var(--yellow) 75%, var(--yellow)),
-                linear-gradient(45deg, var(--yellow) 25%, #f0f0f0 25%, #f0f0f0 75%, var(--yellow) 75%, var(--yellow));
-            background-size: 60px 60px, 60px 60px, 100px 100px, 100px 100px;
-            background-position: 0 0, 30px 30px, 0 0, 50px 50px;
+            /* Ein echtes, helles Graffiti-Wand-Bild als Hintergrund */
+            background: url('https://images.unsplash.com/photo-1533104816931-20fa691ff6ca?q=80&w=2000') no-repeat center center fixed;
+            background-size: cover;
             font-family: 'Arial', sans-serif;
         }
 
-        /* Navigation im Comic-Stil */
+        /* Navigation - Jetzt ganz oben und fest im Blick */
         nav {
-            background: white;
+            background: #fff200; /* Knalliges Gelb */
             padding: 15px;
             display: flex;
-            justify-content:
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            border-bottom: 5px solid black;
+        }
 
+        nav a {
+            font-family: 'Bangers', cursive;
+            color: black;
+            text-decoration: none;
+            font-size: 1.2rem;
+            padding: 8px 15px;
+            border: 3px solid black;
+            background: white;
+            transition: 0.2s;
+        }
+
+        nav a:hover {
+            background: #00ced1;
+            transform: scale(1.1) rotate(-2deg);
+        }
+
+        /* Das weiße Feld in der Mitte (wie in deinem Bild) */
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: rgba(255, 255, 255, 0.95);
+            border: 6px solid black;
+            padding: 30px;
+            position: relative;
+            box-shadow: 15px 15px 0px #ff00ff; /* Pinker Schatten */
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 4rem;
+            color: #00ced1;
+            -webkit-text-stroke: 2px black;
+            margin-top: -60px;
+            background: white;
+            display: inline-block;
+            padding: 0 20px;
+            border: 4px solid black;
+            transform: rotate(-2deg);
+        }
+
+        .content {
+            font-size: 1.4rem;
+            line-height: 1.6;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        /* Sticker-Icons */
+        .icon {
+            width: 100px;
+            filter: drop-shadow(4px 4px 0px black);
+        }
+
+        footer {
+            background: black;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-family: 'Bangers', cursive;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="Hauptseite">Home</a>
+        <a href="Über mich">Über mich</a>
+        <a href="Konzerte">Konzerte</a>
+        <a href="Social Media">Social Media</a>
+        <a href="Kontakt">Kontakt</a>
+        <a href="Datenschutz">Datenschutz</a>
+        <a href="Impressum">Impressum</a>
+    </nav>
+
+    <div class="container">
+        <h1>DEIN NAME</h1>
+        
+        <div style="display: flex; justify-content: space-around; margin: 20px 0;">
+            <img src="https://img.icons8.com/color/96/000000/boombox.png" class="icon" alt="Radio">
+            <img src="https://img.icons8.com/color/96/000000/baseball-cap.png" class="icon" alt="Cap">
+        </div>
+
+        <div class="content">
+            <p><strong>WILLKOMMEN AN DER WALL!</strong></p>
+            <p>Hier erfährst du alles über meine Musik und meine nächsten Shows. Klick dich einfach durch das Menü oben!</p>
+        </div>
+    </div>
+
+    <footer>STAY REAL - BEAT ON!</footer>
+
+</body>
+</html>
