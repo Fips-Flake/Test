@@ -3,54 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Willkommen | Anton</title>
+    <title>Willkommen | ANTON</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Poppins:wght@600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #FFD93D;   /* Gelb */
+            --secondary: #FF6B6B; /* Koralle */
+            --accent: #4D96FF;    /* Blau */
+        }
+
         body, html {
             margin: 0; padding: 0; height: 100%;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: linear-gradient(135deg, #FFD93D 0%, #FF8400 100%);
-            display: flex; justify-content: center; align-items: center;
-            color: #fff;
-        }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            padding: 60px 80px;
-            border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            animation: fadeIn 1.2s ease-out;
-        }
-        h1 { font-size: 3.5rem; margin-bottom: 10px; letter-spacing: 2px; text-transform: uppercase; }
-        p { font-size: 1.2rem; opacity: 0.9; margin-bottom: 40px; }
-        .enter-button {
-            text-decoration: none;
-            color: #FF8400;
-            background: #fff;
-            padding: 15px 40px;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: all 0.4s ease;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        .enter-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-            background: #fdfdfd;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
-</head>
-<body>
-    <div class="glass-card">
-        <h1>ANTON</h1>
-        <p>Official Artist Page</p>
-        <a href="hauptseite.html" class="enter-button">ENTDECKEN</a>
-    </div>
-</body>
-</html>
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            /* Ein
