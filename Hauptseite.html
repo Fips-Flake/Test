@@ -3,133 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kids Pop & HipHop | Deine Seite</title>
+    <title>Willkommen | Streetart Kids</title>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Permanent+Marker&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --turquois: #00ced1;
-            --dark-graffiti: #222;
-            --accent-pink: #ff00ff;
-            --accent-yellow: #fff200;
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #222; font-family: 'Permanent Marker', cursive; }
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 206, 209, 0.4), rgba(0,0,0,0.8)), 
+                        url('https://images.unsplash.com/photo-1525358043132-4017f8670877?q=80&w=2070');
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center;
         }
-
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: var(--dark-graffiti);
-            background-image: radial-gradient(var(--turquois) 0.5px, transparent 0.5px);
-            background-size: 20px 20px; /* Dezenter Punkt-Raster wie bei Streetart */
-            color: white;
-            font-family: 'Arial', sans-serif;
+        h1 { font-size: 5rem; color: #00ced1; text-shadow: 4px 4px white; margin: 0; transform: rotate(-2deg); }
+        .tagline { font-family: 'Bangers', cursive; font-size: 1.5rem; color: #fff200; margin-bottom: 40px; }
+        .enter-btn {
+            padding: 20px 50px; border: 4px solid #ff00ff; color: white; text-decoration: none;
+            font-size: 2rem; background: rgba(0,0,0,0.5); box-shadow: 8px 8px 0px #ff00ff; transition: 0.3s;
         }
-
-        /* Graffiti Überschriften */
-        h1, h2, .nav-link {
-            font-family: 'Permanent Marker', cursive;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        /* Navigation */
-        nav {
-            background: rgba(0, 0, 0, 0.8);
-            padding: 15px;
-            border-bottom: 4px solid var(--turquois);
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.1rem;
-            transition: 0.3s;
-            padding: 5px 10px;
-        }
-
-        nav a:hover {
-            color: var(--turquois);
-            transform: rotate(-3deg) scale(1.1);
-            text-shadow: 2px 2px var(--accent-pink);
-        }
-
-        /* Hauptcontainer */
-        .main-container {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 20px;
-            border: 5px solid white;
-            background: rgba(0, 206, 209, 0.1);
-            position: relative;
-            box-shadow: 10px 10px 0px var(--turquois);
-        }
-
-        /* Deko-Elemente */
-        .icon-box {
-            font-size: 3rem;
-            position: absolute;
-            opacity: 0.3;
-        }
-
-        /* Button im Street-Look */
-        .btn-cool {
-            background: var(--turquois);
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            font-family: 'Bangers', cursive;
-            font-size: 1.5rem;
-            cursor: pointer;
-            box-shadow: 5px 5px 0px var(--accent-pink);
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 20px;
-        }
-
-        .btn-cool:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 7px 7px 0px var(--accent-pink);
-        }
-
-        footer { text-align: center; padding: 40px; font-family: 'Permanent Marker'; color: var(--turquois); }
+        .enter-btn:hover { transform: scale(1.1) rotate(2deg); background: #ff00ff; box-shadow: none; }
     </style>
 </head>
 <body>
-
-    <nav>
-        <a href="Hauptseite.html">Home</a>
-        <a href="Über mich.html">Über mich</a>
-        <a href="Konzerte.html">Konzerte</a>
-        <a href="Social Media.html">Social Media</a>
-        <a href="Kontakt.html">Kontakt</a>
-        <a href="Datenschutz.html">Datenschutz</a>
-        <a href="Impressum.html">Impressum</a>
-    </nav>
-
-    <div class="main-container">
-        <div class="icon-box" style="top: -20px; right: -20px;">🎧</div>
-        <div class="icon-box" style="bottom: -20px; left: -20px;">📻</div>
-        
-        <h1 style="color: var(--turquois); font-size: 3.5rem; text-shadow: 3px 3px white;">Yo! Willkommen!</h1>
-        
-        <p style="font-size: 1.2rem; line-height: 1.6;">
-            Hier gibt es fetten <strong>Familien-Pop</strong> und <strong>HipHop</strong> für euch! 
-            Schnappt euch eure Caps 🧢, dreht die Musikboxen 🔊 auf und feiert mit.
-        </p>
-
-        <div style="margin-top: 30px; border: 2px dashed var(--accent-yellow); padding: 20px;">
-            <h2 style="color: var(--accent-pink);">Nächster Halt: Bühne!</h2>
-            <p>Checkt meine Konzert-Termine aus und seid live dabei.</p>
-            <a href="konzerte.html" class="btn-cool">Zu den Shows</a>
-        </div>
+    <div class="hero">
+        <h1>BÄM!</h1>
+        <p class="tagline">Check den Sound aus!</p>
+        <a href="Hauptseite" class="enter-btn">EINTRETEN</a>
     </div>
-
-    <footer>
-        STAY COOL & BEAT ON! 🎵 2026
-    </footer>
-
 </body>
 </html>
-
