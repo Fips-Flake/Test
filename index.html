@@ -3,45 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Willkommen | Kids Pop Art</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <title>Willkommen | Anton</title>
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; }
-        .hero {
-            height: 100vh;
-            /* Ein echtes, buntes Graffiti-Bild */
-            background: #00ced1 url('https://images.unsplash.com/photo-1514912887304-633045618413?q=80&w=2000') no-repeat center center fixed;
-            background-size: cover;
+        body, html {
+            margin: 0; padding: 0; height: 100%;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #FFD93D 0%, #FF8400 100%);
             display: flex; justify-content: center; align-items: center;
+            color: #fff;
         }
-        .welcome-card {
-            background: rgba(255, 255, 255, 0.95);
-            border: 10px solid #000;
-            padding: 60px;
-            box-shadow: 20px 20px 0px #ff00ff;
-            transform: rotate(-1deg);
+        .glass-card {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 60px 80px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
             text-align: center;
-            border-radius: 40px 10px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            animation: fadeIn 1.2s ease-out;
         }
-        h1 {
-            font-family: 'Luckiest Guy', cursive; font-size: 7rem; color: #fff200;
-            -webkit-text-stroke: 3px #000; text-shadow: 8px 8px 0px #000; margin: 0;
+        h1 { font-size: 3.5rem; margin-bottom: 10px; letter-spacing: 2px; text-transform: uppercase; }
+        p { font-size: 1.2rem; opacity: 0.9; margin-bottom: 40px; }
+        .enter-button {
+            text-decoration: none;
+            color: #FF8400;
+            background: #fff;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
-        .btn {
-            display: inline-block; margin-top: 30px; padding: 20px 50px;
-            background: #00ced1; color: #fff; text-decoration: none;
-            font-family: 'Bangers', cursive; font-size: 2.5rem;
-            border: 5px solid #000; box-shadow: 8px 8px 0px #000; transition: 0.2s;
+        .enter-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            background: #fdfdfd;
         }
-        .btn:hover { transform: scale(1.1) rotate(5deg); background: #ff00ff; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
-    <div class="hero">
-        <div class="welcome-card">
-            <h1>ANTON</h1>
-            <a href="hauptseite.html" class="btn">EINTRETEN</a>
-        </div>
+    <div class="glass-card">
+        <h1>ANTON</h1>
+        <p>Official Artist Page</p>
+        <a href="hauptseite.html" class="enter-button">ENTDECKEN</a>
     </div>
 </body>
 </html>
