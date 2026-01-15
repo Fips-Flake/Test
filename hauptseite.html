@@ -16,124 +16,111 @@
         body {
             margin: 0; padding: 0;
             font-family: 'Poppins', sans-serif;
-            background: #fdfdfd;
-            color: var(--dark);
+            /* Das Cartoon-Streetart Hintergrundbild */
+            background: url('https://img.freepik.com/vektoren-kostenlos/hand-gezeichnete-graffiti-karikatur-hintergrund_23-2148963503.jpg?t=st=1715852554~exp=1715856154~hmac=8e586c0e5a6b5e5a6b5e5a6b5e5a6b5e5a6b5e5a6b5e5a6b5e5a6b5e5a6b5e5a') center center;
+            background-size: cover;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
-        /* Moderner Header mit Glow */
+        /* Falls das externe Bild mal nicht lädt, hier ein buntes Muster als Backup */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 20% 20%, #FFD93D 0%, #FF6B6B 50%, #4D96FF 100%);
+            z-index: -1;
+            opacity: 0.9;
+        }
+
         header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            padding: 40px 20px;
+            background: linear-gradient(135deg, rgba(255, 217, 61, 0.95), rgba(255, 107, 107, 0.95));
+            padding: 30px 20px;
             text-align: center;
             color: white;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-bottom: 5px solid white;
         }
 
         .logo {
             font-family: 'Montserrat', sans-serif;
-            font-size: 4rem;
-            margin: 0;
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            margin: 0 0 15px 0;
             text-transform: uppercase;
             letter-spacing: -2px;
-            animation: pulse 3s infinite ease-in-out;
+            text-shadow: 3px 3px 0px rgba(0,0,0,0.1);
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.03); }
-        }
-
-        /* Die Button-Leiste (Navigation) */
         nav {
             display: flex;
             justify-content: center;
-            gap: 12px;
-            margin-top: 25px;
+            gap: 10px;
             flex-wrap: wrap;
-            max-width: 1000px;
-            margin-left: auto;
-            margin-right: auto;
         }
 
         nav a {
             text-decoration: none;
             color: white;
             font-weight: 700;
-            padding: 12px 20px;
-            background: rgba(0, 0, 0, 0.15);
-            border-radius: 15px;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        /* Verschiedene Farben beim rüber Sliden */
-        nav a:hover {
-            transform: translateY(-5px);
-            background: white;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        /* Individuelle Hover-Farben für die Buttons */
-        nav a[href="ueber-mich.html"]:hover { color: var(--secondary); }
-        nav a[href="konzerte.html"]:hover { color: var(--accent); }
-        nav a[href="social-media.html"]:hover { color: #f0932b; }
-        nav a[href="kontakt.html"]:hover { color: #6ab04c; }
-
-        /* Hauptbereich */
-        .content {
-            max-width: 900px;
-            margin: 50px auto;
-            padding: 0 20px;
-            text-align: center;
-        }
-
-        .hero-box {
-            background: white;
-            padding: 50px;
-            border-radius: 30px;
-            border: 2px solid #eee;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
-        }
-
-        h2 { font-family: 'Montserrat', sans-serif; font-size: 2.5rem; color: var(--secondary); }
-
-        .btn-large {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 15px 40px;
-            background: var(--accent);
-            color: white;
-            text-decoration: none;
+            padding: 8px 18px;
+            background: rgba(0, 0, 0, 0.2);
             border-radius: 50px;
-            font-weight: bold;
-            transition: 0.4s;
+            transition: 0.3s;
+            border: 2px solid white;
+            font-size: 0.9rem;
         }
 
-        .btn-large:hover {
-            background: var(--dark);
-            transform: scale(1.05);
-            box-shadow: 0 10px 20px rgba(77, 150, 255, 0.3);
+        nav a:hover {
+            background: white;
+            color: var(--secondary);
+            transform: scale(1.1) rotate(2deg);
         }
-    </style>
-</head>
-<body>
 
-<header>
-    <div class="logo">ANTON</div>
-    <nav>
-        <a href="index.html">Start</a>
-        <a href="hauptseite.html">Home</a>
-        <a href="ueber-mich.html">Über mich</a>
-        <a href="konzerte.html">Konzerte</a>
-        <a href="social-media.html">Social Media</a>
-        <a href="kontakt.html">Kontakt</a>
-        <a href="impressum.html">Impressum</a>
-        <a href="datenschutz.html">Datenschutz</a>
-    </nav>
-</header>
+        .main-content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
 
-<div class="content">
-    <div class="hero-box">
-        <h2>Willkommen in meiner Welt!</h2>
-        <p style="
+        .welcome-card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(5px);
+            padding: 50px;
+            border-radius: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            border: 8px solid white;
+            max-width: 600px;
+            text-align: center;
+            transform: rotate(-1deg); /* Leichter Comic-Knick */
+        }
+
+        h2 { font-family: 'Montserrat', sans-serif; font-size: 2.5rem; color: var(--secondary); margin: 0; }
+        p { font-size: 1.1rem; color: #444; margin: 20px 0; font-weight: 600; }
+
+        .cta-button {
+            background: linear-gradient(to right, var(--accent), #2e86de);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 1.2rem;
+            display: inline-block;
+            box-shadow: 0 10px 0px #1d5a9c;
+            transition: 0.2s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(5px);
+            box-shadow: 0 5px 0px #1d5a9c;
+        }
+
+        footer {
+            background: white;
+            padding: 20px;
+            text-align: center;
+            font-
