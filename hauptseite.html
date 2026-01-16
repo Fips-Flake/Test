@@ -81,4 +81,90 @@
         main {
             width: 75%;
             padding: 50px;
-            box-sizing: border-
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: 3rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Responsive Anpassung für Handys */
+        @media (max-width: 768px) {
+            .wrapper { flex-direction: column; }
+            nav { width: 100%; min-height: auto; }
+            main { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="background-canvas"></canvas>
+
+    <div class="wrapper">
+        <nav>
+            <div class="menu-links">
+                <a href="hauptseite.html">Home</a>
+                <a href="ueber-mich.html">Über mich</a>
+                <a href="konzerte.html">Konzerte</a>
+                <a href="kontakt.html">Kontakt</a>
+                <a href="impressum.html">Impressum</a>
+                <a href="datenschutz.html">Datenschutz</a>
+            </div>
+
+            <div class="social-icons">
+                <a href="#" title="YouTube">🎬</a>
+                <a href="#" title="TikTok">📱</a>
+                <a href="#" title="Instagram">📸</a>
+                <a href="#" title="Facebook">👥</a>
+                <a href="#" title="Newsletter">@</a>
+            </div>
+        </nav>
+
+        <main>
+            <h1>Willkommen zurück</h1>
+            <p>Hier ist der Bereich für deine News, Musik oder Ankündigungen.</p>
+        </main>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('background-canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Zeichen: Buchstaben und Noten
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789♫♪♯♭¶𝄞';
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+
+        function draw() {
+            // Hintergrund leicht übermalen für Schweif-Effekt
+            ctx.fillStyle = 'rgba(26, 26, 26, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.6)'; // Weißliche Zeichen
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = characters.charAt(Math.floor(Math.random() * characters.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(draw, 35);
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
