@@ -8,7 +8,7 @@
     <style>
         :root {
             --primary-blue: #ade8f4;
-            --sidebar-width: 25%;
+            --sidebar-width: 15%; /* Jetzt auf 15% verkleinert */
             --accent-yellow: #FFD93D;
         }
 
@@ -21,26 +21,48 @@
             overflow: hidden;
         }
 
-        /* SCHMALE SIDEBAR (25%) */
+        /* SIDEBAR (15%) */
         .sidebar {
             width: var(--sidebar-width);
             background: white;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 40px 20px;
+            padding: 30px 15px;
             box-sizing: border-box;
             border-right: 2px solid #e0e0e0;
             box-shadow: 5px 0 15px rgba(0,0,0,0.05);
             z-index: 20;
+            min-width: 140px; /* Damit es auf kleinen Screens nicht zu schmal wird */
+        }
+
+        .top-part {
+            position: relative;
+        }
+
+        /* Das "X" anstatt "close" */
+        .close-icon {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 1.8rem;
+            color: #ff4d4d;
+            cursor: pointer;
+            position: absolute;
+            top: -10px;
+            right: 0;
+            transition: transform 0.2s;
+        }
+
+        .close-icon:hover {
+            transform: scale(1.2) rotate(90deg);
         }
 
         .logo {
             font-family: 'Permanent Marker', cursive;
-            font-size: 2.5rem;
-            text-align: center;
+            font-size: 2rem;
+            text-align: left;
             margin-bottom: 40px;
             color: #333;
+            padding-right: 30px;
         }
 
         nav ul {
@@ -49,13 +71,13 @@
         }
 
         nav ul li {
-            margin: 15px 0;
+            margin: 20px 0;
         }
 
         nav ul li a {
             text-decoration: none;
             color: #333;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 700;
             transition: color 0.3s;
         }
@@ -67,10 +89,11 @@
         /* SOCIAL MEDIA ICONS */
         .social-media {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
-            gap: 15px;
-            font-size: 1.2rem;
-            padding: 20px 0;
+            gap: 10px;
+            font-size: 1.1rem;
+            padding: 15px 0;
             border-top: 1px solid #eee;
         }
 
@@ -88,13 +111,12 @@
         /* MAIN CONTENT AREA */
         .main-content {
             width: calc(100% - var(--sidebar-width));
-            padding: 40px;
+            padding: 30px;
             box-sizing: border-box;
             display: grid;
-            /* Grid: Links groß, rechts zwei kleine untereinander */
-            grid-template-columns: 2fr 1fr;
+            grid-template-columns: 2.5fr 1fr; /* News Fenster ist jetzt noch breiter */
             grid-template-rows: 1fr 1fr;
-            gap: 25px;
+            gap: 20px;
         }
 
         /* FENSTER-STYLING */
@@ -108,7 +130,7 @@
         }
 
         .news-window {
-            grid-row: span 2; /* Geht über beide Zeilen */
+            grid-row: span 2;
             border-top: 8px solid var(--accent-yellow);
         }
 
@@ -120,30 +142,33 @@
             font-family: 'Permanent Marker', cursive;
             margin-top: 0;
             color: #333;
+            font-size: 1.5rem;
         }
 
-        /* FOOTER MIT URL UNTER IMPRESSUM/DATENSCHUTZ */
+        /* SIDEBAR FOOTER */
         .sidebar-footer {
             text-align: center;
         }
 
         .footer-links {
-            font-size: 0.8rem;
-            margin-bottom: 10px;
+            font-size: 0.75rem;
+            margin-bottom: 8px;
         }
 
         .footer-links a {
             color: #888;
             text-decoration: none;
-            margin: 0 5px;
+            display: block; /* Untereinander in der schmalen Sidebar */
+            margin: 4px 0;
         }
 
         .url-subtext {
             display: block;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: #bbb;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             margin-top: 10px;
+            word-break: break-all; /* Falls die URL zu lang für 15% wird */
         }
     </style>
 </head>
@@ -151,6 +176,7 @@
 
     <aside class="sidebar">
         <div class="top-part">
+            <div class="close-icon" title="Schließen">X</div>
             <div class="logo">ANTON</div>
             <nav>
                 <ul>
@@ -164,16 +190,16 @@
 
         <div class="bottom-part">
             <div class="social-media">
-                <a href="#" title="YouTube">YT</a>
-                <a href="#" title="TikTok">TT</a>
-                <a href="#" title="Instagram">IG</a>
-                <a href="#" title="Facebook">FB</a>
-                <a href="#" title="@">@</a>
+                <a href="#">YT</a>
+                <a href="#">TT</a>
+                <a href="#">IG</a>
+                <a href="#">FB</a>
+                <a href="#">@</a>
             </div>
             
             <div class="sidebar-footer">
                 <div class="footer-links">
-                    <a href="impressum.html">Impressum</a> | 
+                    <a href="impressum.html">Impressum</a>
                     <a href="datenschutz.html">Datenschutz</a>
                 </div>
                 <span class="url-subtext">www.anton-familienpop.de</span>
@@ -184,17 +210,17 @@
     <main class="main-content">
         <section class="content-window news-window">
             <h2>Neuigkeiten</h2>
-            <p>Hier erfährst du alles über neue Songs und Projekte...</p>
+            <p>Inhalte folgen...</p>
         </section>
 
         <section class="content-window small-window">
-            <h2>Nächstes Event</h2>
-            <p>Schau bald wieder rein!</p>
+            <h2>Live</h2>
+            <p>Nächste Show...</p>
         </section>
 
         <section class="content-window small-window">
-            <h2>Social Feed</h2>
-            <p>Folge mir für mehr Insights.</p>
+            <h2>Socials</h2>
+            <p>Check TikTok!</p>
         </section>
     </main>
 
