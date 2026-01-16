@@ -8,7 +8,7 @@
     <style>
         :root {
             --primary-blue: #ade8f4;
-            --sidebar-width: 15%; /* Auf 15% verkleinert */
+            --sidebar-width: 25%;
             --accent-yellow: #FFD93D;
         }
 
@@ -21,41 +21,25 @@
             overflow: hidden;
         }
 
-        /* SCHMALE SIDEBAR (15%) */
+        /* SCHMALE SIDEBAR (25%) */
         .sidebar {
             width: var(--sidebar-width);
             background: white;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 30px 15px;
+            padding: 40px 20px;
             box-sizing: border-box;
             border-right: 2px solid #e0e0e0;
             box-shadow: 5px 0 15px rgba(0,0,0,0.05);
             z-index: 20;
-            min-width: 120px; /* Sicherstellung der Lesbarkeit */
-        }
-
-        .top-part {
-            position: relative;
-        }
-
-        /* Das neue X oben rechts */
-        .close-x {
-            position: absolute;
-            top: -10px;
-            right: 0;
-            font-family: 'Permanent Marker', cursive;
-            font-size: 1.5rem;
-            color: #333;
-            cursor: pointer;
         }
 
         .logo {
             font-family: 'Permanent Marker', cursive;
-            font-size: 2rem;
-            text-align: left;
-            margin-bottom: 30px;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 40px;
             color: #333;
         }
 
@@ -71,7 +55,7 @@
         nav ul li a {
             text-decoration: none;
             color: #333;
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 700;
             transition: color 0.3s;
         }
@@ -84,10 +68,9 @@
         .social-media {
             display: flex;
             justify-content: center;
-            flex-wrap: wrap; /* Zeilenumbruch falls Sidebar zu schmal */
-            gap: 10px;
-            font-size: 1rem;
-            padding: 15px 0;
+            gap: 15px;
+            font-size: 1.2rem;
+            padding: 20px 0;
             border-top: 1px solid #eee;
         }
 
@@ -102,12 +85,13 @@
             color: #000;
         }
 
-        /* MAIN CONTENT AREA (85%) */
+        /* MAIN CONTENT AREA */
         .main-content {
             width: calc(100% - var(--sidebar-width));
             padding: 40px;
             box-sizing: border-box;
             display: grid;
+            /* Grid: Links groß, rechts zwei kleine untereinander */
             grid-template-columns: 2fr 1fr;
             grid-template-rows: 1fr 1fr;
             gap: 25px;
@@ -124,7 +108,7 @@
         }
 
         .news-window {
-            grid-row: span 2;
+            grid-row: span 2; /* Geht über beide Zeilen */
             border-top: 8px solid var(--accent-yellow);
         }
 
@@ -138,30 +122,28 @@
             color: #333;
         }
 
-        /* FOOTER MIT URL */
+        /* FOOTER MIT URL UNTER IMPRESSUM/DATENSCHUTZ */
         .sidebar-footer {
             text-align: center;
         }
 
         .footer-links {
-            font-size: 0.75rem;
-            margin-bottom: 5px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
         }
 
         .footer-links a {
             color: #888;
             text-decoration: none;
-            margin: 0 2px;
-            display: block; /* Untereinander in schmaler Sidebar */
+            margin: 0 5px;
         }
 
         .url-subtext {
             display: block;
-            font-size: 0.65rem;
+            font-size: 0.75rem;
             color: #bbb;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
             margin-top: 10px;
-            word-break: break-all;
         }
     </style>
 </head>
@@ -169,7 +151,6 @@
 
     <aside class="sidebar">
         <div class="top-part">
-            <div class="close-x">X</div>
             <div class="logo">ANTON</div>
             <nav>
                 <ul>
@@ -192,7 +173,7 @@
             
             <div class="sidebar-footer">
                 <div class="footer-links">
-                    <a href="impressum.html">Impressum</a>
+                    <a href="impressum.html">Impressum</a> | 
                     <a href="datenschutz.html">Datenschutz</a>
                 </div>
                 <span class="url-subtext">www.anton-familienpop.de</span>
