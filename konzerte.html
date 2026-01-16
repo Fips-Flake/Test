@@ -1,47 +1,12 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Konzerte | ANTON</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        :root { --primary: #FFD93D; --secondary: #FF6B6B; --accent: #4D96FF; --dark: #1e272e; }
-        body { margin: 0; font-family: 'Poppins', sans-serif; background-color: var(--accent); color: var(--dark); }
-        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
-        .logo { font-family: 'Montserrat', sans-serif; font-size: 3rem; text-align: center; color: white; text-shadow: 4px 4px 0px var(--dark); letter-spacing: -2px; margin-bottom: 20px; }
-        nav { display: flex; justify-content: center; gap: 10px; margin-bottom: 40px; flex-wrap: wrap; }
-        nav a { text-decoration: none; color: var(--dark); background: white; padding: 10px 20px; border-radius: 50px; font-weight: 600; border: 2px solid var(--dark); transition: 0.3s; }
-        nav a:hover { transform: translateY(-3px); box-shadow: 4px 4px 0px var(--dark); }
-        .card { background: white; border-radius: 24px; padding: 30px; border: 4px solid var(--dark); box-shadow: 12px 12px 0px var(--dark); }
-        .event-row { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 2px solid #eee; }
-        .event-date { font-weight: 900; color: var(--secondary); font-size: 1.2rem; }
-        .event-loc { font-weight: 600; }
-        h2 { font-family: 'Montserrat', sans-serif; text-transform: uppercase; margin-top: 0; }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1 class="logo">ANTON</h1>
-        <nav>
-            <a href="hauptseite.html">Zurück</a>
-            <a href="Über mich.html">Über mich</a>
-            <a href="Social Media.html">Social Media</a>
-            <a href="Kontakt.html">Kontakt</a>
-        </nav>
-        <main class="card">
-            <h2>Live Termine 2026</h2>
-            <div class="event-row">
-                <span class="event-date">24. MAI</span>
-                <span class="event-loc">Berlin, Columbiahalle</span>
-                <a href="#" style="color: var(--accent); font-weight: 900;">TICKETS</a>
-            </div>
-            <div class="event-row">
-                <span class="event-date">12. JUNI</span>
-                <span class="event-loc">Hamburg, Reeperbahn</span>
-                <a href="#" style="color: var(--accent); font-weight: 900;">TICKETS</a>
-            </div>
-        </main>
-    </div>
-</body>
-</html>
+<style>
+    .tour-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    .tour-table td { padding: 15px; border-bottom: 3px solid var(--dark); font-weight: bold; }
+    .btn-tickets { background: #FFD93D; padding: 10px; border: 3px solid var(--dark); text-decoration: none; color: var(--dark); border-radius: 8px; }
+</style>
+<div class="content-box">
+    <h2>Tourdaten 2026</h2>
+    <table class="tour-table">
+        <tr><td>24.05. Berlin</td><td>Wuhlheide</td><td><a href="#" class="btn-tickets">Tickets</a></td></tr>
+        <tr><td>30.05. Hamburg</td><td>Stadtpark</td><td><a href="#" class="btn-tickets">Tickets</a></td></tr>
+    </table>
+</div>
