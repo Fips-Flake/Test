@@ -11,7 +11,7 @@
             --secondary: #FF6B6B;
             --accent: #4D96FF;
             --dark: #1e272e;
-            --bg-medium: #1c2533; /* Etwas helleres Dunkelblau */
+            --bg-color: #24344d; /* Helleres, kräftiges Blau */
         }
 
         * { box-sizing: border-box; }
@@ -20,10 +20,10 @@
             margin: 0;
             padding: 0;
             font-family: 'Poppins', sans-serif;
-            background-color: var(--bg-medium);
+            background-color: var(--bg-color);
             
-            /* STREET ART SVG MIT A-N-T-O-N, NOTENSCHLÜSSEL & MIKRO */
-            background-image: url("data:image/svg+xml,%3Csvg width='500' height='500' viewBox='0 0 500 500' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.08'%3E%3C!-- Buchstaben ANTON --%3E%3Ctext x='40' y='100' font-family='Montserrat' font-size='80' font-weight='900'%3EA%3C/text%3E%3Ctext x='150' y='150' font-family='Montserrat' font-size='70' font-weight='900' transform='rotate(15, 150, 150)'%3EN%3C/text%3E%3Ctext x='280' y='80' font-family='Montserrat' font-size='90' font-weight='900' transform='rotate(-10, 280, 80)'%3ET%3C/text%3E%3Ctext x='380' y='160' font-family='Montserrat' font-size='75' font-weight='900'%3EO%3C/text%3E%3Ctext x='430' y='300' font-family='Montserrat' font-size='85' font-weight='900' transform='rotate(20, 430, 300)'%3EN%3C/text%3E%3C!-- Notenschlüssel (Symbolisiert) --%3E%3Ctext x='50' y='400' font-family='Arial' font-size='100'%3E%26%23119070;%3C/text%3E%3C!-- Mikrofon (Symbolisiert) --%3E%3Cpath d='M250 300c15 0 25-10 25-25V220c0-15-10-25-25-25s-25 10-25 25v55c0 15 10 25 25 25z'/%3E%3Cpath d='M220 250c0 15 15 30 30 30s30-15 30-30M250 280v20M235 305h30' stroke='%23ffffff' stroke-width='4' fill='none'/%3E%3C!-- Drips --%3E%3Ccircle cx='45' cy='120' r='4'/%3E%3Ccircle cx='55' cy='135' r='3'/%3E%3Ccircle cx='290' cy='110' r='5'/%3E%3C/g%3E%3C/svg%3E");
+            /* STREET ART SVG PATTERN: A, N, T, O, N, Mikro, Notenschlüssel */
+            background-image: url("data:image/svg+xml,%3Csvg width='600' height='600' viewBox='0 0 600 600' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3C!-- Buchstaben ANTON --%3E%3Ctext x='50' y='120' font-family='Montserrat' font-size='100' font-weight='900' transform='rotate(-10, 50, 120)'%3EA%3C/text%3E%3Ctext x='200' y='180' font-family='Montserrat' font-size='80' font-weight='900' transform='rotate(15, 200, 180)'%3EN%3C/text%3E%3Ctext x='350' y='100' font-family='Montserrat' font-size='110' font-weight='900' transform='rotate(-5, 350, 100)'%3ET%3C/text%3E%3Ctext x='480' y='220' font-family='Montserrat' font-size='90' font-weight='900' transform='rotate(10, 480, 220)'%3EO%3C/text%3E%3Ctext x='100' y='520' font-family='Montserrat' font-size='95' font-weight='900' transform='rotate(-15, 100, 520)'%3EN%3C/text%3E%3C!-- Notenschlüssel --%3E%3Ctext x='300' y='450' font-family='Arial' font-size='120'%3E%26%23119070;%3C/text%3E%3C!-- Mikrofon Symbol --%3E%3Cpath d='M450 400c15 0 25-10 25-25v-50c0-15-10-25-25-25s-25 10-25 25v50c0 15 10 25 25 25z'/%3E%3Cpath d='M420 360c0 20 15 35 30 35s30-15 30-35M450 395v20M430 420h40' stroke='%23ffffff' stroke-width='6' fill='none'/%3E%3C!-- Drips --%3E%3Ccircle cx='60' cy='150' r='5'/%3E%3Ccircle cx='75' cy='175' r='3'/%3E%3Ccircle cx='365' cy='135' r='6'/%3E%3C/g%3E%3C/svg%3E");
             color: var(--dark);
         }
 
@@ -33,72 +33,82 @@
             padding: 40px 20px;
         }
 
+        /* Navigations-Button */
         .back-nav { margin-bottom: 30px; }
         .back-nav a {
             text-decoration: none;
             color: var(--dark);
             background: white;
-            padding: 12px 30px;
-            border-radius: 50px;
+            padding: 14px 35px;
+            border-radius: 15px;
             font-weight: 900;
             border: 4px solid var(--dark);
-            box-shadow: 6px 6px 0px var(--secondary);
-            transition: 0.15s;
+            box-shadow: 7px 7px 0px var(--secondary);
+            transition: 0.2s;
             display: inline-block;
             text-transform: uppercase;
         }
         .back-nav a:hover {
-            transform: translate(-3px, -3px);
-            box-shadow: 10px 10px 0px var(--secondary);
+            transform: translate(-4px, -4px);
+            box-shadow: 11px 11px 0px var(--secondary);
             background: var(--primary);
         }
 
+        /* Inhalts-Box */
         .legal-box {
-            background: rgba(255, 255, 255, 0.97);
-            padding: 50px;
-            border-radius: 35px;
-            border: 5px solid var(--dark);
-            box-shadow: 20px 20px 0px rgba(0,0,0,0.5);
+            background: white;
+            padding: 60px;
+            border-radius: 40px;
+            border: 6px solid var(--dark);
+            box-shadow: 25px 25px 0px rgba(0,0,0,0.4);
         }
 
         h1 {
             font-family: 'Montserrat', sans-serif;
-            font-size: clamp(2rem, 8vw, 3rem);
-            color: var(--secondary);
-            text-shadow: 3px 3px 0px var(--dark);
+            font-size: clamp(2.2rem, 9vw, 3.5rem);
             text-transform: uppercase;
-            margin-bottom: 20px;
+            color: var(--secondary);
+            text-shadow: 4px 4px 0px var(--dark);
+            margin-bottom: 30px;
+            line-height: 0.9;
         }
 
         h2 {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.3rem;
-            margin-top: 40px;
+            font-size: 1.5rem;
+            margin-top: 45px;
             background: var(--primary);
-            padding: 5px 15px;
-            border: 3px solid var(--dark);
+            padding: 5px 20px;
+            border: 4px solid var(--dark);
             display: inline-block;
-            transform: rotate(-1deg);
+            box-shadow: 5px 5px 0px var(--dark);
         }
 
         .contact-card {
             background: #f1f5f9;
-            padding: 25px;
-            border: 3px solid var(--dark);
-            margin: 25px 0;
+            padding: 30px;
             border-radius: 20px;
+            border: 3px solid var(--dark);
+            margin: 30px 0;
+            box-shadow: 8px 8px 0px var(--accent);
         }
 
         .opt-out-list {
             background: #fff3cd;
-            padding: 20px;
-            border-left: 10px solid var(--accent);
-            border-radius: 10px;
-            margin: 20px 0;
+            padding: 25px;
+            border-left: 12px solid var(--accent);
+            border-radius: 12px;
+            margin: 30px 0;
+            border-top: 3px solid var(--dark);
+            border-right: 3px solid var(--dark);
+            border-bottom: 3px solid var(--dark);
         }
 
+        p, li { font-size: 1.05rem; line-height: 1.7; color: #222; }
+
         @media (max-width: 600px) {
-            .legal-box { padding: 30px 20px; }
+            .legal-box { padding: 35px 25px; }
+            h1 { font-size: 2.2rem; }
         }
     </style>
 </head>
@@ -111,28 +121,30 @@
 
         <main class="legal-box">
             <h1>Datenschutz</h1>
-            <p><strong>Stand: 21. März 2023</strong></p>
+            <p style="opacity: 0.6; font-size: 0.9rem;">Stand: 21. März 2023</p>
 
             <h2>Verantwortlicher</h2>
             <div class="contact-card">
                 <strong>Anton Nachtwey</strong><br>
                 Karl-Liebknecht-Str. 15<br>
-                14612 Falkensee<br><br>
-                E-Mail: anton.familienpop@gmail.com
+                14612 Falkensee, Deutschland<br><br>
+                E-Mail: anton.familienpop@gmail.com<br>
+                Telefon: 030/34080992
             </div>
 
-            <h2>Cookies & Werbung</h2>
-            <p>Zur Verwaltung Ihrer Werbepräferenzen nutzen Sie bitte:</p>
+            <h2>Cookies & Opt-Out</h2>
+            <p>Hier kannst du deine Einstellungen für Onlinemarketing anpassen:</p>
             <div class="opt-out-list">
-                • <a href="https://www.youronlinechoices.eu" target="_blank">YourOnlineChoices (EU)</a><br>
-                • <a href="https://optout.aboutads.info" target="_blank">AboutAds (Global)</a>
+                • Europa: <a href="https://www.youronlinechoices.eu" target="_blank">www.youronlinechoices.eu</a><br>
+                • USA: <a href="https://www.aboutads.info/choices" target="_blank">www.aboutads.info/choices</a><br>
+                • Global: <a href="https://optout.aboutads.info" target="_blank">optout.aboutads.info</a>
             </div>
 
-            <h2>Ihre Rechte</h2>
-            <p>Sie haben gemäß DSGVO Rechte auf Auskunft, Berichtigung, Löschung und Widerspruch Ihrer Daten.</p>
+            <h2>Deine Rechte</h2>
+            <p>Du hast jederzeit das Recht auf Auskunft, Berichtigung und Löschung deiner gespeicherten Daten gemäß DSGVO.</p>
 
-            <p style="margin-top: 50px; text-align: center; font-size: 0.75rem; opacity: 0.5;">
-                Erstellt mit Datenschutz-Generator.de
+            <p style="margin-top: 60px; text-align: center; font-size: 0.8rem; opacity: 0.4;">
+                Erstellt mit Datenschutz-Generator.de von Dr. Thomas Schwenke
             </p>
         </main>
     </div>
