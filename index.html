@@ -13,46 +13,56 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #48cae4, #90e0ef, #ade8f4);
-            font-family: sans-serif;
+            /* Dezent bewegter Hintergrund auch hier */
+            background: linear-gradient(-45deg, #48cae4, #90e0ef, #ade8f4, #caf0f8);
+            background-size: 400% 400%;
+            animation: gradientBG 10s ease infinite;
             overflow: hidden;
         }
 
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         .welcome-text {
-            font-family: 'Permanent Marker', cursive;
-            font-size: clamp(2.5rem, 8vw, 6rem);
+            font-family: 'Permanent Marker', cursive !important;
+            font-size: clamp(2rem, 7vw, 5.5rem);
             color: white;
-            text-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+            text-shadow: 4px 4px 10px rgba(0,0,0,0.15);
             text-align: center;
-            margin-bottom: 40px;
-            animation: float 3s ease-in-out infinite;
+            margin-bottom: 50px;
+            animation: float 4s ease-in-out infinite;
+            padding: 0 20px;
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+            0%, 100% { transform: translateY(0) rotate(-1deg); }
+            50% { transform: translateY(-15px) rotate(1deg); }
         }
 
         .enter-btn {
-            padding: 15px 45px;
-            font-family: 'Permanent Marker', cursive;
+            padding: 18px 50px;
+            font-family: 'Permanent Marker', cursive !important;
             font-size: 1.8rem;
             color: #000;
             background: #FFD93D;
             text-decoration: none;
-            border-radius: 50px;
+            border-radius: 60px;
             box-shadow: 0 8px 0px #d4b42a;
-            transition: 0.2s;
+            transition: all 0.2s ease;
         }
 
         .enter-btn:hover {
-            transform: translateY(3px);
+            transform: translateY(3px) scale(1.05);
             box-shadow: 0 5px 0px #d4b42a;
+            background: #ffe26d;
         }
     </style>
 </head>
 <body>
-    <h1 class="welcome-text">Hi! Schön das du da bist!</h1>
+    <h1 class="welcome-text">Hey! Schön das du da bist!</h1>
     <a href="hauptseite.html" class="enter-btn">Komm rein</a>
 </body>
 </html>
