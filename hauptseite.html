@@ -3,211 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Official Artist | ANTON</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>ANTON | Hauptseite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Poppins:wght@600&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #FFD93D;
-            --secondary: #FF6B6B;
-            --accent: #4D96FF;
-            --dark: #1e272e;
-            --glass: rgba(255, 255, 255, 0.95);
+        :root { --bg: #FFD93D; --dark: #1e272e; --accent: #FF6B6B; }
+        body { 
+            margin: 0; font-family: 'Poppins', sans-serif; background-color: var(--bg);
+            background-image: url("data:image/svg+xml,%3Csvg width='400' height='400' viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000000' fill-opacity='0.05'%3E%3Ctext x='20' y='60' font-family='Montserrat' font-size='60' font-weight='900'%3EA%3C/text%3E%3Ctext x='150' y='120' font-family='Montserrat' font-size='50' font-weight='900'%3EN%3C/text%3E%3Ctext x='300' y='250' font-family='Arial' font-size='80'%3E%26%23119070;%3C/text%3E%3C/g%3E%3C/svg%3E");
         }
-
-        * { box-sizing: border-box; }
-
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', sans-serif;
-            background-color: #f0f2f5;
-            /* Subtiles Punkt-Muster für den Modern-Art-Look */
-            background-image: radial-gradient(var(--dark) 0.5px, transparent 0.5px);
-            background-size: 20px 20px;
-            background-opacity: 0.1;
-            color: var(--dark);
-            overflow-x: hidden;
+        .nav-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; padding: 50px; max-width: 1000px; margin: 0 auto; }
+        .nav-item { 
+            background: white; border: 5px solid var(--dark); padding: 30px; border-radius: 20px;
+            text-align: center; text-decoration: none; color: var(--dark); font-size: 1.5rem;
+            box-shadow: 10px 10px 0px var(--dark); transition: 0.2s;
         }
-
-        /* Dynamischer Hintergrund-Akzent */
-        body::before {
-            content: "";
-            position: fixed;
-            top: -50px; left: -10%;
-            width: 120%; height: 250px;
-            background: var(--secondary);
-            transform: rotate(-2deg);
-            z-index: -1;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        header {
-            text-align: center;
-            padding: 40px 0;
-        }
-
-        .logo {
-            font-family: 'Montserrat', sans-serif;
-            font-size: clamp(3.5rem, 12vw, 5.5rem);
-            margin: 0;
-            line-height: 0.8;
-            letter-spacing: -4px;
-            color: white;
-            text-shadow: 6px 6px 0px var(--dark);
-            text-transform: uppercase;
-        }
-
-        /* Optimierte Navigation - WICHTIG: Kleingeschriebene Dateinamen */
-        nav.main-nav {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin: 30px 0 50px 0;
-            flex-wrap: wrap;
-        }
-
-        nav.main-nav a {
-            text-decoration: none;
-            color: var(--dark);
-            background: white;
-            padding: 12px 20px;
-            border-radius: 12px;
-            font-weight: 800;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            border: 3px solid var(--dark);
-            box-shadow: 4px 4px 0px var(--dark);
-            transition: all 0.2s ease;
-        }
-
-        nav.main-nav a:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 7px 7px 0px var(--dark);
-            background: var(--primary);
-        }
-
-        /* Inhalts-Bereich */
-        .content-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 300px;
-            gap: 30px;
-        }
-
-        .main-card {
-            background: white;
-            border-radius: 30px;
-            padding: 40px;
-            border: 4px solid var(--dark);
-            box-shadow: 12px 12px 0px var(--dark);
-        }
-
-        .side-bar {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .side-card {
-            background: var(--accent);
-            color: white;
-            border-radius: 20px;
-            padding: 25px;
-            border: 4px solid var(--dark);
-            box-shadow: 8px 8px 0px var(--dark);
-        }
-
-        h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.2rem;
-            margin-top: 0;
-            text-transform: uppercase;
-            letter-spacing: -1px;
-        }
-
-        .badge {
-            display: inline-block;
-            background: var(--primary);
-            padding: 4px 12px;
-            border-radius: 8px;
-            font-weight: 900;
-            margin-bottom: 10px;
-            border: 2px solid var(--dark);
-        }
-
-        footer {
-            margin-top: 80px;
-            text-align: center;
-            padding-bottom: 40px;
-        }
-
-        .footer-links a {
-            color: var(--dark);
-            text-decoration: none;
-            font-weight: 600;
-            margin: 0 10px;
-            font-size: 0.9rem;
-        }
-
-        /* Mobile Anpassung */
-        @media (max-width: 850px) {
-            .content-wrapper { grid-template-columns: 1fr; }
-            .logo { letter-spacing: -2px; }
-        }
+        .nav-item:hover { transform: translate(-5px, -5px); box-shadow: 15px 15px 0px var(--accent); background: var(--accent); color: white; }
+        h1 { text-align: center; font-family: 'Montserrat'; font-size: 4rem; color: white; text-shadow: 5px 5px 0px var(--dark); margin-top: 50px; }
     </style>
 </head>
 <body>
-
-    <div class="container">
-        <header>
-            <h1 class="logo">ANTON</h1>
-            <div class="badge">OFFICIAL ARTIST 2026</div>
-        </header>
-
-        <nav class="main-nav">
-            <a href="index.html">Start</a>
-            <a href="konzerte.html">Konzerte</a>
-            <a href="uebermich.html">Über mich</a>
-            <a href="social.html">Socials</a>
-            <a href="kontakt.html">Kontakt</a>
-        </nav>
-
-        <div class="content-wrapper">
-            <main class="main-card">
-                <h2>Willkommen</h2>
-                <p>Das ist das neue Zentrum deiner digitalen Präsenz. Modern, mutig und direkt.</p>
-                <p>Hier kannst du aktuelle Neuigkeiten posten oder deine Geschichte erzählen. Das Design passt sich automatisch an alle Geräte an.</p>
-                <img src="https://via.placeholder.com/600x300" alt="Artist Image" style="width: 100%; border-radius: 15px; border: 3px solid var(--dark); margin-top: 20px;">
-            </main>
-
-            <aside class="side-bar">
-                <div class="side-card">
-                    <h3>Next Show</h3>
-                    <p>Berlin, DE<br><strong>24. Mai 2026</strong></p>
-                    <a href="konzerte.html" style="color: white; font-weight: 800; text-decoration: underline;">Alle Termine</a>
-                </div>
-                
-                <div class="side-card" style="background: var(--primary); color: var(--dark);">
-                    <h3>Socials</h3>
-                    <p>Täglich neue Einblicke auf unseren Kanälen.</p>
-                    <a href="social.html" style="color: var(--dark); font-weight: 800; text-decoration: underline;">Folgen</a>
-                </div>
-            </aside>
-        </div>
-
-        <footer>
-            <div class="footer-links">
-                <a href="impressum.html">Impressum</a>
-                <a href="datenschutz.html">Datenschutz</a>
-            </div>
-            <p style="opacity: 0.6; margin-top: 20px;">&copy; 2026 ANTON ARTIST</p>
-        </footer>
+    <h1>ANTON</h1>
+    <div class="nav-grid">
+        <a href="ueber_mich.html" class="nav-item">Über mich</a>
+        <a href="konzerte.html" class="nav-item">Konzerte</a>
+        <a href="social_media.html" class="nav-item">Social Media</a>
+        <a href="kontakt.html" class="nav-item">Kontakt</a>
     </div>
-
 </body>
 </html>
