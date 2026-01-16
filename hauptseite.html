@@ -6,63 +6,47 @@
     <title>Hauptseite | ANTON</title>
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Plus+Jakarta+Sans:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary-blue: #ade8f4;
-            --sidebar-width: 15%; /* Jetzt auf 15% verkleinert */
-            --accent-yellow: #FFD93D;
-        }
-
         body {
             margin: 0;
             display: flex;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #f0f9ff;
+            background-color: #f4f7f6; /* Dein ursprünglicher Hauptseiten-Hintergrund */
             height: 100vh;
             overflow: hidden;
         }
 
-        /* SIDEBAR (15%) */
+        /* Sidebar auf 15% verkleinert */
         .sidebar {
-            width: var(--sidebar-width);
-            background: white;
+            width: 15%;
+            background: #ffffff;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 30px 15px;
+            padding: 25px 15px;
             box-sizing: border-box;
-            border-right: 2px solid #e0e0e0;
-            box-shadow: 5px 0 15px rgba(0,0,0,0.05);
-            z-index: 20;
-            min-width: 140px; /* Damit es auf kleinen Screens nicht zu schmal wird */
+            border-right: 1px solid #ddd;
         }
 
-        .top-part {
+        .sidebar-top {
             position: relative;
         }
 
-        /* Das "X" anstatt "close" */
-        .close-icon {
+        /* Das gewünschte X */
+        .close-x {
             font-family: 'Permanent Marker', cursive;
-            font-size: 1.8rem;
-            color: #ff4d4d;
-            cursor: pointer;
+            color: #333;
+            font-size: 1.2rem;
             position: absolute;
-            top: -10px;
+            top: 0;
             right: 0;
-            transition: transform 0.2s;
-        }
-
-        .close-icon:hover {
-            transform: scale(1.2) rotate(90deg);
+            cursor: pointer;
         }
 
         .logo {
             font-family: 'Permanent Marker', cursive;
-            font-size: 2rem;
-            text-align: left;
+            font-size: 1.8rem;
             margin-bottom: 40px;
-            color: #333;
-            padding-right: 30px;
+            color: #000;
         }
 
         nav ul {
@@ -71,112 +55,94 @@
         }
 
         nav ul li {
-            margin: 20px 0;
+            margin-bottom: 20px;
         }
 
         nav ul li a {
             text-decoration: none;
             color: #333;
-            font-size: 1rem;
             font-weight: 700;
-            transition: color 0.3s;
+            font-size: 0.95rem;
         }
 
-        nav ul li a:hover {
-            color: #00b4d8;
-        }
-
-        /* SOCIAL MEDIA ICONS */
-        .social-media {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            font-size: 1.1rem;
-            padding: 15px 0;
-            border-top: 1px solid #eee;
-        }
-
-        .social-media a {
-            text-decoration: none;
-            color: #555;
-            transition: transform 0.2s;
-        }
-
-        .social-media a:hover {
-            transform: scale(1.2);
-            color: #000;
-        }
-
-        /* MAIN CONTENT AREA */
+        /* Hauptbereich mit der neuen Fenster-Aufteilung */
         .main-content {
-            width: calc(100% - var(--sidebar-width));
-            padding: 30px;
-            box-sizing: border-box;
+            width: 85%;
+            padding: 25px;
             display: grid;
-            grid-template-columns: 2.5fr 1fr; /* News Fenster ist jetzt noch breiter */
+            /* 2 Spalten: Links Neuigkeiten (breit), rechts die kleinen Fenster */
+            grid-template-columns: 1.8fr 1fr; 
             grid-template-rows: 1fr 1fr;
             gap: 20px;
+            box-sizing: border-box;
         }
 
-        /* FENSTER-STYLING */
-        .content-window {
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            border: 1px solid rgba(0,0,0,0.05);
+        .window {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
             overflow-y: auto;
         }
 
+        /* Neuigkeiten-Fenster geht über beide Zeilen links */
         .news-window {
             grid-row: span 2;
-            border-top: 8px solid var(--accent-yellow);
-        }
-
-        .small-window {
-            border-top: 8px solid var(--primary-blue);
         }
 
         h2 {
             font-family: 'Permanent Marker', cursive;
             margin-top: 0;
-            color: #333;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
         }
 
-        /* SIDEBAR FOOTER */
-        .sidebar-footer {
+        /* Footer Bereich der Sidebar */
+        .sidebar-bottom {
             text-align: center;
         }
 
-        .footer-links {
-            font-size: 0.75rem;
-            margin-bottom: 8px;
+        .social-icons {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding: 0 5px;
         }
 
-        .footer-links a {
-            color: #888;
+        .social-icons a {
             text-decoration: none;
-            display: block; /* Untereinander in der schmalen Sidebar */
-            margin: 4px 0;
+            color: #333;
+            font-size: 0.85rem;
+            font-weight: bold;
         }
 
-        .url-subtext {
+        .footer-nav {
+            font-size: 0.75rem;
+            margin-bottom: 10px;
+        }
+
+        .footer-nav a {
+            color: #777;
+            text-decoration: none;
+            display: block;
+            margin: 3px 0;
+        }
+
+        /* Die URL wie auf der Index-Seite */
+        .url-display {
             display: block;
             font-size: 0.7rem;
-            color: #bbb;
-            letter-spacing: 0.5px;
+            color: #aaa;
             margin-top: 10px;
-            word-break: break-all; /* Falls die URL zu lang für 15% wird */
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
     </style>
 </head>
 <body>
 
     <aside class="sidebar">
-        <div class="top-part">
-            <div class="close-icon" title="Schließen">X</div>
+        <div class="sidebar-top">
+            <span class="close-x">X</span>
             <div class="logo">ANTON</div>
             <nav>
                 <ul>
@@ -188,39 +154,36 @@
             </nav>
         </div>
 
-        <div class="bottom-part">
-            <div class="social-media">
+        <div class="sidebar-bottom">
+            <div class="social-icons">
                 <a href="#">YT</a>
                 <a href="#">TT</a>
                 <a href="#">IG</a>
                 <a href="#">FB</a>
                 <a href="#">@</a>
             </div>
-            
-            <div class="sidebar-footer">
-                <div class="footer-links">
-                    <a href="impressum.html">Impressum</a>
-                    <a href="datenschutz.html">Datenschutz</a>
-                </div>
-                <span class="url-subtext">www.anton-familienpop.de</span>
+            <div class="footer-nav">
+                <a href="impressum.html">Impressum</a>
+                <a href="datenschutz.html">Datenschutz</a>
             </div>
+            <span class="url-display">www.anton-familienpop.de</span>
         </div>
     </aside>
 
     <main class="main-content">
-        <section class="content-window news-window">
+        <section class="window news-window">
             <h2>Neuigkeiten</h2>
-            <p>Inhalte folgen...</p>
+            <p>Hier kommen deine neuesten Updates rein...</p>
         </section>
 
-        <section class="content-window small-window">
-            <h2>Live</h2>
-            <p>Nächste Show...</p>
+        <section class="window">
+            <h2>Konzert-Vorschau</h2>
+            <p>Nächster Termin...</p>
         </section>
 
-        <section class="content-window small-window">
-            <h2>Socials</h2>
-            <p>Check TikTok!</p>
+        <section class="window">
+            <h2>Highlights</h2>
+            <p>Was gerade wichtig ist...</p>
         </section>
     </main>
 
