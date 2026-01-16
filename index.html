@@ -31,7 +31,7 @@
             color: white;
             text-shadow: 4px 4px 15px rgba(0,0,0,0.15);
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 80px;
             animation: float 4s ease-in-out infinite;
             padding: 0 20px;
         }
@@ -41,14 +41,45 @@
             50% { transform: translateY(-15px) rotate(1deg); }
         }
 
-        /* Moderner Button-Container */
-        .btn-container {
+        /* Container für Button + Kette */
+        .wrapper {
             position: relative;
-            display: inline-block;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Die Goldkette (gezeichnet mit CSS) */
+        .gold-chain {
+            position: absolute;
+            width: 120%;
+            height: 140%;
+            border: 12px double #D4AF37; /* Goldene Farbe */
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3), inset 0 0 10px #FFD700;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Der goldene Notenschlüssel Anhänger */
+        .pendant {
+            position: absolute;
+            bottom: -50px;
+            font-size: 4rem;
+            color: #D4AF37;
+            text-shadow: 3px 3px 10px rgba(0,0,0,0.4), 0 0 5px #FFD700;
+            z-index: 5;
+            animation: swing 3s ease-in-out infinite;
+        }
+
+        @keyframes swing {
+            0%, 100% { transform: rotate(-5deg); transform-origin: top; }
+            50% { transform: rotate(5deg); transform-origin: top; }
         }
 
         .enter-btn {
             position: relative;
+            z-index: 2;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -59,32 +90,26 @@
             background: #FFD93D;
             text-decoration: none;
             border-radius: 20px;
-            overflow: hidden; /* Damit die Note im Hintergrund bleibt */
-            box-shadow: 0 10px 30px rgba(255, 217, 61, 0.4), inset 0 0 15px rgba(255,255,255,0.5);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 2px solid #fff;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            border: 3px solid #fff;
         }
 
         /* Die Doppelnote im Hintergrund des Buttons */
-        .enter-btn::before {
-            content: "\266B"; /* Unicode für Doppelnote */
+        .enter-btn::after {
+            content: "\266B";
             position: absolute;
             font-size: 5rem;
-            color: rgba(0, 0, 0, 0.08);
-            right: 15px;
-            bottom: -5px;
+            color: rgba(0, 0, 0, 0.1);
+            right: 10px;
+            bottom: -10px;
             transform: rotate(-15deg);
-            pointer-events: none;
         }
 
         .enter-btn:hover {
-            transform: scale(1.08) translateY(-5px);
-            background: #ffe16b;
-            box-shadow: 0 15px 40px rgba(255, 217, 61, 0.6);
-        }
-
-        .enter-btn:active {
-            transform: scale(0.98);
+            transform: scale(1.05);
+            background: #FFD700;
         }
 
     </style>
@@ -93,10 +118,14 @@
 
     <h1 class="welcome-text">Hey! Schön das du da bist!</h1>
 
-    <div class="btn-container">
+    <div class="wrapper">
+        <div class="gold-chain"></div>
+        
         <a href="hauptseite.html" class="enter-btn">
             Komm rein
         </a>
+
+        <div class="pendant">𝄞</div>
     </div>
 
 </body>
