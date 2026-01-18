@@ -59,7 +59,7 @@
             margin: 0;
         }
 
-        /* 3. Menü-Button & Sidebar */
+        /* 3. Linke Sidebar (Menü) - 12.5% */
         .menu-btn {
             position: fixed;
             top: 15px;
@@ -78,7 +78,7 @@
             border: 1px solid rgba(0,0,0,0.1);
         }
 
-        nav {
+        .sidebar-left {
             position: fixed;
             top: 10px;
             bottom: 10px;
@@ -96,7 +96,7 @@
             border-radius: 0 15px 15px 0; 
         }
 
-        nav.open { left: 0; }
+        .sidebar-left.open { left: 0; }
 
         .menu-links a {
             display: block;
@@ -107,7 +107,43 @@
             margin-bottom: 20px;
         }
 
-        /* 4. Fenster-Layout (50% verkleinert) */
+        /* 4. Rechte Sidebar (Social Media) - Feste 5% */
+        .sidebar-right {
+            position: fixed;
+            top: 10px;
+            bottom: 10px;
+            right: 10px;
+            width: 5%;
+            background-color: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            padding: 20px 0;
+            box-sizing: border-box;
+            border: 2px solid rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+        }
+
+        .sidebar-right a {
+            color: #333;
+            font-size: 1.5rem;
+            transition: transform 0.3s, color 0.3s;
+        }
+
+        .sidebar-right a:hover {
+            transform: scale(1.2);
+        }
+
+        .fa-youtube:hover { color: #ff0000; }
+        .fa-instagram:hover { color: #E1306C; }
+        .fa-tiktok:hover { color: #000; }
+        .fa-facebook:hover { color: #1877F2; }
+
+        /* 5. Fenster-Layout */
         .content-container {
             position: relative;
             z-index: 5;
@@ -116,16 +152,16 @@
             align-items: center;
             height: calc(100vh - 80px);
             margin-top: 80px;
+            padding-right: 6%; /* Platz für die rechte Sidebar */
         }
 
         .window-grid {
             display: flex;
             gap: 15px;
-            width: 50%; /* Die gesamte Gruppe um 50% verkleinert */
-            height: 50vh; /* Höhe ebenfalls reduziert */
+            width: 50%;
+            height: 50vh;
         }
 
-        /* Das große Fenster jetzt LINKS */
         .main-window {
             flex: 2;
             background: rgba(255, 255, 255, 0.3);
@@ -134,10 +170,8 @@
             border-radius: 15px;
             padding: 20px;
             box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-            overflow-y: auto;
         }
 
-        /* Die Spalte für die kleinen Fenster jetzt RECHTS */
         .side-column {
             display: flex;
             flex-direction: column;
@@ -152,7 +186,6 @@
             border: 1px solid rgba(255, 255, 255, 0.4);
             border-radius: 15px;
             padding: 15px;
-            overflow-y: auto;
         }
 
         h2, h3 {
@@ -161,9 +194,6 @@
             margin-top: 0;
             font-size: 1.2rem;
         }
-
-        .social-icons { margin-top: auto; display: flex; flex-direction: column; gap: 15px; align-items: center; font-size: 1.3rem; }
-        .social-icons a { color: #333; }
     </style>
 </head>
 <body>
@@ -176,8 +206,8 @@
 
     <canvas id="canvas-container"></canvas>
 
-    <nav id="sidebar">
-        <div class="close-btn" onclick="toggleNav()" style="cursor:pointer; align-self:flex-end;">×</div>
+    <nav class="sidebar-left" id="sidebar">
+        <div onclick="toggleNav()" style="cursor:pointer; align-self:flex-end; font-size: 2rem;">×</div>
         <div class="menu-links">
             <a href="hauptseite.html">Home</a>
             <a href="ueber-mich.html">Über mich</a>
@@ -186,30 +216,28 @@
             <a href="impressum.html">Impressum</a>
             <a href="datenschutz.html">Datenschutz</a>
         </div>
-        <div class="social-icons">
-            <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
-            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="#" target="_blank"><i class="fab fa-tiktok"></i></a>
-            <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
-            <a href="mailto:info@deineseite.de"><i class="fas fa-at"></i></a>
-        </div>
     </nav>
+
+    <aside class="sidebar-right">
+        <a href="#" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+        <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="mailto:info@deineseite.de" title="E-Mail"><i class="fas fa-at"></i></a>
+    </aside>
 
     <div class="content-container">
         <div class="window-grid">
             <div class="main-window">
                 <h2>Neuigkeiten</h2>
-                <p style="font-size: 0.9rem;">Willkommen im News-Bereich. Hier erfährst du alles über aktuelle Projekte.</p>
+                <p style="font-size: 0.9rem;">Aktuelle Updates folgen hier.</p>
             </div>
-
             <div class="side-column">
                 <div class="small-window">
                     <h3>Info 1</h3>
-                    <p style="font-size: 0.8rem;">Content rechts oben...</p>
                 </div>
                 <div class="small-window">
                     <h3>Info 2</h3>
-                    <p style="font-size: 0.8rem;">Content rechts unten...</p>
                 </div>
             </div>
         </div>
@@ -220,7 +248,6 @@
             document.getElementById("sidebar").classList.toggle("open");
         }
 
-        // Canvas Animation bleibt identisch
         const canvas = document.getElementById('canvas-container');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
