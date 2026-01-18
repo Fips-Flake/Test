@@ -20,14 +20,8 @@
             position: fixed; top: 0; width: 100%; height: 80px; 
             display: flex; justify-content: center; align-items: center; 
             z-index: 10; background: rgba(0, 0, 0, 0.24); backdrop-filter: blur(10px); 
-            overflow: hidden;
         }
-        
-        .header-title { 
-            font-family: 'Permanent Marker', cursive !important; 
-            font-size: 3rem; color: #ffffff; 
-            letter-spacing: 5px; margin: 0; z-index: 11; text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-        }
+        .header-title { font-size: 3rem; color: #ffffff; letter-spacing: 5px; margin: 0; text-shadow: 2px 2px 5px rgba(0,0,0,0.3); }
 
         .menu-btn { 
             position: fixed; top: 15px; left: 20px; font-size: 24px; cursor: pointer; 
@@ -35,7 +29,6 @@
             display: flex; align-items: center; justify-content: center; border-radius: 5px; color: #333;
         }
 
-        /* Linke Sidebar */
         .sidebar-left { 
             position: fixed; top: 80px; bottom: 0; left: -15%; width: 12.5%; 
             background-color: rgba(255, 235, 59, 0.95); backdrop-filter: blur(10px); 
@@ -51,25 +44,24 @@
         }
         .close-sidebar:hover { transform: scale(1.5); color: #000; }
 
-        /* Rechte Sidebar */
+        /* Rechte Sidebar Animationen */
         .sidebar-right {
             position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 60px;
             display: flex; flex-direction: column; align-items: center; justify-content: center; 
             gap: 15px; z-index: 100; background-color: rgba(255, 255, 255, 0.15); 
-            backdrop-filter: blur(5px); padding: 20px 0; box-sizing: border-box; 
-            border: 1px solid rgba(0, 0, 0, 0.2); border-right: none;
-            border-top-left-radius: 20px; border-bottom-left-radius: 20px;
+            backdrop-filter: blur(5px); padding: 20px 0; border-top-left-radius: 20px; border-bottom-left-radius: 20px;
         }
         .sidebar-right a { color: #000; font-size: 1.4rem; text-decoration: none; display: flex; }
+        
+        /* Standard Puls für alle Icons */
         .sidebar-right a i { animation: sequentialPulseColorSlow 12s infinite ease-in-out; }
 
-        /* Allgemeine Animation für alle außer TikTok */
         @keyframes sequentialPulseColorSlow {
             0%, 10%, 100% { transform: scale(1); color: #000; filter: none; }
             5% { transform: scale(1.4); color: var(--brand-color); }
         }
 
-        /* Spezielle TikTok Glitch-Animation */
+        /* Spezieller TikTok Glitch Puls */
         @keyframes ttGlitchPulse {
             0%, 10%, 100% { transform: scale(1); color: #000; filter: none; }
             5% { 
@@ -80,7 +72,6 @@
         }
         .tt i { animation: ttGlitchPulse 12s infinite ease-in-out !important; }
 
-        /* Branding Farben */
         .yt { --brand-color: #FF0000; }
         .ig { --brand-color: #E1306C; }
         .fb { --brand-color: #1877F2; }
@@ -89,7 +80,7 @@
         .ym { --brand-color: #FF0000; }
         .am { --brand-color: #FF9900; }
 
-        /* Delays */
+        /* Synchronisierte Delays */
         .sidebar-right a:nth-child(1) i { animation-delay: 0s; }
         .sidebar-right a:nth-child(2) i { animation-delay: 1.5s; }
         .sidebar-right a:nth-child(3) i { animation-delay: 3s; }
@@ -99,65 +90,26 @@
         .sidebar-right a:nth-child(7) i { animation-delay: 9s; }
         .sidebar-right a:nth-child(8) i { animation-delay: 10.5s; }
 
-        .menu-links a { 
-            display: flex; align-items: center; gap: 10px; color: #222; text-decoration: none; 
-            font-size: 0.9rem; margin-bottom: 25px; transition: 0.3s;
-        }
-        .menu-links a:hover { transform: scale(1.1); }
-
-        .shop-container { position: relative; }
-        .submenu { 
-            max-height: 0; overflow: hidden; list-style: none; padding: 0; margin: -15px 0 20px 20px; 
-            transition: max-height 0.5s ease-in-out; 
-        }
-        .shop-container:hover .submenu { max-height: 400px; }
-        .submenu li a { font-size: 0.75rem; margin-bottom: 10px; opacity: 0.8; }
-        .submenu li a::before { content: "• "; color: #333; }
-
-        .content-container { 
-            position: relative; z-index: 5; display: flex; justify-content: center; 
-            align-items: center; height: calc(100vh - 80px); margin-top: 80px; 
-        }
+        /* Layout */
+        .content-container { position: relative; z-index: 5; display: flex; justify-content: center; align-items: center; height: calc(100vh - 80px); margin-top: 80px; }
         .window-grid { display: flex; gap: 20px; width: 70%; height: 60vh; }
-        
-        .main-window, .small-window { 
-            background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(15px); 
-            border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 15px; 
-            padding: 25px; overflow-y: auto; display: flex; flex-direction: column;
-        }
-        
+        .main-window, .small-window { background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 15px; padding: 25px; overflow-y: auto; }
         .main-window { flex: 2.2; }
         .side-column { display: flex; flex-direction: column; gap: 20px; flex: 1; }
         .small-window { flex: 1; }
         
-        h2, h3, p { color: #222; margin-top: 0; }
-        .main-window h2 { font-size: 2.5rem; margin-bottom: 20px; }
-        .small-window h3 { font-size: 1.5rem; margin-bottom: 15px; }
-        p { line-height: 1.4; color: #333; }
+        .menu-links a { display: flex; align-items: center; gap: 10px; color: #222; text-decoration: none; margin-bottom: 25px; transition: 0.3s; }
+        .menu-links a:hover { transform: scale(1.1); }
 
-        .slideshow-container { position: relative; width: 100%; height: 100%; border-radius: 10px; overflow: hidden; }
-        .slideshow-image { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1.5s ease-in-out; }
-        .slideshow-image.active { opacity: 1; }
-
-        .footer-legal { 
-            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); 
-            z-index: 100; display: flex; flex-direction: column; align-items: center; 
-            background: rgba(255,255,255,0.4); backdrop-filter: blur(10px); 
-            padding: 10px 25px; border-radius: 20px;
-        }
+        .footer-legal { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 100; display: flex; flex-direction: column; align-items: center; background: rgba(255,255,255,0.4); backdrop-filter: blur(10px); padding: 10px 25px; border-radius: 20px; }
         .footer-links { display: flex; gap: 20px; }
-        .footer-legal a { color: #333; text-decoration: none; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; font-family: 'Segoe UI', sans-serif; }
+        .footer-links a { color: #333; text-decoration: none; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; font-family: 'Segoe UI', sans-serif; }
         .footer-url { font-size: 0.85rem; opacity: 0.8; margin-top: 5px; font-family: 'Segoe UI', sans-serif; color: #333; }
     </style>
 </head>
 <body onclick="closeNavOutside(event)">
-
-    <header>
-        <h1 class="header-title">ANTON</h1>
-    </header>
-
+    <header><h1 class="header-title">ANTON</h1></header>
     <div class="menu-btn" onclick="toggleNav(event)">☰</div>
-
     <nav class="sidebar-left" id="sidebar">
         <div class="close-sidebar" onclick="toggleNav(event)">&times;</div>
         <div class="menu-links">
@@ -166,20 +118,8 @@
             <a href="ueber-mich.html"><i class="fa-regular fa-face-smile"></i> Über mich</a>
             <a href="konzerte.html"><i class="fa-solid fa-microphone-lines"></i> Konzerte</a>
             <a href="kontakt.html"><i class="fa-solid fa-envelope"></i> Kontakt</a>
-            <div class="shop-container">
-                <a href="shop.html"><i class="fa-solid fa-cart-shopping"></i> Onlineshop</a>
-                <ul class="submenu">
-                    <li><a href="shop.html?cat=shirts">Shirts</a></li>
-                    <li><a href="shop.html?cat=muetzen">Mützen</a></li>
-                    <li><a href="shop.html?cat=hoodies">Hoodies</a></li>
-                    <li><a href="shop.html?cat=alben">Alben</a></li>
-                    <li><a href="shop.html?cat=pakete">Fan-Pakete</a></li>
-                    <li><a href="shop.html?cat=sale">Sale</a></li>
-                </ul>
-            </div>
         </div>
     </nav>
-
     <aside class="sidebar-right">
         <a href="#" class="yt"><i class="fa-brands fa-youtube"></i></a>
         <a href="#" class="tt"><i class="fa-brands fa-tiktok"></i></a>
@@ -190,55 +130,28 @@
         <a href="#" class="ym"><i class="fa-solid fa-circle-play"></i></a>
         <a href="#" class="am"><i class="fa-brands fa-amazon"></i></a>
     </aside>
-
     <div class="content-container">
         <div class="window-grid">
             <div class="main-window">
                 <h2>Willkommen!</h2>
-                <p>Tauche ein in die Welt von ANTON – wo jeder Ton ein Lächeln zaubert und jede Melodie zum Mitsingen einlädt!</p>
+                <p>Schön, dass du da bist!</p>
             </div>
             <div class="side-column">
-                <div class="small-window">
-                    <h3>Konzerte</h3>
-                    <div class="slideshow-container">
-                        <img class="slideshow-image active" src="https://via.placeholder.com/500x300/FFC0CB/333?text=Live+1" alt="Konzert 1">
-                        <img class="slideshow-image" src="https://via.placeholder.com/500x300/ADD8E6/333?text=Live+2" alt="Konzert 2">
-                    </div>
-                </div>
-                <div class="small-window">
-                    <h3>News</h3>
-                    <p>Neue Single "Sonnenstrahl" ab sofort verfügbar!</p>
-                </div>
+                <div class="small-window"><h3>News</h3><p>Neue Songs online!</p></div>
+                <div class="small-window"><h3>Tour</h3><p>Bald in deiner Stadt!</p></div>
             </div>
         </div>
     </div>
-
     <footer class="footer-legal">
-        <div class="footer-links">
-            <a href="impressum.html">Impressum</a>
-            <a href="datenschutz.html">Datenschutz</a>
-        </div>
+        <div class="footer-links"><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></div>
         <div class="footer-url">www.anton-familienpop.de</div>
     </footer>
-
     <script>
         function toggleNav(event) { event.stopPropagation(); document.getElementById("sidebar").classList.toggle("open"); }
         function closeNavOutside(event) { 
             const sidebar = document.getElementById("sidebar"); 
             if (sidebar.classList.contains("open") && !sidebar.contains(event.target)) { sidebar.classList.remove("open"); } 
         }
-
-        let slideIndex = 0;
-        const slides = document.querySelectorAll('.slideshow-image');
-        function showSlides() {
-            if(slides.length > 0) {
-                slides.forEach(s => s.classList.remove('active'));
-                slideIndex = (slideIndex + 1) % slides.length;
-                slides[slideIndex].classList.add('active');
-                setTimeout(showSlides, 4000);
-            }
-        }
-        document.addEventListener('DOMContentLoaded', showSlides);
     </script>
 </body>
 </html>
