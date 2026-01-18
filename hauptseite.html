@@ -20,9 +20,9 @@
             position: fixed; top: 0; width: 100%; height: 80px; 
             display: flex; justify-content: center; align-items: center; 
             z-index: 10; background: rgba(0, 0, 0, 0.24); backdrop-filter: blur(10px); 
-            overflow: hidden; /* Wichtig für die schwebenden Elemente */
+            overflow: hidden;
         }
-        /* NEU: Hintergrund für die schwebenden Elemente */
+        
         .header-bg-elements {
             position: absolute;
             width: 100%;
@@ -31,11 +31,11 @@
         }
         .header-bg-elements i {
             position: absolute;
-            font-size: 30px; /* Kleinere Symbole */
+            font-size: 30px;
             color: #fff;
-            opacity: 0.5; /* 50% Transparenz */
-            animation: floatAndFade 20s infinite ease-in-out; /* Längere, sanftere Animation */
-            pointer-events: none; /* Verhindert Interaktion mit den Icons */
+            opacity: 0.5;
+            animation: floatAndFade 20s infinite ease-in-out;
+            pointer-events: none;
             text-shadow: 0 0 5px rgba(0,0,0,0.2);
         }
 
@@ -46,14 +46,13 @@
             100% { transform: translate(var(--x-end, 0), var(--y-end, 0)) scale(1.2); opacity: 0; }
         }
 
-        /* NEU: Neue Schriftart für ANTON */
         .header-title { 
-            font-family: 'Kalam', cursive; /* Oder eine andere deiner Wahl */
-            font-size: 3.5rem; /* Etwas größer für bessere Lesbarkeit */
+            font-family: 'Kalam', cursive;
+            font-size: 3.5rem;
             color: #ffffff; 
             letter-spacing: 5px; 
             margin: 0;
-            z-index: 11; /* Damit der Titel über den schwebenden Elementen liegt */
+            z-index: 11;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
@@ -83,14 +82,18 @@
         }
         .menu-links a:hover { transform: scale(1.1); color: #000; }
 
-        /* Rechte Sidebar Animation */
+        /* Rechte Sidebar mit Umrandung wie auf Kontaktseite */
         .sidebar-right {
             position: fixed; top: 80px; bottom: 0; right: 0; width: 65px;
             display: flex; flex-direction: column; align-items: center;
             justify-content: center; gap: 18px; z-index: 100;
             background-color: rgba(255, 255, 255, 0.2); 
-            backdrop-filter: blur(10px); border-top-left-radius: 25px;
-            box-sizing: border-box; border-left: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px); 
+            border-top-left-radius: 25px;
+            box-sizing: border-box; 
+            /* Umrandung wie Kontaktseite */
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-right: none; /* Schließt bündig am Rand ab */
         }
         .sidebar-right a { color: #333; font-size: 1.5rem; text-decoration: none; transition: 0.5s; display: flex; }
 
