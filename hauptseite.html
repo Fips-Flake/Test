@@ -26,7 +26,7 @@
         }
         .header-title { font-family: 'Rock Salt', cursive; font-size: 2.5rem; color: #ffffff; text-shadow: 2px 2px 5px rgba(0,0,0,0.3); margin: 0; letter-spacing: 5px; }
         
-        /* Sidebar Navigation - 12.5% Breite */
+        /* Sidebar Links (Navigation) - 12.5% Breite */
         .menu-btn { 
             position: fixed; top: 15px; left: 20px; font-size: 24px; cursor: pointer; 
             z-index: 110; background: rgba(255, 255, 255, 0.5); width: 45px; height: 45px; 
@@ -41,9 +41,8 @@
         }
         .sidebar-left.open { left: 0; }
         .menu-links a { display: block; color: #222; text-decoration: none; font-family: 'Permanent Marker', cursive; font-size: 1.3rem; margin-bottom: 20px; transition: 0.3s; }
-        .menu-links a:hover { color: #d35400; transform: translateX(5px); }
 
-        /* Sidebar Social Rechts */
+        /* Sidebar Rechts (Socials) */
         .sidebar-right { 
             position: fixed; top: 50%; right: 15px; transform: translateY(-50%); 
             width: 55px; background: rgba(255,255,255,0.3); backdrop-filter: blur(8px); 
@@ -51,11 +50,11 @@
             gap: 20px; padding: 20px 0; border: 2px solid rgba(0, 0, 0, 0.1); border-radius: 12px; 
         }
 
-        /* Überarbeitete Animation: Längeres Halten der Farbe */
+        /* Automatische Animation */
         @keyframes sequentialPulseSlow { 
             0%, 2% { transform: scale(1); color: #000000; filter: grayscale(1); opacity: 0.6; } 
             5% { transform: scale(1.3); filter: grayscale(0); opacity: 1; color: var(--brand-color); } 
-            12% { transform: scale(1.3); filter: grayscale(0); opacity: 1; color: var(--brand-color); } /* Farbe hält länger */
+            12% { transform: scale(1.3); filter: grayscale(0); opacity: 1; color: var(--brand-color); } 
             15%, 100% { transform: scale(1); color: #000000; filter: grayscale(1); opacity: 0.6; } 
         }
 
@@ -63,20 +62,35 @@
             color: #000000; font-size: 1.5rem; text-decoration: none; 
             animation: sequentialPulseSlow 16s linear infinite; 
             display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s ease;
         }
-        .sidebar-right svg { width: 1.5rem; height: 1.5rem; fill: currentColor; }
+
+        /* STOPP der Animation bei Hover über die Sidebar */
+        .sidebar-right:hover a {
+            animation-play-state: paused;
+        }
+
+        /* Hover-Effekt für das einzelne Symbol */
+        .sidebar-right a:hover {
+            transform: scale(1.5) !important;
+            filter: grayscale(0) !important;
+            opacity: 1 !important;
+            color: var(--brand-color) !important;
+            text-shadow: 0 0 10px var(--brand-color);
+        }
+
+        .sidebar-right svg { width: 1.6rem; height: 1.6rem; fill: currentColor; }
 
         /* Brand Colors & Delays */
-        .sidebar-right a:nth-child(1) { animation-delay: 0s; --brand-color: #FF0000; } /* YT */
-        .sidebar-right a:nth-child(2) { animation-delay: 2s; --brand-color: #E1306C; } /* Insta */
-        .sidebar-right a:nth-child(3) { animation-delay: 4s; --brand-color: #000000; } /* TikTok */
-        .sidebar-right a:nth-child(4) { animation-delay: 6s; --brand-color: #1877F2; } /* FB */
-        .sidebar-right a:nth-child(5) { animation-delay: 8s; --brand-color: #1DB954; } /* Spotify */
-        .sidebar-right a:nth-child(6) { animation-delay: 10s; --brand-color: #00A8E1; } /* Amazon Music */
-        /* Das @-Symbol leuchtet weiß auf */
-        .sidebar-right a:nth-child(7) { animation-delay: 12s; --brand-color: #ffffff; filter: drop-shadow(0 0 5px #fff); } 
+        .sidebar-right a:nth-child(1) { animation-delay: 0s; --brand-color: #FF0000; } 
+        .sidebar-right a:nth-child(2) { animation-delay: 2s; --brand-color: #E1306C; } 
+        .sidebar-right a:nth-child(3) { animation-delay: 4s; --brand-color: #000000; } 
+        .sidebar-right a:nth-child(4) { animation-delay: 6s; --brand-color: #1877F2; } 
+        .sidebar-right a:nth-child(5) { animation-delay: 8s; --brand-color: #1DB954; } 
+        .sidebar-right a:nth-child(6) { animation-delay: 10s; --brand-color: #00A8E1; } 
+        .sidebar-right a:nth-child(7) { animation-delay: 12s; --brand-color: #ffffff; } 
 
-        /* Footer Bar */
+        /* Footer */
         .footer-legal { 
             position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); 
             z-index: 100; display: flex; gap: 20px; padding: 10px 25px; 
@@ -85,7 +99,7 @@
         }
         .footer-legal a { color: #333; text-decoration: none; font-family: 'Segoe UI', sans-serif; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* Inhalts-Layout */
+        /* Content Windows */
         .content-container { 
             position: relative; z-index: 5; display: flex; justify-content: center; 
             align-items: center; height: calc(100vh - 80px); margin-top: 80px; 
@@ -126,8 +140,9 @@
         <a href="#" title="Spotify"><i class="fab fa-spotify"></i></a>
         <a href="#" title="Amazon Music">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.33 13.5c-.17.25-.5.33-.75.17-1.42-.87-3.2-1.07-5.3-.6-.28.07-.57-.12-.63-.4-.07-.28.12-.57.4-.63 2.3-.53 4.27-.3 5.87.68.25.15.33.48.17.75l.24.03zm1.15-2.55c-.22.35-.67.47-1.02.25-1.62-.99-4.1-1.28-6.02-.7-.4.12-.82-.1-.94-.5s.1-.82.5-.94c2.25-.68 5-.35 6.87.8.35.2.47.65.25 1.02l.36.07zm.1-2.7c-1.95-1.15-5.17-1.26-7.03-.7-.3.1-.63-.08-.72-.38-.1-.3.08-.63.38-.72 2.15-.65 5.7-.52 7.95.82.27.15.35.5.2.77-.17.27-.5.35-.77.2l-.01.01z"/>
-                <path d="M14.5 16.5c-1.5 1-4 1.2-5.5.5-.3-.1-.4-.5-.3-.8.1-.3.5-.4.8-.3 1.1.5 3 .4 4.1-.3.3-.2.7-.1.9.2.1.3 0 .7-.3.7z" opacity=".8"/>
+                <path d="M12.5 4c-4.4 0-8 3.6-8 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm0 14c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6z"/>
+                <path d="M15.5 12.5c-.8 0-1.5.7-1.5 1.5s.7 1.5 1.5 1.5 1.5-.7 1.5-1.5-.7-1.5-1.5-1.5zM11.5 13c-.3 0-.5.2-.5.5s.2.5.5.5h2c.3 0 .5-.2.5-.5s-.2-.5-.5-.5h-2z"/>
+                <path d="M16 16.5c-1 1-2.5 1.5-4 1.5s-3-.5-4-1.5c-.2-.2-.2-.5 0-.7.2-.2.5-.2.7 0 .8.8 2 1.2 3.3 1.2s2.5-.4 3.3-1.2c.2-.2.5-.2.7 0 .2.2.2.5 0 .7z"/>
             </svg>
         </a>
         <a href="#" title="Kontakt"><i class="fas fa-at"></i></a>
@@ -142,11 +157,11 @@
         <div class="window-grid">
             <div class="main-window">
                 <h2>Schön, dass du da bist!</h2>
-                <p>Willkommen auf der offiziellen Seite von ANTON. Entdecke neuen Familienpop, der ins Ohr geht!</p>
+                <p>Willkommen in meiner Welt des Familienpops. Schau dich in Ruhe um!</p>
             </div>
             <div class="side-column">
-                <div class="small-window"><h3>News</h3><p>Tourdaten 2026 sind online!</p></div>
-                <div class="small-window"><h3>Events</h3><p>Nächstes Konzert: Berlin.</p></div>
+                <div class="small-window"><h3>News</h3><p>Tour 2026 startet!</p></div>
+                <div class="small-window"><h3>Live</h3><p>Demnächst in deiner Stadt.</p></div>
             </div>
         </div>
     </div>
