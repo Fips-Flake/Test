@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ANTON | Hauptseite</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Permanent+Marker&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Permanent+Marker&display=swap" rel="stylesheet">
     <style>
         body, html { 
             margin: 0; padding: 0; height: 100%; width: 100%; 
@@ -16,6 +16,7 @@
         }
         @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
+        /* Header Bereich */
         header { 
             position: fixed; top: 0; width: 100%; height: 80px; 
             display: flex; justify-content: center; align-items: center; 
@@ -23,37 +24,39 @@
             overflow: hidden;
         }
         
+        /* Schwebende Symbole im gesamten Header */
         .header-bg-elements {
             position: absolute;
             width: 100%;
             height: 100%;
-            overflow: hidden;
+            top: 0;
+            left: 0;
         }
         .header-bg-elements i {
             position: absolute;
-            font-size: 30px;
+            font-size: 24px;
             color: #fff;
             opacity: 0.5;
-            animation: floatAndFade 20s infinite ease-in-out;
+            animation: flyAround 15s infinite linear;
             pointer-events: none;
-            text-shadow: 0 0 5px rgba(0,0,0,0.2);
         }
 
-        @keyframes floatAndFade {
-            0% { transform: translate(var(--x-start, 0), var(--y-start, 0)) scale(0.5); opacity: 0; }
-            20% { opacity: 0.5; }
-            80% { opacity: 0.5; }
-            100% { transform: translate(var(--x-end, 0), var(--y-end, 0)) scale(1.2); opacity: 0; }
+        @keyframes flyAround {
+            0% { transform: translate(var(--x-start), var(--y-start)) rotate(0deg); }
+            50% { transform: translate(var(--x-mid), var(--y-mid)) rotate(180deg); }
+            100% { transform: translate(var(--x-end), var(--y-end)) rotate(360deg); }
         }
 
+        /* Kantige Schriftart für ANTON */
         .header-title { 
-            font-family: 'Kalam', cursive;
-            font-size: 3.5rem;
+            font-family: 'Bangers', cursive;
+            font-size: 3.8rem;
             color: #ffffff; 
-            letter-spacing: 5px; 
+            letter-spacing: 4px; 
             margin: 0;
             z-index: 11;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 3px 3px 0px rgba(0,0,0,0.2);
+            -webkit-text-stroke: 1px rgba(255,255,255,0.1);
         }
 
         .menu-btn { 
@@ -82,7 +85,7 @@
         }
         .menu-links a:hover { transform: scale(1.1); color: #000; }
 
-        /* Rechte Sidebar mit Umrandung wie auf Kontaktseite */
+        /* Rechte Sidebar mit Umrandung */
         .sidebar-right {
             position: fixed; top: 80px; bottom: 0; right: 0; width: 65px;
             display: flex; flex-direction: column; align-items: center;
@@ -91,9 +94,8 @@
             backdrop-filter: blur(10px); 
             border-top-left-radius: 25px;
             box-sizing: border-box; 
-            /* Umrandung wie Kontaktseite */
             border: 1px solid rgba(255, 255, 255, 0.3);
-            border-right: none; /* Schließt bündig am Rand ab */
+            border-right: none;
         }
         .sidebar-right a { color: #333; font-size: 1.5rem; text-decoration: none; transition: 0.5s; display: flex; }
 
@@ -113,6 +115,7 @@
         .ym { --brand-color: #FF0000; --brand-shadow: none; --brand-stroke: 0px transparent; }
         .am { --brand-color: #00A8E1; --brand-shadow: none; --brand-stroke: 0px transparent; }
 
+        /* Animation Delays Icons */
         .sidebar-right a:nth-child(1) i { animation-delay: 0s; }
         .sidebar-right a:nth-child(2) i { animation-delay: 1.5s; }
         .sidebar-right a:nth-child(3) i { animation-delay: 3s; }
@@ -125,90 +128,4 @@
         /* Content Area */
         .main-content { padding-top: 150px; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; }
         .welcome-card { background: rgba(255,255,255,0.5); padding: 50px; border-radius: 30px; text-align: center; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.3); }
-        .welcome-card h2 { font-family: 'Bangers'; font-size: 3.5rem; color: #333; margin: 0; }
-
-        /* Footer */
-        .footer-legal { 
-            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); 
-            z-index: 100; display: flex; flex-direction: column; align-items: center; 
-            background: rgba(255,255,255,0.4); backdrop-filter: blur(10px); 
-            padding: 10px 25px; border-radius: 20px;
-        }
-        .footer-links { display: flex; gap: 20px; }
-        .footer-legal a.legal-link { 
-            color: #333; text-decoration: none; font-size: 0.8rem; 
-            font-weight: bold; text-transform: uppercase; font-family: 'Segoe UI', sans-serif; 
-        }
-        .footer-url { font-size: 0.55rem; opacity: 0.6; margin-top: 5px; text-decoration: none; color: #333; }
-    </style>
-</head>
-<body onclick="closeNavOutside(event)">
-
-    <header>
-        <div class="header-bg-elements">
-            <i class="fa-solid fa-note-sticky" style="--x-start: -10%; --y-start: 20%; --x-end: 110%; --y-end: 80%; animation-delay: 0s;"></i>
-            <i class="fa-solid fa-headphones" style="--x-start: 110%; --y-start: 50%; --x-end: -10%; --y-end: 10%; animation-delay: 2s;"></i>
-            <i class="fa-solid fa-microphone-lines" style="--x-start: -10%; --y-start: 80%; --x-end: 110%; --y-end: 20%; animation-delay: 4s;"></i>
-            <i class="fa-solid fa-volume-high" style="--x-start: 110%; --y-start: 10%; --x-end: -10%; --y-end: 70%; animation-delay: 6s;"></i>
-            <i class="fa-solid fa-music" style="--x-start: -10%; --y-start: 60%; --x-end: 110%; --y-end: 40%; animation-delay: 8s;"></i>
-            <i class="fa-solid fa-hat-cowboy" style="--x-start: 110%; --y-start: 30%; --x-end: -10%; --y-end: 90%; animation-delay: 10s;"></i>
-            <i class="fa-solid fa-compact-disc" style="--x-start: -10%; --y-start: 10%; --x-end: 110%; --y-end: 60%; animation-delay: 12s;"></i>
-            <i class="fa-solid fa-guitar" style="--x-start: 110%; --y-start: 70%; --x-end: -10%; --y-end: 30%; animation-delay: 14s;"></i>
-        </div>
-        <h1 class="header-title">ANTON</h1>
-    </header>
-
-    <div class="menu-btn" onclick="toggleNav(event)">☰</div>
-
-    <nav class="sidebar-left" id="sidebar">
-        <div class="close-sidebar" onclick="toggleNav(event)">&times;</div>
-        <div class="menu-links">
-            <a href="hauptseite.html"><i class="fa-solid fa-house"></i> Home</a>
-            <a href="meinemusik.html"><i class="fa-solid fa-music"></i> Meine Musik</a>
-            <a href="ueber-mich.html"><i class="fa-regular fa-face-smile"></i> Über mich</a>
-            <a href="konzerte.html"><i class="fa-solid fa-microphone-lines"></i> Konzerte</a>
-            <a href="shop.html"><i class="fa-solid fa-cart-shopping"></i> Onlineshop</a>
-            <a href="kontakt.html"><i class="fa-solid fa-envelope"></i> Kontakt</a>
-        </div>
-    </nav>
-
-    <aside class="sidebar-right">
-        <a href="#" class="yt" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
-        <a href="#" class="tt" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-        <a href="#" class="ig" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#" class="fb" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
-        <a href="#" class="sp" title="Spotify"><i class="fa-brands fa-spotify"></i></a>
-        <a href="#" class="ap" title="Apple Music"><i class="fa-brands fa-apple"></i></a>
-        <a href="#" class="ym" title="YouTube Music"><i class="fa-solid fa-circle-play"></i></a>
-        <a href="#" class="am" title="Amazon Music"><i class="fa-brands fa-amazon"></i></a>
-    </aside>
-
-    <main class="main-content">
-        <div class="welcome-card">
-            <h2>HEY!</h2>
-            <p style="font-family: 'Permanent Marker'; font-size: 1.5rem;">Schön, dass du da bist.</p>
-        </div>
-    </main>
-
-    <footer class="footer-legal">
-        <div class="footer-links">
-            <a href="impressum.html" class="legal-link">Impressum</a>
-            <a href="datenschutz.html" class="legal-link">Datenschutz</a>
-        </div>
-        <a href="index.html" class="footer-url">www.anton-familienpop.de</a>
-    </footer>
-
-    <script>
-        function toggleNav(event) { 
-            event.stopPropagation(); 
-            document.getElementById("sidebar").classList.toggle("open"); 
-        }
-        function closeNavOutside(event) { 
-            const sidebar = document.getElementById("sidebar"); 
-            if (sidebar.classList.contains("open") && !sidebar.contains(event.target)) { 
-                sidebar.classList.remove("open"); 
-            } 
-        }
-    </script>
-</body>
-</html>
+        .welcome-card h2 { font-family: 'Bangers'; font-size:
