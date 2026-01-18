@@ -23,16 +23,14 @@
         }
         .header-title { font-family: 'Bangers', cursive; font-size: 3rem; color: #ffffff; letter-spacing: 5px; margin: 0; }
 
-        /* Menü Button oben links */
+        /* Menü Button */
         .menu-btn { 
             position: fixed; top: 15px; left: 20px; font-size: 24px; cursor: pointer; 
             z-index: 110; background: rgba(255, 255, 255, 0.5); width: 45px; height: 45px; 
             display: flex; align-items: center; justify-content: center; border-radius: 5px; color: #333;
-            transition: 0.3s;
         }
-        .menu-btn:hover { background: rgba(255, 255, 255, 0.8); }
 
-        /* Linke Sidebar - Gesteuert über Klasse .open */
+        /* Linke Sidebar */
         .sidebar-left { 
             position: fixed; top: 80px; bottom: 0; left: -15%; width: 12.5%; 
             background-color: rgba(255, 235, 59, 0.9); backdrop-filter: blur(10px); 
@@ -42,16 +40,16 @@
             border-right: 1px solid rgba(0,0,0,0.1);
         }
         .sidebar-left.open { left: 0; }
+        .close-sidebar { position: absolute; top: 10px; right: 15px; font-size: 1.5rem; cursor: pointer; color: #333; }
 
         .menu-links a { 
             display: flex; align-items: center; gap: 10px; color: #222; 
             text-decoration: none; font-family: 'Permanent Marker', cursive; 
             font-size: 0.9rem; margin-bottom: 25px; transition: 0.3s;
         }
-        .menu-links a i { width: 20px; text-align: center; }
         .menu-links a:hover { transform: scale(1.1); color: #000; }
 
-        /* Rechte Sidebar - Rahmen & Animation */
+        /* Rechte Sidebar */
         .sidebar-right {
             position: fixed; top: 80px; bottom: 0; right: 0; width: 65px;
             display: flex; flex-direction: column; align-items: center;
@@ -60,23 +58,35 @@
             backdrop-filter: blur(10px); border-top-left-radius: 25px;
             box-sizing: border-box; border-left: 1px solid rgba(255, 255, 255, 0.3);
         }
-        .sidebar-right a { color: #333; font-size: 1.5rem; text-decoration: none; transition: transform 0.3s, color 0.3s; }
 
-        @keyframes sequentialPulseSlow { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.25); } }
-        .sidebar-right a i { animation: sequentialPulseSlow 5s infinite ease-in-out; }
+        /* Basis-Stil für Social Icons (Schwarz) */
+        .sidebar-right a { color: #333; font-size: 1.5rem; text-decoration: none; transition: 0.3s; display: flex; }
+
+        /* Neue Pulse-Animation mit Farbwechsel */
+        @keyframes sequentialPulseColor {
+            0%, 100% { transform: scale(1); color: #333; }
+            50% { transform: scale(1.3); color: var(--brand-color); }
+        }
+
+        .sidebar-right a i { animation: sequentialPulseColor 5s infinite ease-in-out; }
         .sidebar-right:hover a i { animation-play-state: paused; }
-        
-        /* Markenfarben bei Hover */
-        .sidebar-right a.yt:hover { color: #FF0000; }
-        .sidebar-right a.tt:hover { color: #000000; text-shadow: 1px 1px #ff0050, -1px -1px #00f2ea; }
-        .sidebar-right a.ig:hover { color: #E1306C; }
-        .sidebar-right a.fb:hover { color: #1877F2; }
-        .sidebar-right a.sp:hover { color: #1DB954; }
-        .sidebar-right a.ap:hover { color: #FC3C44; }
-        .sidebar-right a.ym:hover { color: #FF0000; }
-        .sidebar-right a.am:hover { color: #00A8E1; }
+        .sidebar-right a:hover { transform: scale(1.4); }
 
-        /* Zeitversatz für Puls-Animation */
+        /* Definition der Markenfarben für die Animation */
+        .yt { --brand-color: #FF0000; }
+        .tt { --brand-color: #000000; } /* TikTok bleibt schwarz/akzentuiert */
+        .ig { --brand-color: #E1306C; }
+        .fb { --brand-color: #1877F2; }
+        .sp { --brand-color: #1DB954; }
+        .ap { --brand-color: #FC3C44; }
+        .ym { --brand-color: #FF0000; }
+        .am { --brand-color: #00A8E1; }
+
+        /* Hover-Effekt (Manuell übersteuern für TikTok Schatten) */
+        .sidebar-right a.tt:hover { text-shadow: 1px 1px #ff0050, -1px -1px #00f2ea; }
+        .sidebar-right a:hover i { color: var(--brand-color); }
+
+        /* Animation Delays */
         .sidebar-right a:nth-child(1) i { animation-delay: 0.0s; }
         .sidebar-right a:nth-child(2) i { animation-delay: 0.6s; }
         .sidebar-right a:nth-child(3) i { animation-delay: 1.2s; }
@@ -91,12 +101,12 @@
         .welcome-card { background: rgba(255,255,255,0.5); padding: 50px; border-radius: 30px; text-align: center; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.3); }
         .welcome-card h2 { font-family: 'Bangers'; font-size: 3.5rem; color: #333; margin: 0; }
 
-        /* Footer Design */
+        /* Footer */
         .footer-legal { 
             position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); 
             z-index: 100; display: flex; flex-direction: column; align-items: center; 
             background: rgba(255,255,255,0.4); backdrop-filter: blur(10px); 
-            padding: 12px 30px; border-radius: 20px;
+            padding: 12px 30px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
         .footer-links { display: flex; gap: 25px; }
         .footer-legal a.legal-link { color: #333; text-decoration: none; font-size: 1rem; font-weight: bold; text-transform: uppercase; font-family: 'Segoe UI', sans-serif; }
@@ -110,6 +120,7 @@
     <div class="menu-btn" onclick="toggleNav(event)">☰</div>
 
     <nav class="sidebar-left" id="sidebar">
+        <div class="close-sidebar" onclick="toggleNav(event)">&times;</div>
         <div class="menu-links">
             <a href="hauptseite.html"><i class="fa-solid fa-house"></i> Home</a>
             <a href="meinemusik.html"><i class="fa-solid fa-music"></i> Meine Musik</a>
@@ -147,13 +158,10 @@
     </footer>
 
     <script>
-        // Funktion zum Öffnen/Schließen der Sidebar
         function toggleNav(event) { 
             event.stopPropagation(); 
             document.getElementById("sidebar").classList.toggle("open"); 
         }
-
-        // Funktion zum Schließen bei Klick außerhalb
         function closeNavOutside(event) { 
             const sidebar = document.getElementById("sidebar"); 
             if (sidebar.classList.contains("open") && !sidebar.contains(event.target)) { 
@@ -161,6 +169,5 @@
             } 
         }
     </script>
-
 </body>
 </html>
