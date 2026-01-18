@@ -46,29 +46,15 @@
             background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(5px);
         }
 
-        /* Animation & Hover Logik */
-        .sidebar-right a { 
-            color: #333; /* Anfangsposition Schwarz/Dunkelgrau */
-            font-size: 1.6rem; 
-            text-decoration: none; 
-            transition: transform 0.3s, color 0.3s;
-        }
+        .sidebar-right a { color: #333; font-size: 1.6rem; text-decoration: none; transition: transform 0.3s, color 0.3s; }
 
         @keyframes sequentialPulseSlow {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.3); }
         }
 
-        .sidebar-right a i { 
-            animation: sequentialPulseSlow 4s infinite ease-in-out; 
-        }
-
-        /* Animation stoppen, wenn Maus über der Sidebar ist */
-        .sidebar-right:hover a i { 
-            animation-play-state: paused; 
-        }
-
-        /* Einzelnes Icon Hover-Effekt (Farbe & Scale) */
+        .sidebar-right a i { animation: sequentialPulseSlow 4s infinite ease-in-out; }
+        .sidebar-right:hover a i { animation-play-state: paused; }
         .sidebar-right a:hover { transform: scale(1.4); }
         
         /* Original Farben beim Hover */
@@ -76,23 +62,34 @@
         .sidebar-right a.tt:hover { color: #000000; text-shadow: 1px 1px #ff0050, -1px -1px #00f2ea; }
         .sidebar-right a.ig:hover { color: #E1306C; }
         .sidebar-right a.fb:hover { color: #1877F2; }
-        .sidebar-right a.am:hover { color: #00A8E1; } /* Amazon Music Blau */
+        .sidebar-right a.am:hover { color: #00A8E1; }
 
-        /* Zeitversatz für die Animation */
         .sidebar-right a:nth-child(1) i { animation-delay: 0s; }
         .sidebar-right a:nth-child(2) i { animation-delay: 0.8s; }
         .sidebar-right a:nth-child(3) i { animation-delay: 1.6s; }
         .sidebar-right a:nth-child(4) i { animation-delay: 2.4s; }
         .sidebar-right a:nth-child(5) i { animation-delay: 3.2s; }
 
-        /* Content & Footer */
+        /* Content */
         .main-content { margin-left: 12.5%; margin-right: 60px; padding-top: 120px; display: flex; justify-content: center; align-items: flex-start; }
         .welcome-card { background: rgba(255,255,255,0.5); padding: 50px; border-radius: 30px; text-align: center; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.3); }
         .welcome-card h2 { font-family: 'Bangers'; font-size: 3.5rem; color: #333; margin: 0; }
 
-        .footer-legal { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 100; display: flex; flex-direction: column; align-items: center; background: rgba(255,255,255,0.4); backdrop-filter: blur(10px); padding: 10px 25px; border-radius: 20px; }
-        .footer-links { display: flex; gap: 20px; }
-        .footer-legal a { color: #333; text-decoration: none; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; }
+        /* Footer mit angepasster Schriftgröße (wie Über Mich) */
+        .footer-legal { 
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); 
+            z-index: 100; display: flex; flex-direction: column; align-items: center; 
+            background: rgba(255,255,255,0.4); backdrop-filter: blur(10px); 
+            padding: 12px 30px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .footer-links { display: flex; gap: 25px; }
+        .footer-legal a.legal-link { 
+            color: #333; text-decoration: none; 
+            font-size: 1rem; /* Größere Schrift wie auf der Über-Mich-Seite */
+            font-weight: bold; text-transform: uppercase; 
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .footer-url { font-size: 0.65rem; opacity: 0.6; margin-top: 8px; text-decoration: none; color: #333; }
     </style>
 </head>
 <body>
@@ -127,10 +124,10 @@
 
     <footer class="footer-legal">
         <div class="footer-links">
-            <a href="impressum.html">Impressum</a>
-            <a href="datenschutz.html">Datenschutz</a>
+            <a href="impressum.html" class="legal-link">Impressum</a>
+            <a href="datenschutz.html" class="legal-link">Datenschutz</a>
         </div>
-        <a href="index.html" style="font-size:0.6rem; opacity:0.6; margin-top: 5px;">www.anton-familienpop.de</a>
+        <a href="index.html" class="footer-url">www.anton-familienpop.de</a>
     </footer>
 
 </body>
