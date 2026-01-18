@@ -63,14 +63,25 @@
         .sidebar-right a { color: #000; font-size: 1.4rem; text-decoration: none; display: flex; }
         .sidebar-right a i { animation: sequentialPulseColorSlow 12s infinite ease-in-out; }
 
+        /* Allgemeine Animation für alle außer TikTok */
         @keyframes sequentialPulseColorSlow {
-            0%, 10%, 100% { transform: scale(1); color: #000; }
+            0%, 10%, 100% { transform: scale(1); color: #000; filter: none; }
             5% { transform: scale(1.4); color: var(--brand-color); }
         }
 
-        /* Branding Farben für die Animation */
+        /* Spezielle TikTok Glitch-Animation */
+        @keyframes ttGlitchPulse {
+            0%, 10%, 100% { transform: scale(1); color: #000; filter: none; }
+            5% { 
+                transform: scale(1.4); 
+                color: #000; 
+                filter: drop-shadow(-2px -1px 0px #25F4EE) drop-shadow(2px 1px 0px #FE2C55);
+            }
+        }
+        .tt i { animation: ttGlitchPulse 12s infinite ease-in-out !important; }
+
+        /* Branding Farben */
         .yt { --brand-color: #FF0000; }
-        .tt { --brand-color: #00f2ea; } /* TikTok Originalfarbe */
         .ig { --brand-color: #E1306C; }
         .fb { --brand-color: #1877F2; }
         .sp { --brand-color: #1DB954; }
@@ -78,7 +89,7 @@
         .ym { --brand-color: #FF0000; }
         .am { --brand-color: #FF9900; }
 
-        /* Sequenzielle Verzögerung */
+        /* Delays */
         .sidebar-right a:nth-child(1) i { animation-delay: 0s; }
         .sidebar-right a:nth-child(2) i { animation-delay: 1.5s; }
         .sidebar-right a:nth-child(3) i { animation-delay: 3s; }
@@ -90,7 +101,7 @@
 
         .menu-links a { 
             display: flex; align-items: center; gap: 10px; color: #222; text-decoration: none; 
-            font-family: 'Permanent Marker', cursive; font-size: 0.9rem; margin-bottom: 25px; transition: 0.3s;
+            font-size: 0.9rem; margin-bottom: 25px; transition: 0.3s;
         }
         .menu-links a:hover { transform: scale(1.1); }
 
@@ -119,7 +130,7 @@
         .side-column { display: flex; flex-direction: column; gap: 20px; flex: 1; }
         .small-window { flex: 1; }
         
-        h2, h3, p { font-family: 'Permanent Marker', cursive !important; color: #222; margin-top: 0; }
+        h2, h3, p { color: #222; margin-top: 0; }
         .main-window h2 { font-size: 2.5rem; margin-bottom: 20px; }
         .small-window h3 { font-size: 1.5rem; margin-bottom: 15px; }
         p { line-height: 1.4; color: #333; }
@@ -184,7 +195,7 @@
         <div class="window-grid">
             <div class="main-window">
                 <h2>Willkommen!</h2>
-                <p>Tauche ein in die Welt von ANTON – wo jeder Ton ein Lächeln zaubert und jede Melodie zum Mitsingen einlädt! Lass uns gemeinsam die Welt mit fröhlichen Klängen füllen!</p>
+                <p>Tauche ein in die Welt von ANTON – wo jeder Ton ein Lächeln zaubert und jede Melodie zum Mitsingen einlädt!</p>
             </div>
             <div class="side-column">
                 <div class="small-window">
@@ -196,7 +207,7 @@
                 </div>
                 <div class="small-window">
                     <h3>News</h3>
-                    <p>Neue Single "Sonnenstrahl" ab sofort überall verfügbar!</p>
+                    <p>Neue Single "Sonnenstrahl" ab sofort verfügbar!</p>
                 </div>
             </div>
         </div>
