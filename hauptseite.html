@@ -45,8 +45,16 @@
             transition: left 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); border-right: 1px solid rgba(0,0,0,0.1);
         }
         .sidebar-left.open { left: 0; }
+        
+        /* Das angepasste "x" */
         .close-sidebar { 
-            position: absolute; top: 15px; right: 15px; font-size: 1.8rem; cursor: pointer; color: #333; 
+            position: absolute; top: 15px; right: 15px; font-size: 1.2rem; cursor: pointer; color: #333; 
+            transition: transform 0.3s ease, font-size 0.3s ease; display: block;
+        }
+        .close-sidebar:hover { 
+            transform: scale(1.5); 
+            font-size: 1.2rem; /* Behält die Relation bei, wirkt aber durch Scale größer */
+            color: #000;
         }
 
         .menu-links a { 
@@ -65,7 +73,7 @@
         .submenu li a { font-size: 0.75rem; margin-bottom: 10px; opacity: 0.8; }
         .submenu li a::before { content: "• "; color: #333; }
 
-        /* Rechte Sidebar (Wiederhergestellt) */
+        /* Rechte Sidebar */
         .sidebar-right {
             position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 60px;
             display: flex; flex-direction: column; align-items: center; justify-content: center; 
