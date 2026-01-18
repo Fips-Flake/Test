@@ -1,1 +1,136 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANTON | Onlineshop</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Permanent+Marker&display=swap" rel="stylesheet">
+    <style>
+        body, html { 
+            margin: 0; padding: 0; min-height: 100%; width: 100%; 
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(45deg, #ade8f4, #ffffff, #ade8f4); 
+            background-size: 200% 200%; animation: gradientBG 15s ease infinite;
+        }
+        @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
+        header { 
+            position: fixed; top: 0; width: 100%; height: 80px; 
+            display: flex; justify-content: center; align-items: center; 
+            z-index: 10; background: rgba(0, 0, 0, 0.24); backdrop-filter: blur(10px); 
+        }
+        .header-title { font-family: 'Bangers', cursive; font-size: 3rem; color: #ffffff; letter-spacing: 5px; margin: 0; }
+
+        /* Warenkorb-Counter oben rechts */
+        .cart-status {
+            position: fixed; top: 20px; right: 80px; z-index: 100;
+            background: #ffeb3b; padding: 10px 20px; border-radius: 30px;
+            font-family: 'Permanent Marker', cursive; box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+        }
+
+        /* Sidebar Navigation */
+        .menu-btn { position: fixed; top: 15px; left: 20px; font-size: 24px; cursor: pointer; z-index: 110; background: rgba(255, 255, 255, 0.5); width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 5px; }
+        .sidebar-left { position: fixed; top: 80px; bottom: 0; left: -15%; width: 12.5%; background-color: rgba(255, 235, 59, 0.85); backdrop-filter: blur(10px); z-index: 100; transition: 0.4s; display: flex; flex-direction: column; padding: 40px 20px; box-sizing: border-box; border-top-right-radius: 25px; }
+        .sidebar-left.open { left: 0; }
+        .menu-links a { display: flex; align-items: center; gap: 10px; color: #222; text-decoration: none; font-family: 'Permanent Marker', cursive; font-size: 1.1rem; margin-bottom: 20px; }
+
+        /* Shop Grid */
+        .shop-container { padding: 120px 50px 100px 50px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; justify-items: center; }
+        
+        .product-card {
+            background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px);
+            border-radius: 20px; padding: 20px; width: 250px; text-align: center;
+            border: 1px solid rgba(255,255,255,0.4); transition: transform 0.3s;
+        }
+        .product-card:hover { transform: translateY(-10px); }
+        .product-img { width: 100%; height: 200px; background: #ddd; border-radius: 15px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: #888; }
+        
+        .product-title { font-family: 'Permanent Marker', cursive; font-size: 1.4rem; margin: 10px 0; }
+        .product-price { font-weight: bold; color: #333; font-size: 1.2rem; margin-bottom: 15px; display: block; }
+        
+        .add-to-cart {
+            background: #222; color: #fff; border: none; padding: 10px 20px;
+            border-radius: 10px; cursor: pointer; font-family: 'Segoe UI', sans-serif;
+            font-weight: bold; transition: 0.2s;
+        }
+        .add-to-cart:hover { background: #d35400; }
+
+        /* Footer */
+        .footer-legal { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 100; display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 10px 25px; border-radius: 20px; background: rgba(255,255,255,0.2); backdrop-filter: blur(5px); }
+        .footer-legal a { color: #333; text-decoration: none; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; }
+    </style>
+</head>
+<body onclick="closeNavOutside(event)">
+
+    <header><h1 class="header-title">ANTON SHOP</h1></header>
+    
+    <div class="menu-btn" onclick="toggleNav(event)">☰</div>
+    
+    <div class="cart-status">
+        <i class="fa-solid fa-cart-shopping"></i> <span id="cart-count">0</span> Artikel
+    </div>
+
+    <nav class="sidebar-left" id="sidebar">
+        <div class="menu-links">
+            <a href="hauptseite.html">Home</a>
+            <a href="meinemusik.html">Musik</a>
+            <a href="konzerte.html">Konzerte</a>
+            <a href="shop.html"><i class="fa-solid fa-cart-shopping"></i> Onlineshop</a>
+            <a href="kontakt.html">Kontakt</a>
+        </div>
+    </nav>
+
+    <div class="shop-container">
+        <div class="product-card">
+            <div class="product-img"><i class="fa-solid fa-shirt"></i></div>
+            <div class="product-title">ANTON T-Shirt</div>
+            <span class="product-price">24,99 €</span>
+            <button class="add-to-cart" onclick="addToCart()">In den Warenkorb</button>
+        </div>
+
+        <div class="product-card">
+            <div class="product-img"><i class="fa-solid fa-compact-disc"></i></div>
+            <div class="product-title">Album "Familienpop"</div>
+            <span class="product-price">17,99 €</span>
+            <button class="add-to-cart" onclick="addToCart()">In den Warenkorb</button>
+        </div>
+
+        <div class="product-card">
+            <div class="product-img"><i class="fa-solid fa-hat-cowboy"></i></div>
+            <div class="product-title">ANTON Cap</div>
+            <span class="product-price">19,99 €</span>
+            <button class="add-to-cart" onclick="addToCart()">In den Warenkorb</button>
+        </div>
+    </div>
+
+    <footer class="footer-legal">
+        <div style="display:flex; gap:15px;">
+            <a href="impressum.html">Impressum</a>
+            <a href="datenschutz.html">Datenschutz</a>
+        </div>
+        <a href="index.html" style="font-size:0.6rem; opacity:0.7;">www.anton-familienpop.de</a>
+    </footer>
+
+    <script>
+        let count = 0;
+        function addToCart() {
+            count++;
+            document.getElementById('cart-count').innerText = count;
+            alert("Artikel wurde zum Warenkorb hinzugefügt!");
+        }
+
+        function toggleNav(event) {
+            event.stopPropagation();
+            document.getElementById("sidebar").classList.toggle("open");
+        }
+
+        function closeNavOutside(event) {
+            const sidebar = document.getElementById("sidebar");
+            if (sidebar.classList.contains("open") && !sidebar.contains(event.target)) {
+                sidebar.classList.remove("open");
+            }
+        }
+    </script>
+</body>
+</html>
