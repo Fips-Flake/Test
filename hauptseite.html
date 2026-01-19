@@ -91,7 +91,7 @@
         .sub-menu { padding-left: 20px; margin-bottom: 15px; }
         .sub-menu a { font-size: 0.8rem; margin-bottom: 10px; opacity: 0.8; }
 
-        /* --- SIDEBAR RECHTS (Social Icons mit Pulse & Glitch) --- */
+        /* --- SIDEBAR RECHTS --- */
         .sidebar-right {
             position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 60px;
             display: flex; flex-direction: column; align-items: center; gap: 15px; z-index: 100; 
@@ -234,7 +234,6 @@ document.addEventListener("click", function(event) {
     }
 });
 
-// Icons im Header generieren
 const iconClasses = ['fa-music', 'fa-guitar', 'fa-microphone', 'fa-headphones', 'fa-compact-disc'];
 const headerContainer = document.getElementById('headerIcons');
 for (let i = 0; i < 12; i++) {
@@ -246,7 +245,6 @@ for (let i = 0; i < 12; i++) {
     headerContainer.appendChild(icon);
 }
 
-// Slideshow Logik
 let currentSlide = 0;
 const slides = document.querySelectorAll('.slideshow-img');
 setInterval(() => {
