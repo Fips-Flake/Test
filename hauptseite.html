@@ -10,6 +10,7 @@
 :root {
     --tiktok-cyan: #25F4EE;
     --tiktok-pink: #FE2C55;
+    --whatsapp-green: #25D366;
 }
 
 body, html { 
@@ -26,12 +27,12 @@ position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
 font-size: 45vw; color: rgba(255, 255, 255, 0.15); z-index: 1; user-select: none; pointer-events: none;
 }
 
-/* --- HEADER MIT ICONS --- */
+/* --- HEADER MIT SCHWEBENDEN ICONS --- */
 header { 
 position: fixed; top: 0; width: 100%; height: 80px; 
 display: flex; justify-content: center; align-items: center; 
 z-index: 10; background: rgba(0, 0, 0, 0.24); backdrop-filter: blur(10px); 
-overflow: hidden; /* Damit die Icons im Header bleiben */
+overflow: hidden;
 }
 
 .header-title { 
@@ -42,23 +43,35 @@ overflow: hidden; /* Damit die Icons im Header bleiben */
     margin: 0; 
     text-shadow: 2px 2px 5px rgba(0,0,0,0.3); 
     position: relative;
-    z-index: 5;
+    z-index: 20; /* Über den schwebenden Icons */
 }
 
-.header-icon {
+/* Container für die schwebenden Icons */
+.header-float-container {
     position: absolute;
-    font-size: 1.5rem;
-    color: rgba(255, 255, 255, 0.3);
-    animation: headerFly 5s infinite ease-in-out;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
 }
 
-@keyframes headerFly {
-    0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.2; }
-    50% { transform: translate(20px, -10px) rotate(20deg); opacity: 0.6; color: var(--tiktok-cyan); }
+.header-float-icon {
+    position: absolute;
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.4); /* Einfarbig Weiß/Transparent */
+    animation: slowFloat linear infinite;
+    top: 25px;
 }
 
-/* TikTok-Glitch Menü Button */
+@keyframes slowFloat {
+    0% { left: -50px; transform: rotate(0deg); opacity: 0; }
+    10% { opacity: 0.4; }
+    90% { opacity: 0.4; }
+    100% { left: 100%; transform: rotate(360deg); opacity: 0; }
+}
+
+/* --- MENÜ & SIDEBARS --- */
 .menu-btn { 
 position: fixed; top: 15px; left: 20px; font-size: 24px; cursor: pointer; 
 z-index: 160; background: #fff; width: 45px; height: 45px; 
@@ -68,7 +81,6 @@ transition: 0.2s;
 }
 .menu-btn:hover { transform: scale(1.1); box-shadow: -3px -2px 0px var(--tiktok-cyan), 3px 2px 0px var(--tiktok-pink); }
 
-/* Sidebar Links */
 .sidebar-left { 
 position: fixed; top: 0; bottom: 0; left: -15%; width: 12.5%; 
 background-color: rgba(255, 235, 59, 0.98); backdrop-filter: blur(10px); 
@@ -80,9 +92,7 @@ overflow-y: auto;
 }
 .sidebar-left.open { left: 0; }
 .menu-links a { display: block; color: #000; text-decoration: none; font-size: 1.1rem; margin-bottom: 20px; transition: 0.3s; position: relative; }
-.menu-links a:hover { transform: translateX(5px); }
 
-/* Sidebar Rechts */
 .sidebar-right {
 position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 60px;
 display: flex; flex-direction: column; align-items: center; gap: 15px; z-index: 100; 
@@ -94,12 +104,29 @@ border-top-left-radius: 20px; border-bottom-left-radius: 20px;
 
 @keyframes ttGlitchPulse {
 0% { transform: scale(1); color: #000; filter: none; }
-5%, 12.5% { transform: scale(1.4); color: #000; filter: drop-shadow(-2px -1px 0px #25F4EE) drop-shadow(2px 1px 0px #FE2C55); }
-18%, 100% { transform: scale(1); color: #000; filter: none; }
+5%, 10% { transform: scale(1.4); color: #000; filter: drop-shadow(-2px -1px 0px #25F4EE) drop-shadow(2px 1px 0px #FE2C55); }
+15%, 100% { transform: scale(1); color: #000; filter: none; }
 }
-.sidebar-right a i { animation: ttGlitchPulse 16s infinite ease-in-out; }
+@keyframes sequentialPulse {
+0% { transform: scale(1); color: #000; }
+5%, 10% { transform: scale(1.4); color: var(--brand-color); }
+15%, 100% { transform: scale(1); color: #000; }
+}
 
-/* Content Layout */
+.sidebar-right a i { animation: sequentialPulse 14s infinite ease-in-out; }
+.sidebar-right a.tt i { animation-name: ttGlitchPulse; }
+.sidebar-right a:nth-child(1) i { animation-delay: 0s; } 
+.sidebar-right a:nth-child(2) i { animation-delay: 2s; }
+.sidebar-right a:nth-child(3) i { animation-delay: 4s; } 
+.sidebar-right a:nth-child(4) i { animation-delay: 6s; }
+.sidebar-right a:nth-child(5) i { animation-delay: 8s; } 
+.sidebar-right a:nth-child(6) i { animation-delay: 10s; }
+.sidebar-right a:nth-child(7) i { animation-delay: 12s; }
+
+.yt { --brand-color: #FF0000; } .tt { --brand-color: #000000; } .wa { --brand-color: var(--whatsapp-green); }
+.ig { --brand-color: #E1306C; } .fb { --brand-color: #1877F2; } .sp { --brand-color: #1DB954; } .ap { --brand-color: #555555; }
+
+/* --- CONTENT --- */
 .content-container { position: relative; z-index: 5; display: flex; justify-content: center; align-items: center; height: calc(100vh - 120px); margin-top: 80px; }
 .window-grid { display: flex; gap: 20px; width: 80%; height: 55vh; }
 .main-window, .small-window { background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 15px; padding: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative; }
@@ -110,11 +137,9 @@ border-top-left-radius: 20px; border-bottom-left-radius: 20px;
 .window-label { position: absolute; top: 8px; left: 12px; font-size: 0.7rem; opacity: 0.6; text-transform: uppercase; letter-spacing: 1px; font-family: sans-serif; }
 .window-content { height: 100%; display: flex; align-items: center; justify-content: center; text-align: center; }
 
-/* Slideshow */
 .slideshow-img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s; }
 .slideshow-img.active { opacity: 1; }
 
-/* Footer */
 .footer-legal { position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%); z-index: 100; display: flex; flex-direction: column; align-items: center; background: rgba(255,255,255,0.4); backdrop-filter: blur(10px); padding: 8px 25px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.5); }
 .footer-links { display: flex; gap: 20px; }
 .footer-links a { color: #333; text-decoration: none; font-size: 0.75rem; font-family: sans-serif; font-weight: bold; text-transform: uppercase; }
@@ -126,11 +151,7 @@ border-top-left-radius: 20px; border-bottom-left-radius: 20px;
 <div class="big-a">A</div>
 
 <header>
-    <i class="fa-solid fa-music header-icon" style="left: 15%; animation-delay: 0s;"></i>
-    <i class="fa-solid fa-compact-disc header-icon" style="left: 25%; animation-delay: 1s;"></i>
-    <i class="fa-solid fa-microphone header-icon" style="right: 25%; animation-delay: 0.5s;"></i>
-    <i class="fa-solid fa-headphones header-icon" style="right: 15%; animation-delay: 1.5s;"></i>
-    
+    <div class="header-float-container" id="headerIcons"></div>
     <h1 class="header-title">ANTON</h1>
 </header>
 
@@ -143,15 +164,14 @@ border-top-left-radius: 20px; border-bottom-left-radius: 20px;
     <a href="ueber-mich.html">Über mich</a>
     <a href="konzerte.html">Konzerte</a>
     <a href="kontakt.html">Kontakt</a>
-    <div class="shop-container">
-        <a href="shop.html">Onlineshop</a>
-    </div>
+    <div class="shop-container"><a href="shop.html">Onlineshop</a></div>
 </div>
 </nav>
 
 <aside class="sidebar-right">
 <a href="#" class="yt"><i class="fa-brands fa-youtube"></i></a>
 <a href="#" class="tt"><i class="fa-brands fa-tiktok"></i></a>
+<a href="#" class="wa"><i class="fa-brands fa-whatsapp"></i></a>
 <a href="#" class="ig"><i class="fa-brands fa-instagram"></i></a>
 <a href="#" class="fb"><i class="fa-brands fa-facebook"></i></a>
 <a href="#" class="sp"><i class="fa-brands fa-spotify"></i></a>
@@ -162,9 +182,7 @@ border-top-left-radius: 20px; border-bottom-left-radius: 20px;
 <div class="window-grid">
 <div class="main-window big-column">
 <span class="window-label">Willkommen</span>
-<div class="window-content">
-<h2 style="font-size: 2.2rem; margin: 0;">Hey, schön das du da bist...</h2>
-</div>
+<div class="window-content"><h2 style="font-size: 2.2rem; margin: 0;">Hey, schön das du da bist...</h2></div>
 </div>
 <div class="side-column">
 <div class="small-window">
@@ -174,19 +192,14 @@ border-top-left-radius: 20px; border-bottom-left-radius: 20px;
 </div>
 <div class="small-window">
 <span class="window-label">Neuigkeiten</span>
-<div class="window-content">
-<p style="font-size: 1rem; opacity: 0.8;">Demnächst mehr...</p>
-</div>
+<div class="window-content"><p style="font-size: 1rem; opacity: 0.8;">Demnächst mehr...</p></div>
 </div>
 </div>
 </div>
 </div>
 
 <footer class="footer-legal">
-<div class="footer-links">
-<a href="impressum.html">Impressum</a>
-<a href="datenschutz.html">Datenschutz</a>
-</div>
+<div class="footer-links"><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></div>
 <div class="footer-url"><a href="index.html">www.anton-familienpop.de</a></div>
 </footer>
 
@@ -197,6 +210,7 @@ const sidebar = document.getElementById("sidebar");
 if (sidebar.classList.contains("open") && !sidebar.contains(event.target)) { sidebar.classList.remove("open"); }
 });
 
+// Slideshow
 let currentSlide = 0;
 const slides = document.querySelectorAll('.slideshow-img');
 setInterval(() => {
@@ -206,6 +220,36 @@ setInterval(() => {
         slides[currentSlide].classList.add('active');
     }
 }, 4000);
+
+// Header Floating Icons Logik
+const headerIconsList = [
+    'fa-brands fa-youtube', 'fa-brands fa-tiktok', 'fa-brands fa-whatsapp', 
+    'fa-brands fa-instagram', 'fa-brands fa-facebook', 'fa-brands fa-spotify', 
+    'fa-brands fa-apple', 'fa-solid fa-music', 'fa-solid fa-compact-disc', 
+    'fa-solid fa-microphone', 'fa-solid fa-headphones'
+];
+
+function createHeaderIcon() {
+    const container = document.getElementById('headerIcons');
+    const icon = document.createElement('i');
+    const randomClass = headerIconsList[Math.floor(Math.random() * headerIconsList.length)];
+    
+    icon.className = randomClass + ' header-float-icon';
+    
+    // Zufällige Dauer zwischen 15s und 25s für sanftes Schweben
+    const duration = Math.random() * 10 + 15 + "s";
+    icon.style.animationDuration = duration;
+    
+    // Zufällige vertikale Position innerhalb des Headers
+    icon.style.top = Math.random() * 40 + 10 + "px";
+
+    container.appendChild(icon);
+
+    setTimeout(() => { icon.remove(); }, parseFloat(duration) * 1000);
+}
+
+// Alle 1.5 Sekunden ein neues Icon in den Header schicken
+setInterval(createHeaderIcon, 1500);
 </script>
 </body>
 </html>
