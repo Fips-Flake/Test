@@ -35,7 +35,7 @@ z-index: 170; background: rgba(0, 0, 0, 0.24); backdrop-filter: blur(10px);
 }
 .header-title { font-size: 2.5rem; color: #ffffff; letter-spacing: 5px; margin: 0; text-shadow: 2px 2px 5px rgba(0,0,0,0.3); }
 
-/* --- MENÜ BUTTON (Klassisches Design) --- */
+/* --- MENÜ BUTTON --- */
 .menu-btn { 
 position: fixed; top: 15px; left: 20px; font-size: 24px; cursor: pointer; 
 z-index: 180; background: rgba(255, 255, 255, 0.5); width: 45px; height: 45px; 
@@ -44,10 +44,10 @@ transition: 0.3s;
 }
 .menu-btn:hover { background: rgba(255, 255, 255, 0.8); transform: scale(1.05); }
 
-/* --- LINKE SIDEBAR (Transparenter & unter Header) --- */
+/* --- LINKE SIDEBAR --- */
 .sidebar-left { 
 position: fixed; top: 80px; bottom: 0; left: -15%; width: 12.5%; 
-background-color: rgba(255, 235, 59, 0.45); /* 50% transparenter als vorher */
+background-color: rgba(255, 235, 59, 0.45); 
 backdrop-filter: blur(10px); 
 z-index: 150; display: flex; flex-direction: column; 
 padding: 30px 15px; box-sizing: border-box; 
@@ -119,13 +119,27 @@ border-top-left-radius: 20px; border-bottom-left-radius: 20px;
 .sidebar-right:hover a i { animation: none !important; color: #000; transform: scale(1); filter: none; }
 .sidebar-right a:hover i { transform: scale(1.5) !important; color: var(--brand-color) !important; }
 
-/* --- CONTENT --- */
+/* --- CONTENT (Quadratisches Hauptfenster) --- */
 .content-container { position: relative; z-index: 5; display: flex; justify-content: center; align-items: center; height: calc(100vh - 120px); margin-top: 80px; }
-.window-grid { display: flex; gap: 20px; width: 80%; height: 55vh; }
-.main-window, .small-window { background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 15px; padding: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative; }
-.big-column { flex: 2; }
-.side-column { flex: 0.8; display: flex; flex-direction: column; gap: 15px; }
-.small-window { flex: 1; }
+.window-grid { display: flex; gap: 40px; width: auto; height: auto; align-items: center; }
+
+/* Das Hauptfenster ist nun quadratisch (ca. 45vh x 45vh) */
+.main-window { 
+    background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(15px); 
+    border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 15px; 
+    padding: 30px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+    position: relative; width: 45vh; height: 45vh; 
+    display: flex; flex-direction: column; justify-content: center;
+}
+
+.side-column { display: flex; flex-direction: column; gap: 15px; height: 45vh; justify-content: space-between; }
+.small-window { 
+    background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(15px); 
+    border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 15px; 
+    padding: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+    position: relative; width: 250px; height: calc(50% - 7.5px);
+}
+
 .window-label { position: absolute; top: 8px; left: 12px; font-size: 0.7rem; opacity: 0.6; text-transform: uppercase; letter-spacing: 1px; font-family: sans-serif; }
 .window-content { height: 100%; display: flex; align-items: center; justify-content: center; text-align: center; }
 
@@ -182,9 +196,9 @@ border-top-left-radius: 20px; border-bottom-left-radius: 20px;
 
 <div class="content-container">
 <div class="window-grid">
-    <div class="main-window big-column">
+    <div class="main-window">
         <span class="window-label">Willkommen</span>
-        <div class="window-content"><h2 style="font-size: 2.2rem; margin: 0;">Hey, schön das du da bist...</h2></div>
+        <div class="window-content"><h2 style="font-size: 1.8rem; margin: 0; line-height: 1.4;">Hey, schön das du da bist...</h2></div>
     </div>
     <div class="side-column">
         <div class="small-window">
@@ -194,7 +208,7 @@ border-top-left-radius: 20px; border-bottom-left-radius: 20px;
         </div>
         <div class="small-window">
             <span class="window-label">Neuigkeiten</span>
-            <div class="window-content"><p style="font-size: 1rem; opacity: 0.8;">Demnächst mehr...</p></div>
+            <div class="window-content"><p style="font-size: 0.9rem; opacity: 0.8;">Demnächst mehr...</p></div>
         </div>
     </div>
 </div>
