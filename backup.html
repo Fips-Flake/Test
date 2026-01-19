@@ -157,12 +157,30 @@
         .window-label.right-label { left: auto; right: 12px; }
         .window-content { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
 
-        .slideshow { width: 100%; height: 100%; position: relative; }
-        .slide { position: absolute; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.1rem; opacity: 0; animation: slideFade 12s infinite; background-color: rgba(0,0,0,0.2); }
-        .slide:nth-child(1) { animation-delay: 0s; }
-        .slide:nth-child(2) { animation-delay: 4s; }
-        .slide:nth-child(3) { animation-delay: 8s; }
-        @keyframes slideFade { 0%, 33% { opacity: 1; } 34%, 100% { opacity: 0; } }
+        /* SLIDESHOW STYLES */
+        .slideshow-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px; /* Optional: abgerundete Ecken für die Slideshow */
+        }
+
+        .slide-image {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 1s ease-in-out; /* Sanfter Übergang zwischen den Bildern */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .slide-image.active {
+            opacity: 1;
+        }
 
         .footer-legal { 
             position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%); 
@@ -218,10 +236,10 @@
         </div>
         <div class="side-column">
             <div class="small-window">
-                <div class="slideshow">
-                    <div class="slide">Konzert Bild 1</div>
-                    <div class="slide">Konzert Bild 2</div>
-                    <div class="slide">Konzert Bild 3</div>
+                <div class="slideshow-container">
+                    <div class="slide-image active" style="background-image: url('https://via.placeholder.com/400x200/FF0000/FFFFFF?text=Konzert+Anton+1');"></div>
+                    <div class="slide-image" style="background-image: url('https://via.placeholder.com/400x200/0000FF/FFFFFF?text=Konzert+Anton+2');"></div>
+                    <div class="slide-image" style="background-image: url('https://via.placeholder.com/400x200/00FF00/FFFFFF?text=Konzert+Anton+3');"></div>
                 </div>
             </div>
             <div class="small-window">
@@ -255,6 +273,22 @@ document.addEventListener("click", function(event) {
         sidebar.classList.remove("open"); 
     } 
 });
+
+// Slideshow Script
+let slideIndex = 0;
+showSlides();
+
+function showSlides() {
+    let i;
+    let slides = document.getElementsByClassName("slide-image");
+    for (i = 0; i < slides.length; i++) {
+        slides[i].classList.remove('active'); // Alle Slides inaktiv setzen
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) {slideIndex = 1}    
+    slides[slideIndex-1].classList.add('active'); // Aktuelle Slide aktiv setzen
+    setTimeout(showSlides, 4000); // Bildwechsel alle 4 Sekunden
+}
 </script>
 </body>
 </html>
