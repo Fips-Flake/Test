@@ -98,13 +98,13 @@
         .sidebar-right a:nth-child(8) i { animation-delay: 14s; --brand-color: #FF0000; }
         .sidebar-right a:nth-child(9) i { animation-delay: 16s; --brand-color: var(--amazon-music-tuerkis); }
 
-        /* CONTENT LAYOUT */
+        /* PRÄZISES BÜNDIGES LAYOUT */
         .content-container { position: relative; z-index: 5; display: flex; justify-content: center; align-items: center; height: calc(100vh - 120px); margin-top: 80px; }
         
         .window-grid { 
             display: flex; 
             gap: 40px; 
-            align-items: flex-start; /* Spalten fangen oben gleichzeitig an */
+            align-items: flex-start; 
         }
 
         .main-window { 
@@ -115,13 +115,14 @@
             width: 45vh; 
             height: 45vh; 
             display: flex; flex-direction: column;
+            box-sizing: border-box;
         }
 
         .side-column { 
             display: flex; 
             flex-direction: column; 
-            justify-content: space-between; /* Dies drückt das untere Fenster bündig nach unten */
-            height: 45vh; /* Gleiche Höhe wie das Hauptfenster links */
+            justify-content: space-between; /* Zwingt Fenster an Ober- und Unterkante */
+            height: 45vh; /* Absolut identisch mit main-window */
             width: 250px;
         }
 
@@ -131,7 +132,8 @@
             padding: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
             position: relative; 
             width: 100%; 
-            height: calc(50% - 15px); /* Fenstergröße für harmonisches Gleichgewicht */
+            height: calc(50% - 20px); /* Bietet Platz für den Gap zwischen den kleinen Fenstern */
+            box-sizing: border-box;
         }
 
         .window-label { position: absolute; top: 8px; left: 12px; font-size: 0.7rem; opacity: 0.6; text-transform: uppercase; letter-spacing: 1px; font-family: sans-serif; z-index: 10; }
