@@ -8,9 +8,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Rock+Salt&display=swap" rel="stylesheet">
 <style>
 :root {
-    --tiktok-cyan: #00f2ea;
-    --tiktok-pink: #ff0050;
-    --sidebar-width: 12.5%;
+    --tiktok-cyan: #25F4EE;
+    --tiktok-pink: #FE2C55;
+    --whatsapp-green: #25D366;
 }
 
 body, html { 
@@ -53,18 +53,19 @@ overflow: hidden;
     100% { left: 100%; transform: rotate(360deg); opacity: 0; }
 }
 
-/* --- MENÜ BUTTON (Clean Design) --- */
+/* --- MENÜ BUTTON --- */
 .menu-btn { 
 position: fixed; top: 15px; left: 20px; font-size: 24px; cursor: pointer; 
 z-index: 160; background: #fff; width: 45px; height: 45px; 
 display: flex; align-items: center; justify-content: center; border-radius: 8px; color: #000;
-border: 2px solid #000; transition: 0.3s;
+box-shadow: -2px -1px 0px var(--tiktok-cyan), 2px 1px 0px var(--tiktok-pink);
+transition: 0.2s;
 }
-.menu-btn:hover { background: #f0f0f0; transform: scale(1.05); }
+.menu-btn:hover { transform: scale(1.1); box-shadow: -3px -2px 0px var(--tiktok-cyan), 3px 2px 0px var(--tiktok-pink); }
 
-/* --- LINKE SIDEBAR (12.5% mit Header-Box) --- */
+/* --- SIDEBAR LINKS (12.5%) --- */
 .sidebar-left { 
-position: fixed; top: 0; bottom: 0; left: -15%; width: var(--sidebar-width); 
+position: fixed; top: 0; bottom: 0; left: -15%; width: 12.5%; 
 background-color: rgba(255, 235, 59, 0.98); backdrop-filter: blur(10px); 
 z-index: 150; display: flex; flex-direction: column; 
 padding: 0; box-sizing: border-box; 
@@ -75,38 +76,61 @@ border-right: 3px solid #000; overflow-y: auto;
 
 .sidebar-header-box {
     background: #000; color: #fff; padding: 25px 15px; text-align: center;
-    font-family: sans-serif; font-weight: bold; font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 20px;
+    font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 20px;
 }
 
 .menu-links { padding: 0 15px; }
-.menu-links a { display: block; color: #000; text-decoration: none; font-size: 1.1rem; margin-bottom: 20px; transition: 0.3s; }
-.menu-links a:hover { transform: translateX(5px); font-weight: bold; }
+.menu-links a { display: block; color: #000; text-decoration: none; font-size: 1.1rem; margin-bottom: 20px; transition: 0.3s; position: relative; }
+.menu-links a:hover { transform: translateX(5px); }
 
-/* --- RECHTE SIDEBAR (8 Icons inkl. Amazon) --- */
+/* --- SIDEBAR RECHTS (9 Icons inkl. WhatsApp) --- */
 .sidebar-right {
-    position: fixed; right: 0; top: 0; height: 100vh; width: 60px;
-    display: flex; flex-direction: column; justify-content: center;
-    align-items: center; gap: 20px; z-index: 100;
+position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 60px;
+display: flex; flex-direction: column; align-items: center; gap: 15px; z-index: 100; 
+background-color: rgba(255, 255, 255, 0.15); backdrop-filter: blur(5px); 
+padding: 20px 0; border: 1px solid rgba(0, 0, 0, 0.2); border-right: none;
+border-top-left-radius: 20px; border-bottom-left-radius: 20px;
+}
+.sidebar-right a { color: #000; font-size: 1.4rem; text-decoration: none; display: flex; transition: all 0.3s ease; }
+
+@keyframes sequentialPulse {
+0% { transform: scale(1); color: #000; }
+5%, 11% { transform: scale(1.4); color: var(--brand-color); }
+16%, 100% { transform: scale(1); color: #000; }
+}
+@keyframes applePulse {
+0% { transform: scale(1); color: #000; filter: none; }
+5%, 11% { transform: scale(1.4); color: #555555; filter: drop-shadow(0 0 1px #000); }
+16%, 100% { transform: scale(1); color: #000; filter: none; }
+}
+@keyframes ttGlitchPulse {
+0% { transform: scale(1); color: #000; filter: none; }
+5%, 11% { transform: scale(1.4); color: #000; filter: drop-shadow(-2px -1px 0px #25F4EE) drop-shadow(2px 1px 0px #FE2C55); }
+16%, 100% { transform: scale(1); color: #000; filter: none; }
 }
 
-.social-icon {
-    color: white; font-size: 1.5rem; text-decoration: none;
-    animation: sequentialPulseSlow 8s infinite;
-}
+.sidebar-right a i { animation: sequentialPulse 18s infinite ease-in-out; }
+.sidebar-right a.tt i { animation-name: ttGlitchPulse; }
+.sidebar-right a.ap i { animation-name: applePulse; }
 
-@keyframes sequentialPulseSlow {
-    0%, 100% { transform: scale(1); text-shadow: none; color: white; }
-    5%, 15% { transform: scale(1.4); text-shadow: 0 0 10px var(--tiktok-cyan), 0 0 20px var(--tiktok-pink); color: var(--tiktok-cyan); }
-}
+.sidebar-right a:nth-child(1) i { animation-delay: 0s; } 
+.sidebar-right a:nth-child(2) i { animation-delay: 2s; }
+.sidebar-right a:nth-child(3) i { animation-delay: 4s; } 
+.sidebar-right a:nth-child(4) i { animation-delay: 6s; }
+.sidebar-right a:nth-child(5) i { animation-delay: 8s; } 
+.sidebar-right a:nth-child(6) i { animation-delay: 10s; }
+.sidebar-right a:nth-child(7) i { animation-delay: 12s; } 
+.sidebar-right a:nth-child(8) i { animation-delay: 14s; }
+.sidebar-right a:nth-child(9) i { animation-delay: 16s; }
 
-.social-icon:nth-child(1) { animation-delay: 0s; }
-.social-icon:nth-child(2) { animation-delay: 1s; }
-.social-icon:nth-child(3) { animation-delay: 2s; }
-.social-icon:nth-child(4) { animation-delay: 3s; }
-.social-icon:nth-child(5) { animation-delay: 4s; }
-.social-icon:nth-child(6) { animation-delay: 5s; }
-.social-icon:nth-child(7) { animation-delay: 6s; }
-.social-icon:nth-child(8) { animation-delay: 7s; }
+.yt { --brand-color: #FF0000; } .tt { --brand-color: #000; } .ig { --brand-color: #E1306C; } 
+.wa { --brand-color: var(--whatsapp-green); } .fb { --brand-color: #1877F2; } .sp { --brand-color: #1DB954; } 
+.ap { --brand-color: #555; } .ym { --brand-color: #FF0000; } .am { --brand-color: #FF9900; }
+
+.sidebar-right:hover a i { animation: none !important; color: #000; transform: scale(1); filter: none; }
+.sidebar-right a:hover i { transform: scale(1.5) !important; color: var(--brand-color) !important; }
+.sidebar-right a.ap:hover i { color: #555555 !important; filter: drop-shadow(0 0 1px #000) !important; }
+.sidebar-right a.tt:hover i { color: #000 !important; filter: drop-shadow(-2px -1px 0px #25F4EE) drop-shadow(2px 1px 0px #FE2C55) !important; }
 
 /* --- CONTENT --- */
 .content-container { position: relative; z-index: 5; display: flex; justify-content: center; align-items: center; height: calc(100vh - 120px); margin-top: 80px; }
@@ -142,24 +166,25 @@ border-right: 3px solid #000; overflow-y: auto;
 <nav class="sidebar-left" id="sidebar">
     <div class="sidebar-header-box">MENÜ</div>
     <div class="menu-links">
-        <a href="hauptseite.html">Hauptseite</a>
+        <a href="hauptseite.html">Home</a>
         <a href="meinemusik.html">Musik</a>
         <a href="ueber-mich.html">Über mich</a>
         <a href="konzerte.html">Konzerte</a>
         <a href="kontakt.html">Kontakt</a>
-        <a href="shop.html">Shop</a>
+        <a href="shop.html">Onlineshop</a>
     </div>
 </nav>
 
 <aside class="sidebar-right">
-    <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
-    <a href="#" class="social-icon"><i class="fab fa-tiktok"></i></a>
-    <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
-    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-    <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
-    <a href="#" class="social-icon"><i class="fab fa-spotify"></i></a>
-    <a href="#" class="social-icon"><i class="fab fa-apple"></i></a>
-    <a href="#" class="social-icon"><i class="fab fa-amazon"></i></a>
+    <a href="#" class="yt"><i class="fa-brands fa-youtube"></i></a>
+    <a href="#" class="tt"><i class="fa-brands fa-tiktok"></i></a>
+    <a href="#" class="ig"><i class="fa-brands fa-instagram"></i></a>
+    <a href="#" class="wa"><i class="fa-brands fa-whatsapp"></i></a>
+    <a href="#" class="fb"><i class="fa-brands fa-facebook"></i></a>
+    <a href="#" class="sp"><i class="fa-brands fa-spotify"></i></a>
+    <a href="#" class="ap"><i class="fa-brands fa-apple"></i></a>
+    <a href="#" class="ym"><i class="fa-solid fa-circle-play"></i></a>
+    <a href="#" class="am"><i class="fa-brands fa-amazon"></i></a>
 </aside>
 
 <div class="content-container">
@@ -205,9 +230,9 @@ setInterval(() => {
 }, 4000);
 
 const headerIconsList = [
-    'fa-brands fa-youtube', 'fa-brands fa-tiktok', 'fa-brands fa-whatsapp', 
-    'fa-brands fa-instagram', 'fa-brands fa-facebook', 'fa-brands fa-spotify', 
-    'fa-brands fa-apple', 'fa-brands fa-amazon', 'fa-solid fa-music', 
+    'fa-brands fa-youtube', 'fa-brands fa-tiktok', 'fa-brands fa-instagram', 
+    'fa-brands fa-whatsapp', 'fa-brands fa-facebook', 'fa-brands fa-spotify', 
+    'fa-brands fa-apple', 'fa-solid fa-circle-play', 'fa-brands fa-amazon', 'fa-solid fa-music', 
     'fa-solid fa-compact-disc', 'fa-solid fa-microphone', 'fa-solid fa-headphones'
 ];
 
