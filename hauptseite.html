@@ -11,6 +11,7 @@
     --tiktok-cyan: #25F4EE;
     --tiktok-pink: #FE2C55;
     --whatsapp-green: #25D366;
+    --amazon-music-tuerkis: #00A8E1;
 }
 
 body, html { 
@@ -27,31 +28,12 @@ position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
 font-size: 45vw; color: rgba(255, 255, 255, 0.15); z-index: 1; user-select: none; pointer-events: none;
 }
 
-/* --- HEADER --- */
 header { 
 position: fixed; top: 0; width: 100%; height: 80px; 
 display: flex; justify-content: center; align-items: center; 
 z-index: 10; background: rgba(0, 0, 0, 0.24); backdrop-filter: blur(10px); 
-overflow: hidden;
 }
-
-.header-title { 
-    font-family: 'Permanent Marker', cursive !important; 
-    font-size: 2.5rem; color: #ffffff; letter-spacing: 5px; margin: 0; 
-    text-shadow: 2px 2px 5px rgba(0,0,0,0.3); position: relative; z-index: 20;
-}
-
-.header-float-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
-.header-float-icon {
-    position: absolute; font-size: 1.2rem; color: rgba(255, 255, 255, 0.4); 
-    animation: slowFloat linear infinite; top: 25px;
-}
-@keyframes slowFloat {
-    0% { left: -50px; transform: rotate(0deg); opacity: 0; }
-    10% { opacity: 0.4; }
-    90% { opacity: 0.4; }
-    100% { left: 100%; transform: rotate(360deg); opacity: 0; }
-}
+.header-title { font-size: 2.5rem; color: #ffffff; letter-spacing: 5px; margin: 0; text-shadow: 2px 2px 5px rgba(0,0,0,0.3); }
 
 /* --- MENÜ BUTTON --- */
 .menu-btn { 
@@ -63,7 +45,7 @@ transition: 0.2s;
 }
 .menu-btn:hover { transform: scale(1.1); box-shadow: -3px -2px 0px var(--tiktok-cyan), 3px 2px 0px var(--tiktok-pink); }
 
-/* --- SIDEBAR LINKS (12.5%) --- */
+/* --- LINKE SIDEBAR (12.5% Breite) --- */
 .sidebar-left { 
 position: fixed; top: 0; bottom: 0; left: -15%; width: 12.5%; 
 background-color: rgba(255, 235, 59, 0.98); backdrop-filter: blur(10px); 
@@ -77,13 +59,21 @@ border-right: 3px solid #000; overflow-y: auto;
 .sidebar-header-box {
     background: #000; color: #fff; padding: 25px 15px; text-align: center;
     font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 20px;
+    font-family: sans-serif; font-weight: bold;
 }
 
 .menu-links { padding: 0 15px; }
 .menu-links a { display: block; color: #000; text-decoration: none; font-size: 1.1rem; margin-bottom: 20px; transition: 0.3s; position: relative; }
 .menu-links a:hover { transform: translateX(5px); }
 
-/* --- SIDEBAR RECHTS (9 Icons inkl. WhatsApp) --- */
+/* SHOP DROPDOWN */
+.shop-container { position: relative; }
+.sub-menu { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-in-out; padding-left: 15px; }
+.shop-container:hover .sub-menu { max-height: 400px; margin-top: 10px; }
+.sub-menu a { font-size: 0.9rem; margin-bottom: 12px; color: #333; display: flex; align-items: center; }
+.sub-menu a::before { content: "•"; margin-right: 8px; color: #000; font-weight: bold; }
+
+/* --- RECHTE SIDEBAR (9 Icons) --- */
 .sidebar-right {
 position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 60px;
 display: flex; flex-direction: column; align-items: center; gap: 15px; z-index: 100; 
@@ -125,12 +115,10 @@ border-top-left-radius: 20px; border-bottom-left-radius: 20px;
 
 .yt { --brand-color: #FF0000; } .tt { --brand-color: #000; } .ig { --brand-color: #E1306C; } 
 .wa { --brand-color: var(--whatsapp-green); } .fb { --brand-color: #1877F2; } .sp { --brand-color: #1DB954; } 
-.ap { --brand-color: #555; } .ym { --brand-color: #FF0000; } .am { --brand-color: #FF9900; }
+.ap { --brand-color: #555; } .ym { --brand-color: #FF0000; } .am { --brand-color: var(--amazon-music-tuerkis); }
 
 .sidebar-right:hover a i { animation: none !important; color: #000; transform: scale(1); filter: none; }
 .sidebar-right a:hover i { transform: scale(1.5) !important; color: var(--brand-color) !important; }
-.sidebar-right a.ap:hover i { color: #555555 !important; filter: drop-shadow(0 0 1px #000) !important; }
-.sidebar-right a.tt:hover i { color: #000 !important; filter: drop-shadow(-2px -1px 0px #25F4EE) drop-shadow(2px 1px 0px #FE2C55) !important; }
 
 /* --- CONTENT --- */
 .content-container { position: relative; z-index: 5; display: flex; justify-content: center; align-items: center; height: calc(100vh - 120px); margin-top: 80px; }
@@ -139,7 +127,6 @@ border-top-left-radius: 20px; border-bottom-left-radius: 20px;
 .big-column { flex: 2; }
 .side-column { flex: 0.8; display: flex; flex-direction: column; gap: 15px; }
 .small-window { flex: 1; }
-
 .window-label { position: absolute; top: 8px; left: 12px; font-size: 0.7rem; opacity: 0.6; text-transform: uppercase; letter-spacing: 1px; font-family: sans-serif; }
 .window-content { height: 100%; display: flex; align-items: center; justify-content: center; text-align: center; }
 
@@ -156,22 +143,29 @@ border-top-left-radius: 20px; border-bottom-left-radius: 20px;
 
 <div class="big-a">A</div>
 
-<header>
-    <div class="header-float-container" id="headerIcons"></div>
-    <h1 class="header-title">ANTON</h1>
-</header>
+<header><h1 class="header-title">ANTON</h1></header>
 
 <div class="menu-btn" onclick="toggleNav(event)">☰</div>
 
 <nav class="sidebar-left" id="sidebar">
     <div class="sidebar-header-box">MENÜ</div>
     <div class="menu-links">
-        <a href="hauptseite.html">Home</a>
-        <a href="meinemusik.html">Musik</a>
+        <a href="hauptseite.html">Hauptseite</a>
+        <a href="meinemusik.html">Meine Musik</a>
         <a href="ueber-mich.html">Über mich</a>
         <a href="konzerte.html">Konzerte</a>
         <a href="kontakt.html">Kontakt</a>
-        <a href="shop.html">Onlineshop</a>
+        
+        <div class="shop-container">
+            <a href="shop.html">Onlineshop</a>
+            <div class="sub-menu">
+                <a href="shirts.html">Shirts</a>
+                <a href="muetzen.html">Mützen</a>
+                <a href="hoodies.html">Hoodies</a>
+                <a href="alben.html">Alben</a>
+                <a href="pakete.html">Fan-Pakete</a>
+            </div>
+        </div>
     </div>
 </nav>
 
@@ -189,21 +183,21 @@ border-top-left-radius: 20px; border-bottom-left-radius: 20px;
 
 <div class="content-container">
 <div class="window-grid">
-<div class="main-window big-column">
-<span class="window-label">Willkommen</span>
-<div class="window-content"><h2 style="font-size: 2.2rem; margin: 0;">Hey, schön das du da bist...</h2></div>
-</div>
-<div class="side-column">
-<div class="small-window">
-<span class="window-label" style="z-index: 2; color: white; text-shadow: 1px 1px 3px rgba(0,0,0,0.5);">Konzerte</span>
-<img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&w=400" class="slideshow-img active" alt="Konzert 1">
-<img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=400" class="slideshow-img" alt="Konzert 2">
-</div>
-<div class="small-window">
-<span class="window-label">Neuigkeiten</span>
-<div class="window-content"><p style="font-size: 1rem; opacity: 0.8;">Demnächst mehr...</p></div>
-</div>
-</div>
+    <div class="main-window big-column">
+        <span class="window-label">Willkommen</span>
+        <div class="window-content"><h2 style="font-size: 2.2rem; margin: 0;">Hey, schön das du da bist...</h2></div>
+    </div>
+    <div class="side-column">
+        <div class="small-window">
+            <span class="window-label" style="z-index: 2; color: white; text-shadow: 1px 1px 3px rgba(0,0,0,0.5);">Konzerte</span>
+            <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&w=400" class="slideshow-img active" alt="Konzert 1">
+            <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=400" class="slideshow-img" alt="Konzert 2">
+        </div>
+        <div class="small-window">
+            <span class="window-label">Neuigkeiten</span>
+            <div class="window-content"><p style="font-size: 1rem; opacity: 0.8;">Demnächst mehr...</p></div>
+        </div>
+    </div>
 </div>
 </div>
 
@@ -228,26 +222,6 @@ setInterval(() => {
         slides[currentSlide].classList.add('active');
     }
 }, 4000);
-
-const headerIconsList = [
-    'fa-brands fa-youtube', 'fa-brands fa-tiktok', 'fa-brands fa-instagram', 
-    'fa-brands fa-whatsapp', 'fa-brands fa-facebook', 'fa-brands fa-spotify', 
-    'fa-brands fa-apple', 'fa-solid fa-circle-play', 'fa-brands fa-amazon', 'fa-solid fa-music', 
-    'fa-solid fa-compact-disc', 'fa-solid fa-microphone', 'fa-solid fa-headphones'
-];
-
-function createHeaderIcon() {
-    const container = document.getElementById('headerIcons');
-    if(!container) return;
-    const icon = document.createElement('i');
-    icon.className = headerIconsList[Math.floor(Math.random() * headerIconsList.length)] + ' header-float-icon';
-    const duration = Math.random() * 10 + 15 + "s";
-    icon.style.animationDuration = duration;
-    icon.style.top = Math.random() * 40 + 10 + "px";
-    container.appendChild(icon);
-    setTimeout(() => { icon.remove(); }, parseFloat(duration) * 1000);
-}
-setInterval(createHeaderIcon, 1500);
 </script>
 </body>
 </html>
