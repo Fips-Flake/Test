@@ -50,28 +50,30 @@ transition: 0.2s;
 position: fixed; top: 0; bottom: 0; left: -15%; width: 12.5%; 
 background-color: rgba(255, 235, 59, 0.98); backdrop-filter: blur(10px); 
 z-index: 150; display: flex; flex-direction: column; 
-padding: 0; box-sizing: border-box; 
+padding: 80px 15px 30px 15px; box-sizing: border-box; 
 transition: left 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-border-right: 3px solid #000; overflow-y: auto;
+border-right: 3px solid #000; border-top-right-radius: 25px;
+overflow-y: auto;
 }
 .sidebar-left.open { left: 0; }
 
-.sidebar-header-box {
-    background: #000; color: #fff; padding: 25px 15px; text-align: center;
-    font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 20px;
-    font-family: sans-serif; font-weight: bold;
-}
+.close-sidebar { position: absolute; top: 15px; right: 15px; font-size: 1.5rem; cursor: pointer; color: #333; transition: 0.3s; }
+.close-sidebar:hover { transform: scale(1.2) rotate(90deg); color: #000; }
 
-.menu-links { padding: 0 15px; }
-.menu-links a { display: block; color: #000; text-decoration: none; font-size: 1.1rem; margin-bottom: 20px; transition: 0.3s; position: relative; }
-.menu-links a:hover { transform: translateX(5px); }
+.menu-links a, .shop-trigger { 
+    display: flex; align-items: center; gap: 12px; 
+    color: #000; text-decoration: none; font-size: 1.1rem; 
+    margin-bottom: 25px; transition: 0.3s; cursor: pointer;
+}
+.menu-links a:hover, .shop-trigger:hover { transform: translateX(5px); }
+.menu-links i { width: 25px; text-align: center; }
 
 /* SHOP DROPDOWN */
 .shop-container { position: relative; }
-.sub-menu { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-in-out; padding-left: 15px; }
-.shop-container:hover .sub-menu { max-height: 400px; margin-top: 10px; }
-.sub-menu a { font-size: 0.9rem; margin-bottom: 12px; color: #333; display: flex; align-items: center; }
-.sub-menu a::before { content: "•"; margin-right: 8px; color: #000; font-weight: bold; }
+.sub-menu { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-in-out; padding-left: 37px; }
+.shop-container:hover .sub-menu { max-height: 400px; margin-top: -10px; margin-bottom: 15px; }
+.sub-menu a { font-size: 0.9rem; margin-bottom: 12px; color: #333; display: flex; align-items: center; gap: 8px; }
+.sub-menu a::before { content: "•"; color: #000; font-weight: bold; }
 
 /* --- RECHTE SIDEBAR (9 Icons) --- */
 .sidebar-right {
@@ -83,23 +85,20 @@ border-top-left-radius: 20px; border-bottom-left-radius: 20px;
 }
 .sidebar-right a { color: #000; font-size: 1.4rem; text-decoration: none; display: flex; transition: all 0.3s ease; }
 
-@keyframes sequentialPulse {
-0% { transform: scale(1); color: #000; }
-5%, 11% { transform: scale(1.4); color: var(--brand-color); }
-16%, 100% { transform: scale(1); color: #000; }
+@keyframes sequentialPulseColorSlow {
+    0%, 10%, 100% { transform: scale(1); color: #000; filter: none; }
+    5% { transform: scale(1.4); color: var(--brand-color); }
 }
 @keyframes applePulse {
-0% { transform: scale(1); color: #000; filter: none; }
-5%, 11% { transform: scale(1.4); color: #555555; filter: drop-shadow(0 0 1px #000); }
-16%, 100% { transform: scale(1); color: #000; filter: none; }
+    0%, 10%, 100% { transform: scale(1); color: #000; filter: none; }
+    5% { transform: scale(1.4); color: #555555; filter: drop-shadow(0 0 1px #000); }
 }
 @keyframes ttGlitchPulse {
-0% { transform: scale(1); color: #000; filter: none; }
-5%, 11% { transform: scale(1.4); color: #000; filter: drop-shadow(-2px -1px 0px #25F4EE) drop-shadow(2px 1px 0px #FE2C55); }
-16%, 100% { transform: scale(1); color: #000; filter: none; }
+    0%, 10%, 100% { transform: scale(1); color: #000; filter: none; }
+    5% { transform: scale(1.4); color: #000; filter: drop-shadow(-2px -1px 0px var(--tiktok-cyan)) drop-shadow(2px 1px 0px var(--tiktok-pink)); }
 }
 
-.sidebar-right a i { animation: sequentialPulse 18s infinite ease-in-out; }
+.sidebar-right a i { animation: sequentialPulseColorSlow 18s infinite ease-in-out; }
 .sidebar-right a.tt i { animation-name: ttGlitchPulse; }
 .sidebar-right a.ap i { animation-name: applePulse; }
 
@@ -148,16 +147,16 @@ border-top-left-radius: 20px; border-bottom-left-radius: 20px;
 <div class="menu-btn" onclick="toggleNav(event)">☰</div>
 
 <nav class="sidebar-left" id="sidebar">
-    <div class="sidebar-header-box">MENÜ</div>
+    <div class="close-sidebar" onclick="toggleNav(event)">&times;</div>
     <div class="menu-links">
-        <a href="hauptseite.html">Hauptseite</a>
-        <a href="meinemusik.html">Meine Musik</a>
-        <a href="ueber-mich.html">Über mich</a>
-        <a href="konzerte.html">Konzerte</a>
-        <a href="kontakt.html">Kontakt</a>
+        <a href="hauptseite.html"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="meinemusik.html"><i class="fa-solid fa-music"></i> Meine Musik</a>
+        <a href="ueber-mich.html"><i class="fa-regular fa-face-smile"></i> Über mich</a>
+        <a href="konzerte.html"><i class="fa-solid fa-microphone-lines"></i> Konzerte</a>
+        <a href="kontakt.html"><i class="fa-solid fa-envelope"></i> Kontakt</a>
         
         <div class="shop-container">
-            <a href="shop.html">Onlineshop</a>
+            <div class="shop-trigger"><i class="fa-solid fa-cart-shopping"></i> Onlineshop</div>
             <div class="sub-menu">
                 <a href="shirts.html">Shirts</a>
                 <a href="muetzen.html">Mützen</a>
@@ -210,7 +209,8 @@ border-top-left-radius: 20px; border-bottom-left-radius: 20px;
 function toggleNav(event) { event.stopPropagation(); document.getElementById("sidebar").classList.toggle("open"); }
 document.addEventListener("click", function(event) {
 const sidebar = document.getElementById("sidebar");
-if (sidebar.classList.contains("open") && !sidebar.contains(event.target)) { sidebar.classList.remove("open"); }
+const menuBtn = document.querySelector(".menu-btn");
+if (sidebar.classList.contains("open") && !sidebar.contains(event.target) && !menuBtn.contains(event.target)) { sidebar.classList.remove("open"); }
 });
 
 let currentSlide = 0;
