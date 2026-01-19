@@ -23,33 +23,43 @@ overflow: hidden;
 }
 @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-/* --- SCHWEBENDE SYMBOLE (VORDERGRUND) --- */
-.floating-icons i {
-    position: absolute; 
-    color: rgba(0, 0, 0, 0.12); 
-    font-size: 2rem; 
-    z-index: 200; 
-    animation: float 20s linear infinite;
-    pointer-events: none;
-}
-@keyframes float {
-    0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
-}
-
 .big-a {
 position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
 font-size: 45vw; color: rgba(255, 255, 255, 0.15); z-index: 1; user-select: none; pointer-events: none;
 }
 
+/* --- HEADER DESIGN --- */
 header { 
 position: fixed; top: 0; width: 100%; height: 80px; 
 display: flex; justify-content: center; align-items: center; 
 z-index: 170; background: rgba(0, 0, 0, 0.24); backdrop-filter: blur(10px); 
+overflow: hidden; /* Wichtig, damit Icons nicht aus dem Header ragen */
 }
-.header-title { font-family: 'Rock Salt', cursive !important; font-size: 2rem; color: #ffffff; letter-spacing: 5px; margin: 0; text-shadow: 2px 2px 5px rgba(0,0,0,0.3); }
+
+.header-title { 
+    font-family: 'Rock Salt', cursive !important; 
+    font-size: 2rem; color: #ffffff; 
+    letter-spacing: 5px; margin: 0; 
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.3); 
+    z-index: 175; /* Über den schwebenden Icons */
+}
+
+/* --- SCHWEBENDE ICONS IM HEADER --- */
+.header-floating-icons i {
+    position: absolute; 
+    color: rgba(255, 255, 255, 0.2); 
+    font-size: 1.2rem; 
+    z-index: 172; /* Zwischen Header-BG und Titel */
+    animation: headerFloat 15s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes headerFloat {
+    0% { transform: translateX(-10vw) translateY(10px) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateX(110vw) translateY(-10px) rotate(360deg); opacity: 0; }
+}
 
 .menu-btn { 
 position: fixed; top: 15px; left: 20px; font-size: 24px; cursor: pointer; 
@@ -69,15 +79,14 @@ border-right: 2px solid rgba(0,0,0,0.1); border-top-right-radius: 25px;
 overflow-y: auto;
 }
 .sidebar-left.open { left: 0; }
-
 .close-sidebar { position: absolute; top: 10px; right: 15px; font-size: 1.5rem; cursor: pointer; color: #333; }
 
-.menu-links a, .shop-trigger { 
+.menu-links a { 
     display: flex; align-items: center; gap: 12px; 
     color: #000; text-decoration: none; font-size: 1.1rem; 
-    margin-bottom: 25px; transition: 0.3s; cursor: pointer;
+    margin-bottom: 25px; transition: 0.3s;
 }
-.menu-links a:hover, .shop-trigger:hover { transform: translateX(5px); }
+.menu-links a:hover { transform: translateX(5px); }
 
 /* --- RECHTE SIDEBAR MIT ANIMATIONEN --- */
 .sidebar-right {
@@ -156,10 +165,12 @@ border-top-left-radius: 20px; border-bottom-left-radius: 20px;
 </head>
 <body>
 
-<div class="floating-icons" id="floatingIcons"></div>
 <div class="big-a">A</div>
 
-<header><h1 class="header-title">ANTON</h1></header>
+<header>
+    <div class="header-floating-icons" id="headerIcons"></div>
+    <h1 class="header-title">ANTON</h1>
+</header>
 
 <div class="menu-btn" onclick="toggleNav(event)">☰</div>
 
@@ -171,6 +182,8 @@ border-top-left-radius: 20px; border-bottom-left-radius: 20px;
         <a href="ueber-mich.html"><i class="fa-regular fa-face-smile"></i> Über mich</a>
         <a href="konzerte.html"><i class="fa-solid fa-microphone-lines"></i> Konzerte</a>
         <a href="kontakt.html"><i class="fa-solid fa-envelope"></i> Kontakt</a>
+        <a href="impressum.html"><i class="fa-solid fa-scale-balanced"></i> Impressum</a>
+        <a href="datenschutz.html"><i class="fa-solid fa-lock"></i> Datenschutz</a>
     </div>
 </nav>
 
@@ -212,22 +225,29 @@ border-top-left-radius: 20px; border-bottom-left-radius: 20px;
 </footer>
 
 <script>
-function toggleNav(event) { event.stopPropagation(); document.getElementById("sidebar").classList.toggle("open"); }
+function toggleNav(event) { 
+    event.stopPropagation(); 
+    document.getElementById("sidebar").classList.toggle("open"); 
+}
+
 document.addEventListener("click", function(event) {
     const sidebar = document.getElementById("sidebar");
     const menuBtn = document.querySelector(".menu-btn");
-    if (sidebar.classList.contains("open") && !sidebar.contains(event.target) && !menuBtn.contains(event.target)) { sidebar.classList.remove("open"); }
+    if (sidebar.classList.contains("open") && !sidebar.contains(event.target) && !menuBtn.contains(event.target)) { 
+        sidebar.classList.remove("open"); 
+    }
 });
 
-const iconClasses = ['fa-music', 'fa-note-sticky', 'fa-headphones', 'fa-guitar', 'fa-microphone'];
-const container = document.getElementById('floatingIcons');
-for (let i = 0; i < 15; i++) {
+// Icons nur im Header generieren
+const iconClasses = ['fa-music', 'fa-guitar', 'fa-microphone', 'fa-headphones', 'fa-compact-disc'];
+const headerContainer = document.getElementById('headerIcons');
+for (let i = 0; i < 12; i++) {
     const icon = document.createElement('i');
     icon.className = `fa-solid ${iconClasses[Math.floor(Math.random() * iconClasses.length)]}`;
-    icon.style.left = Math.random() * 100 + 'vw';
-    icon.style.animationDelay = Math.random() * 20 + 's';
-    icon.style.fontSize = (Math.random() * 20 + 20) + 'px';
-    container.appendChild(icon);
+    icon.style.left = '-10vw';
+    icon.style.top = Math.random() * 50 + 15 + 'px';
+    icon.style.animationDelay = (Math.random() * 15) + 's';
+    headerContainer.appendChild(icon);
 }
 
 let currentSlide = 0;
