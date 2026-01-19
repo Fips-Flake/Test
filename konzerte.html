@@ -17,7 +17,7 @@
         body, html { 
             margin: 0; padding: 0; height: 100%; width: 100%; 
             font-family: 'Permanent Marker', cursive !important;
-            background: linear-gradient(45deg, #a18cd1, #fbc2eb, #a18cd1); 
+            background: linear-gradient(45deg, #2c3e50, #4ca1af, #2c3e50); 
             background-size: 200% 200%; animation: gradientBG 15s ease infinite;
             overflow: hidden;
         }
@@ -26,7 +26,7 @@
 
         .big-a {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            font-size: 45vw; color: rgba(255, 255, 255, 0.15); z-index: 1; user-select: none; pointer-events: none;
+            font-size: 45vw; color: rgba(255, 255, 255, 0.1); z-index: 1; user-select: none; pointer-events: none;
         }
 
         header { 
@@ -86,7 +86,6 @@
         .shop-container:hover .sub-menu { max-height: 400px; }
         .sub-menu a { font-size: 0.8rem; margin-bottom: 12px; opacity: 0.8; display: flex; align-items: center; gap: 8px; }
 
-        /* RECHTE SIDEBAR & ANIMATIONEN */
         .sidebar-right {
             position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 60px;
             display: flex; flex-direction: column; align-items: center; gap: 15px; z-index: 100; 
@@ -111,39 +110,19 @@
         .sidebar-right a:nth-child(9) i { animation-delay: 16s; --brand-color: var(--amazon-music-tuerkis); }
 
         .content-container { position: relative; z-index: 5; display: flex; justify-content: center; align-items: center; height: calc(100vh - 120px); margin-top: 80px; }
-        .window-grid { display: flex; gap: 40px; align-items: center; }
-
         .main-window { 
             background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(15px); 
             border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 15px; 
-            padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
-            position: relative; width: 45vh; height: 45vh; 
-            display: flex; flex-direction: column; overflow-y: auto;
+            padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+            width: 80%; max-width: 700px; max-height: 70vh; overflow-y: auto;
         }
 
-        .side-column { display: flex; flex-direction: column; gap: 15px; height: 45vh; justify-content: space-between; }
-        .small-window { 
-            background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(15px); 
-            border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 15px; 
-            padding: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
-            position: relative; width: 250px; height: calc(50% - 7.5px);
-        }
-
-        .window-label { position: absolute; top: 8px; left: 12px; font-size: 0.7rem; opacity: 0.6; text-transform: uppercase; letter-spacing: 1px; font-family: sans-serif; z-index: 10; }
-        .window-content { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-
-        .slideshow { width: 100%; height: 100%; position: relative; overflow: hidden; border-radius: 10px; }
-        .slideshow img { width: 100%; height: 100%; object-fit: cover; position: absolute; opacity: 0; animation: slideAnim 12s infinite; }
-        .slideshow img:nth-child(2) { animation-delay: 4s; }
-        .slideshow img:nth-child(3) { animation-delay: 8s; }
-        @keyframes slideAnim { 0%, 33% { opacity: 1; } 34%, 100% { opacity: 0; } }
-
-        .date-list { list-style: none; padding: 0; width: 100%; }
-        .date-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(0,0,0,0.1); font-size: 0.9rem; }
+        .tour-date { display: flex; justify-content: space-between; padding: 15px; border-bottom: 1px solid rgba(0,0,0,0.1); }
 
         .footer-legal { position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%); z-index: 100; display: flex; flex-direction: column; align-items: center; background: rgba(255,255,255,0.4); backdrop-filter: blur(10px); padding: 8px 25px; border-radius: 15px; }
         .footer-links { display: flex; gap: 20px; }
         .footer-links a { color: #333; text-decoration: none; font-size: 0.75rem; font-family: sans-serif; font-weight: bold; text-transform: uppercase; }
+        .footer-subtext a { text-decoration: none; color: inherit; }
     </style>
 </head>
 <body>
@@ -164,7 +143,7 @@
         <a href="ueber-mich.html"><i class="fa-regular fa-face-smile"></i> Über mich</a>
         <a href="konzerte.html"><i class="fa-solid fa-microphone-lines"></i> Konzerte</a>
         <div class="shop-container">
-            <a href="onlineshop.html"><i class="fa-solid fa-cart-shopping"></i> Onlineshop</a>
+            <a href="shop.html"><i class="fa-solid fa-cart-shopping"></i> Onlineshop</a>
             <div class="sub-menu">
                 <a href="shirts.html"><i class="fa-solid fa-shirt"></i> Shirts</a>
                 <a href="hoodies.html"><i class="fa-solid fa-vest"></i> Hoodies</a>
@@ -190,52 +169,23 @@
 </aside>
 
 <div class="content-container">
-    <div class="window-grid">
-        <div class="main-window">
-            <span class="window-label">Tourdaten 2026</span>
-            <div class="window-content" style="justify-content: flex-start; padding-top: 20px;">
-                <ul class="date-list">
-                    <li class="date-item"><span>12.05. Berlin - Columbia Halle</span> <i class="fa-solid fa-ticket"></i></li>
-                    <li class="date-item"><span>15.05. Hamburg - Sporthalle</span> <i class="fa-solid fa-ticket"></i></li>
-                    <li class="date-item"><span>18.05. Köln - Palladium</span> <i class="fa-solid fa-ticket"></i></li>
-                    <li class="date-item"><span>20.05. München - Zenith</span> <i class="fa-solid fa-ticket"></i></li>
-                    <li class="date-item"><span>22.05. Leipzig - Haus Auensee</span> <i class="fa-solid fa-ticket"></i></li>
-                    <li class="date-item"><span>25.05. Frankfurt - Jahrhunderthalle</span> <i class="fa-solid fa-ticket"></i></li>
-                    <li class="date-item"><span>28.05. Stuttgart - Porsche Arena</span> <i class="fa-solid fa-ticket"></i></li>
-                    <li class="date-item"><span>01.06. Wien - Gasometer</span> <i class="fa-solid fa-ticket"></i></li>
-                </ul>
-            </div>
-        </div>
-        <div class="side-column">
-            <div class="small-window">
-                <span class="window-label">Highlights</span>
-                <div class="window-content" style="padding:0;">
-                    <div class="slideshow">
-                        <img src="konzert1.jpg" alt="Highlight 1">
-                        <img src="konzert2.jpg" alt="Highlight 2">
-                        <img src="konzert3.jpg" alt="Highlight 3">
-                    </div>
-                </div>
-            </div>
-            <div class="small-window">
-                <span class="window-label">Sicherheit</span>
-                <div class="window-content" style="font-size: 0.7rem; font-family: sans-serif; text-align: left; overflow-y: auto;">
-                    <p><strong>Hausordnung:</strong> Taschen max. A4. Keine Glasflaschen, Profi-Kameras oder spitze Gegenstände. Gehörschutz für Kinder wird empfohlen!</p>
-                </div>
-            </div>
-        </div>
+    <div class="main-window">
+        <h2>Live-Termine</h2>
+        <div class="tour-date"><span>12.05.2026</span><span>Berlin, Astra</span></div>
+        <div class="tour-date"><span>15.05.2026</span><span>Hamburg, Fabrik</span></div>
+        <div class="tour-date"><span>20.05.2026</span><span>München, Backstage</span></div>
     </div>
 </div>
 
 <footer class="footer-legal">
     <div class="footer-links"><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></div>
-    <div style="font-size: 0.7rem; opacity: 0.5; margin-top: 5px; font-family: sans-serif;">www.anton-familienpop.de</div>
+    <div class="footer-subtext" style="font-size: 0.7rem; opacity: 0.5; margin-top: 5px; font-family: sans-serif;"><a href="index.html">www.anton-familienpop.de</a></div>
 </footer>
 
 <script>
 function toggleNav(event) { event.stopPropagation(); document.getElementById("sidebar").classList.toggle("open"); }
 document.addEventListener("click", function(event) { const sidebar = document.getElementById("sidebar"); if (sidebar.classList.contains("open") && !sidebar.contains(event.target)) { sidebar.classList.remove("open"); } });
-const iconClasses = ['fa-music', 'fa-guitar', 'fa-microphone', 'fa-headphones', 'fa-compact-disc'];
+const iconClasses = ['fa-microphone', 'fa-ticket', 'fa-guitar', 'fa-bolt'];
 const headerContainer = document.getElementById('headerIcons');
 for (let i = 0; i < 12; i++) {
     const icon = document.createElement('i');
