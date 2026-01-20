@@ -3,30 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANTON | Backup (Testing Vollständig)</title>
+    <title>ANTON | Backup (Testing)</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Rock+Salt&display=swap" rel="stylesheet">
     <style>
         :root {
-            --sidebar-width-desktop: 12.5%;
-            --sidebar-width-mobile: 250px;
-            --accent-yellow: rgba(255, 235, 59, 0.45);
             --tiktok-cyan: #25F4EE;
             --tiktok-pink: #FE2C55;
             --whatsapp-green: #25D366;
             --amazon-music-tuerkis: #00A8E1;
+            --sidebar-width: 12.5%;
         }
 
         body, html { 
             margin: 0; padding: 0; height: 100%; width: 100%; 
             font-family: 'Permanent Marker', cursive !important;
-            background: #ffffff;
-            overflow-x: hidden;
-            overflow-y: auto;
+            background: #ffffff; /* Bewusster Test-Modus */
+            overflow: hidden;
         }
 
         .big-a {
-            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
             font-size: 45vw; color: rgba(0, 0, 0, 0.03); z-index: 1; user-select: none; pointer-events: none;
         }
 
@@ -35,13 +32,12 @@
             position: fixed; top: 0; width: 100%; height: 80px; 
             display: flex; justify-content: center; align-items: center; 
             z-index: 170; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); 
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0,0,0,0.1); overflow: hidden;
         }
 
         .header-title { 
             font-family: 'Rock Salt', cursive !important; 
-            font-size: 2rem; color: #ff0000;
-            letter-spacing: 5px; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); 
+            font-size: 2rem; color: #ff0000; letter-spacing: 5px; z-index: 10;
         }
 
         .floating-icons i {
@@ -51,6 +47,7 @@
         @keyframes floatAround {
             0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
             10% { opacity: 0.5; }
+            90% { opacity: 0.5; }
             100% { transform: translate(100px, -50px) rotate(360deg); opacity: 0; }
         }
 
@@ -62,68 +59,65 @@
 
         /* SIDEBAR LINKS */
         .sidebar-left { 
-            position: fixed; top: 80px; bottom: 0; left: calc(var(--sidebar-width-desktop) * -1); 
-            width: var(--sidebar-width-desktop); 
-            background-color: var(--accent-yellow); backdrop-filter: blur(10px); 
+            position: fixed; top: 80px; bottom: 0; left: calc(var(--sidebar-width) * -1); 
+            width: var(--sidebar-width); 
+            background-color: rgba(255, 235, 59, 0.45); backdrop-filter: blur(10px); 
             z-index: 150; display: flex; flex-direction: column; 
             padding: 20px 15px; box-sizing: border-box; 
             transition: left 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            border-right: 1px solid rgba(0,0,0,0.1); border-top-right-radius: 25px;
+            border-right: 2px solid rgba(0,0,0,0.1); border-top-right-radius: 25px;
         }
         .sidebar-left.open { left: 0; }
-        .sidebar-left a { display: flex; align-items: center; gap: 10px; color: #000; text-decoration: none; font-size: 0.9rem; margin-bottom: 18px; transition: 0.3s; }
-        .sidebar-left a:hover { transform: translateX(5px); }
+        .close-sidebar { align-self: flex-end; margin-bottom: 20px; cursor: pointer; font-size: 1.5rem; color: #000; }
+        .menu-links a { display: flex; align-items: center; gap: 10px; color: #000; text-decoration: none; font-size: 0.9rem; margin-bottom: 18px; transition: 0.3s; }
+        .menu-links a:hover { transform: translateX(5px); }
 
-        /* SIDEBAR RECHTS (Socials) */
+        /* SIDEBAR RECHTS - EXAKTE ANIMATIONEN */
         .sidebar-right {
             position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 60px;
             display: flex; flex-direction: column; align-items: center; gap: 15px; z-index: 100; 
             background-color: rgba(0, 0, 0, 0.03); backdrop-filter: blur(5px); 
-            padding: 20px 0; border: 1px solid rgba(0, 0, 0, 0.05); border-radius: 20px 0 0 20px;
+            padding: 20px 0; border: 1px solid rgba(0, 0, 0, 0.1); border-right: none;
+            border-top-left-radius: 20px; border-bottom-left-radius: 20px;
         }
-        .sidebar-right a i { color: #000; transition: 0.3s; }
-        .sidebar-right a:hover i { transform: scale(1.3); }
 
-        /* CONTENT GRID */
-        .content-container { 
-            position: relative; z-index: 5; display: flex; justify-content: center; 
-            align-items: center; min-height: calc(100vh - 160px); margin-top: 80px; padding: 20px;
-        }
-        .window-grid { display: flex; gap: 20px; width: 100%; max-width: 1100px; }
+        @keyframes sequentialPulseSlow { 0%, 10%, 100% { transform: scale(1); color: #000; filter: none; } 5% { transform: scale(1.4); color: var(--brand-color); } }
+        @keyframes ttGlitchPulse { 0%, 10%, 100% { transform: scale(1); color: #000; filter: none; } 5% { transform: scale(1.4); color: #000; filter: drop-shadow(-2px -1px 0px var(--tiktok-cyan)) drop-shadow(2px 1px 0px var(--tiktok-pink)); } }
 
+        .sidebar-right a i { animation: sequentialPulseSlow 18s infinite ease-in-out; color: #000; transition: 0.3s; }
+        .sidebar-right a.tt i { animation-name: ttGlitchPulse; }
+        .sidebar-right a:nth-child(1) i { animation-delay: 0s; --brand-color: #FF0000; } 
+        .sidebar-right a:nth-child(2) i { animation-delay: 2s; } 
+        .sidebar-right a:nth-child(3) i { animation-delay: 4s; --brand-color: #E1306C; } 
+        .sidebar-right a:nth-child(4) i { animation-delay: 6s; --brand-color: var(--whatsapp-green); }
+
+        /* LAYOUT - BENTO BOX */
+        .content-container { position: relative; z-index: 5; display: flex; justify-content: center; align-items: center; height: calc(100vh - 120px); margin-top: 80px; }
+        .window-grid { display: flex; gap: 20px; align-items: flex-start; }
+        
         .main-window { 
-            background: rgba(0, 0, 0, 0.02); backdrop-filter: blur(15px); 
-            border: 1px solid rgba(0, 0, 0, 0.05); border-radius: 15px; 
-            padding: 30px; flex: 2; height: 60vh; display: flex; flex-direction: column; 
-            box-sizing: border-box;
+            background: rgba(0, 0, 0, 0.02); backdrop-filter: blur(15px); border: 1px solid rgba(0, 0, 0, 0.05); 
+            border-radius: 15px; padding: 30px; width: 70vh; height: 60vh; display: flex; flex-direction: column; box-sizing: border-box; 
         }
-        .side-column { display: flex; flex-direction: column; justify-content: space-between; height: 60vh; flex: 1; gap: 20px; }
+        .side-column { display: flex; flex-direction: column; justify-content: space-between; height: 60vh; width: 320px; }
         .small-window { 
-            background: rgba(0, 0, 0, 0.02); backdrop-filter: blur(15px); 
-            border: 1px solid rgba(0, 0, 0, 0.05); border-radius: 15px; 
-            overflow: hidden; height: calc(50% - 10px); position: relative;
+            background: rgba(0, 0, 0, 0.02); backdrop-filter: blur(15px); border: 1px solid rgba(0, 0, 0, 0.05); 
+            border-radius: 15px; padding: 0; overflow: hidden; width: 100%; height: calc(50% - 10px); position: relative; 
         }
-
         .window-label { position: absolute; top: 8px; left: 12px; font-size: 0.7rem; opacity: 0.5; text-transform: uppercase; font-family: sans-serif; z-index: 20; color: #000; }
 
         /* FOOTER */
-        .footer-legal { 
-            position: relative; margin: 40px auto 20px; width: fit-content;
-            display: flex; flex-direction: column; align-items: center; 
-            background: rgba(0,0,0,0.03); backdrop-filter: blur(10px); 
-            padding: 10px 25px; border-radius: 15px; z-index: 100;
-        }
-        .footer-links { display: flex; gap: 20px; margin-bottom: 5px; }
-        .footer-links a { color: #333; text-decoration: none; font-size: 0.75rem; font-family: sans-serif; font-weight: bold; }
-        .footer-subtext a { text-decoration: none; color: inherit; font-family: sans-serif; font-size: 0.7rem; opacity: 0.5; }
+        .footer-legal { position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%); z-index: 100; display: flex; flex-direction: column; align-items: center; background: rgba(0,0,0,0.03); backdrop-filter: blur(10px); padding: 8px 25px; border-radius: 15px; }
+        .footer-links { display: flex; gap: 20px; }
+        .footer-links a { color: #333; text-decoration: none; font-size: 0.75rem; font-family: sans-serif; font-weight: bold; text-transform: uppercase; }
+        .footer-subtext a { text-decoration: none; color: inherit; font-family: sans-serif; font-size: 0.7rem; opacity: 0.5; margin-top: 5px; }
 
-        /* RESPONSIVE */
+        /* MOBILE RESPONSIVE */
         @media (max-width: 768px) {
-            .window-grid { flex-direction: column; }
-            .main-window, .side-column { width: 95vw; height: auto; }
-            .small-window { height: 250px; }
-            .sidebar-left { width: var(--sidebar-width-mobile); left: calc(var(--sidebar-width-mobile) * -1); }
-            .sidebar-right { display: none; } /* Versteckt Socials auf Handy für mehr Platz */
+            .window-grid { flex-direction: column; height: auto; }
+            .main-window, .side-column { width: 90vw; height: auto; min-height: 250px; }
+            .sidebar-right { display: none; }
+            .content-container { height: auto; margin-top: 100px; padding-bottom: 100px; }
         }
     </style>
 </head>
@@ -133,9 +127,11 @@
 
 <header>
     <div class="floating-icons">
-        <i class="fa-solid fa-music" style="left:15%; top:25%;"></i>
-        <i class="fa-solid fa-microphone" style="left:40%; top:55%;"></i>
-        <i class="fa-solid fa-guitar" style="left:75%; top:35%;"></i>
+        <i class="fa-solid fa-music" style="left:10%; top:20%;"></i>
+        <i class="fa-solid fa-microphone" style="left:30%; top:60%;"></i>
+        <i class="fa-solid fa-guitar" style="left:50%; top:10%;"></i>
+        <i class="fa-solid fa-compact-disc" style="left:70%; top:50%;"></i>
+        <i class="fa-solid fa-headphones" style="left:85%; top:30%;"></i>
     </div>
     <h1 class="header-title">BACKUP</h1>
 </header>
@@ -143,8 +139,8 @@
 <div class="menu-btn" onclick="toggleNav(event)">☰</div>
 
 <nav class="sidebar-left" id="sidebar">
-    <div style="text-align:right; cursor:pointer; font-size: 1.5rem;" onclick="toggleNav(event)"><i class="fa-solid fa-xmark"></i></div>
-    <div class="menu-links" style="margin-top:20px;">
+    <div class="close-sidebar" onclick="toggleNav(event)"><i class="fa-solid fa-xmark"></i></div>
+    <div class="menu-links">
         <a href="hauptseite.html"><i class="fa-solid fa-house"></i> Home</a>
         <a href="meinemusik.html"><i class="fa-solid fa-music"></i> Meine Musik</a>
         <a href="ueber-mich.html"><i class="fa-regular fa-face-smile"></i> Über mich</a>
@@ -156,7 +152,7 @@
 
 <aside class="sidebar-right">
     <a href="#"><i class="fa-brands fa-youtube"></i></a>
-    <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+    <a href="#" class="tt"><i class="fa-brands fa-tiktok"></i></a>
     <a href="#"><i class="fa-brands fa-instagram"></i></a>
     <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
 </aside>
@@ -164,21 +160,21 @@
 <div class="content-container">
     <div class="window-grid">
         <div class="main-window">
-            <span class="window-label">Core-Testing</span>
-            <div style="margin:auto; text-align:center;">
-                <h2>Bento-Box Master</h2>
-                <p>Volle Funktionalität im Backup-Modus.</p>
+            <span class="window-label" style="left: auto; right: 12px;">Testing</span>
+            <div style="margin: auto; text-align: center;">
+                <h2>Backup & Sandbox</h2>
+                <p style="font-family: sans-serif; font-size: 0.9rem;">Spiegelung des Master-Layouts erfolgreich.</p>
             </div>
         </div>
         <div class="side-column">
             <div class="small-window">
                 <span class="window-label">Animation</span>
-                <div style="background: #f0f0f0; height:100%;"></div>
+                <div style="background: #f9f9f9; height: 100%;"></div>
             </div>
             <div class="small-window">
-                <span class="window-label">Updates</span>
-                <div style="display:flex; align-items:center; justify-content:center; height:100%;">
-                    <p>Inhalt stabil.</p>
+                <span class="window-label">Status</span>
+                <div style="display: flex; align-items: center; justify-content: center; height: 100%;">
+                    <p>System OK</p>
                 </div>
             </div>
         </div>
