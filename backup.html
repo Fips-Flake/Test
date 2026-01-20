@@ -151,4 +151,40 @@
     <a href="#"><i class="fa-brands fa-spotify"></i></a>
     <a href="#"><i class="fa-brands fa-apple"></i></a>
     <a href="#"><i class="fa-solid fa-circle-play"></i></a>
-    <a href="#"><i class="fa-brands fa-amazon
+    <a href="#"><i class="fa-brands fa-amazon"></i></a>
+</aside>
+
+<main class="main-grid">
+    <div class="bento-card card-hero"><h2>ALBUM: TON AN</h2></div>
+    <div class="bento-card card-list"><h3>TRACKLISTE</h3></div>
+    <div class="bento-card card-player">
+        <div class="player-cover-replacement">TON AN<br>VOL. 1</div>
+        <div class="track-info" style="font-size: 0.85rem;">Dino-Pizza - Anton</div>
+        <div class="progress-container"><div class="progress-bar"></div></div>
+        <div class="btns">
+            <i class="fa-solid fa-backward-step"></i>
+            <i id="play-btn" class="fa-solid fa-play play-main" onclick="handlePlay()"></i>
+            <i class="fa-solid fa-forward-step"></i>
+        </div>
+    </div>
+</main>
+
+<footer>www.anton-familienpop.de</footer>
+
+<script>
+    function toggleMenu() { document.getElementById('sidebar').classList.toggle('open'); }
+    function handlePlay() {
+        const btn = document.getElementById('play-btn');
+        btn.classList.toggle('fa-play');
+        btn.classList.toggle('fa-pause');
+    }
+    document.addEventListener('click', function(e) {
+        const sb = document.getElementById("sidebar");
+        const btn = document.querySelector(".menu-btn");
+        if (!sb.contains(e.target) && !btn.contains(e.target) && sb.classList.contains("open")) {
+            sb.classList.remove("open");
+        }
+    });
+</script>
+</body>
+</html>
