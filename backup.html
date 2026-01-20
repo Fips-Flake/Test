@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANTON | FUSION V4 (Professional Layers)</title>
+    <title>ANTON | FUSION V5 (Color Hover)</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Rock+Salt&display=swap" rel="stylesheet">
     <style>
-        /* --- Z-INDEX MANAGEMENT & VARIABLEN --- */
+        /* --- Z-INDEX MANAGEMENT --- */
         :root {
             --anton-red: #ff0000;
             --anton-yellow: #ffeb3b;
             --sidebar-width: 200px;
             
-            /* Die Schicht-Hierarchie */
             --z-index-bg-deco: 1;
             --z-index-content: 10;
             --z-index-right-bar: 50;
@@ -28,14 +27,12 @@
             background: #ffffff; overflow-x: hidden;
         }
 
-        /* Hintergrund-Deko */
         .big-a {
             position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
             font-size: 50vw; color: rgba(0, 0, 0, 0.02); 
             z-index: var(--z-index-bg-deco); pointer-events: none;
         }
 
-        /* --- HEADER --- */
         header { 
             position: fixed; top: 0; width: 100%; height: 80px; 
             display: flex; justify-content: center; align-items: center; 
@@ -61,37 +58,44 @@
         }
         .sidebar-left.open { left: 0; }
 
-        /* --- SOCIAL BAR RECHTS --- */
+        /* --- SOCIAL BAR RECHTS (COLOR HOVER FIX) --- */
         .sidebar-right {
             position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 50px;
             display: flex; flex-direction: column; align-items: center; gap: 15px; 
             z-index: var(--z-index-right-bar); background: rgba(0, 0, 0, 0.03); 
             padding: 20px 0; border-radius: 20px 0 0 20px;
         }
+        .sidebar-right a { text-decoration: none; width: 100%; text-align: center; }
+        
         .sidebar-right a i { 
             color: #000; font-size: 1.2rem; transition: 0.3s;
             animation: pulseIcons 18s infinite ease-in-out; 
         }
+        
+        /* HOVER: Animation pausieren, vergrößern und FARBE zeigen */
         .sidebar-right a:hover i { 
-            animation-play-state: paused; transform: scale(1.6) !important; color: var(--brand-color); 
+            animation-play-state: paused; 
+            transform: scale(1.6) !important; 
+            color: var(--brand-color) !important; /* Hier wird es farbig */
         }
+
         @keyframes pulseIcons { 
             0%, 5.55%, 100% { transform: scale(1); color: #000; } 
             2.77% { transform: scale(1.4); color: var(--brand-color); } 
         }
 
-        /* Social Delays & Colors */
-        .sidebar-right a:nth-child(1) i { --brand-color: #f00; animation-delay: 0s; }
-        .sidebar-right a:nth-child(2) i { --brand-color: #25F4EE; animation-delay: 2s; }
-        .sidebar-right a:nth-child(3) i { --brand-color: #E1306C; animation-delay: 4s; }
-        .sidebar-right a:nth-child(4) i { --brand-color: #25D366; animation-delay: 6s; }
-        .sidebar-right a:nth-child(5) i { --brand-color: #1877F2; animation-delay: 8s; }
-        .sidebar-right a:nth-child(6) i { --brand-color: #1DB954; animation-delay: 10s; }
-        .sidebar-right a:nth-child(7) i { --brand-color: #555; animation-delay: 12s; }
-        .sidebar-right a:nth-child(8) i { --brand-color: #f00; animation-delay: 14s; }
-        .sidebar-right a:nth-child(9) i { --brand-color: #00A8E1; animation-delay: 16s; }
+        /* Farndefinitionen */
+        .sidebar-right a:nth-child(1) i { --brand-color: #f00; animation-delay: 0s; } /* YT */
+        .sidebar-right a:nth-child(2) i { --brand-color: #25F4EE; animation-delay: 2s; } /* TT */
+        .sidebar-right a:nth-child(3) i { --brand-color: #E1306C; animation-delay: 4s; } /* IG */
+        .sidebar-right a:nth-child(4) i { --brand-color: #25D366; animation-delay: 6s; } /* WA */
+        .sidebar-right a:nth-child(5) i { --brand-color: #1877F2; animation-delay: 8s; } /* FB */
+        .sidebar-right a:nth-child(6) i { --brand-color: #1DB954; animation-delay: 10s; } /* SP */
+        .sidebar-right a:nth-child(7) i { --brand-color: #555; animation-delay: 12s; } /* AP */
+        .sidebar-right a:nth-child(8) i { --brand-color: #f00; animation-delay: 14s; } /* TV */
+        .sidebar-right a:nth-child(9) i { --brand-color: #00A8E1; animation-delay: 16s; } /* AMZ */
 
-        /* --- MAIN CONTENT --- */
+        /* --- MAIN GRID --- */
         .main-grid {
             position: relative; z-index: var(--z-index-content); padding: 120px 20px;
             display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
@@ -107,11 +111,9 @@
         .card-list { grid-column: span 2; }
         .card-player { grid-column: span 1; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 
-        /* VINYL PLAYER - Verbessertes Design */
         .vinyl-disc { 
             width: 140px; height: 140px; border-radius: 50%; border: 5px solid #000;
             background: radial-gradient(circle, #333 5%, #111 15%, #333 25%, #111 40%, #444 60%, #111 90%);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             position: relative; animation: spin 4s infinite linear; animation-play-state: paused;
         }
         .vinyl-disc.active { animation-play-state: running; }
@@ -121,7 +123,6 @@
         }
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        /* FOOTER */
         footer { 
             position: relative; width: 100%; padding: 30px 0; text-align: center;
             background: rgba(0,0,0,0.02); border-top: 1px solid rgba(0,0,0,0.05); margin-top: 60px;
@@ -170,12 +171,10 @@
     <div class="bento-card card-hero">
         <h2 style="font-family: 'Rock Salt';">ZAPPEL-TIME!</h2>
     </div>
-
     <div class="bento-card card-list">
         <h3 style="margin-top:0; border-bottom:2px solid red; display:inline-block;">PLAYLIST</h3>
-        <p style="margin-top:20px; opacity:0.7;">Hier entstehen bald deine Lieblingslieder...</p>
+        <p style="margin-top:20px; opacity:0.7;">Wähle deinen Song...</p>
     </div>
-
     <div class="bento-card card-player">
         <div id="disc" class="vinyl-disc"></div>
         <div style="font-size: 2.5rem; cursor: pointer; margin-top: 20px;">
@@ -202,7 +201,6 @@
             disc.classList.remove('active');
         }
     }
-    // Schließen bei Klick außerhalb
     document.addEventListener('click', function(e) {
         const sb = document.getElementById("sidebar");
         const btn = document.querySelector(".menu-btn");
