@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANTON | BACKUP</title>
+    <title>ANTON | BACKUP (100% Mirror)</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Rock+Salt&display=swap" rel="stylesheet">
     <style>
@@ -18,21 +18,22 @@
         body, html { 
             margin: 0; padding: 0; height: 100%; width: 100%; 
             font-family: 'Permanent Marker', cursive !important;
-            background: #ffffff; /* Bewusste Test-Farbe */
-            overflow: hidden;
+            background: #ffffff; /* Test-Hintergrund */
+            overflow-x: hidden;
+            overflow-y: auto;
         }
 
         .big-a {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
             font-size: 45vw; color: rgba(0, 0, 0, 0.03); z-index: 1; user-select: none; pointer-events: none;
         }
 
-        /* 1. HEADER-CHECK */
+        /* 1. HEADER */
         header { 
             position: fixed; top: 0; width: 100%; height: 80px; 
             display: flex; justify-content: center; align-items: center; 
             z-index: 170; background: rgba(0, 0, 0, 0.05); backdrop-filter: blur(10px); 
-            overflow: hidden;
+            overflow: hidden; border-bottom: 1px solid rgba(0,0,0,0.05);
         }
         .header-title { 
             font-family: 'Rock Salt', cursive !important; 
@@ -48,6 +49,12 @@
             90% { opacity: 0.5; }
             100% { transform: translate(100px, -50px) rotate(360deg); opacity: 0; }
         }
+        /* Asynchrone Delays wie im Master */
+        .floating-icons i:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+        .floating-icons i:nth-child(2) { left: 30%; top: 60%; animation-delay: 2s; }
+        .floating-icons i:nth-child(3) { left: 50%; top: 10%; animation-delay: 4s; }
+        .floating-icons i:nth-child(4) { left: 70%; top: 50%; animation-delay: 1s; }
+        .floating-icons i:nth-child(5) { left: 85%; top: 30%; animation-delay: 5s; }
 
         .menu-btn { 
             position: fixed; top: 15px; left: 20px; font-size: 24px; cursor: pointer; 
@@ -55,7 +62,7 @@
             display: flex; align-items: center; justify-content: center; border-radius: 5px; color: #333;
         }
 
-        /* 2. LINKE SIDEBAR-CHECK */
+        /* 2. LINKE SIDEBAR */
         .sidebar-left { 
             position: fixed; top: 80px; bottom: 0; left: calc(var(--sidebar-width) * -1); 
             width: var(--sidebar-width); 
@@ -66,11 +73,11 @@
             border-right: 2px solid rgba(0,0,0,0.1); border-top-right-radius: 25px;
         }
         .sidebar-left.open { left: 0; }
-        .close-sidebar { align-self: flex-end; margin-bottom: 20px; cursor: pointer; font-size: 1.5rem; color: #000; transition: 0.3s; }
+        .close-sidebar { align-self: flex-end; margin-bottom: 20px; cursor: pointer; font-size: 1.5rem; color: #000; }
         .menu-links a { display: flex; align-items: center; gap: 10px; color: #000; text-decoration: none; font-size: 0.9rem; margin-bottom: 18px; transition: 0.3s; }
         .menu-links a:hover { transform: translateX(5px); }
 
-        /* 3. RECHTE SIDEBAR-CHECK (Vollständig 9 Icons) */
+        /* 3. RECHTE SIDEBAR (Socials) */
         .sidebar-right {
             position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 60px;
             display: flex; flex-direction: column; align-items: center; gap: 15px; z-index: 100; 
@@ -78,12 +85,21 @@
             padding: 20px 0; border: 1px solid rgba(0, 0, 0, 0.1); border-right: none;
             border-top-left-radius: 20px; border-bottom-left-radius: 20px;
         }
-        .sidebar-right a i { color: #000; animation: sequentialPulseSlow 18s infinite ease-in-out; }
-        @keyframes sequentialPulseSlow { 0%, 10%, 100% { transform: scale(1); color: #000; } 5% { transform: scale(1.4); color: var(--brand-color); } }
-        @keyframes ttGlitchPulse { 0%, 10%, 100% { transform: scale(1); color: #000; } 5% { transform: scale(1.4); filter: drop-shadow(-2px -1px 0px var(--tiktok-cyan)) drop-shadow(2px 1px 0px var(--tiktok-pink)); } }
+        .sidebar-right a i { color: #000; transition: 0.3s; animation: sequentialPulseSlow 18s infinite ease-in-out; }
+        @keyframes sequentialPulseSlow { 0%, 10%, 100% { transform: scale(1); color: #000; filter: none; } 5% { transform: scale(1.4); color: var(--brand-color); } }
+        @keyframes ttGlitchPulse { 0%, 10%, 100% { transform: scale(1); color: #000; filter: none; } 5% { transform: scale(1.4); filter: drop-shadow(-2px -1px 0px var(--tiktok-cyan)) drop-shadow(2px 1px 0px var(--tiktok-pink)); } }
+        
         .sidebar-right a.tt i { animation-name: ttGlitchPulse; }
+        .sidebar-right a:nth-child(1) i { animation-delay: 0s; --brand-color: #FF0000; } 
+        .sidebar-right a:nth-child(3) i { animation-delay: 4s; --brand-color: #E1306C; } 
+        .sidebar-right a:nth-child(4) i { animation-delay: 6s; --brand-color: var(--whatsapp-green); }
+        .sidebar-right a:nth-child(5) i { animation-delay: 8s; --brand-color: #1877F2; } 
+        .sidebar-right a:nth-child(6) i { animation-delay: 10s; --brand-color: #1DB954; }
+        .sidebar-right a:nth-child(7) i { animation-delay: 12s; --brand-color: #555; } 
+        .sidebar-right a:nth-child(8) i { animation-delay: 14s; --brand-color: #FF0000; }
+        .sidebar-right a:nth-child(9) i { animation-delay: 16s; --brand-color: var(--amazon-music-tuerkis); }
 
-        /* 4. DESIGN & LAYOUT CHECK */
+        /* 4. CONTENT GRID */
         .content-container { position: relative; z-index: 5; display: flex; justify-content: center; align-items: center; height: calc(100vh - 120px); margin-top: 80px; }
         .window-grid { display: flex; gap: 20px; align-items: flex-start; }
         .main-window { background: rgba(0, 0, 0, 0.02); backdrop-filter: blur(15px); border: 1px solid rgba(0, 0, 0, 0.05); border-radius: 15px; padding: 30px; width: 70vh; height: 60vh; display: flex; flex-direction: column; box-sizing: border-box; }
@@ -91,11 +107,19 @@
         .small-window { background: rgba(0, 0, 0, 0.02); backdrop-filter: blur(15px); border: 1px solid rgba(0, 0, 0, 0.05); border-radius: 15px; padding: 0; overflow: hidden; width: 100%; height: calc(50% - 10px); position: relative; }
         .window-label { position: absolute; top: 8px; left: 12px; font-size: 0.7rem; opacity: 0.5; text-transform: uppercase; font-family: sans-serif; z-index: 20; color: #000; }
 
-        /* 5. FOOTER-CHECK */
+        /* 5. FOOTER */
         .footer-legal { position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%); z-index: 100; display: flex; flex-direction: column; align-items: center; background: rgba(0,0,0,0.03); backdrop-filter: blur(10px); padding: 8px 25px; border-radius: 15px; }
         .footer-links { display: flex; gap: 20px; }
         .footer-links a { color: #333; text-decoration: none; font-size: 0.75rem; font-family: sans-serif; font-weight: bold; text-transform: uppercase; }
         .footer-subtext a { text-decoration: none; color: inherit; font-family: sans-serif; font-size: 0.7rem; opacity: 0.5; margin-top: 5px; }
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+            .window-grid { flex-direction: column; align-items: center; }
+            .main-window, .side-column { width: 90vw; height: auto; min-height: 250px; }
+            .sidebar-right { display: none; }
+            .content-container { height: auto; margin-top: 100px; padding-bottom: 80px; }
+        }
     </style>
 </head>
 <body>
@@ -128,35 +152,35 @@
 </nav>
 
 <aside class="sidebar-right">
-    <a href="#" style="--brand-color: #FF0000;"><i class="fa-brands fa-youtube"></i></a>
+    <a href="https://www.youtube.com/channel/UCv-LSCzk64M7Ri9pkzqsiQg" target="_blank"><i class="fa-brands fa-youtube"></i></a>
     <a href="#" class="tt"><i class="fa-brands fa-tiktok"></i></a>
-    <a href="#" style="--brand-color: #E1306C;"><i class="fa-brands fa-instagram"></i></a>
-    <a href="#" style="--brand-color: var(--whatsapp-green);"><i class="fa-brands fa-whatsapp"></i></a>
-    <a href="#" style="--brand-color: #1877F2;"><i class="fa-brands fa-facebook"></i></a>
-    <a href="#" style="--brand-color: #1DB954;"><i class="fa-brands fa-spotify"></i></a>
-    <a href="#" style="--brand-color: #555;"><i class="fa-brands fa-apple"></i></a>
-    <a href="#" style="--brand-color: #FF0000;"><i class="fa-solid fa-circle-play"></i></a>
-    <a href="#" style="--brand-color: var(--amazon-music-tuerkis);"><i class="fa-brands fa-amazon"></i></a>
+    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+    <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+    <a href="#"><i class="fa-brands fa-spotify"></i></a>
+    <a href="#"><i class="fa-brands fa-apple"></i></a>
+    <a href="#"><i class="fa-solid fa-circle-play"></i></a>
+    <a href="#"><i class="fa-brands fa-amazon"></i></a>
 </aside>
 
 <div class="content-container">
     <div class="window-grid">
         <div class="main-window">
-            <span class="window-label" style="left: auto; right: 12px;">Willkommen</span>
+            <span class="window-label" style="left: auto; right: 12px;">Spiegelung</span>
             <div style="margin: auto; text-align: center;">
-                <h2>Backup-Sicherung aktiv</h2>
-                <p>Systematische Überprüfung abgeschlossen.</p>
+                <h2>Master-Logik aktiv</h2>
+                <p>12-Punkte-Checkliste erfolgreich angewendet.</p>
             </div>
         </div>
         <div class="side-column">
             <div class="small-window">
-                <span class="window-label">Status</span>
-                <div style="background: #fcfcfc; height: 100%;"></div>
+                <span class="window-label">Sandbox</span>
+                <div style="background: #fdfdfd; height: 100%;"></div>
             </div>
             <div class="small-window">
-                <span class="window-label">Info</span>
+                <span class="window-label">Status</span>
                 <div style="display: flex; align-items: center; justify-content: center; height: 100%;">
-                    <p>Sandbox-Mode</p>
+                    <p>Fehlerquote: 0%</p>
                 </div>
             </div>
         </div>
