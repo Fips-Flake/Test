@@ -3,126 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANTON | MEINE MUSIK (Vision)</title>
+    <title>ANTON | FUSION PROTOTYP</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Rock+Salt&display=swap" rel="stylesheet">
     <style>
         :root {
             --anton-red: #ff0000;
             --anton-yellow: #ffeb3b;
-            --brand-tiktok: #25F4EE;
-            --sidebar-width: 250px;
+            --sidebar-width: 280px;
         }
 
         body, html { 
             margin: 0; padding: 0; height: 100%; width: 100%; 
             font-family: 'Permanent Marker', cursive !important;
-            background: #ffffff;
-            overflow-x: hidden;
+            background: #ffffff; overflow-x: hidden;
         }
 
-        /* --- BIG BACKGROUND DECO --- */
         .big-a {
             position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            font-size: 50vw; color: rgba(0, 0, 0, 0.02); z-index: 1; user-select: none; pointer-events: none;
+            font-size: 50vw; color: rgba(0, 0, 0, 0.02); z-index: 1; pointer-events: none;
         }
 
         /* --- HEADER --- */
         header { 
             position: fixed; top: 0; width: 100%; height: 80px; 
             display: flex; justify-content: center; align-items: center; 
-            z-index: 170; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); 
-            border-bottom: 2px solid rgba(0,0,0,0.05); overflow: hidden;
+            z-index: 170; background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); 
+            border-bottom: 2px solid rgba(0,0,0,0.05);
         }
-        .header-title { font-family: 'Rock Salt', cursive !important; font-size: 1.8rem; color: var(--anton-red); letter-spacing: 3px; }
-        
-        .floating-icons i { position: absolute; color: rgba(0, 0, 0, 0.05); font-size: 1.2rem; animation: float 8s infinite linear; }
-        @keyframes float { 0% { transform: translateY(100px) rotate(0deg); opacity: 0; } 50% { opacity: 0.5; } 100% { transform: translateY(-100px) rotate(360deg); opacity: 0; } }
+        .header-title { font-family: 'Rock Salt', cursive !important; color: var(--anton-red); font-size: 1.8rem; }
 
-        /* --- HIDDEN LEFT SIDEBAR --- */
+        /* --- NAVIGATION (OFF-CANVAS) --- */
         .menu-btn { 
             position: fixed; top: 18px; left: 20px; font-size: 24px; cursor: pointer; 
             z-index: 200; background: #000; color: #fff; width: 45px; height: 45px; 
-            display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: 0.3s;
+            display: flex; align-items: center; justify-content: center; border-radius: 50%;
         }
-        .menu-btn:hover { transform: scale(1.1) rotate(90deg); background: var(--anton-red); }
 
         .sidebar-left { 
-            position: fixed; top: 0; bottom: 0; left: calc(var(--sidebar-width) * -1); 
+            position: fixed; top: 0; bottom: 0; left: calc(var(--sidebar-width) * -1.2); 
             width: var(--sidebar-width); background: var(--anton-yellow); 
-            z-index: 190; display: flex; flex-direction: column; padding: 100px 20px;
-            transition: left 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+            z-index: 190; display: flex; flex-direction: column; padding: 100px 30px;
+            transition: left 0.6s cubic-bezier(0.77, 0, 0.175, 1);
             box-shadow: 10px 0 30px rgba(0,0,0,0.1);
         }
         .sidebar-left.open { left: 0; }
-        .menu-links a { display: block; color: #000; text-decoration: none; font-size: 1.4rem; margin-bottom: 25px; transition: 0.2s; }
-        .menu-links a:hover { color: var(--anton-red); transform: translateX(10px); }
+        
+        .menu-links a { display: block; color: #000; text-decoration: none; font-size: 1.2rem; margin-bottom: 15px; transition: 0.2s; border-bottom: 2px solid transparent; width: fit-content; }
+        .menu-links a:hover { border-bottom-color: var(--anton-red); transform: translateX(5px); }
+        .menu-links .primary { font-size: 1.5rem; margin-bottom: 25px; }
 
-        /* --- RIGHT SOCIAL BAR --- */
+        /* --- SOCIAL BAR --- */
         .sidebar-right {
             position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 50px;
             display: flex; flex-direction: column; align-items: center; gap: 12px; z-index: 100; 
             background: rgba(0, 0, 0, 0.03); padding: 15px 0; border-radius: 20px 0 0 20px;
         }
         .sidebar-right a i { color: #000; font-size: 1.1rem; animation: pulse 18s infinite ease-in-out; }
-        .sidebar-right a:hover i { animation-play-state: paused; transform: scale(1.4); color: var(--brand-color); }
-        
+        .sidebar-right a:hover i { animation-play-state: paused; transform: scale(1.4); }
+
         @keyframes pulse { 0%, 5.55%, 100% { transform: scale(1); color: #000; } 2.77% { transform: scale(1.3); color: var(--brand-color); } }
-        
-        /* Brand Colors */
-        .sidebar-right a:nth-child(1) i { animation-delay: 0s; --brand-color: #f00; }
-        .sidebar-right a:nth-child(2) i { animation-delay: 2s; --brand-color: #25F4EE; }
-        .sidebar-right a:nth-child(3) i { animation-delay: 4s; --brand-color: #E1306C; }
-        .sidebar-right a:nth-child(4) i { animation-delay: 6s; --brand-color: #25D366; }
-        .sidebar-right a:nth-child(5) i { animation-delay: 8s; --brand-color: #1877F2; }
-        .sidebar-right a:nth-child(6) i { animation-delay: 10s; --brand-color: #1DB954; }
-        .sidebar-right a:nth-child(7) i { animation-delay: 12s; --brand-color: #555; }
-        .sidebar-right a:nth-child(8) i { animation-delay: 14s; --brand-color: #f00; }
-        .sidebar-right a:nth-child(9) i { animation-delay: 16s; --brand-color: #00A8E1; }
+        /* Social Brand Colors (Checkliste Punkt 5/13) */
+        .sidebar-right a:nth-child(1) i { --brand-color: #f00; animation-delay: 0s; }
+        .sidebar-right a:nth-child(2) i { --brand-color: #25F4EE; animation-delay: 2s; }
+        .sidebar-right a:nth-child(3) i { --brand-color: #E1306C; animation-delay: 4s; }
+        .sidebar-right a:nth-child(4) i { --brand-color: #25D366; animation-delay: 6s; }
+        .sidebar-right a:nth-child(5) i { --brand-color: #1877F2; animation-delay: 8s; }
+        .sidebar-right a:nth-child(6) i { --brand-color: #1DB954; animation-delay: 10s; }
+        .sidebar-right a:nth-child(7) i { --brand-color: #555; animation-delay: 12s; }
+        .sidebar-right a:nth-child(8) i { --brand-color: #f00; animation-delay: 14s; }
+        .sidebar-right a:nth-child(9) i { --brand-color: #00A8E1; animation-delay: 16s; }
 
-        /* --- CONTENT AREA (Bento Light) --- */
-        .main-content {
-            position: relative; z-index: 10; padding: 120px 80px 100px 80px;
-            display: grid; grid-template-columns: 1fr 1fr; gap: 30px; max-width: 1200px; margin: 0 auto;
+        /* --- FUSION CONTENT GRID --- */
+        .main-grid {
+            position: relative; z-index: 10; padding: 120px 20px;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+            max-width: 1100px; margin: 0 auto;
         }
 
-        .hero-box {
-            grid-column: span 2; background: #000; color: #fff; padding: 40px; border-radius: 30px;
-            display: flex; justify-content: space-between; align-items: center;
+        .bento-card {
+            background: rgba(255,255,255,0.8); backdrop-filter: blur(15px);
+            border: 2px solid #000; border-radius: 25px; padding: 25px;
+            display: flex; flex-direction: column; justify-content: center;
         }
-        .hero-text h2 { font-size: 3rem; margin: 0; color: var(--anton-yellow); }
-        .hero-text p { font-size: 1.2rem; opacity: 0.8; }
 
-        .player-box {
-            background: #f9f9f9; padding: 40px; border-radius: 30px; border: 3px solid #000;
-            display: flex; flex-direction: column; align-items: center; text-align: center;
-        }
-        .vinyl-wrap { position: relative; width: 180px; height: 180px; margin-bottom: 20px; }
+        .card-hero { grid-column: span 3; background: #000; color: #fff; text-align: center; min-height: 150px; }
+        .card-player { grid-column: span 1; align-items: center; }
+        .card-list { grid-column: span 2; }
+
+        /* VINYL PLAYER */
+        .vinyl-container { width: 150px; height: 150px; position: relative; }
         .vinyl-disc { 
-            width: 100%; height: 100%; background: #111; border-radius: 50%; 
-            background: repeating-radial-gradient(circle, #222, #111 2px, #222 4px);
-            border: 4px solid #333; animation: spin 5s infinite linear;
+            width: 100%; height: 100%; background: radial-gradient(circle, #333 10%, #111 40%, #222 70%, #111 100%);
+            border-radius: 50%; border: 3px solid #000; position: relative;
+            animation: spin 4s infinite linear; animation-play-state: paused;
         }
-        .vinyl-disc::after {
+        .vinyl-disc.active { animation-play-state: running; }
+        .vinyl-disc::after { 
             content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 40px; height: 40px; background: var(--anton-red); border-radius: 50%; border: 3px solid #fff;
+            width: 35px; height: 35px; background: var(--anton-red); border: 3px solid #fff; border-radius: 50%;
         }
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        .song-info h3 { margin: 10px 0 5px 0; font-size: 1.5rem; }
-        .controls { display: flex; gap: 25px; font-size: 2rem; margin-top: 15px; cursor: pointer; }
-        .controls i:hover { color: var(--anton-red); }
+        .controls { display: flex; gap: 25px; font-size: 2rem; margin-top: 20px; cursor: pointer; }
 
-        .tracklist-box { background: var(--anton-yellow); padding: 30px; border-radius: 30px; }
-        .track { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(0,0,0,0.1); cursor: pointer; }
-        .track:hover { color: var(--anton-red); }
+        .track-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.1); }
+        .track-item:hover { color: var(--anton-red); }
 
-        /* --- FOOTER --- */
-        footer { padding: 40px; text-align: center; font-family: sans-serif; font-size: 0.8rem; opacity: 0.6; }
+        /* --- FOOTER (Fusion Style) --- */
+        footer {
+            background: #f4f4f4; padding: 40px 20px; text-align: center;
+            border-top: 2px solid #000; margin-top: 50px;
+        }
+        .footer-nav a { text-decoration: none; color: #000; font-weight: bold; margin: 0 15px; font-family: sans-serif; font-size: 0.8rem; }
+        .footer-copy { margin-top: 15px; font-family: sans-serif; font-size: 0.7rem; opacity: 0.5; }
 
-        @media (max-width: 850px) {
-            .main-content { grid-template-columns: 1fr; padding: 100px 20px; }
-            .hero-box { flex-direction: column; text-align: center; }
+        @media (max-width: 800px) {
+            .main-grid { grid-template-columns: 1fr; }
+            .card-hero, .card-player, .card-list { grid-column: span 1; }
             .sidebar-right { display: none; }
         }
     </style>
@@ -131,23 +129,19 @@
 
 <div class="big-a">A</div>
 
-<header>
-    <div class="floating-icons">
-        <i class="fa-solid fa-star" style="left: 15%;"></i>
-        <i class="fa-solid fa-heart" style="left: 50%;"></i>
-        <i class="fa-solid fa-music" style="left: 85%;"></i>
-    </div>
-    <div class="header-title">ANTONS WELT</div>
-</header>
+<header><div class="header-title">ANTON | FUSION</div></header>
 
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
 <nav class="sidebar-left" id="sidebar">
     <div class="menu-links">
-        <a href="#"><i class="fa-solid fa-house"></i> START</a>
-        <a href="#"><i class="fa-solid fa-music"></i> MUSIK</a>
-        <a href="#"><i class="fa-solid fa-face-grin-tears"></i> ÜBER MICH</a>
-        <a href="#"><i class="fa-solid fa-envelope"></i> KONTAKT</a>
+        <a href="#" class="primary"><i class="fa-solid fa-house"></i> START</a>
+        <a href="#" class="primary"><i class="fa-solid fa-music"></i> MEINE MUSIK</a>
+        <a href="#" class="primary"><i class="fa-regular fa-face-smile"></i> ÜBER MICH</a>
+        <a href="#" class="primary"><i class="fa-solid fa-envelope"></i> KONTAKT</a>
+        <hr style="border: 0; border-top: 1px solid rgba(0,0,0,0.1); margin: 20px 0;">
+        <a href="#"><i class="fa-solid fa-microphone-lines"></i> KONZERTE</a>
+        <a href="#"><i class="fa-solid fa-cart-shopping"></i> ONLINESHOP</a>
     </div>
 </nav>
 
@@ -163,48 +157,57 @@
     <a href="#"><i class="fa-brands fa-amazon"></i></a>
 </aside>
 
-<main class="main-content">
-    <div class="hero-box">
-        <div class="hero-text">
-            <h2>Hör mal rein!</h2>
-            <p>Freche Lieder für kleine Entdecker und große Ohren.</p>
-        </div>
-        <i class="fa-solid fa-bolt" style="font-size: 5rem; color: var(--anton-yellow);"></i>
+<main class="main-grid">
+    <div class="bento-card card-hero">
+        <h2 style="font-size: 2.5rem; margin: 0; font-family: 'Rock Salt';">ZAPPEL MIT!</h2>
+        <p>Entdecke die bunteste Musik für dein Kinderzimmer.</p>
     </div>
 
-    <div class="player-box">
-        <div class="vinyl-wrap">
-            <div class="vinyl-disc"></div>
-        </div>
-        <div class="song-info">
-            <h3>"DER ZAPPEL-BOOGIE"</h3>
-            <p>Album: Anton macht Krach</p>
+    <div class="bento-card card-player">
+        <div class="vinyl-container">
+            <div id="disc" class="vinyl-disc"></div>
         </div>
         <div class="controls">
-            <i class="fa-solid fa-backward-step"></i>
-            <i class="fa-solid fa-circle-play"></i>
-            <i class="fa-solid fa-forward-step"></i>
+            <i id="play-btn" class="fa-solid fa-play" onclick="handlePlay()"></i>
         </div>
+        <p style="margin-top: 10px; font-size: 0.8rem;">Aktueller Song: Dino-Pizza</p>
     </div>
 
-    <div class="tracklist-box">
-        <h3 style="margin-top:0;">AKTUELLE HITS:</h3>
-        <div class="track"><span>1. Der Zappel-Boogie</span><span>02:45</span></div>
-        <div class="track"><span>2. Matschpfützen-Hopser</span><span>03:10</span></div>
-        <div class="track"><span>3. Mein Dino mag Pizza</span><span>02:15</span></div>
-        <div class="track"><span>4. Schlaflied für Räuber</span><span>04:20</span></div>
+    <div class="bento-card card-list">
+        <h3 style="margin-top: 0; border-bottom: 2px solid var(--anton-red); display: inline-block;">HITS FÜR DICH:</h3>
+        <div class="track-item"><span>1. Dino-Pizza</span><span>02:10</span></div>
+        <div class="track-item"><span>2. Matschpfützen-Lied</span><span>03:05</span></div>
+        <div class="track-item"><span>3. Der Zappel-Boogie</span><span>02:40</span></div>
+        <div class="track-item"><span>4. Raketen-Start</span><span>03:15</span></div>
     </div>
 </main>
 
 <footer>
-    <p>IMPRESSUM | DATENSCHUTZ</p>
-    <p>© 2026 ANTON - www.anton-familienpop.de</p>
+    <nav class="footer-nav">
+        <a href="#">IMPRESSUM</a>
+        <a href="#">DATENSCHUTZ</a>
+        <a href="#">PRESSE</a>
+    </nav>
+    <div class="footer-copy">© 2026 ANTON FAMILIENPOP - www.anton-familienpop.de</div>
 </footer>
 
 <script>
     function toggleMenu() {
         document.getElementById('sidebar').classList.toggle('open');
     }
+    
+    function handlePlay() {
+        const btn = document.getElementById('play-btn');
+        const disc = document.getElementById('disc');
+        if (btn.classList.contains('fa-play')) {
+            btn.classList.replace('fa-play', 'fa-pause');
+            disc.classList.add('active');
+        } else {
+            btn.classList.replace('fa-pause', 'fa-play');
+            disc.classList.remove('active');
+        }
+    }
+
     // Schließen bei Klick außerhalb
     document.addEventListener('click', function(e) {
         const sb = document.getElementById("sidebar");
