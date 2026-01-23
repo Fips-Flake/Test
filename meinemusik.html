@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANTON | HOME</title>
+    <title>ANTON | MEINE MUSIK</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
     
@@ -92,8 +92,14 @@
         
         .bento-card { background: rgba(255, 255, 255, 0.7); border: 2px solid #000; border-radius: 15px; padding: 25px; box-shadow: 4px 4px 0px rgba(0,0,0,0.1); }
         .card-hero { grid-column: span 3; background: #000; color: #fff; text-align: center; }
-        .card-welcome { grid-column: span 2; }
-        .card-social-info { grid-column: span 1; }
+        .card-list { grid-column: span 2; }
+        .card-player { grid-column: span 1; display: flex; flex-direction: column; align-items: center; gap: 15px; }
+        
+        .track { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #000; }
+        .player-cover-replacement { width: 100%; aspect-ratio: 1/1; border-radius: 8px; background: #000; display: flex; align-items: center; justify-content: center; color: var(--anton-yellow); border: 2px solid #000; font-size: 1.4rem; text-align: center; }
+        .progress-container { width: 100%; height: 6px; background: #bbb; border-radius: 3px; }
+        .progress-bar { width: 45%; height: 100%; background: var(--anton-red); border-radius: 3px; }
+        .btns { display: flex; gap: 20px; font-size: 1.2rem; cursor: pointer; align-items: center; }
 
         footer { 
             position: relative; width: 100%; padding: 30px 0; 
@@ -106,20 +112,20 @@
 
         @media (max-width: 800px) {
             .main-grid { grid-template-columns: 1fr; }
-            .card-hero, .card-welcome, .card-social-info { grid-column: span 1; }
+            .card-hero, .card-list, .card-player { grid-column: span 1; }
             .sidebar-right { display: none; }
         }
     </style>
 </head>
 <body>
 
-<header><div class="header-title">ANTON | HOME</div></header>
+<header><div class="header-title">ANTON | MEINE MUSIK</div></header>
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
 <nav class="sidebar-left" id="sidebar">
     <div style="margin-top: 20px;">
-        <a href="index.html"><i class="fa-solid fa-house"></i> HOME</a>
-        <a href="meine-musik.html"><i class="fa-solid fa-music"></i> MEINE MUSIK</a>
+        <a href="home.html"><i class="fa-solid fa-house"></i> HOME</a>
+        <a href="meinemusik.html"><i class="fa-solid fa-music"></i> MEINE MUSIK</a>
         <a href="shop.html"><i class="fa-solid fa-cart-shopping"></i> SHOP</a>
         <a href="kontakt.html"><i class="fa-solid fa-envelope"></i> KONTAKT</a>
     </div>
@@ -138,14 +144,21 @@
 </aside>
 
 <main class="main-grid">
-    <div class="bento-card card-hero"><h2>ANTON - FAMILIENPOP</h2></div>
-    <div class="bento-card card-welcome">
-        <h3>Willkommen in Antons Welt!</h3>
-        <p>Hier erfährst du alles über das neue Album "TON AN" und kommende Termine.</p>
+    <div class="bento-card card-hero"><h2>ALBUM: TON AN</h2></div>
+    <div class="bento-card card-list">
+        <h3>TRACKLISTE</h3>
+        <div class="track"><span>1. TON AN</span><span>03:20</span></div>
+        <div class="track"><span>2. FAMILIENBAND</span><span>02:45</span></div>
+        <div class="track"><span>3. SUPERHELD</span><span>03:10</span></div>
     </div>
-    <div class="bento-card card-social-info">
-        <h3>Follow Me</h3>
-        <p>Check die Sidebar für alle Links!</p>
+    <div class="bento-card card-player">
+        <div class="player-cover-replacement">TON AN<br>VOL. 1</div>
+        <div class="progress-container"><div class="progress-bar"></div></div>
+        <div class="btns">
+            <i class="fa-solid fa-backward-step"></i>
+            <i id="play-btn" class="fa-solid fa-play" onclick="handlePlay()"></i>
+            <i class="fa-solid fa-forward-step"></i>
+        </div>
     </div>
 </main>
 
@@ -159,10 +172,17 @@
 
 <script>
     function toggleMenu() { document.getElementById('sidebar').classList.toggle('open'); }
+    function handlePlay() {
+        const btn = document.getElementById('play-btn');
+        btn.classList.toggle('fa-play');
+        btn.classList.toggle('fa-pause');
+    }
     document.addEventListener('click', function(e) {
         const sb = document.getElementById("sidebar");
         const btn = document.querySelector(".menu-btn");
-        if (!sb.contains(e.target) && !btn.contains(e.target) && sb.classList.contains("open")) { sb.classList.remove("open"); }
+        if (!sb.contains(e.target) && !btn.contains(e.target) && sb.classList.contains("open")) {
+            sb.classList.remove("open");
+        }
     });
 </script>
 </body>
