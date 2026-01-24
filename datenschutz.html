@@ -10,20 +10,14 @@
     <style>
         :root {
             --anton-red: #ff0000;
-            --anton-yellow: #ffeb3b;
             --sidebar-width: 220px;
-            --z-index-content: 10;
-            --z-index-right-bar: 50;
             --z-index-header: 100;
-            --z-index-sidebar: 200;
-            --z-index-menu-btn: 210;
         }
 
         html, body { height: 100%; margin: 0; padding: 0; }
-
         body { 
             display: flex; flex-direction: column; font-family: 'Special Elite', cursive;
-            background-color: #b0b0b0; background-image: url('TON-AN.png');
+            background-color: #ffffff; background-image: url('TON-AN.png');
             background-size: cover; background-position: center; background-repeat: no-repeat;
             background-attachment: fixed; background-blend-mode: multiply; overflow-x: hidden;
         }
@@ -38,103 +32,66 @@
 
         .menu-btn { 
             position: fixed; top: 18px; left: 20px; font-size: 24px; cursor: pointer; 
-            z-index: var(--z-index-menu-btn); background: #000; color: #fff; 
-            width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 5px;
+            z-index: 210; background: #000; color: #fff; width: 45px; height: 45px; 
+            display: flex; align-items: center; justify-content: center; border-radius: 5px;
         }
 
         .sidebar-left { 
-            position: fixed; top: 0; bottom: 0; left: calc(var(--sidebar-width) * -1.2); 
+            position: fixed; top: 0; bottom: 0; left: -270px; 
             width: var(--sidebar-width); background: rgba(255, 235, 59, 0.98); 
-            z-index: var(--z-index-sidebar); display: flex; flex-direction: column; padding: 100px 20px;
+            z-index: 200; display: flex; flex-direction: column; padding: 100px 20px;
             transition: left 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); border-right: 2px solid #000;
         }
         .sidebar-left.open { left: 0; }
         .nav-item { margin-bottom: 25px; }
         .sidebar-left a { display: flex; align-items: center; gap: 15px; color: #000; text-decoration: none; font-size: 1.2rem; }
-        .submenu { display: none; flex-direction: column; padding-left: 40px; margin-top: 10px; }
-        .submenu a { font-size: 1rem; margin-bottom: 10px; color: #333; }
-        .nav-item:hover .submenu { display: flex; }
 
-        .sidebar-right {
-            position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 50px;
-            display: flex; flex-direction: column; align-items: center; gap: 15px; 
-            z-index: var(--z-index-right-bar); background: rgba(255, 255, 255, 0.2); 
-            backdrop-filter: blur(3px); padding: 20px 0; border-radius: 20px 0 0 20px;
-        }
-        .sidebar-right a i { color: #000; font-size: 1.2rem; transition: 0.3s; animation: pulseIcons 18s infinite ease-in-out; }
-        
-        @keyframes pulseIcons { 0%, 5.55%, 100% { transform: scale(1); color: #000; } 2.77% { transform: scale(1.4); color: var(--brand-color); } }
-        /* Animation-Delays identisch zur Hauptseite */
+        main { flex: 1; padding: 120px 20px 50px; max-width: 800px; margin: 0 auto; width: 100%; box-sizing: border-box; }
+        .bento-card { background: rgba(255, 255, 255, 0.9); border: 2px solid #000; border-radius: 15px; padding: 30px; line-height: 1.6; }
 
-        main {
-            flex: 1; position: relative; z-index: var(--z-index-content); 
-            padding: 120px 20px 50px 20px; display: grid; 
-            grid-template-columns: 1fr; max-width: 1000px; margin: 0 auto; width: 100%; box-sizing: border-box;
-        }
-        .bento-card { background: rgba(255, 255, 255, 0.9); border: 2px solid #000; border-radius: 15px; padding: 40px; box-shadow: 4px 4px 0px rgba(0,0,0,0.1); }
-
-        footer { 
-            width: 100%; padding: 30px 0; text-align: center; 
-            background: rgba(255,255,255,0.85); border-top: 2px solid #000; 
-            z-index: var(--z-index-content);
-        }
-        .footer-content { max-width: 1000px; margin: 0 auto; }
-        .footer-links { margin-top: 15px; font-size: 0.9rem; }
-        .footer-links a { color: #000; text-decoration: none; margin: 0 15px; border-bottom: 1px solid transparent; transition: 0.2s; }
-        .footer-links a:hover { border-bottom: 1px solid var(--anton-red); }
-
-        @media (max-width: 800px) { .sidebar-right { display: none; } }
+        footer { width: 100%; padding: 30px 0; text-align: center; background: rgba(255,255,255,0.85); border-top: 2px solid #000; }
+        .footer-main-link, .footer-links a { color: #000; text-decoration: none; margin: 0 15px; border-bottom: 1px solid transparent; transition: 0.2s; display: inline-block; }
+        .footer-main-link:hover, .footer-links a:hover { border-bottom: 1px solid var(--anton-red); }
     </style>
 </head>
 <body>
+    <header><div class="header-title">ANTON | DATENSCHUTZ</div></header>
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
-<header><div class="header-title">ANTON | DATENSCHUTZ</div></header>
-<div class="menu-btn" onclick="toggleMenu()">☰</div>
-
-<nav class="sidebar-left" id="sidebar">
-    <div style="margin-top: 20px;">
+    <nav class="sidebar-left" id="sidebar">
         <div class="nav-item"><a href="hauptseite.html"><i class="fa-solid fa-house"></i> HOME</a></div>
-        <div class="nav-item">
-            <a href="meinemusik.html"><i class="fa-solid fa-music"></i> MEINE MUSIK</a>
-            <div class="submenu">
-                <a href="uebermich.html"><i class="fa-solid fa-user"></i> ÜBER MICH</a>
-                <a href="konzerte.html"><i class="fa-solid fa-calendar-days"></i> KONZERTE</a>
-            </div>
-        </div>
+        <div class="nav-item"><a href="meinemusik.html"><i class="fa-solid fa-music"></i> MUSIK</a></div>
         <div class="nav-item"><a href="shop.html"><i class="fa-solid fa-cart-shopping"></i> SHOP</a></div>
         <div class="nav-item"><a href="kontakt.html"><i class="fa-solid fa-envelope"></i> KONTAKT</a></div>
-    </div>
-</nav>
+    </nav>
 
-<aside class="sidebar-right">
-    </aside>
-
-<main>
-    <div class="bento-card">
-        <h2>Datenschutzerklärung</h2>
-        <p>Informationen zur Datenerfassung findest du in unserer ausführlichen Erklärung.</p>
-    </div>
-</main>
-
-<footer>
-    <div class="footer-content">
-        <div>www.anton-familienpop.de</div>
-        <div class="footer-links">
-            <a href="impressum.html">Impressum</a>
-            <a href="datenschutz.html">Datenschutz</a>
+    <main>
+        <div class="bento-card">
+            <h2>Datenschutzerklärung</h2>
+            <p><strong>1. Datenschutz auf einen Blick</strong></p>
+            <p>Wir freuen uns über Ihr Interesse an unserer Website. Der Schutz Ihrer Privatsphäre ist für uns sehr wichtig. Nachstehend informieren wir Sie ausführlich über den Umgang mit Ihren Daten.</p>
+            <p><strong>2. Datenerfassung auf dieser Website</strong></p>
+            <p>Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten können Sie dem Impressum dieser Website entnehmen.</p>
         </div>
-    </div>
-</footer>
+    </main>
 
-<script>
-    function toggleMenu() { document.getElementById('sidebar').classList.toggle('open'); }
-    document.addEventListener('click', function(e) {
-        const sb = document.getElementById("sidebar");
-        const btn = document.querySelector(".menu-btn");
-        if (!sb.contains(e.target) && !btn.contains(e.target) && sb.classList.contains("open")) {
-            sb.classList.remove("open");
-        }
-    });
-</script>
+    <footer>
+        <div class="footer-content">
+            <a href="hauptseite.html" class="footer-main-link">www.anton-familienpop.de</a>
+            <div class="footer-links">
+                <a href="impressum.html">Impressum</a>
+                <a href="datenschutz.html">Datenschutz</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() { document.getElementById('sidebar').classList.toggle('open'); }
+        document.addEventListener('click', function(e) {
+            const sb = document.getElementById("sidebar");
+            const btn = document.querySelector(".menu-btn");
+            if (sb && !sb.contains(e.target) && !btn.contains(e.target)) sb.classList.remove("open");
+        });
+    </script>
 </body>
 </html>
