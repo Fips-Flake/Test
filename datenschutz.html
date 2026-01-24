@@ -19,111 +19,63 @@
             --z-index-menu-btn: 210;
         }
 
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
+        html, body { height: 100%; margin: 0; padding: 0; }
 
         body { 
-            display: flex;
-            flex-direction: column;
-            font-family: 'Special Elite', cursive;
-            background-color: #b0b0b0; 
-            background-image: url('TON-AN.png');
-            background-size: 100%; 
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-blend-mode: multiply; 
-            overflow-x: hidden;
+            display: flex; flex-direction: column; font-family: 'Special Elite', cursive;
+            background-color: #b0b0b0; background-image: url('TON-AN.png');
+            background-size: cover; background-position: center; background-repeat: no-repeat;
+            background-attachment: fixed; background-blend-mode: multiply; overflow-x: hidden;
         }
 
         header { 
-            position: fixed; top: 0; width: 100%; height: 80px; 
-            display: flex; justify-content: center; align-items: center; 
-            z-index: var(--z-index-header); 
-            background: rgba(255, 255, 255, 0.8); 
-            backdrop-filter: blur(10px); 
-            border-bottom: 2px solid #000;
+            position: fixed; top: 0; width: 100%; height: 80px; display: flex; 
+            justify-content: center; align-items: center; z-index: var(--z-index-header); 
+            background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border-bottom: 2px solid #000;
         }
         .header-title { color: var(--anton-red); font-size: 1.8rem; }
 
         .menu-btn { 
             position: fixed; top: 18px; left: 20px; font-size: 24px; cursor: pointer; 
             z-index: var(--z-index-menu-btn); background: #000; color: #fff; 
-            width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; 
-            border-radius: 5px;
+            width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 5px;
         }
 
         .sidebar-left { 
             position: fixed; top: 0; bottom: 0; left: calc(var(--sidebar-width) * -1.2); 
             width: var(--sidebar-width); background: rgba(255, 235, 59, 0.98); 
             z-index: var(--z-index-sidebar); display: flex; flex-direction: column; padding: 100px 20px;
-            transition: left 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border-right: 2px solid #000;
+            transition: left 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); border-right: 2px solid #000;
         }
         .sidebar-left.open { left: 0; }
-        .sidebar-left a { display: flex; align-items: center; gap: 15px; color: #000; text-decoration: none; font-size: 1.2rem; margin-bottom: 25px; }
-        .sidebar-left a i { width: 25px; text-align: center; }
-
-        .sidebar-right {
-            position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 50px;
-            display: flex; flex-direction: column; align-items: center; gap: 15px; 
-            z-index: var(--z-index-right-bar); background: rgba(255, 255, 255, 0.2); 
-            backdrop-filter: blur(3px);
-            padding: 20px 0; border-radius: 20px 0 0 20px;
-        }
-        .sidebar-right a i { color: #000; font-size: 1.2rem; transition: 0.3s; animation: pulseIcons 18s infinite ease-in-out; }
-        .sidebar-right a:hover i { animation-play-state: paused; transform: scale(1.6) !important; color: var(--brand-color) !important; }
+        .nav-item { margin-bottom: 25px; }
+        .sidebar-left a { display: flex; align-items: center; gap: 15px; color: #000; text-decoration: none; font-size: 1.2rem; }
         
-        @keyframes pulseIcons { 
-            0%, 5.55%, 100% { transform: scale(1); color: #000; } 
-            2.77% { transform: scale(1.4); color: var(--brand-color); } 
-        }
-        .sidebar-right a:nth-child(1) i { --brand-color: #f00; animation-delay: 0s; }
-        .sidebar-right a:nth-child(2) i { --brand-color: #25F4EE; animation-delay: 2s; }
-        .sidebar-right a:nth-child(3) i { --brand-color: #E1306C; animation-delay: 4s; }
-        .sidebar-right a:nth-child(4) i { --brand-color: #25D366; animation-delay: 6s; }
-        .sidebar-right a:nth-child(5) i { --brand-color: #1877F2; animation-delay: 8s; }
-        .sidebar-right a:nth-child(6) i { --brand-color: #1DB954; animation-delay: 10s; }
-        .sidebar-right a:nth-child(7) i { --brand-color: #A2AAAD; animation-delay: 12s; }
-        .sidebar-right a:nth-child(8) i { --brand-color: #f00; animation-delay: 14s; }
-        .sidebar-right a:nth-child(9) i { --brand-color: #00A8E1; animation-delay: 16s; }
+        .submenu { display: none; flex-direction: column; padding-left: 40px; margin-top: 10px; }
+        .submenu a { font-size: 1rem; margin-bottom: 10px; color: #333; }
+        .nav-item:hover .submenu { display: flex; }
 
         main {
-            flex: 1;
-            position: relative; 
-            z-index: var(--z-index-content); 
-            padding: 120px 20px 50px 20px;
-            max-width: 800px; 
-            margin: 0 auto;
-            width: 100%;
-            box-sizing: border-box;
+            flex: 1; position: relative; z-index: var(--z-index-content); 
+            padding: 120px 20px 50px 20px; display: grid; 
+            grid-template-columns: 1fr; gap: 20px;
+            max-width: 1000px; margin: 0 auto; width: 100%; box-sizing: border-box;
         }
         
-        .legal-card { 
-            background: rgba(255, 255, 255, 0.9); 
-            border: 2px solid #000; 
-            border-radius: 15px; 
-            padding: 40px;
+        .bento-card { 
+            background: rgba(255, 255, 255, 0.9); border: 2px solid #000; 
+            border-radius: 15px; padding: 40px; box-shadow: 4px 4px 0px rgba(0,0,0,0.1); 
             line-height: 1.6;
         }
-
-        h2 { color: var(--anton-red); margin-top: 0; }
-        h3 { border-bottom: 2px solid #000; display: inline-block; margin-top: 25px; margin-bottom: 10px; }
+        .bento-card h2 { color: var(--anton-red); border-bottom: 2px solid #000; padding-bottom: 10px; }
+        .bento-card h3 { margin-top: 25px; border-left: 5px solid var(--anton-yellow); padding-left: 10px; }
 
         footer { 
             width: 100%; padding: 30px 0; text-align: center; 
             background: rgba(255,255,255,0.85); border-top: 2px solid #000; 
-            z-index: var(--z-index-content);
         }
-        .footer-content { max-width: 1000px; margin: 0 auto; }
-        .footer-links a { color: #000; text-decoration: none; margin: 0 15px; }
 
-        @media (max-width: 800px) {
-            .sidebar-right { display: none; }
-        }
+        @media (max-width: 800px) { padding: 100px 10px 30px 10px; }
     </style>
 </head>
 <body>
@@ -133,40 +85,53 @@
 
 <nav class="sidebar-left" id="sidebar">
     <div style="margin-top: 20px;">
-        <a href="hauptseite.html"><i class="fa-solid fa-house"></i> HOME</a>
-        <a href="meinemusik.html"><i class="fa-solid fa-music"></i> MEINE MUSIK</a>
-        <a href="shop.html"><i class="fa-solid fa-cart-shopping"></i> SHOP</a>
-        <a href="kontakt.html"><i class="fa-solid fa-envelope"></i> KONTAKT</a>
+        <div class="nav-item"><a href="hauptseite.html"><i class="fa-solid fa-house"></i> HOME</a></div>
+        <div class="nav-item">
+            <a href="meinemusik.html"><i class="fa-solid fa-music"></i> MEINE MUSIK</a>
+            <div class="submenu">
+                <a href="uebermich.html"><i class="fa-solid fa-user"></i> ÜBER MICH</a>
+                <a href="konzerte.html"><i class="fa-solid fa-calendar-days"></i> KONZERTE</a>
+            </div>
+        </div>
+        <div class="nav-item"><a href="shop.html"><i class="fa-solid fa-cart-shopping"></i> SHOP</a></div>
+        <div class="nav-item"><a href="kontakt.html"><i class="fa-solid fa-envelope"></i> KONTAKT</a></div>
     </div>
 </nav>
 
-<aside class="sidebar-right">
-    <a href="#"><i class="fa-brands fa-youtube"></i></a>
-    <a href="#"><i class="fa-brands fa-tiktok"></i></a>
-    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-    <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
-    <a href="#"><i class="fa-brands fa-facebook"></i></a>
-    <a href="#"><i class="fa-brands fa-spotify"></i></a>
-    <a href="#"><i class="fa-brands fa-apple"></i></a>
-    <a href="#"><i class="fa-solid fa-circle-play"></i></a>
-    <a href="#"><i class="fa-brands fa-amazon"></i></a>
-</aside>
-
 <main>
-    <div class="legal-card">
+    <div class="bento-card">
         <h2>Datenschutzerklärung</h2>
         
         <h3>1. Datenschutz auf einen Blick</h3>
-        <p>Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen.</p>
+        <p>Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können.</p>
 
-        <h3>2. Datenerfassung auf dieser Website</h3>
-        <p>Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten können Sie dem Impressum dieser Website entnehmen.</p>
+        <h3>2. Hosting</h3>
+        <p>Wir hosten die Inhalte unserer Website bei folgendem Anbieter: [NAME DES HOSTERS, z.B. GitHub Pages / Strato / IONOS]. Bei dem Besuch unserer Website werden personenbezogene Daten (z. B. IP-Adressen) auf den Servern des Hosters verarbeitet, um die Bereitstellung der Seite zu ermöglichen.</p>
 
-        <h3>3. Analyse-Tools und Tools von Drittanbietern</h3>
-        <p>Beim Besuch dieser Website kann Ihr Surf-Verhalten statistisch ausgewertet werden. Dies geschieht vor allem mit Cookies und mit sogenannten Analyseprogrammen.</p>
+        <h3>3. Allgemeine Hinweise und Pflichtinformationen</h3>
+        <p>Der Betreiber dieser Seiten nimmt den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend den gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.</p>
+        <p><strong>Verantwortliche Stelle:</strong><br>
+        [Dein Name / Name des Unternehmens]<br>
+        [Straße, Hausnummer]<br>
+        [PLZ, Ort]<br>
+        E-Mail: info@anton-familienpop.de</p>
 
-        <h3>4. Ihre Rechte</h3>
-        <p>Sie haben jederzeit das Recht, unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten personenbezogenen Daten zu erhalten.</p>
+        <h3>4. Datenerfassung auf dieser Website</h3>
+        <p><strong>Server-Log-Dateien:</strong> Der Provider der Seiten erhebt und speichert automatisch Informationen in sogenannten Server-Log-Dateien, die Ihr Browser automatisch an uns übermittelt. Dies sind: Browsertyp, Betriebssystem, Referrer URL, Hostname des zugreifenden Rechners und Uhrzeit der Serveranfrage.</p>
+        <p><strong>Kontaktformular:</strong> Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert.</p>
+
+        <h3>5. Soziale Medien</h3>
+        <p>Auf dieser Website sind Links zu verschiedenen Social-Media-Diensten (YouTube, TikTok, Instagram, Facebook, Spotify) eingebunden. Erst wenn Sie auf die jeweiligen Icons klicken, werden Sie zu den Diensten weitergeleitet. Dort gelten die Datenschutzbestimmungen der jeweiligen Anbieter.</p>
+
+        <h3>6. Ihre Rechte</h3>
+        <p>Sie haben jederzeit das Recht:</p>
+        <ul>
+            <li>Auskunft über Ihre gespeicherten Daten zu erhalten.</li>
+            <li>Die Berichtigung oder Löschung Ihrer Daten zu verlangen.</li>
+            <li>Die Einschränkung der Verarbeitung zu fordern.</li>
+            <li>Widerspruch gegen die Verarbeitung einzulegen.</li>
+        </ul>
+        <p>Hierzu sowie zu weiteren Fragen zum Thema Datenschutz können Sie sich jederzeit unter der im Impressum angegebenen Adresse an uns wenden.</p>
     </div>
 </main>
 
