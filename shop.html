@@ -29,7 +29,7 @@
             display: flex;
             flex-direction: column;
             font-family: 'Special Elite', cursive;
-            background-color: #b0b0b0; 
+            background-color: #ffffff; 
             background-image: url('TON-AN.png');
             background-size: cover; 
             background-position: center;
@@ -76,14 +76,8 @@
             padding-left: 40px;
             margin-top: 10px;
         }
-        .submenu a {
-            font-size: 1rem;
-            margin-bottom: 10px;
-            color: #333;
-        }
-        .nav-item:hover .submenu {
-            display: flex;
-        }
+        .submenu a { font-size: 1rem; margin-bottom: 10px; color: #333; text-decoration: none; }
+        .nav-item:hover .submenu { display: flex; }
 
         /* SIDEBAR RIGHT */
         .sidebar-right {
@@ -93,65 +87,82 @@
             backdrop-filter: blur(3px);
             padding: 20px 0; border-radius: 20px 0 0 20px;
         }
-        .sidebar-right a i { color: #000; font-size: 1.2rem; transition: 0.3s; animation: pulseIcons 18s infinite ease-in-out; }
+        .sidebar-right a i { color: #000; font-size: 1.2rem; transition: transform 0.3s, color 0.3s; animation: pulseIcons 18s infinite ease-in-out; }
+        .sidebar-right a:hover i { animation-play-state: paused; transform: scale(1.6) !important; color: var(--brand-color) !important; }
         
         @keyframes pulseIcons { 
             0%, 5.55%, 100% { transform: scale(1); color: #000; } 
             2.77% { transform: scale(1.4); color: var(--brand-color); } 
         }
+        .sidebar-right a:nth-child(1) i { --brand-color: #f00; animation-delay: 0s; }
+        .sidebar-right a:nth-child(2) i { --brand-color: #25F4EE; animation-delay: 2s; }
+        .sidebar-right a:nth-child(3) i { --brand-color: #E1306C; animation-delay: 4s; }
+        .sidebar-right a:nth-child(4) i { --brand-color: #25D366; animation-delay: 6s; }
+        .sidebar-right a:nth-child(5) i { --brand-color: #1877F2; animation-delay: 8s; }
+        .sidebar-right a:nth-child(6) i { --brand-color: #1DB954; animation-delay: 10s; }
+        .sidebar-right a:nth-child(7) i { --brand-color: #A2AAAD; animation-delay: 12s; }
+        .sidebar-right a:nth-child(8) i { --brand-color: #f00; animation-delay: 14s; }
+        .sidebar-right a:nth-child(9) i { --brand-color: #00A8E1; animation-delay: 16s; }
 
+        /* SHOP CONTENT */
         main {
             flex: 1;
             position: relative; 
             z-index: var(--z-index-content); 
             padding: 120px 20px 50px 20px;
-            display: grid; 
-            grid-template-columns: repeat(3, 1fr); 
-            gap: 20px;
             max-width: 1000px; 
             margin: 0 auto;
             width: 100%;
             box-sizing: border-box;
         }
-        
-        .bento-card { background: rgba(255, 255, 255, 0.75); border: 2px solid #000; border-radius: 15px; padding: 25px; box-shadow: 4px 4px 0px rgba(0,0,0,0.1); }
-        .card-hero { grid-column: span 3; text-align: center; background: #000; color: #fff; }
+
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
 
         .product-card {
+            background: rgba(255, 255, 255, 0.85);
+            border: 2px solid #000;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
             display: flex;
             flex-direction: column;
-            align-items: center;
-            text-align: center;
-            transition: transform 0.3s;
+            justify-content: space-between;
         }
-        .product-card:hover { transform: translateY(-5px); background: #fff; }
-        
-        .product-img {
+
+        .product-img-placeholder {
             width: 100%;
-            height: 180px;
-            background: #ddd;
-            border: 2px solid #000;
+            height: 200px;
+            background: #f0f0f0;
+            border: 2px dashed #ccc;
             border-radius: 10px;
-            margin-bottom: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
+            margin-bottom: 15px;
         }
 
-        .price { font-weight: bold; color: var(--anton-red); font-size: 1.2rem; margin: 10px 0; }
-        
-        .buy-btn {
-            background: var(--anton-yellow);
-            border: 2px solid #000;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            color: #000;
+        .product-price {
+            font-size: 1.4rem;
+            color: var(--anton-red);
             font-weight: bold;
-            transition: 0.2s;
+            margin: 10px 0;
         }
-        .buy-btn:hover { background: #000; color: #fff; }
+
+        .btn-buy {
+            background: #000;
+            color: #fff;
+            padding: 12px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: 0.3s;
+            font-size: 0.9rem;
+        }
+        .btn-buy:hover { background: var(--anton-red); }
 
         footer { 
             width: 100%; 
@@ -162,13 +173,21 @@
             z-index: var(--z-index-content);
         }
         .footer-content { max-width: 1000px; margin: 0 auto; }
+        
+        .footer-main-link, .footer-links a { 
+            color: #000; 
+            text-decoration: none; 
+            margin: 0 15px; 
+            border-bottom: 1px solid transparent; 
+            transition: 0.2s; 
+            display: inline-block;
+        }
+        .footer-main-link:hover, .footer-links a:hover { 
+            border-bottom: 1px solid var(--anton-red); 
+        }
         .footer-links { margin-top: 15px; font-size: 0.9rem; }
-        .footer-links a { color: #000; text-decoration: none; margin: 0 15px; border-bottom: 1px solid transparent; transition: 0.2s; }
-        .footer-links a:hover { border-bottom: 1px solid var(--anton-red); }
 
         @media (max-width: 800px) {
-            main { grid-template-columns: 1fr; }
-            .card-hero { grid-column: span 1; }
             .sidebar-right { display: none; }
         }
     </style>
@@ -186,7 +205,7 @@
         <div class="nav-item">
             <a href="meinemusik.html"><i class="fa-solid fa-music"></i> MEINE MUSIK</a>
             <div class="submenu">
-                <a href="uebermich.html"><i class="fa-solid fa-user"></i> ÜBER MICH</a>
+                <a href="ueber-mich.html"><i class="fa-solid fa-user"></i> ÜBER MICH</a>
                 <a href="konzerte.html"><i class="fa-solid fa-calendar-days"></i> KONZERTE</a>
             </div>
         </div>
@@ -212,39 +231,40 @@
 </aside>
 
 <main>
-    <div class="bento-card card-hero">
-        <h2>MERCH & MEHR</h2>
-        <p>Hol dir den Sound nach Hause!</p>
-    </div>
+    <div class="shop-grid">
+        <div class="product-card">
+            <div class="product-img-placeholder">[ALBUM CD]</div>
+            <h3>CD "TON AN"</h3>
+            <p class="product-price">17,99 €</p>
+            <a href="#" class="btn-buy">In den Warenkorb</a>
+        </div>
+        
+        <div class="product-card">
+            <div class="product-img-placeholder">[T-SHIRT]</div>
+            <h3>Anton Logo Shirt</h3>
+            <p class="product-price">24,99 €</p>
+            <a href="#" class="btn-buy">In den Warenkorb</a>
+        </div>
 
-    <div class="bento-card product-card">
-        <div class="product-img"><i class="fa-solid fa-compact-disc"></i></div>
-        <h3>Album "TON AN"</h3>
-        <p>CD im Digipack</p>
-        <div class="price">15,99 €</div>
-        <a href="#" class="buy-btn">In den Warenkorb</a>
-    </div>
+        <div class="product-card">
+            <div class="product-img-placeholder">[HOODIE]</div>
+            <h3>Fan Hoodie</h3>
+            <p class="product-price">49,99 €</p>
+            <a href="#" class="btn-buy">In den Warenkorb</a>
+        </div>
 
-    <div class="bento-card product-card">
-        <div class="product-img" style="background: #ffeb3b;"><i class="fa-solid fa-shirt"></i></div>
-        <h3>ANTON Shirt</h3>
-        <p>100% Bio-Baumwolle</p>
-        <div class="price">24,99 €</div>
-        <a href="#" class="buy-btn">In den Warenkorb</a>
-    </div>
-
-    <div class="bento-card product-card">
-        <div class="product-img" style="background: #ff8a80;"><i class="fa-solid fa-hat-wizard"></i></div>
-        <h3>Party-Cap</h3>
-        <p>Einheitsgröße</p>
-        <div class="price">19,99 €</div>
-        <a href="#" class="buy-btn">In den Warenkorb</a>
+        <div class="product-card">
+            <div class="product-img-placeholder">[CAP]</div>
+            <h3>Anton Snapback</h3>
+            <p class="product-price">19,99 €</p>
+            <a href="#" class="btn-buy">In den Warenkorb</a>
+        </div>
     </div>
 </main>
 
 <footer>
     <div class="footer-content">
-        <div>www.anton-familienpop.de</div>
+        <a href="hauptseite.html" class="footer-main-link">www.anton-familienpop.de</a>
         <div class="footer-links">
             <a href="impressum.html">Impressum</a>
             <a href="datenschutz.html">Datenschutz</a>
@@ -254,11 +274,14 @@
 
 <script>
     function toggleMenu() { document.getElementById('sidebar').classList.toggle('open'); }
+    
     document.addEventListener('click', function(e) {
         const sb = document.getElementById("sidebar");
         const btn = document.querySelector(".menu-btn");
-        if (!sb.contains(e.target) && !btn.contains(e.target) && sb.classList.contains("open")) {
-            sb.classList.remove("open");
+        if (sb && btn) {
+            if (!sb.contains(e.target) && !btn.contains(e.target) && sb.classList.contains("open")) {
+                sb.classList.remove("open");
+            }
         }
     });
 </script>
