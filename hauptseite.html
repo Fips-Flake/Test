@@ -76,14 +76,8 @@
             padding-left: 40px;
             margin-top: 10px;
         }
-        .submenu a {
-            font-size: 1rem;
-            margin-bottom: 10px;
-            color: #333;
-        }
-        .nav-item:hover .submenu {
-            display: flex;
-        }
+        .submenu a { font-size: 1rem; margin-bottom: 10px; color: #333; }
+        .nav-item:hover .submenu { display: flex; }
 
         /* SIDEBAR RIGHT */
         .sidebar-right {
@@ -138,10 +132,20 @@
             z-index: var(--z-index-content);
         }
         .footer-content { max-width: 1000px; margin: 0 auto; }
-        .footer-main-link { color: #000; text-decoration: none; font-weight: bold; }
+        
+        /* Einheitlicher Link-Stil im Footer */
+        .footer-main-link, .footer-links a { 
+            color: #000; 
+            text-decoration: none; 
+            margin: 0 15px; 
+            border-bottom: 1px solid transparent; 
+            transition: 0.2s; 
+            display: inline-block;
+        }
+        .footer-main-link:hover, .footer-links a:hover { 
+            border-bottom: 1px solid var(--anton-red); 
+        }
         .footer-links { margin-top: 15px; font-size: 0.9rem; }
-        .footer-links a { color: #000; text-decoration: none; margin: 0 15px; border-bottom: 1px solid transparent; transition: 0.2s; }
-        .footer-links a:hover { border-bottom: 1px solid var(--anton-red); }
 
         @media (max-width: 800px) {
             main { grid-template-columns: 1fr; }
@@ -160,7 +164,6 @@
         <div class="nav-item">
             <a href="hauptseite.html"><i class="fa-solid fa-house"></i> HOME</a>
         </div>
-        
         <div class="nav-item">
             <a href="meinemusik.html"><i class="fa-solid fa-music"></i> MEINE MUSIK</a>
             <div class="submenu">
@@ -168,7 +171,6 @@
                 <a href="konzerte.html"><i class="fa-solid fa-calendar-days"></i> KONZERTE</a>
             </div>
         </div>
-
         <div class="nav-item">
             <a href="shop.html"><i class="fa-solid fa-cart-shopping"></i> SHOP</a>
         </div>
