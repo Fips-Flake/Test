@@ -19,7 +19,6 @@
             --z-index-menu-btn: 210;
         }
 
-        /* STICKY FOOTER LOGIC */
         html, body {
             height: 100%;
             margin: 0;
@@ -32,7 +31,7 @@
             font-family: 'Special Elite', cursive;
             background-color: #b0b0b0; 
             background-image: url('TON-AN.png');
-            background-size: 100%; 
+            background-size: cover; 
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -75,7 +74,7 @@
             backdrop-filter: blur(3px);
             padding: 20px 0; border-radius: 20px 0 0 20px;
         }
-        .sidebar-right a i { color: #000; font-size: 1.2rem; transition: 0.3s; animation: pulseIcons 18s infinite ease-in-out; }
+        .sidebar-right a i { color: #000; font-size: 1.2rem; transition: transform 0.3s, color 0.3s; animation: pulseIcons 18s infinite ease-in-out; }
         .sidebar-right a:hover i { animation-play-state: paused; transform: scale(1.6) !important; color: var(--brand-color) !important; }
         
         @keyframes pulseIcons { 
@@ -92,7 +91,6 @@
         .sidebar-right a:nth-child(8) i { --brand-color: #f00; animation-delay: 14s; }
         .sidebar-right a:nth-child(9) i { --brand-color: #00A8E1; animation-delay: 16s; }
 
-        /* MAIN AREA FLEX FILL */
         main {
             flex: 1;
             position: relative; 
@@ -109,14 +107,8 @@
         
         .bento-card { background: rgba(255, 255, 255, 0.7); border: 2px solid #000; border-radius: 15px; padding: 25px; box-shadow: 4px 4px 0px rgba(0,0,0,0.1); }
         .card-hero { grid-column: span 3; background: #000; color: #fff; text-align: center; }
-        .card-list { grid-column: span 2; }
-        .card-player { grid-column: span 1; display: flex; flex-direction: column; align-items: center; gap: 15px; }
-        
-        .track { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #000; }
-        .player-cover-replacement { width: 100%; aspect-ratio: 1/1; border-radius: 8px; background: #000; display: flex; align-items: center; justify-content: center; color: var(--anton-yellow); border: 2px solid #000; font-size: 1.4rem; text-align: center; }
-        .progress-container { width: 100%; height: 6px; background: #bbb; border-radius: 3px; }
-        .progress-bar { width: 45%; height: 100%; background: var(--anton-red); border-radius: 3px; }
-        .btns { display: flex; gap: 20px; font-size: 1.2rem; cursor: pointer; align-items: center; }
+        .card-welcome { grid-column: span 2; }
+        .card-social-info { grid-column: span 1; }
 
         footer { 
             width: 100%; 
@@ -133,7 +125,7 @@
 
         @media (max-width: 800px) {
             main { grid-template-columns: 1fr; }
-            .card-hero, .card-list, .card-player { grid-column: span 1; }
+            .card-hero, .card-welcome, .card-social-info { grid-column: span 1; }
             .sidebar-right { display: none; }
         }
     </style>
@@ -165,21 +157,15 @@
 </aside>
 
 <main>
-    <div class="bento-card card-hero"><h2>ALBUM: TON AN</h2></div>
-    <div class="bento-card card-list">
-        <h3>TRACKLISTE</h3>
-        <div class="track"><span>1. TON AN</span><span>03:20</span></div>
-        <div class="track"><span>2. FAMILIENBAND</span><span>02:45</span></div>
-        <div class="track"><span>3. SUPERHELD</span><span>03:10</span></div>
+    <div class="bento-card card-hero"><h2>ALBUM: "TON AN"</h2></div>
+    <div class="bento-card card-welcome">
+        <h3>Hör mal rein</h3>
+        <p>Hier findest du alle Tracks des neuen Albums. Von fetzigen Pop-Beats bis zu Liedern für die ganze Familie.</p>
+        <div style="background: #eee; padding: 20px; border: 1px dashed #000; text-align: center;">[MUSIK PLAYER PLATZHALTER]</div>
     </div>
-    <div class="bento-card card-player">
-        <div class="player-cover-replacement">TON AN<br>VOL. 1</div>
-        <div class="progress-container"><div class="progress-bar"></div></div>
-        <div class="btns">
-            <i class="fa-solid fa-backward-step"></i>
-            <i id="play-btn" class="fa-solid fa-play" onclick="handlePlay()"></i>
-            <i class="fa-solid fa-forward-step"></i>
-        </div>
+    <div class="bento-card card-social-info">
+        <h3>Streaming</h3>
+        <p>Höre ANTON auf Spotify, Apple Music oder Amazon Music.</p>
     </div>
 </main>
 
@@ -195,11 +181,6 @@
 
 <script>
     function toggleMenu() { document.getElementById('sidebar').classList.toggle('open'); }
-    function handlePlay() {
-        const btn = document.getElementById('play-btn');
-        btn.classList.toggle('fa-play');
-        btn.classList.toggle('fa-pause');
-    }
     document.addEventListener('click', function(e) {
         const sb = document.getElementById("sidebar");
         const btn = document.querySelector(".menu-btn");
