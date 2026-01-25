@@ -73,6 +73,12 @@
         .nav-item { margin-bottom: 25px; }
         .sidebar-left a { display: flex; align-items: center; gap: 15px; color: #000; text-decoration: none; font-size: 1.2rem; }
         .sidebar-left a i { width: 25px; text-align: center; }
+        
+        /* Pfeil für Untermenü */
+        .submenu-indicator {
+            font-size: 0.8rem;
+            margin-left: auto;
+        }
 
         .submenu {
             display: none;
@@ -130,7 +136,6 @@
             backdrop-filter: blur(5px);
         }
         
-        /* Die neue Infobox, die das Graffitti ersetzt */
         .card-info { 
             grid-column: span 3; 
             min-height: 150px;
@@ -186,7 +191,10 @@
             <a href="hauptseite.html"><i class="fa-solid fa-house"></i> HOME</a>
         </div>
         <div class="nav-item">
-            <a href="meinemusik.html"><i class="fa-solid fa-music"></i> MEINE MUSIK</a>
+            <a href="meinemusik.html">
+                <i class="fa-solid fa-music"></i> MEINE MUSIK 
+                <span class="submenu-indicator"><i class="fa-solid fa-caret-down"></i></span>
+            </a>
             <div class="submenu">
                 <a href="ueber-mich.html"><i class="fa-solid fa-user"></i> ÜBER MICH</a>
                 <a href="konzerte.html"><i class="fa-solid fa-calendar-days"></i> KONZERTE</a>
