@@ -17,196 +17,412 @@
             --z-index-menu-btn: 1200;
         }
 
-        /* Footer Fix: Body als Flex-Container */
-        html, body { height: 100%; margin: 0; padding: 0; }
-        
-        body { 
-            display: flex; 
-            flex-direction: column; 
+        /* Grundstruktur für stabilen Footer am Seitenende */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
             font-family: 'Special Elite', cursive;
             background: #ffffff url('AFaPo Wall.png') center/cover no-repeat fixed;
-            background-blend-mode: multiply; 
+            background-blend-mode: multiply;
             overflow-x: hidden;
+            color: #000;
         }
 
-        header { 
-            position: fixed; top: 0; width: 100%; height: 80px; 
-            display: flex; justify-content: center; align-items: center; 
-            z-index: var(--z-index-header); background: rgba(255, 255, 255, 0.85); 
-            backdrop-filter: blur(10px); border-bottom: 2px solid #000;
-        }
-        
-        .header-title { color: var(--anton-red); font-size: 1.8rem; text-decoration: none; letter-spacing: 2px; text-transform: uppercase; }
-
-        .menu-btn { 
-            position: fixed; top: 18px; left: 20px; font-size: 24px; cursor: pointer; 
-            z-index: var(--z-index-menu-btn); background: #000; color: #fff; 
-            width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; 
-            border-radius: 5px; border: none;
-        }
-
-        /* SIDEBAR (IDENTISCH MIT ALLEN SEITEN) */
-        .sidebar-left { 
-            position: fixed; top: 0; bottom: 0; left: calc(var(--sidebar-width) * -1.2); 
-            width: var(--sidebar-width); background: rgba(255, 235, 59, 0.98); 
-            z-index: var(--z-index-sidebar); display: flex; flex-direction: column; 
-            padding: 100px 20px; transition: left 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            border-right: 2px solid #000; box-sizing: border-box; 
-        }
-        .sidebar-left.open { left: 0; }
-        .nav-item { margin-bottom: 25px; }
-        .sidebar-left a { display: flex; align-items: center; color: #000; text-decoration: none; font-size: 1.1rem; width: 100%; }
-        .nav-label { display: flex; align-items: center; gap: 15px; }
-        .main-icon { width: 25px; text-align: center; }
-        
-        .submenu-indicator-wrapper { flex-grow: 1; display: flex; justify-content: flex-end; }
-        .submenu-indicator { font-size: 0.8rem; transition: transform 0.3s; }
-        .nav-item:hover .submenu-indicator { transform: rotate(180deg); }
-        .submenu { display: none; flex-direction: column; padding-left: 40px; margin-top: 10px; }
-        .submenu a { font-size: 1rem; margin-bottom: 10px; color: #333; }
-        .nav-item:hover .submenu { display: flex; }
-
-        /* Social Bar Rechts */
-        .sidebar-right { 
-            position: fixed; top: 50%; right: 0; transform: translateY(-50%); 
-            width: 50px; display: flex; flex-direction: column; align-items: center; 
-            gap: 15px; z-index: 500; background: rgba(255, 255, 255, 0.2); 
-            backdrop-filter: blur(5px); padding: 20px 0; border-radius: 20px 0 0 20px; 
-        }
-        .sidebar-right a i { color: #000; font-size: 1.2rem; }
-
-        /* MUSIK CONTENT */
-        main { flex: 1; padding: 120px 20px 50px; max-width: 900px; margin: 0 auto; width: 100%; box-sizing: border-box; }
-        
-        .album-list { display: flex; flex-direction: column; gap: 40px; }
-        
-        .bio-card { 
-            background: rgba(255, 255, 255, 0.85); border: 2px solid #000; border-radius: 15px; 
-            padding: 30px; box-shadow: 4px 4px 0px rgba(0,0,0,0.1); backdrop-filter: blur(5px);
-            display: flex; gap: 30px; align-items: flex-start;
+        /* --- HEADER (Master Standard) --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: var(--z-index-header);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #000;
         }
 
-        .album-cover { 
-            width: 220px; height: 220px; background: #000; border-radius: 10px; 
-            display: flex; align-items: center; justify-content: center; 
-            color: #fff; font-size: 4rem; flex-shrink: 0; 
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.2); border: 2px solid #000;
+        .header-title {
+            color: var(--anton-red);
+            font-size: 1.8rem;
+            text-decoration: none;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: bold;
         }
 
-        .album-info { flex-grow: 1; }
-        .album-title { font-size: 1.8rem; color: var(--anton-red); margin: 0 0 5px 0; text-transform: uppercase; }
-        .album-year { font-size: 0.9rem; margin-bottom: 15px; display: block; opacity: 0.7; }
-
-        .tracklist { list-style: none; padding: 0; margin: 15px 0; }
-        .tracklist li { 
-            padding: 8px 0; border-bottom: 1px dashed rgba(0,0,0,0.2); 
-            display: flex; justify-content: space-between; font-size: 0.95rem;
+        /* --- MENÜ-BUTTON (Master Standard) --- */
+        .menu-btn {
+            position: fixed;
+            top: 18px;
+            left: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: var(--z-index-menu-btn);
+            background: #000;
+            color: #fff;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+            border: none;
+            transition: background 0.3s ease;
+        }
+        .menu-btn:hover {
+            background: var(--anton-red);
         }
 
-        .listen-btn { 
-            display: inline-flex; align-items: center; gap: 10px; margin-top: 20px;
-            background: #000; color: #fff; text-decoration: none; padding: 10px 20px; 
-            border-radius: 5px; transition: background 0.3s; font-size: 0.9rem;
+        /* --- SIDEBAR LINKS (Master Standard) --- */
+        .sidebar-left {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: calc(var(--sidebar-width) * -1.2);
+            width: var(--sidebar-width);
+            background: rgba(255, 235, 59, 0.98);
+            z-index: var(--z-index-sidebar);
+            display: flex;
+            flex-direction: column;
+            padding: 100px 20px;
+            transition: left 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-right: 2px solid #000;
+            box-sizing: border-box;
         }
-        .listen-btn:hover { background: var(--anton-red); }
-
-        /* FOOTER KORREKTUR */
-        footer { 
-            width: 100%; padding: 25px 0; background: rgba(255, 255, 255, 0.95); 
-            border-top: 2px solid #000; text-align: center; margin-top: auto; 
+        .sidebar-left.open {
+            left: 0;
         }
-        .footer-content { display: flex; flex-direction: column; align-items: center; gap: 10px; }
-        .footer-links { display: flex; gap: 30px; justify-content: center; }
-        .footer-links a { color: #000; text-decoration: none; font-size: 0.9rem; }
 
-        @media (max-width: 750px) { 
-            .bio-card { flex-direction: column; align-items: center; text-align: center; } 
+        .nav-item {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .sidebar-left a {
+            display: flex;
+            align-items: center;
+            color: #000;
+            text-decoration: none;
+            font-size: 1.1rem;
+            width: 100%;
+        }
+
+        .nav-label {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .main-icon {
+            width: 25px;
+            text-align: center;
+        }
+
+        .submenu-indicator-wrapper {
+            flex-grow: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .submenu-indicator {
+            font-size: 0.8rem;
+            transition: transform 0.3s;
+        }
+
+        .nav-item:hover .submenu-indicator {
+            transform: rotate(180deg);
+        }
+
+        .submenu {
+            display: none;
+            flex-direction: column;
+            padding-left: 40px;
+            margin-top: 10px;
+        }
+
+        .submenu a {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .nav-item:hover .submenu {
+            display: flex;
+        }
+
+        /* --- SIDEBAR RECHTS (Master Standard) --- */
+        .sidebar-right {
+            position: fixed;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            width: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            z-index: 500;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            padding: 20px 0;
+            border-radius: 20px 0 0 20px;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .sidebar-right a i {
+            color: #000;
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+
+        .sidebar-right a:hover i {
+            color: var(--anton-red);
+            transform: scale(1.2);
+        }
+
+        /* --- MAIN CONTENT --- */
+        main {
+            flex: 1;
+            padding: 120px 20px 50px;
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.85);
+            border: 2px solid #000;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+            backdrop-filter: blur(5px);
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: var(--anton-red);
+            text-transform: uppercase;
+            text-align: center;
+            font-size: 2rem;
+            margin-top: 0;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+        }
+
+        /* Musik Grid Layout */
+        .music-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .album-cover {
+            width: 100%;
+            aspect-ratio: 1/1;
+            background: #000;
+            border: 2px solid #000;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .album-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .album-info h3 {
+            font-size: 1.8rem;
+            margin-top: 0;
+            color: var(--anton-red);
+        }
+
+        .listen-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .listen-btn {
+            background: #000;
+            color: #fff;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s;
+        }
+
+        .listen-btn:hover {
+            background: var(--anton-red);
+            transform: translateY(-2px);
+        }
+
+        /* --- FOOTER (Master Standard) --- */
+        footer {
+            width: 100%;
+            padding: 25px 0;
+            background: rgba(255, 255, 255, 0.95);
+            border-top: 2px solid #000;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            color: #000;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: 0.2s;
+            border-bottom: 1px solid transparent;
+        }
+
+        .footer-links a:hover {
+            border-bottom: 1px solid var(--anton-red);
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 850px) {
             .sidebar-right { display: none; }
-            .album-cover { width: 180px; height: 180px; }
-            .tracklist li { justify-content: center; gap: 20px; }
+            .music-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .listen-links {
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
 
-<header><div class="header-title">MEINE MUSIK</div></header>
-<button class="menu-btn" onclick="toggleMenu()">☰</button>
+    <header>
+        <a href="hauptseite.html" class="header-title">ANTON - Familienpop</a>
+    </header>
 
-<nav class="sidebar-left" id="sidebar">
-    <div class="nav-item"><a href="hauptseite.html"><span class="nav-label"><i class="fa-solid fa-house main-icon"></i> HOME</span></a></div>
-    <div class="nav-item">
-        <a href="meinemusik.html" style="color: var(--anton-red);">
-            <span class="nav-label"><i class="fa-solid fa-music main-icon"></i> MEINE MUSIK</span>
-            <div class="submenu-indicator-wrapper"><span class="submenu-indicator"><i class="fa-solid fa-caret-down"></i></span></div>
-        </a>
-        <div class="submenu">
-            <a href="ueber-mich.html"><i class="fa-regular fa-face-smile main-icon"></i> ÜBER MICH</a>
-            <a href="konzerte.html"><i class="fa-solid fa-microphone-lines main-icon"></i> KONZERTE</a>
+    <button class="menu-btn" onclick="toggleMenu()" aria-label="Menü öffnen">☰</button>
+
+    <nav class="sidebar-left" id="sidebar">
+        <div class="nav-item">
+            <a href="hauptseite.html">
+                <span class="nav-label"><i class="fa-solid fa-house main-icon"></i> HOME</span>
+            </a>
         </div>
-    </div>
-    <div class="nav-item"><a href="shop.html"><span class="nav-label"><i class="fa-solid fa-cart-shopping main-icon"></i> SHOP</span></a></div>
-    <div class="nav-item"><a href="kontakt.html"><span class="nav-label"><i class="fa-solid fa-envelope main-icon"></i> KONTAKT</span></a></div>
-</nav>
 
-<aside class="sidebar-right">
-    <a href="#"><i class="fa-brands fa-youtube"></i></a>
-    <a href="#"><i class="fa-brands fa-tiktok"></i></a>
-    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-    <a href="#"><i class="fa-brands fa-spotify"></i></a>
-</aside>
-
-<main>
-    <div class="album-list">
-        
-        <div class="bio-card">
-            <div class="album-cover"><i class="fa-solid fa-compact-disc"></i></div>
-            <div class="album-info">
-                <h2 class="album-title">Familienpop Vol. 1</h2>
-                <span class="album-year">VÖ: 2024</span>
-                <ul class="tracklist">
-                    <li><span>1. Intro</span> <span>0:45</span></li>
-                    <li><span>2. Tanzen im Wohnzimmer</span> <span>3:20</span></li>
-                    <li><span>3. Der Brokkoli-Song</span> <span>2:55</span></li>
-                </ul>
-                <a href="#" class="listen-btn"><i class="fa-brands fa-spotify"></i> AUF SPOTIFY HÖREN</a>
+        <div class="nav-item">
+            <a href="meinemusik.html" style="color: var(--anton-red);">
+                <span class="nav-label"><i class="fa-solid fa-music main-icon"></i> MEINE MUSIK</span>
+                <div class="submenu-indicator-wrapper">
+                    <span class="submenu-indicator"><i class="fa-solid fa-caret-down"></i></span>
+                </div>
+            </a>
+            <div class="submenu">
+                <a href="ueber-mich.html">
+                    <span class="nav-label"><i class="fa-regular fa-face-smile main-icon"></i> ÜBER MICH</span>
+                </a>
+                <a href="konzerte.html">
+                    <span class="nav-label"><i class="fa-solid fa-microphone-lines main-icon"></i> KONZERTE</span>
+                </a>
             </div>
         </div>
 
-        <div class="bio-card">
-            <div class="album-cover" style="background: var(--anton-red);"><i class="fa-solid fa-record-vinyl"></i></div>
-            <div class="album-info">
-                <h2 class="album-title">Live in Berlin</h2>
-                <span class="album-year">VÖ: 2025</span>
-                <ul class="tracklist">
-                    <li><span>1. Wir sind Anton</span> <span>4:10</span></li>
-                    <li><span>2. Hüpfburg-Hymne (Live)</span> <span>3:45</span></li>
-                </ul>
-                <a href="#" class="listen-btn"><i class="fa-brands fa-apple"></i> AUF APPLE MUSIC</a>
+        <div class="nav-item">
+            <a href="shop.html">
+                <span class="nav-label"><i class="fa-solid fa-cart-shopping main-icon"></i> SHOP</span>
+            </a>
+        </div>
+
+        <div class="nav-item">
+            <a href="kontakt.html">
+                <span class="nav-label"><i class="fa-solid fa-envelope main-icon"></i> KONTAKT</span>
+            </a>
+        </div>
+    </nav>
+
+    <aside class="sidebar-right">
+        <a href="#" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+        <a href="#" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="#" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" target="_blank"><i class="fa-brands fa-spotify"></i></a>
+    </aside>
+
+    <main>
+        <div class="content-card">
+            <h2>Aktuelle Veröffentlichung</h2>
+            <div class="music-grid">
+                <div class="album-cover">
+                    <i class="fa-solid fa-compact-disc fa-5x"></i>
+                </div>
+                <div class="album-info">
+                    <h3>Abenteuerland (2026)</h3>
+                    <p>Das brandneue Album mit 12 Songs über Mut, Freundschaft und das Kindsein. Jetzt auf allen Plattformen verfügbar!</p>
+                    <div class="listen-links">
+                        <a href="#" class="listen-btn"><i class="fa-brands fa-spotify"></i> Spotify</a>
+                        <a href="#" class="listen-btn"><i class="fa-brands fa-apple"></i> Apple Music</a>
+                        <a href="#" class="listen-btn"><i class="fa-brands fa-amazon"></i> Amazon Music</a>
+                    </div>
+                </div>
             </div>
         </div>
+    </main>
 
-    </div>
-</main>
-
-<footer>
-    <div class="footer-content">
-        <a href="hauptseite.html" style="color:#000; text-decoration:none; font-weight:bold;">www.anton-familienpop.de</a>
-        <div class="footer-links">
-            <a href="impressum.html">Impressum</a>
-            <a href="datenschutz.html">Datenschutz</a>
+    <footer>
+        <div class="footer-content">
+            <a href="hauptseite.html" style="color:#000; text-decoration:none; font-weight:bold;">www.anton-familienpop.de</a>
+            <div class="footer-links">
+                <a href="impressum.html">Impressum</a>
+                <a href="datenschutz.html">Datenschutz</a>
+            </div>
         </div>
-    </div>
-</footer>
+    </footer>
 
-<script>
-    function toggleMenu() { document.getElementById('sidebar').classList.toggle('open'); }
-    document.addEventListener('click', function(e) {
-        const sb = document.getElementById("sidebar");
-        const btn = document.querySelector(".menu-btn");
-        if (sb.classList.contains("open") && !sb.contains(e.target) && !btn.contains(e.target)) {
-            sb.classList.remove("open");
+    <script>
+        function toggleMenu() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
         }
-    });
-</script>
+
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const menuBtn = document.querySelector('.menu-btn');
+            if (sidebar.classList.contains('open') && 
+                !sidebar.contains(event.target) && 
+                !menuBtn.contains(event.target)) {
+                sidebar.classList.remove('open');
+            }
+        });
+    </script>
 </body>
 </html>
