@@ -6,92 +6,55 @@
     <title>ANTON | DATENSCHUTZ</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
-    
     <style>
-        :root {
-            --anton-red: #ff0000;
-            --sidebar-width: 220px;
-            --z-index-header: 100;
-        }
-
+        /* CSS ist identisch mit Impressum (siehe oben) */
+        :root { --anton-red: #ff0000; --anton-yellow: #ffeb3b; --sidebar-width: 220px; }
         html, body { height: 100%; margin: 0; padding: 0; }
-        body { 
-            display: flex; flex-direction: column; font-family: 'Special Elite', cursive;
-            background-color: #ffffff; background-image: url('TON-AN.png');
-            background-size: cover; background-position: center; background-repeat: no-repeat;
-            background-attachment: fixed; background-blend-mode: multiply; overflow-x: hidden;
-        }
-
-        header { 
-            position: fixed; top: 0; width: 100%; height: 80px; 
-            display: flex; justify-content: center; align-items: center; 
-            z-index: var(--z-index-header); background: rgba(255, 255, 255, 0.8); 
-            backdrop-filter: blur(10px); border-bottom: 2px solid #000;
-        }
-        .header-title { color: var(--anton-red); font-size: 1.8rem; }
-
-        .menu-btn { 
-            position: fixed; top: 18px; left: 20px; font-size: 24px; cursor: pointer; 
-            z-index: 210; background: #000; color: #fff; width: 45px; height: 45px; 
-            display: flex; align-items: center; justify-content: center; border-radius: 5px;
-        }
-
-        .sidebar-left { 
-            position: fixed; top: 0; bottom: 0; left: -270px; 
-            width: var(--sidebar-width); background: rgba(255, 235, 59, 0.98); 
-            z-index: 200; display: flex; flex-direction: column; padding: 100px 20px;
-            transition: left 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); border-right: 2px solid #000;
-        }
+        body { display: flex; flex-direction: column; font-family: 'Special Elite', cursive; background: #fff url('AFaPo Wall.png') center/cover no-repeat fixed; background-blend-mode: multiply; }
+        header { position: fixed; top: 0; width: 100%; height: 80px; display: flex; justify-content: center; align-items: center; z-index: 100; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border-bottom: 2px solid #000; }
+        .header-title { color: var(--anton-red); font-size: 1.8rem; text-transform: uppercase; }
+        .menu-btn { position: fixed; top: 18px; left: 20px; font-size: 24px; cursor: pointer; z-index: 210; background: #000; color: #fff; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 5px; }
+        .sidebar-left { position: fixed; top: 0; bottom: 0; left: -264px; width: 220px; background: rgba(255, 235, 59, 0.98); z-index: 200; padding: 100px 20px; transition: left 0.6s; border-right: 2px solid #000; }
         .sidebar-left.open { left: 0; }
         .nav-item { margin-bottom: 25px; }
-        .sidebar-left a { display: flex; align-items: center; gap: 15px; color: #000; text-decoration: none; font-size: 1.2rem; }
-
+        .sidebar-left a { color: #000; text-decoration: none; font-size: 1.2rem; display: flex; align-items: center; gap: 15px; }
         main { flex: 1; padding: 120px 20px 50px; max-width: 800px; margin: 0 auto; width: 100%; box-sizing: border-box; }
-        .bento-card { background: rgba(255, 255, 255, 0.9); border: 2px solid #000; border-radius: 15px; padding: 30px; line-height: 1.6; }
-
-        footer { width: 100%; padding: 30px 0; text-align: center; background: rgba(255,255,255,0.85); border-top: 2px solid #000; }
-        .footer-main-link, .footer-links a { color: #000; text-decoration: none; margin: 0 15px; border-bottom: 1px solid transparent; transition: 0.2s; display: inline-block; }
-        .footer-main-link:hover, .footer-links a:hover { border-bottom: 1px solid var(--anton-red); }
+        .bio-card { background: rgba(255, 255, 255, 0.85); border: 2px solid #000; border-radius: 15px; padding: 40px; box-shadow: 4px 4px 0px rgba(0,0,0,0.1); backdrop-filter: blur(5px); }
+        h2 { color: var(--anton-red); text-transform: uppercase; }
+        footer { width: 100%; padding: 20px 0; background: rgba(255,255,255,0.9); border-top: 2px solid #000; text-align: center; }
     </style>
 </head>
 <body>
-    <header><div class="header-title">ANTON | DATENSCHUTZ</div></header>
-    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+<header><div class="header-title">DATENSCHUTZ</div></header>
+<div class="menu-btn" onclick="toggleMenu()">☰</div>
 
-    <nav class="sidebar-left" id="sidebar">
+<nav class="sidebar-left" id="sidebar">
+    <div style="margin-top: 20px;">
         <div class="nav-item"><a href="hauptseite.html"><i class="fa-solid fa-house"></i> HOME</a></div>
-        <div class="nav-item"><a href="meinemusik.html"><i class="fa-solid fa-music"></i> MUSIK</a></div>
         <div class="nav-item"><a href="shop.html"><i class="fa-solid fa-cart-shopping"></i> SHOP</a></div>
         <div class="nav-item"><a href="kontakt.html"><i class="fa-solid fa-envelope"></i> KONTAKT</a></div>
-    </nav>
+    </div>
+</nav>
 
-    <main>
-        <div class="bento-card">
-            <h2>Datenschutzerklärung</h2>
-            <p><strong>1. Datenschutz auf einen Blick</strong></p>
-            <p>Wir freuen uns über Ihr Interesse an unserer Website. Der Schutz Ihrer Privatsphäre ist für uns sehr wichtig. Nachstehend informieren wir Sie ausführlich über den Umgang mit Ihren Daten.</p>
-            <p><strong>2. Datenerfassung auf dieser Website</strong></p>
-            <p>Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten können Sie dem Impressum dieser Website entnehmen.</p>
-        </div>
-    </main>
+<main>
+    <div class="bio-card">
+        <h2>Datenschutzerklärung</h2>
+        <h3>1. Datenschutz auf einen Blick</h3>
+        <p>Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen.</p>
+        <h3>2. Datenerfassung auf dieser Website</h3>
+        <p>Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten können Sie dem Impressum dieser Website entnehmen.</p>
+        <p>Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen. Hierbei kann es sich z. B. um Daten handeln, die Sie in ein Kontaktformular eingeben.</p>
+    </div>
+</main>
 
-    <footer>
-        <div class="footer-content">
-            <a href="hauptseite.html" class="footer-main-link">www.anton-familienpop.de</a>
-            <div class="footer-links">
-                <a href="impressum.html">Impressum</a>
-                <a href="datenschutz.html">Datenschutz</a>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        function toggleMenu() { document.getElementById('sidebar').classList.toggle('open'); }
-        document.addEventListener('click', function(e) {
-            const sb = document.getElementById("sidebar");
-            const btn = document.querySelector(".menu-btn");
-            if (sb && !sb.contains(e.target) && !btn.contains(e.target)) sb.classList.remove("open");
-        });
-    </script>
+<footer>www.anton-familienpop.de</footer>
+<script>
+    function toggleMenu() { document.getElementById('sidebar').classList.toggle('open'); }
+    document.addEventListener('click', function(e) {
+        const sb = document.getElementById("sidebar");
+        const btn = document.querySelector(".menu-btn");
+        if (sb && btn && !sb.contains(e.target) && !btn.contains(e.target) && sb.classList.contains("open")) sb.classList.remove("open");
+    });
+</script>
 </body>
 </html>
