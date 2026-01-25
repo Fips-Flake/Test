@@ -121,16 +121,24 @@
             box-sizing: border-box;
         }
         
-        .hero-graffitti-img {
-            grid-column: span 3;
-            width: 100%;
-            max-height: 208px; /* Reduziert um 35% von 320px */
-            object-fit: contain;
-            display: block;
-            margin-bottom: 20px;
+        .bento-card { 
+            background: rgba(255, 255, 255, 0.75); 
+            border: 2px solid #000; 
+            border-radius: 15px; 
+            padding: 25px; 
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+            backdrop-filter: blur(5px);
+        }
+        
+        /* Die neue Infobox, die das Graffitti ersetzt */
+        .card-info { 
+            grid-column: span 3; 
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        .bento-card { background: rgba(255, 255, 255, 0.7); border: 2px solid #000; border-radius: 15px; padding: 25px; box-shadow: 4px 4px 0px rgba(0,0,0,0.1); }
         .card-welcome { grid-column: span 2; }
         .card-social-info { grid-column: span 1; }
 
@@ -159,7 +167,7 @@
 
         @media (max-width: 800px) {
             main { grid-template-columns: 1fr; }
-            .hero-graffitti-img, .card-welcome, .card-social-info { grid-column: span 1; }
+            .card-info, .card-welcome, .card-social-info { grid-column: span 1; }
             .sidebar-right { display: none; }
         }
     </style>
@@ -206,7 +214,10 @@
 </aside>
 
 <main>
-    <img src="Graffitti" alt="Graffitti" class="hero-graffitti-img">
+    <div class="bento-card card-info">
+        <h3>Wichtige Info</h3>
+        <p>Dies ist die neue Infobox. Hier können aktuelle Ankündigungen oder Termine stehen.</p>
+    </div>
     
     <div class="bento-card card-welcome">
         <h3>Willkommen im Backup!</h3>
