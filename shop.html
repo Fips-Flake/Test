@@ -34,7 +34,7 @@
             color: #000;
         }
 
-        /* --- HEADER (Master Standard) --- */
+        /* --- HEADER --- */
         header {
             position: fixed;
             top: 0;
@@ -58,7 +58,7 @@
             font-weight: bold;
         }
 
-        /* --- MENÜ-BUTTON (Master Standard) --- */
+        /* --- MENÜ-BUTTON --- */
         .menu-btn {
             position: fixed;
             top: 18px;
@@ -81,7 +81,7 @@
             background: var(--anton-red);
         }
 
-        /* --- SIDEBAR LINKS (Master Standard) --- */
+        /* --- SIDEBAR LINKS --- */
         .sidebar-left {
             position: fixed;
             top: 0;
@@ -127,6 +127,7 @@
             text-align: center;
         }
 
+        /* Submenü-Logik */
         .submenu-indicator-wrapper {
             flex-grow: 1;
             display: flex;
@@ -159,7 +160,7 @@
             display: flex;
         }
 
-        /* --- SIDEBAR RECHTS (Master Standard) --- */
+        /* --- SIDEBAR RECHTS (Social) --- */
         .sidebar-right {
             position: fixed;
             top: 50%;
@@ -189,7 +190,7 @@
             transform: scale(1.2);
         }
 
-        /* --- MAIN CONTENT (Shop Layout) --- */
+        /* --- MAIN CONTENT & BENTO GRID --- */
         main {
             flex: 1;
             padding: 120px 20px 50px;
@@ -199,66 +200,58 @@
             box-sizing: border-box;
         }
 
-        .shop-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+        .bento-grid { 
+            display: grid; 
+            grid-template-columns: repeat(4, 1fr); 
+            grid-template-rows: auto; 
+            gap: 20px; 
+            width: 100%; 
         }
 
-        .product-card {
-            background: rgba(255, 255, 255, 0.85);
-            border: 2px solid #000;
-            border-radius: 15px;
-            padding: 20px;
-            text-align: center;
-            backdrop-filter: blur(5px);
-            transition: transform 0.3s ease;
+        .bento-item { 
+            background: rgba(255, 255, 255, 0.85); 
+            border: 2px solid #000; 
+            border-radius: 15px; 
+            backdrop-filter: blur(5px); 
+            overflow: hidden; 
+            display: flex; 
+            flex-direction: column;
+            align-items: center; 
+            justify-content: center; 
+            text-align: center; 
+            padding: 20px; 
+            transition: transform 0.3s;
+            text-decoration: none; 
+            color: #000;
         }
 
-        .product-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--anton-red);
+        .bento-item:hover { 
+            transform: translateY(-5px); 
+            border-color: var(--anton-red); 
         }
 
-        .product-image {
-            width: 100%;
-            height: 200px;
-            background: #eee;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+        /* Bento Shop Layout */
+        .item-header { grid-column: span 4; padding: 40px; }
+        .item-product { grid-column: span 2; min-height: 300px; }
 
-        .product-card h3 {
-            margin: 10px 0;
-            text-transform: uppercase;
-        }
-
-        .price {
-            font-size: 1.2rem;
-            font-weight: bold;
+        .price-tag {
             color: var(--anton-red);
-            display: block;
-            margin-bottom: 15px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 15px 0;
         }
 
-        .buy-btn {
+        .shop-btn {
             background: #000;
             color: #fff;
-            text-decoration: none;
             padding: 10px 20px;
             border-radius: 5px;
-            display: inline-block;
-            transition: 0.3s;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            margin-top: 10px;
         }
 
-        .buy-btn:hover {
-            background: var(--anton-red);
-        }
-
-        /* --- FOOTER (Master Standard) --- */
+        /* --- FOOTER --- */
         footer {
             width: 100%;
             padding: 25px 0;
@@ -293,8 +286,10 @@
             border-bottom: 1px solid var(--anton-red);
         }
 
-        /* Mobile Adjustments */
-        @media (max-width: 750px) {
+        /* Mobile Anpassungen */
+        @media (max-width: 850px) {
+            .bento-grid { grid-template-columns: 1fr 1fr; }
+            .item-header, .item-product { grid-column: span 2; }
             .sidebar-right { display: none; }
         }
     </style>
@@ -352,25 +347,24 @@
     </aside>
 
     <main>
-        <h2 style="text-align: center; color: var(--anton-red); text-transform: uppercase; margin-bottom: 40px; font-size: 2.5rem;">Merch Shop</h2>
-        <div class="shop-grid">
-            <div class="product-card">
-                <div class="product-image"><i class="fa-solid fa-shirt fa-4x"></i></div>
-                <h3>Anton T-Shirt</h3>
-                <span class="price">25,00 €</span>
-                <a href="#" class="buy-btn">In den Warenkorb</a>
+        <div class="bento-grid">
+            <div class="bento-item item-header">
+                <h1 style="color: var(--anton-red); margin: 0;">OFFIZIELLER SHOP</h1>
+                <p>Hol dir den Anton-Style nach Hause!</p>
             </div>
-            <div class="product-card">
-                <div class="product-image"><i class="fa-solid fa-compact-disc fa-4x"></i></div>
-                <h3>Album CD</h3>
-                <span class="price">15,00 €</span>
-                <a href="#" class="buy-btn">In den Warenkorb</a>
+            
+            <div class="bento-item item-product">
+                <i class="fa-solid fa-shirt fa-4x" style="margin-bottom: 20px;"></i>
+                <h3>ANTON T-SHIRT</h3>
+                <span class="price-tag">24,90 €</span>
+                <div class="shop-btn">In den Warenkorb</div>
             </div>
-            <div class="product-card">
-                <div class="product-image"><i class="fa-solid fa-hat-wizard fa-4x"></i></div>
-                <h3>Anton Cap</h3>
-                <span class="price">20,00 €</span>
-                <a href="#" class="buy-btn">In den Warenkorb</a>
+
+            <div class="bento-item item-product">
+                <i class="fa-solid fa-compact-disc fa-4x" style="margin-bottom: 20px;"></i>
+                <h3>ALBUM CD</h3>
+                <span class="price-tag">17,90 €</span>
+                <div class="shop-btn">In den Warenkorb</div>
             </div>
         </div>
     </main>
@@ -394,6 +388,7 @@
         document.addEventListener('click', function(event) {
             const sidebar = document.getElementById('sidebar');
             const menuBtn = document.querySelector('.menu-btn');
+
             if (sidebar.classList.contains('open') && 
                 !sidebar.contains(event.target) && 
                 !menuBtn.contains(event.target)) {
