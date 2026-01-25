@@ -67,17 +67,44 @@
             z-index: var(--z-index-sidebar); display: flex; flex-direction: column; padding: 100px 20px;
             transition: left 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border-right: 2px solid #000;
+            box-sizing: border-box;
         }
         .sidebar-left.open { left: 0; }
         
         .nav-item { margin-bottom: 25px; }
-        .sidebar-left a { display: flex; align-items: center; gap: 15px; color: #000; text-decoration: none; font-size: 1.2rem; }
-        .sidebar-left a i { width: 25px; text-align: center; }
         
-        /* Pfeil für Untermenü */
+        /* Flex-Container für die Nav-Links */
+        .sidebar-left a { 
+            display: flex; 
+            align-items: center; 
+            color: #000; 
+            text-decoration: none; 
+            font-size: 1.2rem; 
+            width: 100%;
+        }
+
+        .nav-label {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-grow: 0; /* Verhindert, dass der Text den ganzen Raum einnimmt */
+        }
+
+        .sidebar-left a i.main-icon { 
+            width: 25px; 
+            text-align: center; 
+        }
+        
+        /* Zentrierung des Pfeils im verbleibenden Raum */
+        .submenu-indicator-wrapper {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
         .submenu-indicator {
             font-size: 0.8rem;
-            margin-left: auto;
         }
 
         .submenu {
@@ -86,9 +113,10 @@
             padding-left: 40px;
             margin-top: 10px;
         }
-        .submenu a { font-size: 1rem; margin-bottom: 10px; color: #333; text-decoration: none; }
+        .submenu a { font-size: 1rem; margin-bottom: 10px; color: #333; text-decoration: none; display: flex; }
         .nav-item:hover .submenu { display: flex; }
 
+        /* Rechte Sidebar Icons */
         .sidebar-right {
             position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 50px;
             display: flex; flex-direction: column; align-items: center; gap: 15px; 
@@ -188,23 +216,31 @@
 <nav class="sidebar-left" id="sidebar">
     <div style="margin-top: 20px;">
         <div class="nav-item">
-            <a href="hauptseite.html"><i class="fa-solid fa-house"></i> HOME</a>
+            <a href="hauptseite.html">
+                <span class="nav-label"><i class="fa-solid fa-house main-icon"></i> HOME</span>
+            </a>
         </div>
         <div class="nav-item">
             <a href="meinemusik.html">
-                <i class="fa-solid fa-music"></i> MEINE MUSIK 
-                <span class="submenu-indicator"><i class="fa-solid fa-caret-down"></i></span>
+                <span class="nav-label"><i class="fa-solid fa-music main-icon"></i> MEINE MUSIK</span>
+                <div class="submenu-indicator-wrapper">
+                    <span class="submenu-indicator"><i class="fa-solid fa-caret-down"></i></span>
+                </div>
             </a>
             <div class="submenu">
-                <a href="ueber-mich.html"><i class="fa-solid fa-user"></i> ÜBER MICH</a>
-                <a href="konzerte.html"><i class="fa-solid fa-calendar-days"></i> KONZERTE</a>
+                <a href="ueber-mich.html"><i class="fa-solid fa-user main-icon"></i> ÜBER MICH</a>
+                <a href="konzerte.html"><i class="fa-solid fa-calendar-days main-icon"></i> KONZERTE</a>
             </div>
         </div>
         <div class="nav-item">
-            <a href="shop.html"><i class="fa-solid fa-cart-shopping"></i> SHOP</a>
+            <a href="shop.html">
+                <span class="nav-label"><i class="fa-solid fa-cart-shopping main-icon"></i> SHOP</span>
+            </a>
         </div>
         <div class="nav-item">
-            <a href="kontakt.html"><i class="fa-solid fa-envelope"></i> KONTAKT</a>
+            <a href="kontakt.html">
+                <span class="nav-label"><i class="fa-solid fa-envelope main-icon"></i> KONTAKT</span>
+            </a>
         </div>
     </div>
 </nav>
