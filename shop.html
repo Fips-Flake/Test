@@ -127,7 +127,6 @@
             text-align: center;
         }
 
-        /* Submenü-Logik */
         .submenu-indicator-wrapper {
             flex-grow: 1;
             display: flex;
@@ -203,7 +202,7 @@
         .bento-grid { 
             display: grid; 
             grid-template-columns: repeat(4, 1fr); 
-            grid-template-rows: auto; 
+            grid-template-rows: repeat(2, 250px); 
             gap: 20px; 
             width: 100%; 
         }
@@ -230,26 +229,11 @@
             border-color: var(--anton-red); 
         }
 
-        /* Bento Shop Layout */
-        .item-header { grid-column: span 4; padding: 40px; }
-        .item-product { grid-column: span 2; min-height: 300px; }
-
-        .price-tag {
-            color: var(--anton-red);
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin: 15px 0;
-        }
-
-        .shop-btn {
-            background: #000;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            margin-top: 10px;
-        }
+        /* Shop Bento Zuordnung */
+        .item-hero { grid-column: span 2; grid-row: span 2; }
+        .item-product-1 { grid-column: span 2; }
+        .item-product-2 { grid-column: span 1; }
+        .item-product-3 { grid-column: span 1; }
 
         /* --- FOOTER --- */
         footer {
@@ -286,10 +270,9 @@
             border-bottom: 1px solid var(--anton-red);
         }
 
-        /* Mobile Anpassungen */
         @media (max-width: 850px) {
-            .bento-grid { grid-template-columns: 1fr 1fr; }
-            .item-header, .item-product { grid-column: span 2; }
+            .bento-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+            .item-hero, .item-product-1 { grid-column: span 2; }
             .sidebar-right { display: none; }
         }
     </style>
@@ -348,24 +331,28 @@
 
     <main>
         <div class="bento-grid">
-            <div class="bento-item item-header">
-                <h1 style="color: var(--anton-red); margin: 0;">OFFIZIELLER SHOP</h1>
+            <div class="bento-item item-hero">
+                <h2 style="color: var(--anton-red); margin: 0;">OFFIZIELLER SHOP</h2>
                 <p>Hol dir den Anton-Style nach Hause!</p>
             </div>
             
-            <div class="bento-item item-product">
-                <i class="fa-solid fa-shirt fa-4x" style="margin-bottom: 20px;"></i>
+            <a href="#" class="bento-item item-product-1">
+                <i class="fa-solid fa-shirt fa-3x" style="margin-bottom: 10px;"></i>
                 <h3>ANTON T-SHIRT</h3>
-                <span class="price-tag">24,90 €</span>
-                <div class="shop-btn">In den Warenkorb</div>
-            </div>
+                <span style="color: var(--anton-red); font-weight: bold;">24,90 €</span>
+            </a>
 
-            <div class="bento-item item-product">
-                <i class="fa-solid fa-compact-disc fa-4x" style="margin-bottom: 20px;"></i>
+            <a href="#" class="bento-item item-product-2">
+                <i class="fa-solid fa-compact-disc fa-2x" style="margin-bottom: 10px;"></i>
                 <h3>ALBUM CD</h3>
-                <span class="price-tag">17,90 €</span>
-                <div class="shop-btn">In den Warenkorb</div>
-            </div>
+                <span style="color: var(--anton-red); font-weight: bold;">17,90 €</span>
+            </a>
+
+            <a href="#" class="bento-item item-product-3">
+                <i class="fa-solid fa-hat-wizard fa-2x" style="margin-bottom: 10px;"></i>
+                <h3>CAP</h3>
+                <span style="color: var(--anton-red); font-weight: bold;">19,90 €</span>
+            </a>
         </div>
     </main>
 
