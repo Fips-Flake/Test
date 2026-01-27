@@ -3,25 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANTON | MEINE MUSIK</title>
+    <title>ANTON | STARTSEITE</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
     <style>
         :root { --anton-red: #ff0000; --anton-yellow: #ffeb3b; --sidebar-width: 240px; }
         html, body { height: 100%; margin: 0; padding: 0; }
         body { display: flex; flex-direction: column; font-family: 'Special Elite', cursive; background: #fff url('AFaPo Wall.png') fixed center/cover no-repeat; background-blend-mode: multiply; overflow-x: hidden; }
+        
         header { position: fixed; top: 0; width: 100%; height: 80px; display: flex; justify-content: center; align-items: center; z-index: 100; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border-bottom: 2px solid #000; }
         .header-title { color: var(--anton-red); font-size: 1.8rem; text-decoration: none; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; }
+        
         .menu-btn { position: fixed; top: 18px; left: 20px; font-size: 24px; cursor: pointer; z-index: 210; background: #000; color: #fff; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 5px; }
         
-        /* LINKE SIDEBAR - Deine Anpassung */
         .sidebar-left { position: fixed; top: 0; bottom: 0; left: -300px; width: var(--sidebar-width); background: rgba(255, 235, 59, 0.98); z-index: 200; display: flex; flex-direction: column; padding: 100px 15px 30px 15px; transition: left 0.4s ease-in-out; border-right: 2px solid #000; box-sizing: border-box; }
         .sidebar-left.open { left: 0; }
         .nav-item { margin-bottom: 20px; width: 100%; }
         .sidebar-left a { display: flex; align-items: center; color: #000; text-decoration: none; font-size: 1.1rem; width: 100%; }
         
         .nav-item-epk { margin-top: auto; }
-        .nav-item-epk a { color: var(--anton-red) !important; font-weight: bold; text-shadow: none !important; }
+        .nav-item-epk a { color: var(--anton-red) !important; font-weight: bold; }
 
         .nav-label { display: flex; align-items: center; width: 100%; }
         .nav-label i.main-icon { width: 30px; text-align: center; margin-right: 10px; }
@@ -32,7 +33,6 @@
         .nav-item:hover .submenu { display: flex; }
         .submenu a { font-size: 0.95rem; margin-bottom: 10px; }
         
-        /* RECHTE SIDEBAR - ORIGINAL MASTER ZURÜCKGESETZT */
         .sidebar-right { position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 50px; display: flex; flex-direction: column; align-items: center; gap: 15px; z-index: 999; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(3px); padding: 25px 0; border-radius: 20px 0 0 20px; }
         .sidebar-right a i { color: #000; font-size: 1.2rem; transition: all 0.7s ease; animation: ultraFlowWave 7s ease-in-out infinite; }
         @keyframes ultraFlowWave { 0% { transform: scale(1); color: #000; } 8% { transform: scale(1.55); color: var(--brand-color); } 20%, 100% { transform: scale(1); color: #000; } }
@@ -47,13 +47,20 @@
         .sidebar-right a:nth-child(9) i { --brand-color: #00A8E1; animation-delay: 2.0s; }
         
         main { flex: 1; padding: 120px 20px 40px 20px; max-width: 1100px; margin: 0 auto; z-index: 10; width: 100%; box-sizing: border-box; }
-        .bento-grid { display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: minmax(250px, auto); gap: 20px; }
-        .bento-box { background: rgba(255, 255, 255, 0.95); border: 3px solid #000; padding: 25px; border-radius: 20px; transition: all 0.3s ease; text-decoration: none; color: inherit; }
+        
+        .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: minmax(180px, auto); gap: 20px; }
+        .bento-box { background: rgba(255, 255, 255, 0.95); border: 3px solid #000; padding: 25px; border-radius: 20px; transition: all 0.3s ease; text-decoration: none; color: inherit; display: flex; flex-direction: column; justify-content: center; }
         .bento-box:hover { transform: translateY(-5px); background: var(--anton-yellow); }
-        .bento-box h2 { margin-top: 0; color: var(--anton-red); text-transform: uppercase; }
-        .box-large { grid-column: span 2; }
+        .bento-box h2 { margin: 0 0 10px 0; color: var(--anton-red); text-transform: uppercase; font-size: 1.4rem; }
+        .bento-box p { margin: 0; line-height: 1.4; }
+        
+        .box-wide { grid-column: span 2; }
+        .box-tall { grid-row: span 2; }
+        .box-full { grid-column: span 3; text-align: center; }
 
-        @media (max-width: 768px) { .bento-grid { grid-template-columns: 1fr; } .box-large { grid-column: span 1; } .sidebar-right { display: none; } }
+        @media (max-width: 900px) { .bento-grid { grid-template-columns: repeat(2, 1fr); } .box-full { grid-column: span 2; } }
+        @media (max-width: 600px) { .bento-grid { grid-template-columns: 1fr; } .box-wide, .box-full { grid-column: span 1; } }
+
         footer { width: 100%; padding: 10px 0; background: rgba(255,255,255,0.9); border-top: 1.5px solid #000; text-align: center; font-size: 0.75rem; }
         footer a { color: #000; text-decoration: none; margin: 0 8px; font-weight: bold; }
     </style>
@@ -77,22 +84,41 @@
     </nav>
 
     <aside class="sidebar-right">
-        <a href="#"><i class="fa-brands fa-youtube"></i></a>
-        <a href="#"><i class="fa-brands fa-tiktok"></i></a>
-        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
-        <a href="#"><i class="fa-brands fa-facebook"></i></a>
-        <a href="#"><i class="fa-brands fa-spotify"></i></a>
-        <a href="#"><i class="fa-brands fa-apple"></i></a>
-        <a href="#"><i class="fa-solid fa-circle-play"></i></a>
-        <a href="#"><i class="fa-brands fa-amazon"></i></a>
+        <a href="#"><i class="fa-brands fa-youtube"></i></a><a href="#"><i class="fa-brands fa-tiktok"></i></a><a href="#"><i class="fa-brands fa-instagram"></i></a><a href="#"><i class="fa-brands fa-whatsapp"></i></a><a href="#"><i class="fa-brands fa-facebook"></i></a><a href="#"><i class="fa-brands fa-spotify"></i></a><a href="#"><i class="fa-brands fa-apple"></i></a><a href="#"><i class="fa-solid fa-circle-play"></i></a><a href="#"><i class="fa-brands fa-amazon"></i></a>
     </aside>
 
     <main>
         <div class="bento-grid">
-            <div class="bento-box box-large"><h2>Diskografie</h2><p>Hier findest du alle meine Alben und Singles. Klick dich durch!</p></div>
-            <a href="ueber-mich.html" class="bento-box"><h2>Über Mich</h2><p>Erfahre mehr über die Geschichte hinter der Musik.</p></a>
-            <a href="konzerte.html" class="bento-box"><h2>Konzerte</h2><p>Alle Live-Termine und Tickets auf einen Blick.</p></a>
+            <div class="bento-box box-full">
+                <h2>Willkommen in Antons Welt</h2>
+                <p>Musik für die ganze Familie – ehrlich, handgemacht und direkt aus dem Leben.</p>
+            </div>
+
+            <a href="meinemusik.html" class="bento-box box-wide">
+                <h2>Neue Musik</h2>
+                <p>Hör rein in die neuesten Singles und Alben. Jetzt auf allen Plattformen verfügbar!</p>
+            </a>
+
+            <a href="ueber-mich.html" class="bento-box">
+                <h2>Anton?</h2>
+                <p>Wer steckt hinter der Musik? Erfahre mehr über meine Geschichte.</p>
+            </a>
+
+            <a href="konzerte.html" class="bento-box box-tall">
+                <h2>Live Erleben</h2>
+                <p>Nichts geht über ein echtes Konzert. Schau dir die nächsten Termine an und sicher dir dein Ticket!</p>
+                <i class="fa-solid fa-ticket" style="font-size: 3rem; margin-top: 20px; color: var(--anton-red);"></i>
+            </a>
+
+            <a href="shop.html" class="bento-box">
+                <h2>Merch & Mehr</h2>
+                <p>Hol dir Anton nach Hause. CDs, Shirts und mehr im Shop.</p>
+            </a>
+
+            <a href="kontakt.html" class="bento-box">
+                <h2>Kontakt</h2>
+                <p>Schreib mir eine Nachricht oder frag ein Booking an.</p>
+            </a>
         </div>
     </main>
 
