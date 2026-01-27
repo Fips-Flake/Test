@@ -3,184 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anton - EPK (Geschützt)</title>
+    <title>ANTON | EPK</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary-color: #2c3e50;
-            --accent-color: #3498db;
-            --bg-color: #f4f7f6;
-            --card-bg: #ffffff;
-            --sidebar-width: 250px;
-        }
+        :root { --anton-red: #ff0000; --anton-yellow: #ffeb3b; --sidebar-width: 240px; }
+        html, body { height: 100%; margin: 0; padding: 0; }
+        body { display: flex; flex-direction: column; font-family: 'Special Elite', cursive; background: #fff url('AFaPo Wall.png') fixed center/cover no-repeat; background-blend-mode: multiply; overflow-x: hidden; }
+        
+        /* Header gemäß Vorgabe: Name der Hauptseite Anton */
+        header { position: fixed; top: 0; width: 100%; height: 80px; display: flex; justify-content: center; align-items: center; z-index: 100; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border-bottom: 2px solid #000; }
+        .header-title { color: var(--anton-red); font-size: 1.8rem; text-decoration: none; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; }
+        
+        .menu-btn { position: fixed; top: 18px; left: 20px; font-size: 24px; cursor: pointer; z-index: 210; background: #000; color: #fff; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 5px; }
+        .sidebar-left { position: fixed; top: 0; bottom: 0; left: -300px; width: var(--sidebar-width); background: rgba(255, 235, 59, 0.98); z-index: 200; display: flex; flex-direction: column; padding: 100px 15px; transition: left 0.4s ease-in-out; border-right: 2px solid #000; box-sizing: border-box; }
+        .sidebar-left.open { left: 0; }
+        .nav-item { margin-bottom: 20px; width: 100%; }
+        .sidebar-left a { display: flex; align-items: center; color: #000; text-decoration: none; font-size: 1.1rem; width: 100%; }
+        .nav-label { display: flex; align-items: center; width: 100%; }
+        .nav-label i.main-icon { width: 30px; text-align: center; margin-right: 10px; }
+        
+        /* Submenu Logik aus Master */
+        .arrow-wrapper { margin-left: auto; padding-right: 5px; }
+        .submenu-indicator { font-size: 0.8rem; transition: transform 0.3s; }
+        .nav-item:hover .submenu-indicator { transform: rotate(180deg); }
+        .submenu { display: none; flex-direction: column; padding-left: 40px; margin-top: 10px; }
+        .nav-item:hover .submenu { display: flex; }
+        .submenu a { font-size: 0.95rem; margin-bottom: 10px; }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            display: flex;
-            background-color: var(--bg-color);
-            color: #333;
-        }
+        .sidebar-right { position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 50px; display: flex; flex-direction: column; align-items: center; gap: 15px; z-index: 999; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(3px); padding: 25px 0; border-radius: 20px 0 0 20px; }
+        .sidebar-right a i { color: #000; font-size: 1.2rem; transition: all 0.7s ease; animation: ultraFlowWave 7s ease-in-out infinite; }
+        @keyframes ultraFlowWave { 0% { transform: scale(1); color: #000; } 8% { transform: scale(1.55); color: var(--brand-color); } 20%, 100% { transform: scale(1); color: #000; } }
+        
+        main { flex: 1; padding: 120px 20px 40px 20px; max-width: 1100px; margin: 0 auto; z-index: 10; width: 100%; box-sizing: border-box; }
+        
+        /* EPK Passwort Abfrage */
+        #login-box { background: rgba(255, 255, 255, 0.95); border: 3px solid #000; padding: 40px; border-radius: 20px; text-align: center; max-width: 500px; margin: 50px auto; }
+        #login-box input { font-family: 'Special Elite', cursive; padding: 10px; font-size: 1.2rem; border: 2px solid #000; width: 80%; margin-bottom: 20px; border-radius: 5px; }
+        #login-box button { font-family: 'Special Elite', cursive; background: #000; color: #fff; padding: 10px 30px; border: none; cursor: pointer; border-radius: 5px; font-size: 1.1rem; }
 
-        /* Sidebar - Gemäß Master-Vorgabe unverändert */
-        #sidebar {
-            width: var(--sidebar-width);
-            height: 100vh;
-            background: var(--primary-color);
-            color: white;
-            position: fixed;
-            padding: 20px;
-            box-sizing: border-box;
-        }
+        /* Geschütztes Grid */
+        #epk-content { display: none; }
+        .bento-grid { display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: minmax(200px, auto); gap: 20px; }
+        .bento-box { background: rgba(255, 255, 255, 0.95); border: 3px solid #000; padding: 25px; border-radius: 20px; color: inherit; }
+        .bento-box h2 { margin-top: 0; color: var(--anton-red); text-transform: uppercase; }
+        .box-large { grid-column: span 2; }
 
-        main {
-            margin-left: var(--sidebar-width);
-            flex-grow: 1;
-            min-height: 100vh;
-        }
+        footer { width: 100%; padding: 10px 0; background: rgba(255,255,255,0.9); border-top: 1.5px solid #000; text-align: center; font-size: 0.75rem; }
+        footer a { color: #000; text-decoration: none; margin: 0 8px; font-weight: bold; }
 
-        header {
-            background: white;
-            padding: 20px 40px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        header h1 {
-            margin: 0;
-            color: var(--primary-color);
-            font-size: 1.5rem;
-        }
-
-        .content {
-            padding: 40px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        /* Passwort-Abfrage Styling */
-        #login-overlay {
-            background: white;
-            padding: 40px;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            max-width: 400px;
-            margin: 100px auto;
-        }
-
-        #login-overlay input {
-            padding: 10px;
-            width: 80%;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-
-        /* EPK Inhalt - initial versteckt */
-        #epk-content {
-            display: none;
-        }
-
-        /* Grid Layout */
-        .epk-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 25px;
-        }
-
-        .grid-item {
-            background: var(--card-bg);
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            border-left: 5px solid var(--accent-color);
-        }
-
-        .full-width { grid-column: span 2; }
-
-        .btn {
-            background: var(--accent-color);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        @media (max-width: 900px) {
-            .epk-grid { grid-template-columns: 1fr; }
-            .full-width { grid-column: span 1; }
-        }
+        @media (max-width: 768px) { .bento-grid { grid-template-columns: 1fr; } .box-large { grid-column: span 1; } }
     </style>
 </head>
 <body>
-
-    <nav id="sidebar">
-        <h3>Navigation</h3>
-        <p>Master-Sidebar</p>
+    <header><div class="header-title">Anton</div></header>
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+    
+    <nav class="sidebar-left" id="sidebar">
+        <div class="nav-item"><a href="hauptseite.html"><span class="nav-label"><i class="fa-solid fa-house main-icon"></i> START</span></a></div>
+        <div class="nav-item">
+            <a href="meinemusik.html"><span class="nav-label"><i class="fa-solid fa-music main-icon"></i> MEINE MUSIK</span><div class="arrow-wrapper"><i class="fa-solid fa-caret-down submenu-indicator"></i></div></a>
+            <div class="submenu">
+                <a href="ueber-mich.html">ÜBER MICH</a>
+                <a href="konzerte.html">KONZERTE</a>
+            </div>
+        </div>
+        <div class="nav-item"><a href="epk.html"><span class="nav-label"><i class="fa-solid fa-lock main-icon"></i> EPK / PRESSE</span></a></div>
+        <div class="nav-item"><a href="shop.html"><span class="nav-label"><i class="fa-solid fa-cart-shopping main-icon"></i> SHOP</span></a></div>
+        <div class="nav-item"><a href="kontakt.html"><span class="nav-label"><i class="fa-solid fa-envelope main-icon"></i> KONTAKT</span></a></div>
     </nav>
 
+    <aside class="sidebar-right">
+        <a href="#"><i class="fa-brands fa-youtube"></i></a><a href="#"><i class="fa-brands fa-tiktok"></i></a><a href="#"><i class="fa-brands fa-instagram"></i></a>
+    </aside>
+
     <main>
-        <header>
-            <h1>Anton</h1>
-        </header>
+        <div id="login-box">
+            <h2>Interner Bereich</h2>
+            <p>Bitte Passwort eingeben:</p>
+            <input type="password" id="pw" placeholder="Passwort...">
+            <br>
+            <button onclick="unlock()">ZUGRIFF</button>
+        </div>
 
-        <section class="content">
-            
-            <div id="login-overlay">
-                <h3>Interner Bereich</h3>
-                <p>Bitte geben Sie das Passwort ein, um das EPK einzusehen.</p>
-                <input type="password" id="password-input" placeholder="Passwort...">
-                <button class="btn" onclick="checkPassword()">Zugreifen</button>
-                <p id="error-msg" style="color: red; display: none; margin-top: 10px;">Falsches Passwort!</p>
-            </div>
-
-            <div id="epk-content">
-                <div class="epk-grid">
-                    <div class="grid-item full-width">
-                        <h2>Electronic Press Kit (Intern)</h2>
-                        <p>Herzlich Willkommen im geschützten Bereich. Hier finden Sie sensible Daten und Dokumente.</p>
-                    </div>
-
-                    <div class="grid-item">
-                        <h3>Presse-Downloads</h3>
-                        <p>Alle Dateien sind für die Veröffentlichung freigegeben.</p>
-                        <ul>
-                            <li><a href="#">Technical Rider 2026</a></li>
-                            <li><a href="#">Pressefoto-Paket</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="grid-item">
-                        <h3>Direkter Kontakt</h3>
-                        <p><strong>Booking:</strong> +49 170 1234567</p>
-                        <p><strong>E-Mail:</strong> privat@anton.de</p>
-                    </div>
+        <div id="epk-content">
+            <div class="bento-grid">
+                <div class="bento-box box-large">
+                    <h2>Electronic Press Kit</h2>
+                    <p>Willkommen im geschützten Pressebereich von Anton. Hier findest du alle Downloads und Kontaktinfos.</p>
+                </div>
+                <div class="bento-box">
+                    <h2>Downloads</h2>
+                    <p>➔ <a href="#">Pressefoto (ZIP)</a></p>
+                    <p>➔ <a href="#">Technical Rider</a></p>
+                </div>
+                <div class="bento-box">
+                    <h2>Booking</h2>
+                    <p>E-Mail: kontakt@anton.de</p>
+                    <p>Tel: +49 123 456 789</p>
                 </div>
             </div>
-
-        </section>
+        </div>
     </main>
 
+    <footer>
+        <div style="margin-bottom: 5px; opacity: 0.8;">www.anton-familienpop.de</div>
+        <div><a href="impressum.html">Impressum</a> | <a href="datenschutz.html">Datenschutz</a></div>
+    </footer>
+
     <script>
-        function checkPassword() {
-            const pw = document.getElementById('password-input').value;
-            // Das Passwort ist hier: anton2026
-            if (pw === 'anton2026') {
-                document.getElementById('login-overlay').style.display = 'none';
+        function toggleMenu() { document.getElementById('sidebar').classList.toggle('open'); }
+        function unlock() {
+            if(document.getElementById('pw').value === 'anton2026') {
+                document.getElementById('login-box').style.display = 'none';
                 document.getElementById('epk-content').style.display = 'block';
-            } else {
-                document.getElementById('error-msg').style.display = 'block';
-            }
+            } else { alert('Falsches Passwort!'); }
         }
-
-        // Ermöglicht "Enter" Taste zum Login
-        document.getElementById('password-input').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                checkPassword();
-            }
-        });
     </script>
-
 </body>
 </html>
