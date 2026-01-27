@@ -16,13 +16,26 @@
         
         .menu-btn { position: fixed; top: 18px; left: 20px; font-size: 24px; cursor: pointer; z-index: 210; background: #000; color: #fff; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 5px; }
         
+        /* KORRIGIERTE LINKE SIDEBAR */
         .sidebar-left { position: fixed; top: 0; bottom: 0; left: -300px; width: var(--sidebar-width); background: rgba(255, 235, 59, 0.98); z-index: 200; display: flex; flex-direction: column; padding: 100px 15px 30px 15px; transition: left 0.4s ease-in-out; border-right: 2px solid #000; box-sizing: border-box; }
         .sidebar-left.open { left: 0; }
         .nav-item { margin-bottom: 20px; width: 100%; }
         .sidebar-left a { display: flex; align-items: center; color: #000; text-decoration: none; font-size: 1.1rem; width: 100%; }
+        
+        /* EPK unten in Rot */
         .nav-item-epk { margin-top: auto; }
         .nav-item-epk a { color: var(--anton-red) !important; font-weight: bold; }
 
+        .nav-label { display: flex; align-items: center; width: 100%; }
+        .nav-label i.main-icon { width: 30px; text-align: center; margin-right: 10px; }
+        .arrow-wrapper { margin-left: auto; padding-right: 5px; }
+        .submenu-indicator { font-size: 0.8rem; transition: transform 0.3s; }
+        .nav-item:hover .submenu-indicator { transform: rotate(180deg); }
+        .submenu { display: none; flex-direction: column; padding-left: 40px; margin-top: 10px; }
+        .nav-item:hover .submenu { display: flex; }
+        .submenu a { font-size: 0.95rem; margin-bottom: 10px; }
+        
+        /* RECHTE SIDEBAR */
         .sidebar-right { position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 50px; display: flex; flex-direction: column; align-items: center; gap: 15px; z-index: 999; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(3px); padding: 25px 0; border-radius: 20px 0 0 20px; }
         .sidebar-right a i { color: #000; font-size: 1.2rem; transition: all 0.7s ease; animation: ultraFlowWave 7s ease-in-out infinite; }
         @keyframes ultraFlowWave { 0% { transform: scale(1); color: #000; } 8% { transform: scale(1.55); color: var(--brand-color); } 20%, 100% { transform: scale(1); color: #000; } }
@@ -47,7 +60,6 @@
         input, textarea { font-family: 'Special Elite', cursive; width: 100%; padding: 10px; margin: 10px 0; border: 2px solid #000; border-radius: 5px; box-sizing: border-box; }
         .submit-btn { background: #000; color: #fff; border: none; padding: 15px 30px; border-radius: 5px; cursor: pointer; font-family: 'Special Elite', cursive; font-size: 1.1rem; margin-top: 10px; }
         
-        /* Pfeil-Animation */
         .social-hint { display: flex; align-items: center; justify-content: center; gap: 15px; margin-top: 10px; }
         .arrow-right-anim { font-size: 1.5rem; color: var(--anton-red); animation: pointRight 1s infinite alternate; }
         @keyframes pointRight { from { transform: translateX(0); } to { transform: translateX(10px); } }
@@ -61,9 +73,16 @@
 <body>
     <header><div class="header-title">Anton</div></header>
     <div class="menu-btn" onclick="toggleMenu()">☰</div>
+    
     <nav class="sidebar-left" id="sidebar">
         <div class="nav-item"><a href="hauptseite.html"><span class="nav-label"><i class="fa-solid fa-house main-icon"></i> START</span></a></div>
-        <div class="nav-item"><a href="meinemusik.html"><span class="nav-label"><i class="fa-solid fa-music main-icon"></i> MEINE MUSIK</span></a></div>
+        <div class="nav-item">
+            <a href="meinemusik.html"><span class="nav-label"><i class="fa-solid fa-music main-icon"></i> MEINE MUSIK</span><div class="arrow-wrapper"><i class="fa-solid fa-caret-down submenu-indicator"></i></div></a>
+            <div class="submenu">
+                <a href="ueber-mich.html"><i class="fa-regular fa-face-smile" style="margin-right:10px"></i> ÜBER MICH</a>
+                <a href="konzerte.html"><i class="fa-solid fa-microphone-lines" style="margin-right:10px"></i> KONZERTE</a>
+            </div>
+        </div>
         <div class="nav-item"><a href="shop.html"><span class="nav-label"><i class="fa-solid fa-cart-shopping main-icon"></i> SHOP</span></a></div>
         <div class="nav-item"><a href="kontakt.html"><span class="nav-label"><i class="fa-solid fa-envelope main-icon"></i> KONTAKT</span></a></div>
         <div class="nav-item nav-item-epk"><a href="epk.html"><span class="nav-label"><i class="fa-solid fa-lock main-icon"></i> EPK / PRESSE</span></a></div>
