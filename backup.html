@@ -117,35 +117,26 @@
         .card-welcome { grid-column: span 2; }
         .card-social-info { grid-column: span 1; }
 
-        /* Footer Präzisions-Layout */
+        /* Footer */
         footer { 
-            width: 100%; padding: 30px 0; background: rgba(255,255,255,0.9); 
+            width: 100%; padding: 20px 0; background: rgba(255,255,255,0.9); 
             border-top: 2px solid #000; z-index: var(--z-index-content);
+            text-align: center;
         }
-        .footer-wrapper {
-            width: 272px; /* Fixierte Breite für absolute Kanten-Bündigkeit */
-            margin: 0 auto;
-            font-size: 0.85rem;
+        .footer-content { 
+            display: flex; flex-direction: column; align-items: center; gap: 8px;
         }
         .footer-main-link { 
-            display: block;
-            width: 100%;
-            text-align: justify;
-            text-align-last: justify;
-            letter-spacing: 0.5px; /* Feinjustierung für den rechten Abschluss */
-            color: #000;
-            text-decoration: none;
-            margin-bottom: 8px;
+            color: #000; text-decoration: none; font-weight: normal; 
+            font-size: 0.9rem;
         }
-        .footer-bottom-row {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
+        .footer-links { 
+            font-size: 0.9rem; display: flex; gap: 20px; 
         }
-        .footer-wrapper a { 
+        .footer-links a { 
             color: #000; text-decoration: none; border-bottom: 1px solid transparent; transition: 0.2s; 
         }
-        .footer-wrapper a:hover { border-bottom: 1px solid var(--anton-red); }
+        .footer-main-link:hover, .footer-links a:hover { border-bottom: 1px solid var(--anton-red); }
 
         @media (max-width: 800px) {
             main { grid-template-columns: 1fr; }
@@ -216,9 +207,9 @@
 </main>
 
 <footer>
-    <div class="footer-wrapper">
+    <div class="footer-content">
         <a href="hauptseite.html" class="footer-main-link">www.anton-familienpop.de</a>
-        <div class="footer-bottom-row">
+        <div class="footer-links">
             <a href="impressum.html">Impressum</a>
             <a href="datenschutz.html">Datenschutz</a>
         </div>
