@@ -1,79 +1,239 @@
-.submenu a { font-size: 1rem; margin-bottom: 10px; color: #333; text-decoration: none; display: flex; }
-.nav-item:hover .submenu { display: flex; }
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANTON | BACKUP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --anton-red: #ff0000;
+            --anton-yellow: #ffeb3b;
+            --sidebar-width: 220px;
+            --z-index-content: 10;
+            --z-index-right-bar: 50;
+            --z-index-header: 100;
+            --z-index-sidebar: 200;
+            --z-index-menu-btn: 210;
+        }
 
-        /* Sidebar Right */
-        /* Sidebar Right Icons */
-.sidebar-right {
-position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 50px;
-display: flex; flex-direction: column; align-items: center; gap: 15px; 
-@@ -101,7 +101,7 @@
-.sidebar-right a:nth-child(8) i { --brand-color: #f00; animation-delay: 14s; }
-.sidebar-right a:nth-child(9) i { --brand-color: #00A8E1; animation-delay: 16s; }
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
 
-        /* Main Content */
-        /* Main Grid */
-main {
-flex: 1; position: relative; z-index: var(--z-index-content); 
-padding: 120px 20px 50px 20px; display: grid; 
-@@ -117,36 +117,35 @@
-.card-welcome { grid-column: span 2; }
-.card-social-info { grid-column: span 1; }
-
-        /* Footer Alignment - Präzise Bündigkeit */
-        /* Footer Präzisions-Layout */
-footer { 
-            width: 100%; padding: 25px 0; background: rgba(255,255,255,0.9); 
-            width: 100%; padding: 30px 0; background: rgba(255,255,255,0.9); 
-border-top: 2px solid #000; z-index: var(--z-index-content);
-}
-        .footer-container {
-            width: 275px; /* Exakt ausgemessene Breite für Special Elite */
-        .footer-wrapper {
-            width: 272px; /* Fixierte Breite für absolute Kanten-Bündigkeit */
-margin: 0 auto;
+        body { 
             display: flex;
             flex-direction: column;
-font-size: 0.85rem;
-}
-.footer-main-link { 
-            color: #000; text-decoration: none;
-            display: flex;
-            justify-content: space-between;
+            font-family: 'Special Elite', cursive;
+            background-color: #ffffff; 
+            background-image: url('AFaPo Wall.png');
+            background-size: cover; 
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-blend-mode: multiply; 
+            overflow-x: hidden;
+        }
+
+        header { 
+            position: fixed; top: 0; width: 100%; height: 80px; 
+            display: flex; justify-content: center; align-items: center; 
+            z-index: var(--z-index-header); 
+            background: rgba(255, 255, 255, 0.8); 
+            backdrop-filter: blur(10px); 
+            border-bottom: 2px solid #000;
+        }
+        
+        .header-title { 
+            color: var(--anton-red); 
+            font-size: 1.8rem; 
+            text-decoration: none;
+        }
+
+        /* Sidebar Left */
+        .menu-btn { 
+            position: fixed; top: 18px; left: 20px; font-size: 24px; cursor: pointer; 
+            z-index: var(--z-index-menu-btn); background: #000; color: #fff; 
+            width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; 
+            border-radius: 5px;
+        }
+
+        .sidebar-left { 
+            position: fixed; top: 0; bottom: 0; left: calc(var(--sidebar-width) * -1.2); 
+            width: var(--sidebar-width); background: rgba(255, 235, 59, 0.98); 
+            z-index: var(--z-index-sidebar); display: flex; flex-direction: column; padding: 100px 20px;
+            transition: left 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-right: 2px solid #000;
+            box-sizing: border-box;
+        }
+        .sidebar-left.open { left: 0; }
+        .nav-item { margin-bottom: 25px; }
+        .sidebar-left a { display: flex; align-items: center; color: #000; text-decoration: none; font-size: 1.2rem; width: 100%; }
+        .nav-label { display: flex; align-items: center; gap: 15px; flex-grow: 0; }
+        .sidebar-left a i.main-icon { width: 25px; text-align: center; }
+        .submenu-indicator-wrapper { flex-grow: 1; display: flex; justify-content: center; align-items: center; }
+        .submenu-indicator { font-size: 0.8rem; }
+        .submenu { display: none; flex-direction: column; padding-left: 40px; margin-top: 10px; }
+        .submenu a { font-size: 1rem; margin-bottom: 10px; color: #333; text-decoration: none; display: flex; }
+        .nav-item:hover .submenu { display: flex; }
+
+        /* Sidebar Right Icons */
+        .sidebar-right {
+            position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 50px;
+            display: flex; flex-direction: column; align-items: center; gap: 15px; 
+            z-index: var(--z-index-right-bar); background: rgba(255, 255, 255, 0.2); 
+            backdrop-filter: blur(3px); padding: 20px 0; border-radius: 20px 0 0 20px;
+        }
+        .sidebar-right a i { color: #000; font-size: 1.2rem; transition: transform 0.3s, color 0.3s; animation: pulseIcons 18s infinite ease-in-out; }
+        .sidebar-right a:hover i { animation-play-state: paused; transform: scale(1.6) !important; color: var(--brand-color) !important; }
+        @keyframes pulseIcons { 0%, 5.55%, 100% { transform: scale(1); color: #000; } 2.77% { transform: scale(1.4); color: var(--brand-color); } }
+        .sidebar-right a:nth-child(1) i { --brand-color: #f00; animation-delay: 0s; }
+        .sidebar-right a:nth-child(2) i { --brand-color: #25F4EE; animation-delay: 2s; }
+        .sidebar-right a:nth-child(3) i { --brand-color: #E1306C; animation-delay: 4s; }
+        .sidebar-right a:nth-child(4) i { --brand-color: #25D366; animation-delay: 6s; }
+        .sidebar-right a:nth-child(5) i { --brand-color: #1877F2; animation-delay: 8s; }
+        .sidebar-right a:nth-child(6) i { --brand-color: #1DB954; animation-delay: 10s; }
+        .sidebar-right a:nth-child(7) i { --brand-color: #A2AAAD; animation-delay: 12s; }
+        .sidebar-right a:nth-child(8) i { --brand-color: #f00; animation-delay: 14s; }
+        .sidebar-right a:nth-child(9) i { --brand-color: #00A8E1; animation-delay: 16s; }
+
+        /* Main Grid */
+        main {
+            flex: 1; position: relative; z-index: var(--z-index-content); 
+            padding: 120px 20px 50px 20px; display: grid; 
+            grid-template-columns: repeat(3, 1fr); gap: 20px;
+            max-width: 1000px; margin: 0 auto; width: 100%; box-sizing: border-box;
+        }
+        .bento-card { 
+            background: rgba(255, 255, 255, 0.75); border: 2px solid #000; 
+            border-radius: 15px; padding: 25px; box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+            backdrop-filter: blur(5px);
+        }
+        .card-info { grid-column: span 3; min-height: 150px; display: flex; flex-direction: column; justify-content: center; }
+        .card-welcome { grid-column: span 2; }
+        .card-social-info { grid-column: span 1; }
+
+        /* Footer Präzisions-Layout */
+        footer { 
+            width: 100%; padding: 30px 0; background: rgba(255,255,255,0.9); 
+            border-top: 2px solid #000; z-index: var(--z-index-content);
+        }
+        .footer-wrapper {
+            width: 272px; /* Fixierte Breite für absolute Kanten-Bündigkeit */
+            margin: 0 auto;
+            font-size: 0.85rem;
+        }
+        .footer-main-link { 
             display: block;
             width: 100%;
-text-align: justify;
-text-align-last: justify;
-            margin-bottom: 5px;
-            width: 100%;
+            text-align: justify;
+            text-align-last: justify;
             letter-spacing: 0.5px; /* Feinjustierung für den rechten Abschluss */
             color: #000;
             text-decoration: none;
             margin-bottom: 8px;
-}
-        .footer-sub-links {
+        }
         .footer-bottom-row {
-display: flex;
-justify-content: space-between;
-width: 100%;
-}
-        .footer-container a { 
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
         .footer-wrapper a { 
-color: #000; text-decoration: none; border-bottom: 1px solid transparent; transition: 0.2s; 
-}
-        .footer-container a:hover { border-bottom: 1px solid var(--anton-red); }
+            color: #000; text-decoration: none; border-bottom: 1px solid transparent; transition: 0.2s; 
+        }
         .footer-wrapper a:hover { border-bottom: 1px solid var(--anton-red); }
 
-@media (max-width: 800px) {
-main { grid-template-columns: 1fr; }
-@@ -217,9 +216,9 @@ <h3>Follow Me</h3>
+        @media (max-width: 800px) {
+            main { grid-template-columns: 1fr; }
+            .card-info, .card-welcome, .card-social-info { grid-column: span 1; }
+            .sidebar-right { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-title">ANTON | BACKUP</div>
+</header>
+
+<div class="menu-btn" onclick="toggleMenu()">☰</div>
+
+<nav class="sidebar-left" id="sidebar">
+    <div style="margin-top: 20px;">
+        <div class="nav-item">
+            <a href="hauptseite.html"><span class="nav-label"><i class="fa-solid fa-house main-icon"></i> HOME</span></a>
+        </div>
+        <div class="nav-item">
+            <a href="meinemusik.html">
+                <span class="nav-label"><i class="fa-solid fa-music main-icon"></i> MEINE MUSIK</span>
+                <div class="submenu-indicator-wrapper"><span class="submenu-indicator"><i class="fa-solid fa-caret-down"></i></span></div>
+            </a>
+            <div class="submenu">
+                <a href="ueber-mich.html"><i class="fa-solid fa-user main-icon"></i> ÜBER MICH</a>
+                <a href="konzerte.html"><i class="fa-solid fa-calendar-days main-icon"></i> KONZERTE</a>
+            </div>
+        </div>
+        <div class="nav-item">
+            <a href="shop.html"><span class="nav-label"><i class="fa-solid fa-cart-shopping main-icon"></i> SHOP</span></a>
+        </div>
+        <div class="nav-item">
+            <a href="kontakt.html"><span class="nav-label"><i class="fa-solid fa-envelope main-icon"></i> KONTAKT</span></a>
+        </div>
+    </div>
+</nav>
+
+<aside class="sidebar-right">
+    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+    <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+    <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+    <a href="#"><i class="fa-brands fa-spotify"></i></a>
+    <a href="#"><i class="fa-brands fa-apple"></i></a>
+    <a href="#"><i class="fa-solid fa-circle-play"></i></a>
+    <a href="#"><i class="fa-brands fa-amazon"></i></a>
+</aside>
+
+<main>
+    <div class="bento-card card-info">
+        <h3>Wichtige Info</h3>
+        <p>Dies ist die neue Infobox. Hier können aktuelle Ankündigungen oder Termine stehen.</p>
+    </div>
+    
+    <div class="bento-card card-welcome">
+        <h3>Willkommen im Backup!</h3>
+        <p>Hier erfährst du alles über das neue Album "TON AN" und kommende Termine.</p>
+    </div>
+    
+    <div class="bento-card card-social-info">
+        <h3>Follow Me</h3>
+        <p>Check die Sidebar für alle Links!</p>
+    </div>
 </main>
 
 <footer>
-    <div class="footer-container">
     <div class="footer-wrapper">
-<a href="hauptseite.html" class="footer-main-link">www.anton-familienpop.de</a>
-        <div class="footer-sub-links">
+        <a href="hauptseite.html" class="footer-main-link">www.anton-familienpop.de</a>
         <div class="footer-bottom-row">
-<a href="impressum.html">Impressum</a>
-<a href="datenschutz.html">Datenschutz</a>
-</div>
+            <a href="impressum.html">Impressum</a>
+            <a href="datenschutz.html">Datenschutz</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    function toggleMenu() { document.getElementById('sidebar').classList.toggle('open'); }
+    document.addEventListener('click', function(e) {
+        const sb = document.getElementById("sidebar");
+        const btn = document.querySelector(".menu-btn");
+        if (sb && btn && !sb.contains(e.target) && !btn.contains(e.target) && sb.classList.contains("open")) {
+            sb.classList.remove("open");
+        }
+    });
+</script>
+</body>
+</html>
