@@ -21,10 +21,8 @@
         .sidebar-left.open { left: 0; }
         .nav-item { margin-bottom: 20px; width: 100%; }
         .sidebar-left a { display: flex; align-items: center; color: #000; text-decoration: none; font-size: 1.1rem; width: 100%; }
-        
         .nav-item-epk { margin-top: auto; }
         .nav-item-epk a { color: var(--anton-red) !important; font-weight: bold; }
-
         .nav-label { display: flex; align-items: center; width: 100%; }
         .nav-label i.main-icon { width: 30px; text-align: center; margin-right: 10px; }
         .arrow-wrapper { margin-left: auto; padding-right: 5px; }
@@ -34,16 +32,10 @@
         .nav-item:hover .submenu { display: flex; }
         .submenu a { font-size: 0.95rem; margin-bottom: 10px; }
         
-        /* RECHTE SIDEBAR - REKONSTRUKTION DES ORIGINALS (FIXIERT) */
+        /* RECHTE SIDEBAR - FIXIERT */
         .sidebar-right { position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 50px; display: flex; flex-direction: column; align-items: center; gap: 15px; z-index: 999; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(3px); padding: 25px 0; border-radius: 20px 0 0 20px; }
         .sidebar-right a i { color: #000; font-size: 1.2rem; transition: transform 0.4s ease-in-out, color 0.4s ease-in-out; animation: ultraFlowWave 6s linear infinite; }
-        
-        @keyframes ultraFlowWave { 
-            0% { transform: scale(1); color: #000; } 
-            9.33% { transform: scale(1.55); color: var(--brand-color); } 
-            23.33%, 100% { transform: scale(1); color: #000; } 
-        }
-
+        @keyframes ultraFlowWave { 0% { transform: scale(1); color: #000; } 9.33% { transform: scale(1.55); color: var(--brand-color); } 23.33%, 100% { transform: scale(1); color: #000; } }
         .sidebar-right a:nth-child(1) i { --brand-color: #f00; animation-delay: 0.0s; }
         .sidebar-right a:nth-child(2) i { --brand-color: #25F4EE; animation-delay: 0.25s; }
         .sidebar-right a:nth-child(3) i { --brand-color: #E1306C; animation-delay: 0.5s; }
@@ -53,10 +45,7 @@
         .sidebar-right a:nth-child(7) i { --brand-color: #A2AAAD; animation-delay: 1.5s; }
         .sidebar-right a:nth-child(8) i { --brand-color: #f00; animation-delay: 1.75s; }
         .sidebar-right a:nth-child(9) i { --brand-color: #00A8E1; animation-delay: 2.0s; }
-        
-        /* Stop-Effekt bei Hover über die gesamte Sidebar */
         .sidebar-right:hover a i { animation-play-state: paused !important; transform: scale(1) !important; color: #000 !important; }
-        /* Highlight-Effekt bei Hover über einzelnes Icon */
         .sidebar-right a:hover i { color: var(--brand-color) !important; transform: scale(1.55) !important; transition: transform 0.3s ease-out !important; }
 
         main { flex: 1; padding: 120px 20px 40px 20px; max-width: 1100px; margin: 0 auto; z-index: 10; width: 100%; box-sizing: border-box; }
@@ -66,8 +55,13 @@
         .bento-box h2 { margin: 0 0 10px 0; color: var(--anton-red); text-transform: uppercase; font-size: 1.5rem; }
         .box-full { grid-column: span 2; }
 
+        /* FOOTER - LAYOUT UNANTASTBAR, HOVER ERGÄNZT */
         footer { width: 100%; padding: 10px 0; background: rgba(255,255,255,0.9); border-top: 1.5px solid #000; text-align: center; font-size: 0.75rem; }
-        footer a { color: #000; text-decoration: none; margin: 0 8px; font-weight: bold; }
+        footer a { color: #000; text-decoration: none; margin: 0 8px; font-weight: bold; transition: color 0.3s ease; }
+        footer a:hover { color: var(--anton-yellow); }
+        .footer-link-main { display: inline-block; margin-bottom: 5px; opacity: 0.8; transition: color 0.3s ease, opacity 0.3s ease; }
+        .footer-link-main:hover { color: var(--anton-yellow); opacity: 1; }
+
         @media (max-width: 600px) { .bento-grid { grid-template-columns: 1fr; } .box-full { grid-column: span 1; } .sidebar-right { display: none; } }
     </style>
 </head>
@@ -97,12 +91,15 @@
         <div class="bento-grid">
             <div class="bento-box box-full">
                 <h2>Master Backup</h2>
-                <p>Systemzustand: Sidebars versiegelt. Animationen auf Originalstand.</p>
+                <p>Sidebars versiegelt. Footer-Hover aktiv. URL verlinkt.</p>
             </div>
         </div>
     </main>
 
-    <footer><div style="margin-bottom: 5px; opacity: 0.8;">www.anton-familienpop.de</div><div><a href="impressum.html">Impressum</a> | <a href="datenschutz.html">Datenschutz</a></div></footer>
+    <footer>
+        <div><a href="index.html" class="footer-link-main">www.anton-familienpop.de</a></div>
+        <div><a href="impressum.html">Impressum</a> | <a href="datenschutz.html">Datenschutz</a></div>
+    </footer>
 
     <script>
         function toggleMenu() { document.getElementById('sidebar').classList.toggle('open'); }
