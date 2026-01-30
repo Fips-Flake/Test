@@ -11,7 +11,7 @@
         html, body { height: 100%; margin: 0; padding: 0; }
         body { display: flex; flex-direction: column; font-family: 'Special Elite', cursive; background: #fff url('AFaPo Wall.png') fixed center/cover no-repeat; background-blend-mode: multiply; overflow-x: hidden; }
         
-        header { position: fixed; top: 0; width: 100%; height: 80px; display: flex; justify(content: center; align-items: center; z-index: 100; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border-bottom: 2px solid #000; }
+        header { position: fixed; top: 0; width: 100%; height: 80px; display: flex; justify-content: center; align-items: center; z-index: 100; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border-bottom: 2px solid #000; }
         .header-title { color: var(--anton-red); font-size: 1.8rem; text-decoration: none; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; }
         
         .menu-btn { position: fixed; top: 18px; left: 20px; font-size: 24px; cursor: pointer; z-index: 210; background: #000; color: #fff; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 5px; }
@@ -23,7 +23,6 @@
         .nav-item-epk { margin-top: auto; }
         .nav-item-epk a { color: var(--anton-red) !important; font-weight: bold; }
 
-        /* RECHTE SIDEBAR - LOGIK: HOVER FARBE VS SCHWARZ */
         .sidebar-right { 
             position: fixed; 
             top: 50%; 
@@ -50,17 +49,11 @@
             animation: ultraFlowWave 7s ease-in-out infinite; 
         }
 
-        /* Wenn die Sidebar gehovert wird: Alle Animationen pausieren */
         .sidebar-right:hover a i { 
             animation-play-state: paused; 
-        }
-
-        /* Wenn die Sidebar gehovert wird: Alle Icons fallen auf Schwarz zurück */
-        .sidebar-right:hover a i { 
             color: #000 !important; 
         }
 
-        /* Das spezifisch gehoverte Icon: Farbe anzeigen und Skalierung fixieren */
         .sidebar-right a:hover i { 
             color: var(--brand-color) !important; 
             transform: scale(1.55) !important; 
