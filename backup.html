@@ -23,7 +23,7 @@
         .nav-item-epk { margin-top: auto; }
         .nav-item-epk a { color: var(--anton-red) !important; font-weight: bold; }
 
-        /* RECHTE SIDEBAR - PRÄZISE LOGIK-UMSETZUNG */
+        /* RECHTE SIDEBAR - FINALE LOGIK */
         .sidebar-right { 
             position: fixed; 
             top: 50%; 
@@ -46,24 +46,22 @@
         .sidebar-right a i { 
             color: #000; 
             font-size: 1.2rem; 
-            transition: transform 0.3s ease, color 0.3s ease; 
+            /* Transition für den sanften Übergang zurück in die Animation */
+            transition: transform 0.6s ease-in-out, color 0.6s ease-in-out; 
             animation: ultraFlowWave 7s ease-in-out infinite; 
         }
 
-        /* 1. Schritt: Bei Hover auf Sidebar alle Animationen stoppen */
+        /* Logik: Animation läuft unsichtbar weiter, Icons werden auf Schwarz/Scale 1 fixiert */
         .sidebar-right:hover a i { 
-            animation-play-state: paused !important; 
-        }
-
-        /* 2. Schritt: Bei Hover auf Sidebar alle Icons auf Schwarz setzen */
-        .sidebar-right:hover a i { 
+            transform: scale(1) !important; 
             color: #000 !important; 
         }
 
-        /* 3. Schritt: Nur das aktiv gehoverte Icon zeigt Markenfarbe und Skalierung */
+        /* Nur das fokussierte Icon bricht die Fixierung */
         .sidebar-right a:hover i { 
             color: var(--brand-color) !important; 
             transform: scale(1.55) !important; 
+            transition: transform 0.2s ease, color 0.2s ease;
         }
 
         @keyframes ultraFlowWave { 
