@@ -14,9 +14,9 @@
 
         /* Panorama-Hintergrund */
         .background-wall {
-            position: fixed; top: 0; left: 0; height: 100%; width: 200%; 
+            position: fixed; top: 0; left: 0; height: 100%; width: 100%; 
             background: #fff url('AFaPo Wall.png') center/cover no-repeat;
-            background-blend-mode: multiply; z-index: 1; transition: transform 0.1s ease-out;
+            background-blend-mode: multiply; z-index: 1;
         }
 
         header { position: fixed; top: 0; width: 100%; height: 80px; display: flex; justify-content: center; align-items: center; z-index: 100; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border-bottom: 2px solid #000; }
@@ -29,7 +29,7 @@
         .nav-item { margin-bottom: 20px; width: 100%; }
         .sidebar-left a { display: flex; align-items: center; color: #000; text-decoration: none; font-size: 1.1rem; width: 100%; }
 
-        /* RECHTE SIDEBAR (MASTER) */
+        /* RECHTE SIDEBAR (MASTER FLOW) */
         .sidebar-right { 
             position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 50px; 
             display: flex; flex-direction: column; align-items: center; gap: 15px; z-index: 999; 
@@ -37,8 +37,7 @@
             border-radius: 20px 0 0 20px; 
         }
         .sidebar-right a i { 
-            color: #000; font-size: 1.2rem; 
-            transition: transform 0.4s ease-in-out, color 0.4s ease-in-out; 
+            color: #000; font-size: 1.2rem; transition: transform 0.4s ease-in-out, color 0.4s ease-in-out; 
             animation: ultraFlowWave 6s linear infinite; display: block; 
         }
 
@@ -63,54 +62,46 @@
         .sidebar-right a:nth-child(8) i { --brand-color: #f00; animation-delay: 1.75s; }
         .sidebar-right a:nth-child(9) i { --brand-color: #00A8E1; animation-delay: 2.0s; }
 
-        /* Main & Zentrales Plakat */
-        main { flex: 1; position: relative; z-index: 10; display: flex; justify-content: center; align-items: center; }
+        /* Zentriertes Plakat */
+        main { flex: 1; position: relative; z-index: 10; display: flex; justify-content: center; align-items: center; padding: 100px 20px; }
         
         .plakat-container { 
-            width: 260px; /* Ca. 15% kleiner als 310px */
-            transform: rotate(-1.5deg); 
-            filter: drop-shadow(8px 12px 15px rgba(0,0,0,0.5));
+            width: 265px; /* Ca. 15% kleiner als das Original 310px */
+            transform: rotate(-2deg);
         }
 
         .bento-box-plakat { 
             background: #fff; 
-            padding: 12px; 
+            padding: 15px; 
+            border: 2px solid #000;
+            border-radius: 2px;
             text-decoration: none; 
             color: inherit; 
             display: flex; 
             flex-direction: column; 
             align-items: center; 
             text-align: center;
-            /* Eingerissener Look via Clip-Path */
-            clip-path: polygon(2% 0%, 98% 1%, 100% 4%, 99% 96%, 97% 100%, 3% 99%, 0% 97%, 1% 3%);
-            border: 1px solid rgba(0,0,0,0.2);
-            position: relative;
+            box-shadow: 10px 10px 25px rgba(0,0,0,0.4), inset 0 0 50px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
         }
 
-        /* Subtiler Papier-Effekt */
-        .bento-box-plakat::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, rgba(255,255,255,0) 95%, rgba(0,0,0,0.1) 100%);
-            pointer-events: none;
-        }
+        .bento-box-plakat:hover { transform: scale(1.02) rotate(0deg); }
 
         .bento-box-plakat img { 
             width: 100%; 
             height: auto; 
-            margin-bottom: 12px; 
+            margin-bottom: 15px; 
             display: block;
-            filter: grayscale(10%) sepia(5%);
+            border: 1px solid #ddd;
         }
         
-        .bento-box-plakat h2 { margin: 0; color: var(--anton-red); text-transform: uppercase; font-size: 1.4rem; }
-        .bento-box-plakat p { margin: 8px 0; font-size: 0.85rem; font-weight: bold; }
+        .bento-box-plakat h2 { margin: 0; color: var(--anton-red); text-transform: uppercase; font-size: 1.5rem; }
+        .bento-box-plakat p { margin: 10px 0; font-size: 0.9rem; font-weight: bold; }
 
         footer { position: fixed; bottom: 0; width: 100%; padding: 10px 0; background: rgba(255,255,255,0.9); border-top: 1.5px solid #000; text-align: center; font-size: 0.75rem; z-index: 100; }
         footer a { color: #000; text-decoration: none; font-weight: bold; }
 
-        /* MOBILE */
+        /* MOBILE OPTIMIERUNG */
         @media (max-width: 800px) {
             .sidebar-right { 
                 top: auto; bottom: 60px; right: 0; left: 0; width: 100%; height: auto; 
@@ -119,6 +110,7 @@
             }
             .sidebar-right a i { font-size: 1.5rem; }
             .plakat-container { width: 230px; }
+            main { padding-bottom: 120px; }
         }
     </style>
 </head>
