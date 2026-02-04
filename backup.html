@@ -30,33 +30,50 @@
 
         main { flex: 1; padding: 120px 20px 40px 20px; max-width: 1100px; margin: 0 auto; z-index: 10; width: 100%; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; gap: 15px; }
         
-        /* SINGLE BOX - WEISS, 5% TRANSPARENT, ABGENUTZT */
-        .single-box { 
+        /* DIE NEUE SINGLE BOX */
+        .hunger-box-new { 
             width: 100%; 
             max-width: 300px; 
             min-height: 300px;
+            /* 5% Transparenter weißer Hintergrund mit Riss-Textur */
             background: 
                 linear-gradient(135deg, transparent 40px, rgba(255, 255, 255, 0.05) 40px),
                 linear-gradient(170deg, transparent 45%, rgba(255, 255, 255, 0.03) 46%, rgba(255, 255, 255, 0.03) 48%, transparent 49%),
                 linear-gradient(20deg, transparent 25%, rgba(255, 255, 255, 0.02) 26%, rgba(255, 255, 255, 0.02) 28%, transparent 29%),
                 repeating-linear-gradient(45deg, rgba(255,255,255, 0.01) 0px, rgba(255,255,255, 0.01) 1px, transparent 1px, transparent 60px);
             
+            /* Ecke oben rechts entfernen, Rest eckig */
             clip-path: polygon(0 0, calc(100% - 45px) 0, 100% 45px, 100% 100%, 0 100%);
+            
             border: none;
             padding: 30px; 
             text-align: center; 
             text-decoration: none; 
             position: relative; 
+            left: -3vw; 
+            top: 3vh;
+            transform: rotate(6deg);
             z-index: 5;
             display: flex;
             flex-direction: column;
             justify-content: center;
             box-sizing: border-box;
-            color: #000;
         }
 
+        .hunger-box-new h2 {
+            font-family: 'Permanent Marker', cursive;
+            color: #000;
+            margin: 0;
+            font-size: 1.5rem;
+            line-height: 1.2;
+        }
+
+        /* Graffiti Style Text unter der Box */
         .hunger-text-tag {
             position: relative;
+            left: -3vw;
+            top: 2vh;
+            transform: rotate(7deg);
             background: transparent;
             text-align: center;
             z-index: 10;
@@ -83,7 +100,7 @@
         footer { width: 100%; padding: 10px 0; background: rgba(255,255,255,0.9); border-top: 1.5px solid #000; text-align: center; font-size: 0.75rem; }
         footer a { color: #000; text-decoration: none; margin: 0 8px; font-weight: bold; }
 
-        @media (max-width: 600px) { .album-row { grid-template-columns: 1fr; max-width: 278px; } .sidebar-right { display: none; } }
+        @media (max-width: 600px) { .album-row { grid-template-columns: 1fr; max-width: 278px; } .hunger-box-new, .hunger-text-tag { left: 0; transform: none; top: 0; } .sidebar-right { display: none; } }
     </style>
 </head>
 <body>
@@ -106,9 +123,9 @@
     </aside>
 
     <main>
-        <div class="single-box">
-            <h2 style="font-family: 'Permanent Marker', cursive;">Hier steht dein Inhalt</h2>
-        </div>
+        <a href="meinemusik.html" class="hunger-box-new">
+            <h2>RIESEN<br>HUNGER</h2>
+        </a>
 
         <div class="hunger-text-tag">
             <h2>Neue Single: RIESENHUNGER</h2>
