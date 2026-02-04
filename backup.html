@@ -64,14 +64,14 @@
         .hunger-box h2 { margin: 8px 0 2px 0; color: var(--anton-red); text-transform: uppercase; font-size: 0.9rem; }
         .hunger-box p { margin: 0; font-size: 0.7rem; color: #000; }
 
-        /* Bento Grid: Horizontal nebeneinander mit Abstand in Box-Breite */
-        .bento-row-horizontal { display: flex; justify-content: center; align-items: center; width: 100%; }
+        /* Bento Grid: Horizontal Reihe */
+        .bento-row-horizontal { display: flex; justify-content: center; align-items: center; width: 100%; max-width: 600px; }
         
         .album-box { background: rgba(255, 255, 255, 0.95); border: 1.5px solid #000; border-radius: 8px; padding: 4px; text-align: center; text-decoration: none; color: inherit; transition: all 0.3s; display: flex; align-items: center; justify-content: center; min-height: 35px; width: 110px; box-sizing: border-box; }
         .album-box:hover { background: var(--anton-yellow); transform: translateY(-2px); }
         .album-box h3 { margin: 0; font-size: 0.5rem; color: #000; text-transform: uppercase; line-height: 1.1; }
 
-        /* Abstand zwischen den Boxen entspricht der Breite einer Box (110px) */
+        /* Abstand zwischen den Boxen entspricht der Breite (110px) */
         .album-box:not(:last-child) { margin-right: 110px; }
 
         footer { width: 100%; padding: 10px 0; background: rgba(255,255,255,0.9); border-top: 1.5px solid #000; text-align: center; font-size: 0.75rem; }
@@ -123,8 +123,8 @@
 
         <div class="bento-row-horizontal">
             <a href="ertappt.html" class="album-box"><h3>Album "ertappt"</h3></a>
-            <a href="meinemusik.html" class="album-box"><h3>Album "Große Pause"</h3></a>
             <a href="meinemusik.html" class="album-box"><h3>Album "?????"</h3></a>
+            <a href="meinemusik.html" class="album-box"><h3>Album "Große Pause"</h3></a>
         </div>
     </main>
 
