@@ -30,29 +30,49 @@
 
         main { flex: 1; padding: 120px 20px 40px 20px; max-width: 1100px; margin: 0 auto; z-index: 10; width: 100%; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; gap: 15px; }
         
-        /* Hunger-Bild: 6 Grad rechts, 5% transparent */
-        .hunger-box { 
+        /* DIE NEUE SINGLE BOX */
+        .hunger-box-new { 
             width: 100%; 
-            max-width: 278px; 
-            background: transparent; 
-            border: none; 
-            padding: 0; 
+            max-width: 300px; 
+            min-height: 300px;
+            /* 5% Transparenter weißer Hintergrund mit Riss-Textur */
+            background: 
+                linear-gradient(135deg, transparent 40px, rgba(255, 255, 255, 0.05) 40px),
+                linear-gradient(170deg, transparent 45%, rgba(255, 255, 255, 0.03) 46%, rgba(255, 255, 255, 0.03) 48%, transparent 49%),
+                linear-gradient(20deg, transparent 25%, rgba(255, 255, 255, 0.02) 26%, rgba(255, 255, 255, 0.02) 28%, transparent 29%),
+                repeating-linear-gradient(45deg, rgba(255,255,255, 0.01) 0px, rgba(255,255,255, 0.01) 1px, transparent 1px, transparent 60px);
+            
+            /* Ecke oben rechts entfernen, Rest eckig */
+            clip-path: polygon(0 0, calc(100% - 45px) 0, 100% 45px, 100% 100%, 0 100%);
+            
+            border: none;
+            padding: 30px; 
             text-align: center; 
             text-decoration: none; 
             position: relative; 
             left: -3vw; 
             top: 3vh;
             transform: rotate(6deg);
-            opacity: 0.95;
             z-index: 5;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-sizing: border-box;
         }
-        .hunger-box img { width: 100%; height: auto; border: none; }
 
-        /* NUR DIESE BOX IST GELB - Graffiti Style */
+        .hunger-box-new h2 {
+            font-family: 'Permanent Marker', cursive;
+            color: #000;
+            margin: 0;
+            font-size: 1.5rem;
+            line-height: 1.2;
+        }
+
+        /* Graffiti Style Text unter der Box */
         .hunger-text-tag {
             position: relative;
             left: -3vw;
-            top: 0vh;
+            top: 2vh;
             transform: rotate(7deg);
             background: transparent;
             text-align: center;
@@ -60,7 +80,7 @@
             pointer-events: none;
             font-family: 'Permanent Marker', cursive;
             color: var(--anton-yellow);
-            text-shadow: 2px 2px 3px #000; /* Schatten für Lesbarkeit auf der Wall */
+            text-shadow: 2px 2px 3px #000;
         }
         .hunger-text-tag h2 { margin: 0; color: var(--anton-yellow); text-transform: uppercase; font-size: 1.4rem; }
         .hunger-text-tag p { margin: 0; font-size: 1rem; color: var(--anton-yellow); }
@@ -71,7 +91,7 @@
             gap: 6px; 
             width: 100%; 
             max-width: 280px;
-            margin-top: 30px;
+            margin-top: 40px;
         }
         .album-box { background: rgba(255, 255, 255, 0.95); border: 1px solid #000; border-radius: 6px; padding: 5px; text-align: center; text-decoration: none; color: inherit; transition: all 0.3s; display: flex; align-items: center; justify-content: center; min-height: 25px; }
         .album-box:hover { background: var(--anton-yellow); transform: translateY(-2px); }
@@ -80,7 +100,7 @@
         footer { width: 100%; padding: 10px 0; background: rgba(255,255,255,0.9); border-top: 1.5px solid #000; text-align: center; font-size: 0.75rem; }
         footer a { color: #000; text-decoration: none; margin: 0 8px; font-weight: bold; }
 
-        @media (max-width: 600px) { .album-row { grid-template-columns: 1fr; max-width: 278px; } .hunger-box, .hunger-text-tag { left: 0; transform: none; top: 0; } .sidebar-right { display: none; } }
+        @media (max-width: 600px) { .album-row { grid-template-columns: 1fr; max-width: 278px; } .hunger-box-new, .hunger-text-tag { left: 0; transform: none; top: 0; } .sidebar-right { display: none; } }
     </style>
 </head>
 <body>
@@ -99,12 +119,12 @@
         <a href="https://www.youtube.com/@antonmusikvevo3861" target="_blank"><i class="fa-brands fa-youtube"></i></a>
         <a href="https://www.tiktok.com/@anton.familienpop" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
         <a href="https://www.instagram.com/anton.familienpop" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-        <a href="https://www.spotify.com" target="_blank"><i class="fa-brands fa-spotify"></i></a>
+        <a href="#"><i class="fa-brands fa-spotify"></i></a>
     </aside>
 
     <main>
-        <a href="meinemusik.html" class="hunger-box">
-            <img src="HUNGER.jpeg" alt="RIESENHUNGER Single">
+        <a href="meinemusik.html" class="hunger-box-new">
+            <h2>RIESEN<br>HUNGER</h2>
         </a>
 
         <div class="hunger-text-tag">
