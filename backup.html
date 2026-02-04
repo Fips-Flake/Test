@@ -62,15 +62,16 @@
         .sidebar-right:hover a i { animation-play-state: paused !important; transform: scale(1) !important; color: #000 !important; text-shadow: none !important; }
         .sidebar-right a:hover i { color: var(--brand-color) !important; transform: scale(1.55) !important; transition: transform 0.3s ease-out !important; }
 
-        /* Bento Grid 50% kleiner als zuvor */
-        main { flex: 1; padding: 120px 20px 40px 20px; max-width: 800px; margin: 0 auto; z-index: 10; width: 100%; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+        main { flex: 1; padding: 120px 20px 40px 20px; max-width: 1100px; margin: 0 auto; z-index: 10; width: 100%; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; gap: 30px; }
         
-        .hunger-box { width: 100%; max-width: 140px; background: rgba(255, 255, 255, 0.95); border: 1.5px solid #000; border-radius: 8px; padding: 6px; text-align: center; text-decoration: none; color: inherit; transition: transform 0.3s; }
-        .hunger-box:hover { transform: scale(1.05); background: var(--anton-yellow); }
-        .hunger-box img { width: 100%; height: auto; border-radius: 4px; border: 1px solid #000; }
-        .hunger-box h2 { margin: 4px 0 1px 0; color: var(--anton-red); text-transform: uppercase; font-size: 0.55rem; }
-        .hunger-box p { margin: 0; font-size: 0.45rem; color: #000; }
+        /* Große Box behält Größe */
+        .hunger-box { width: 100%; max-width: 600px; background: rgba(255, 255, 255, 0.95); border: 3px solid #000; border-radius: 20px; padding: 20px; text-align: center; text-decoration: none; color: inherit; transition: transform 0.3s; }
+        .hunger-box:hover { transform: scale(1.02); background: var(--anton-yellow); }
+        .hunger-box img { width: 100%; height: auto; border-radius: 10px; border: 2px solid #000; }
+        .hunger-box h2 { margin: 15px 0 5px 0; color: var(--anton-red); text-transform: uppercase; font-size: 1.5rem; }
+        .hunger-box p { margin: 0; font-size: 1rem; color: #000; }
 
+        /* Kleine Boxen darunter */
         .album-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; width: 100%; max-width: 300px; }
         .album-box { background: rgba(255, 255, 255, 0.95); border: 1px solid #000; border-radius: 6px; padding: 5px; text-align: center; text-decoration: none; color: inherit; transition: all 0.3s; display: flex; align-items: center; justify-content: center; min-height: 25px; }
         .album-box:hover { background: var(--anton-yellow); transform: translateY(-2px); }
@@ -117,7 +118,7 @@
         <a href="meinemusik.html" class="hunger-box">
             <img src="HUNGER.jpeg" alt="HUNGER Single">
             <h2>Neue Single: HUNGER</h2>
-            <p>Ab 20. Februar!</p>
+            <p>Ab 20. Februar überall!</p>
         </a>
 
         <div class="album-row">
