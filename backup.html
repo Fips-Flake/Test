@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ANTON | OFFIZIELLE SEITE</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Permanent+Marker&family=Rock+Salt&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Permanent+Marker&display=swap" rel="stylesheet">
     <style>
         :root { --anton-red: #ff0000; --anton-yellow: #ffeb3b; --sidebar-width: 240px; }
         html, body { height: 100%; margin: 0; padding: 0; }
@@ -30,7 +30,6 @@
 
         main { flex: 1; padding: 120px 20px 40px 20px; max-width: 1100px; margin: 0 auto; z-index: 10; width: 100%; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; gap: 15px; }
         
-        /* HUNGER BOX (BILD) */
         .hunger-box { 
             width: 100%; 
             max-width: 278px; 
@@ -48,20 +47,30 @@
         }
         .hunger-box img { width: 100%; height: auto; border: none; }
 
-        /* SINGLEBOX - UNTER DER HUNGER BOX MIT WEISSEM HINTERGRUND */
+        /* ABGENUTZTES PLAKAT STYLE */
         .hunger-text-tag {
             position: relative;
             left: -3vw;
-            top: 1vh; /* Abstand zum Bild */
-            background: rgba(255, 255, 255, 0.95);
-            padding: 10px 15px;
-            border: 1px solid #000;
+            top: 1.5vh;
+            width: 100%;
+            max-width: 278px;
+            /* Weißer Hintergrund mit Riss-Texturen über Gradients */
+            background: 
+                linear-gradient(135deg, transparent 40px, rgba(255, 255, 255, 0.95) 40px),
+                linear-gradient(170deg, transparent 45%, rgba(0,0,0,0.05) 46%, rgba(0,0,0,0.05) 48%, transparent 49%),
+                linear-gradient(20deg, transparent 25%, rgba(0,0,0,0.03) 26%, rgba(0,0,0,0.03) 28%, transparent 29%);
+            
+            /* Rissige Kanten über Clip-Path */
+            clip-path: polygon(2% 0%, 95% 2%, 100% 15%, 98% 85%, 95% 100%, 5% 98%, 0% 80%, 3% 20%);
+            
+            padding: 25px 15px;
             text-align: center;
             z-index: 10;
-            font-family: 'Rock Salt', cursive;
+            font-family: 'Special Elite', cursive; /* Ursprüngliche Schrift */
             color: #000;
             font-weight: bold;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+            box-sizing: border-box;
+            border: none; /* Rand entfernt */
         }
         
         .hunger-text-tag h2, .hunger-text-tag p { 
@@ -70,6 +79,7 @@
             font-weight: bold;
             font-size: 0.9rem; 
             text-transform: uppercase;
+            line-height: 1.3;
         }
 
         .album-row { 
