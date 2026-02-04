@@ -62,9 +62,9 @@
         .sidebar-right:hover a i { animation-play-state: paused !important; transform: scale(1) !important; color: #000 !important; text-shadow: none !important; }
         .sidebar-right a:hover i { color: var(--brand-color) !important; transform: scale(1.55) !important; transition: transform 0.3s ease-out !important; }
 
-        main { flex: 1; padding: 120px 20px 40px 20px; max-width: 1100px; margin: 0 auto; z-index: 10; width: 100%; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; gap: 40px; }
+        main { flex: 1; padding: 120px 20px 40px 20px; max-width: 1100px; margin: 0 auto; z-index: 10; width: 100%; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; gap: 20px; }
         
-        /* Hunger-Box: Kein Rahmen, kein Hintergrund, 95% Deckkraft */
+        /* Hunger-Box: Bild, 6 Grad Drehung, 5% transparent */
         .hunger-box { 
             width: 100%; 
             max-width: 278px; 
@@ -73,26 +73,37 @@
             padding: 0; 
             text-align: center; 
             text-decoration: none; 
-            color: inherit; 
             transition: transform 0.3s; 
             position: relative; 
             left: -3vw; 
             top: 3vh;
-            transform: rotate(8deg);
+            transform: rotate(6deg);
             opacity: 0.95;
+            z-index: 5;
         }
-        .hunger-box:hover { transform: rotate(8deg) scale(1.05); opacity: 1; }
         .hunger-box img { width: 100%; height: auto; border: none; }
-        
-        .hunger-box h2 { margin: 10px 0 2px 0; color: var(--anton-red); text-transform: uppercase; font-size: 1rem; background: rgba(255,255,255,0.7); display: inline-block; padding: 2px 5px; }
-        .hunger-box p { margin: 0; font-size: 0.8rem; color: #000; background: rgba(255,255,255,0.7); display: block; }
+
+        /* Neue Text-Box: Transparent, 16 Grad nach LINKS gedreht */
+        .hunger-text-tag {
+            position: relative;
+            left: -3vw;
+            top: 1vh;
+            transform: rotate(-16deg);
+            background: transparent;
+            text-align: center;
+            z-index: 10;
+            pointer-events: none;
+        }
+        .hunger-text-tag h2 { margin: 0; color: var(--anton-red); text-transform: uppercase; font-size: 1.1rem; padding: 2px 5px; }
+        .hunger-text-tag p { margin: 0; font-size: 0.85rem; color: #000; font-weight: bold; }
 
         .album-row { 
             display: grid; 
             grid-template-columns: repeat(3, 1fr); 
             gap: 6px; 
             width: 100%; 
-            max-width: 280px; 
+            max-width: 280px;
+            margin-top: 20px;
         }
         .album-box { background: rgba(255, 255, 255, 0.95); border: 1px solid #000; border-radius: 6px; padding: 5px; text-align: center; text-decoration: none; color: inherit; transition: all 0.3s; display: flex; align-items: center; justify-content: center; min-height: 25px; }
         .album-box:hover { background: var(--anton-yellow); transform: translateY(-2px); }
@@ -101,7 +112,7 @@
         footer { width: 100%; padding: 10px 0; background: rgba(255,255,255,0.9); border-top: 1.5px solid #000; text-align: center; font-size: 0.75rem; }
         footer a { color: #000; text-decoration: none; margin: 0 8px; font-weight: bold; transition: all 0.3s ease; }
 
-        @media (max-width: 600px) { .album-row { grid-template-columns: 1fr; max-width: 278px; } .hunger-box { left: 0; transform: none; top: 0; } .sidebar-right { display: none; } }
+        @media (max-width: 600px) { .album-row { grid-template-columns: 1fr; max-width: 278px; } .hunger-box, .hunger-text-tag { left: 0; transform: none; top: 0; } .sidebar-right { display: none; } }
     </style>
 </head>
 <body>
@@ -137,9 +148,12 @@
     <main>
         <a href="meinemusik.html" class="hunger-box">
             <img src="HUNGER.jpeg" alt="HUNGER Single">
+        </a>
+
+        <div class="hunger-text-tag">
             <h2>Neue Single: HUNGER</h2>
             <p>Ab 20. Februar überall!</p>
-        </a>
+        </div>
 
         <div class="album-row">
             <a href="meinemusik.html" class="album-box"><h3>Album "ertappt"</h3></a>
