@@ -7,43 +7,30 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Permanent+Marker&display=swap" rel="stylesheet">
     <style>
-        :root { 
-            --anton-red: #ff0000; 
-            --anton-yellow: #ffeb3b; 
-            --sidebar-width: 240px; 
-        }
-        
+        :root { --anton-red: #ff0000; --anton-yellow: #ffeb3b; --sidebar-width: 240px; }
         html, body { height: 100%; margin: 0; padding: 0; }
-        body { 
-            display: flex; 
-            flex-direction: column; 
-            font-family: 'Special Elite', cursive; 
-            background: #fff url('AFaPo Wall.png') fixed center/cover no-repeat; 
-            background-blend-mode: multiply; 
-            overflow-x: hidden;
-            color: var(--anton-yellow);
-        }
+        body { display: flex; flex-direction: column; font-family: 'Special Elite', cursive; background: #fff url('AFaPo Wall.png') fixed center/cover no-repeat; background-blend-mode: multiply; overflow-x: hidden; }
         
-        /* Globaler Textschatten für Lesbarkeit der gelben Schrift */
-        * { text-shadow: 2px 2px 4px #000; }
-
-        header { position: fixed; top: 0; width: 100%; height: 80px; display: flex; justify-content: center; align-items: center; z-index: 100; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(10px); border-bottom: 2px solid var(--anton-yellow); }
-        .header-title { color: var(--anton-yellow) !important; font-size: 1.8rem; text-decoration: none; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; }
+        header { position: fixed; top: 0; width: 100%; height: 80px; display: flex; justify-content: center; align-items: center; z-index: 100; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border-bottom: 2px solid #000; }
+        .header-title { color: var(--anton-red); font-size: 1.8rem; text-decoration: none; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; }
         
-        .menu-btn { position: fixed; top: 18px; left: 20px; font-size: 24px; cursor: pointer; z-index: 210; background: #000; color: var(--anton-yellow); width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 5px; transition: all 0.3s ease; border: 2px solid var(--anton-yellow); outline: none; }
+        .menu-btn { position: fixed; top: 18px; left: 20px; font-size: 24px; cursor: pointer; z-index: 210; background: #000; color: #fff; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 5px; transition: all 0.3s ease; border: 2px solid #000; overflow: hidden; outline: none; }
         .menu-btn:hover { background: var(--anton-yellow); color: #000; }
         
-        .sidebar-left { position: fixed; top: 0; bottom: 0; left: -300px; width: var(--sidebar-width); background: rgba(0, 0, 0, 0.95); z-index: 200; display: flex; flex-direction: column; padding: 100px 15px 30px 15px; transition: left 0.4s ease-in-out; border-right: 2px solid var(--anton-yellow); box-sizing: border-box; outline: none; }
+        .sidebar-left { position: fixed; top: 0; bottom: 0; left: -300px; width: var(--sidebar-width); background: rgba(255, 235, 59, 0.98); z-index: 200; display: flex; flex-direction: column; padding: 100px 15px 30px 15px; transition: left 0.4s ease-in-out; border-right: 2px solid #000; box-sizing: border-box; outline: none; }
         .sidebar-left.open { left: 0; }
-        .sidebar-left a { display: flex; align-items: center; color: var(--anton-yellow); text-decoration: none; font-size: 1.1rem; width: 100%; margin-bottom: 20px; outline: none; }
+        .nav-item { margin-bottom: 20px; width: 100%; outline: none; }
+        .sidebar-left a { display: flex; align-items: center; color: #000; text-decoration: none; font-size: 1.1rem; width: 100%; outline: none; }
         .nav-item-epk { margin-top: auto; }
+        .nav-item-epk a { color: var(--anton-red) !important; font-weight: bold; }
         
-        .sidebar-right { position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 50px; display: flex; flex-direction: column; align-items: center; gap: 15px; z-index: 999; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(3px); padding: 20px 0; border-radius: 20px 0 0 20px; outline: none; }
-        .sidebar-right a i { color: var(--anton-yellow); font-size: 1.2rem; transition: all 0.3s; }
+        .sidebar-right { position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 50px; display: flex; flex-direction: column; align-items: center; gap: 15px; z-index: 999; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(3px); padding: 20px 0; border-radius: 20px 0 0 20px; outline: none; }
+        .sidebar-right a i { color: #000; font-size: 1.2rem; transition: all 0.3s ease-in-out; }
         .sidebar-right a:hover i { transform: scale(1.5); }
 
         main { flex: 1; padding: 120px 20px 40px 20px; max-width: 1100px; margin: 0 auto; z-index: 10; width: 100%; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; gap: 15px; }
         
+        /* Hunger-Bild: 6 Grad rechts, 5% transparent */
         .hunger-box { 
             width: 100%; 
             max-width: 278px; 
@@ -61,6 +48,7 @@
         }
         .hunger-box img { width: 100%; height: auto; border: none; }
 
+        /* NUR DIESE BOX IST GELB - Graffiti Style */
         .hunger-text-tag {
             position: relative;
             left: -3vw;
@@ -72,6 +60,7 @@
             pointer-events: none;
             font-family: 'Permanent Marker', cursive;
             color: var(--anton-yellow);
+            text-shadow: 2px 2px 3px #000; /* Schatten für Lesbarkeit auf der Wall */
         }
         .hunger-text-tag h2 { margin: 0; color: var(--anton-yellow); text-transform: uppercase; font-size: 1.4rem; }
         .hunger-text-tag p { margin: 0; font-size: 1rem; color: var(--anton-yellow); }
@@ -84,12 +73,12 @@
             max-width: 280px;
             margin-top: 30px;
         }
-        .album-box { background: rgba(0, 0, 0, 0.7); border: 1px solid var(--anton-yellow); border-radius: 6px; padding: 5px; text-align: center; text-decoration: none; color: var(--anton-yellow); transition: all 0.3s; display: flex; align-items: center; justify-content: center; min-height: 25px; }
-        .album-box:hover { background: var(--anton-yellow); color: #000; transform: translateY(-2px); }
-        .album-box h3 { margin: 0; font-size: 0.45rem; text-transform: uppercase; line-height: 1.1; text-shadow: none; }
+        .album-box { background: rgba(255, 255, 255, 0.95); border: 1px solid #000; border-radius: 6px; padding: 5px; text-align: center; text-decoration: none; color: inherit; transition: all 0.3s; display: flex; align-items: center; justify-content: center; min-height: 25px; }
+        .album-box:hover { background: var(--anton-yellow); transform: translateY(-2px); }
+        .album-box h3 { margin: 0; font-size: 0.45rem; color: #000; text-transform: uppercase; line-height: 1.1; }
 
-        footer { width: 100%; padding: 15px 0; background: rgba(0, 0, 0, 0.8); border-top: 2px solid var(--anton-yellow); text-align: center; font-size: 0.75rem; }
-        footer a { color: var(--anton-yellow); text-decoration: none; margin: 0 8px; font-weight: bold; }
+        footer { width: 100%; padding: 10px 0; background: rgba(255,255,255,0.9); border-top: 1.5px solid #000; text-align: center; font-size: 0.75rem; }
+        footer a { color: #000; text-decoration: none; margin: 0 8px; font-weight: bold; }
 
         @media (max-width: 600px) { .album-row { grid-template-columns: 1fr; max-width: 278px; } .hunger-box, .hunger-text-tag { left: 0; transform: none; top: 0; } .sidebar-right { display: none; } }
     </style>
@@ -99,18 +88,18 @@
     <div class="menu-btn" onclick="toggleMenu()"><span>☰</span></div>
     
     <nav class="sidebar-left" id="sidebar">
-        <a href="hauptseite.html"><i class="fa-solid fa-house" style="margin-right:10px"></i> START</a>
-        <a href="meinemusik.html"><i class="fa-solid fa-music" style="margin-right:10px"></i> MEINE MUSIK</a>
-        <a href="shop.html"><i class="fa-solid fa-cart-shopping" style="margin-right:10px"></i> SHOP</a>
-        <a href="kontakt.html"><i class="fa-solid fa-envelope" style="margin-right:10px"></i> KONTAKT</a>
-        <div class="nav-item-epk"><a href="epk.html"><i class="fa-solid fa-bullhorn" style="margin-right:10px"></i> EPK / PRESSE</a></div>
+        <div class="nav-item"><a href="hauptseite.html"><span><i class="fa-solid fa-house" style="width:30px"></i> START</span></a></div>
+        <div class="nav-item"><a href="meinemusik.html"><span><i class="fa-solid fa-music" style="width:30px"></i> MEINE MUSIK</span></a></div>
+        <div class="nav-item"><a href="shop.html"><span><i class="fa-solid fa-cart-shopping" style="width:30px"></i> SHOP</span></a></div>
+        <div class="nav-item"><a href="kontakt.html"><span><i class="fa-solid fa-envelope" style="width:30px"></i> KONTAKT</span></a></div>
+        <div class="nav-item nav-item-epk"><a href="epk.html"><span><i class="fa-solid fa-bullhorn" style="width:30px"></i> EPK / PRESSE</span></a></div>
     </nav>
 
     <aside class="sidebar-right">
-        <a href="#"><i class="fa-brands fa-youtube"></i></a>
-        <a href="#"><i class="fa-brands fa-tiktok"></i></a>
-        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#"><i class="fa-brands fa-spotify"></i></a>
+        <a href="https://www.youtube.com/@antonmusikvevo3861" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+        <a href="https://www.tiktok.com/@anton.familienpop" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="https://www.instagram.com/anton.familienpop" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://www.spotify.com" target="_blank"><i class="fa-brands fa-spotify"></i></a>
     </aside>
 
     <main>
@@ -132,7 +121,7 @@
 
     <footer>
         <div><a href="hauptseite.html">www.anton-familienpop.de</a></div>
-        <div style="margin-top:5px;"><a href="impressum.html">Impressum</a> | <a href="datenschutz.html">Datenschutz</a></div>
+        <div><a href="impressum.html">Impressum</a> | <a href="datenschutz.html">Datenschutz</a></div>
     </footer>
 
     <script>
