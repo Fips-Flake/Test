@@ -70,6 +70,7 @@
             justify-content: center; 
             align-items: center; 
             width: 100%; 
+            gap: 20px;
         }
         
         .album-box { 
@@ -96,8 +97,7 @@
         footer a:hover { color: var(--anton-yellow) !important; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; }
 
         @media (max-width: 800px) { 
-            .bento-row-horizontal { flex-direction: column; }
-            .album-box { margin: 5px 0 !important; }
+            .bento-row-horizontal { flex-direction: column; gap: 10px; }
         }
     </style>
 </head>
@@ -139,8 +139,8 @@
         </a>
 
         <div class="bento-row-horizontal">
-            <a href="ertappt.html" class="album-box" style="margin-right: 110px;"><h3>Album "ertappt"</h3></a>
-            <a href="meinemusik.html" class="album-box" style="margin-right: 110px;"><h3>Album "????"</h3></a>
+            <a href="ertappt.html" class="album-box"><h3>Album "ertappt"</h3></a>
+            <a href="meinemusik.html" class="album-box"><h3>Album "????"</h3></a>
             <a href="meinemusik.html" class="album-box"><h3>Album "Große Pause"</h3></a>
         </div>
     </main>
