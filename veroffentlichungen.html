@@ -66,9 +66,9 @@
         .veroff-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            max-width: 1000px;
-            margin: 40px auto;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 100px auto 40px auto; 
         }
 
         .bento-item {
@@ -79,8 +79,18 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            box-shadow: 10px 10px 0px #000;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
         }
+
+        .bento-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Order Management */
+        .item-ertappt { order: 3; }
+        .item-pause { order: 2; }
+        .item-placeholder { order: 1; }
 
         .bento-item img {
             width: 100%;
@@ -93,6 +103,16 @@
             font-weight: bold;
             text-align: center;
             background: var(--anton-yellow);
+            color: #000;
+        }
+
+        /* MOBILE VIEW ANPASSUNG */
+        @media (max-width: 768px) {
+            .veroff-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 0 40px;
+            }
         }
 
         main { flex: 1; padding: 120px 20px 40px 20px; z-index: 5; width: 100%; box-sizing: border-box; }
@@ -127,13 +147,13 @@
 
     <main>
         <div class="veroff-grid">
-            <div class="bento-item">
+            <div class="bento-item item-ertappt">
                 <img src="Album Ertappt.jpg" alt="Album Ertappt">
             </div>
-            <div class="bento-item">
+            <div class="bento-item item-pause">
                 <img src="Album Große Pause.jpg" alt="Album Große Pause">
             </div>
-            <div class="bento-item album-placeholder">
+            <div class="bento-item item-placeholder album-placeholder">
                 Album 3
             </div>
         </div>
