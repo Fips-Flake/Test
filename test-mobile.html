@@ -11,25 +11,19 @@
             --anton-red: #ff0000; 
             --anton-yellow: #ffeb3b; 
             --sidebar-width: 240px; 
-            --apple-silver: #A2AAAD;
         }
         
         html, body { height: 100%; margin: 0; padding: 0; background: #000; overflow: hidden; }
         body { font-family: 'Special Elite', cursive; display: flex; flex-direction: column; }
 
-        /* Das Panorama-Hintergrundbild */
+        /* Hintergrund-Wand (Panorama) */
         .background-wall {
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            height: 100%; 
-            width: 300%; /* Das Bild ist 3x so breit wie der Schirm */
+            position: fixed; top: 0; left: 0; height: 100%; width: 300%; 
             background: #fff url('AFaPo Wall.png') center/cover no-repeat;
-            background-blend-mode: multiply; 
-            z-index: 1; 
+            background-blend-mode: multiply; z-index: 1; 
             will-change: transform;
-            /* Startfokus (Mitte minus 5% Versatz) */
-            transform: translateX(-38.33%); 
+            /* Basis-Fokus: Mitte minus 5% Versatz nach links */
+            transform: translateX(-28.33%);
         }
 
         header { 
@@ -40,21 +34,21 @@
         }
         .header-title { color: var(--anton-red); font-size: 1.8rem; text-decoration: none; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; }
         
-        /* Navigation (Links) */
+        /* Navigation Links */
         .menu-btn { position: fixed; top: 18px; left: 20px; font-size: 24px; cursor: pointer; z-index: 210; background: #000; color: #fff; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 5px; border: 2px solid #000; }
         .sidebar-left { position: fixed; top: 0; bottom: 0; left: -300px; width: var(--sidebar-width); background: rgba(255, 235, 59, 0.98); z-index: 200; display: flex; flex-direction: column; padding: 100px 15px 30px 15px; transition: left 0.4s ease-in-out; border-right: 2px solid #000; box-sizing: border-box; }
         .sidebar-left.open { left: 0; }
         .nav-item { margin-bottom: 20px; }
         .sidebar-left a { display: flex; align-items: center; color: #000; text-decoration: none; font-size: 1.1rem; }
 
-        /* Social Sidebar (Rechts) - Keine blauen Streifen */
+        /* Social Sidebar Rechts (Ohne blaue Streifen) */
         .sidebar-right { 
             position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 50px; 
             display: flex; flex-direction: column; align-items: center; gap: 15px; z-index: 999; 
             background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(3px); padding: 25px 0; 
             border-radius: 20px 0 0 20px; 
         }
-        .sidebar-right a { text-decoration: none !important; outline: none !important; -webkit-tap-highlight-color: transparent; display: flex; justify-content: center; align-items: center; border: none; }
+        .sidebar-right a { text-decoration: none !important; outline: none !important; -webkit-tap-highlight-color: transparent; display: flex; justify-content: center; align-items: center; }
         .sidebar-right a i { color: #000; font-size: 1.2rem; animation: ultraFlowWave 6s linear infinite; display: block; }
 
         @keyframes ultraFlowWave { 
@@ -69,26 +63,25 @@
         .sidebar-right a:nth-child(4) i { --brand-color: #25D366; animation-delay: 0.75s; }
         .sidebar-right a:nth-child(5) i { --brand-color: #1877F2; animation-delay: 1.0s; }
         .sidebar-right a:nth-child(6) i { --brand-color: #1DB954; animation-delay: 1.25s; }
-        .sidebar-right a:nth-child(7) i { --brand-color: var(--apple-silver); animation-delay: 1.5s; }
+        .sidebar-right a:nth-child(7) i { --brand-color: #A2AAAD; animation-delay: 1.5s; }
         .sidebar-right a:nth-child(8) i { --brand-color: #f00; animation-delay: 1.75s; }
         .sidebar-right a:nth-child(9) i { --brand-color: #ff9900; animation-delay: 2.0s; }
 
-        /* Swipe-System (Hier wird das Wischen abgefangen) */
+        /* Swipe-System */
         main { 
             flex: 1; position: relative; z-index: 10; overflow-x: auto; overflow-y: hidden; 
             display: flex; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; 
             scrollbar-width: none; 
         }
         main::-webkit-scrollbar { display: none; }
-        
-        /* Die Breite der Sektionen bestimmt, wie weit man swipen kann */
-        .swipe-content { display: flex; width: 600vw; height: 100%; }
+        .swipe-content { display: flex; width: 300vw; height: 100%; }
         .section { width: 100vw; height: 100%; flex-shrink: 0; scroll-snap-align: center; }
 
         footer { position: fixed; bottom: 0; width: 100%; padding: 10px 0; background: rgba(255,255,255,0.9); border-top: 1.5px solid #000; text-align: center; font-size: 0.75rem; z-index: 100; }
         footer a { color: #000; text-decoration: none; font-weight: bold; }
 
         @media (max-width: 800px) {
+            .background-wall { width: 300%; background-position: center center; }
             .sidebar-right { top: auto; bottom: 60px; right: 0; left: 0; width: 100%; height: auto; flex-direction: row; justify-content: space-evenly; transform: none; border-radius: 0; background: rgba(255, 255, 255, 0.85); border-top: 1.5px solid #000; padding: 12px 5px; }
             .sidebar-right a i { font-size: 1.5rem; }
         }
@@ -123,12 +116,7 @@
 
     <main id="mainScroll">
         <div class="swipe-content">
-            <section class="section"></section>
-            <section class="section"></section>
-            <section class="section" id="startSection"></section> <section class="section"></section>
-            <section class="section"></section>
-            <section class="section"></section>
-        </div>
+            <section class="section"></section> <section class="section" id="startSection"></section> <section class="section"></section> </div>
     </main>
 
     <footer>
@@ -142,23 +130,23 @@
         const mainScroll = document.getElementById('mainScroll');
         const bgWall = document.getElementById('bgWall');
 
-        // Startpunkt auf die 3. Sektion setzen (Index 2)
+        // Setze Startposition in die Mitte, damit man nach links und rechts swipen kann
         window.addEventListener('load', () => {
-            mainScroll.scrollLeft = window.innerWidth * 2;
+            mainScroll.scrollLeft = window.innerWidth;
         });
 
         mainScroll.addEventListener('scroll', () => {
+            // Berechnung der Scroll-Position relativ zur Mitte
             const maxScroll = mainScroll.scrollWidth - window.innerWidth;
             const scrollPercentage = mainScroll.scrollLeft / maxScroll;
             
-            // Wir müssen 200% des Hintergrunds (da 300% Gesamtbreite minus 100% Sichtfeld) abfahren.
-            // Der Faktor 66.66 entspricht dem maximalen translateX bei einem 300% Bild.
-            const totalMovement = 66.66; 
-            const currentMove = scrollPercentage * totalMovement;
+            // Bewegungsumfang des Hintergrunds (33% bis 66% des 300%-Bildes)
+            // Startfokus bei 28.33% (Mitte minus 5%)
+            const baseOffset = 18.33; // Angepasst für den 3-Sektionen-Weg
+            const moveRange = 20; 
+            const currentMove = baseOffset + (scrollPercentage * moveRange);
             
-            // 5% Versatz nach links wie gewünscht einrechnen
-            const offset = 5; 
-            bgWall.style.transform = `translateX(-${currentMove + offset}%)`;
+            bgWall.style.transform = `translateX(-${currentMove}%)`;
         });
     </script>
 </body>
