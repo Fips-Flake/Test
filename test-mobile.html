@@ -16,11 +16,13 @@
         html, body { height: 100%; margin: 0; padding: 0; background: #000; overflow: hidden; }
         body { font-family: 'Special Elite', cursive; display: flex; flex-direction: column; }
 
-        /* Hintergrund-Wand Desktop */
+        /* Hintergrund-Wand */
         .background-wall {
             position: fixed; top: 0; left: 0; height: 100%; width: 200%; 
             background: #fff url('AFaPo Wall.png') center/cover no-repeat;
-            background-blend-mode: multiply; z-index: 1; transition: transform 0.1s ease-out;
+            background-blend-mode: multiply; z-index: 1; 
+            transition: transform 0.1s ease-out;
+            will-change: transform, background-position;
         }
 
         header { 
@@ -84,11 +86,11 @@
         /* MOBILE OPTIMIERUNG */
         @media (max-width: 800px) {
             .background-wall { 
-                width: 100%; 
+                width: 250%; /* Mehr Breite für echten Swipe-Effekt mobil */
                 background-size: cover; 
-                /* Ausrichtung nach links korrigiert (35% statt 50%) */
-                background-position: 35% center; 
-                transform: none !important; 
+                /* 20% weiter rechts von 35% = 55% */
+                background-position: 55% center; 
+                transform: translateX(0); 
             }
             .sidebar-right { 
                 top: auto; bottom: 60px; right: 0; left: 0; width: 100%; height: auto; 
@@ -132,14 +134,14 @@
         <div class="swipe-content">
             <section class="section">
                 <div class="plakat">
-                    <h1 style="color:var(--anton-red)">WILLKOMMEN</h1>
-                    <p>Wische für mehr Infos</p>
+                    <h1 style="color:var(--anton-red)">ANTON</h1>
+                    <p>Wische nach links</p>
                 </div>
             </section>
             <section class="section">
                 <div class="plakat">
-                    <h1 style="color:var(--anton-red)">NEUE SINGLE</h1>
-                    <p>BALD VERFÜGBAR</p>
+                    <h1 style="color:var(--anton-red)">NEUE TOUR</h1>
+                    <p>Hier klicken für Tickets</p>
                 </div>
             </section>
         </div>
@@ -155,13 +157,21 @@
         
         const mainScroll = document.getElementById('mainScroll');
         const bgWall = document.getElementById('bgWall');
-        if (window.innerWidth > 800) {
-            mainScroll.addEventListener('scroll', () => {
-                const scrollPercentage = mainScroll.scrollLeft / (mainScroll.scrollWidth - window.innerWidth);
+
+        mainScroll.addEventListener('scroll', () => {
+            const scrollPercentage = mainScroll.scrollLeft / (mainScroll.scrollWidth - window.innerWidth);
+            
+            if (window.innerWidth > 800) {
+                // Desktop Parallax
                 const move = scrollPercentage * 50; 
                 bgWall.style.transform = `translateX(-${move}%)`;
-            });
-        }
+            } else {
+                // Mobile Swipe-Sync
+                // Das Bild bewegt sich beim Swipen leicht mit
+                const moveMobile = scrollPercentage * 30; 
+                bgWall.style.transform = `translateX(-${moveMobile}%)`;
+            }
+        });
     </script>
 </body>
 </html>
