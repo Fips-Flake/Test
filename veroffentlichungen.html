@@ -26,7 +26,7 @@
         }
         
         header { position: fixed; top: 0; width: 100%; height: 80px; display: flex; justify-content: center; align-items: center; z-index: 100; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border-bottom: 2px solid #000; }
-        .header-title { color: var(--anton-red); font-size: 1.8rem; text-decoration: none; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; transition: font-size 0.3s ease; }
+        .header-title { color: var(--anton-red); font-size: 1.8rem; text-decoration: none; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; }
         
         /* MENU BUTTON (MASTER) */
         .menu-btn { position: fixed; top: 18px; left: 20px; font-size: 24px; cursor: pointer; z-index: 210; background: #000; color: #fff; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 5px; transition: all 0.3s ease; border: 2px solid #000; overflow: hidden; }
@@ -52,15 +52,15 @@
         .nav-item:hover .submenu { display: flex; }
         .submenu a { font-size: 0.95rem; margin-bottom: 10px; }
         
-        /* SIDEBAR RECHTS (MASTER & MOBILE) */
+        /* SIDEBAR RECHTS (MASTER) */
         .sidebar-right { 
             position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 50px; 
             display: flex; flex-direction: column; align-items: center; gap: 15px; z-index: 999; 
             background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(3px); padding: 25px 0; 
             border-radius: 20px 0 0 20px; 
         }
-        .sidebar-right a { text-decoration: none !important; outline: none !important; -webkit-tap-highlight-color: transparent; display: flex; justify-content: center; align-items: center; border: none !important; }
-        .sidebar-right a i { color: #000; font-size: 1.2rem; transition: transform 0.4s ease-in-out, color 0.4s ease-in-out; animation: ultraFlowWave 6s linear infinite; display: block; border: none !important; }
+        .sidebar-right a { text-decoration: none; display: flex; justify-content: center; align-items: center; }
+        .sidebar-right a i { color: #000; font-size: 1.2rem; transition: transform 0.4s ease-in-out, color 0.4s ease-in-out; animation: ultraFlowWave 6s linear infinite; }
 
         @keyframes ultraFlowWave { 0% { transform: scale(1); color: #000; } 9.33% { transform: scale(1.55); color: var(--brand-color); } 23.33%, 100% { transform: scale(1); color: #000; } }
         
@@ -74,29 +74,9 @@
         .sidebar-right a:nth-child(8) i { --brand-color: #f00; animation-delay: 1.75s; }
         .sidebar-right a:nth-child(9) i { --brand-color: #00A8E1; animation-delay: 2.0s; }
 
-        .sidebar-right:hover a i { animation-play-state: paused !important; transform: scale(1) !important; color: #000 !important; }
-        .sidebar-right a:hover i { color: var(--brand-color) !important; transform: scale(1.55) !important; transition: transform 0.3s ease-out !important; }
-
-        /* BENTO GRID FÜR VERÖFFENTLICHUNGEN */
-        .veroff-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 60px;
-            max-width: 1200px;
-            margin: 100px auto 40px auto; 
-        }
-
-        .bento-item {
-            background: rgba(255, 255, 255, 0.9);
-            border: 2px solid #000;
-            aspect-ratio: 1 / 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
-        }
-
+        /* BENTO GRID */
+        .veroff-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px; max-width: 1200px; margin: 100px auto 40px auto; }
+        .bento-item { background: rgba(255, 255, 255, 0.9); border: 2px solid #000; aspect-ratio: 1 / 1; display: flex; justify-content: center; align-items: center; overflow: hidden; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease; }
         .bento-item img { width: 100%; height: 100%; object-fit: cover; }
         .album-placeholder { font-size: 1.5rem; font-weight: bold; text-align: center; background: var(--anton-yellow); color: #000; }
 
@@ -108,19 +88,16 @@
         @media (max-width: 800px) {
             .header-title { font-size: 1.3rem; }
             
+            /* Sidebar ganz unten fixiert */
             .sidebar-right { 
-                top: auto; bottom: 60px; right: 0; left: 0; width: 100%; height: auto; 
+                position: sticky; bottom: 0; top: auto; right: 0; left: 0; width: 100%; height: auto; 
                 flex-direction: row; justify-content: space-evenly; transform: none; 
-                border-radius: 0; background: rgba(255, 255, 255, 0.85); 
-                border-top: 1.5px solid #000; padding: 12px 5px; 
+                border-radius: 0; background: rgba(255, 255, 255, 0.95); 
+                border-top: 1.5px solid #000; padding: 15px 5px; z-index: 90;
             }
             .sidebar-right a i { font-size: 1.5rem; }
 
-            .veroff-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
-                padding: 0 40px;
-            }
+            .veroff-grid { grid-template-columns: 1fr; gap: 40px; padding: 0 40px; }
             .item-placeholder { order: 1; }
             .item-pause { order: 2; }
             .item-ertappt { order: 3; }
@@ -128,8 +105,8 @@
 
         main { flex: 1; padding: 120px 20px 40px 20px; z-index: 5; width: 100%; box-sizing: border-box; }
 
-        footer { width: 100%; padding: 10px 0; background: rgba(255,255,255,0.9); border-top: 1.5px solid #000; text-align: center; font-size: 0.75rem; z-index: 100; position: relative; }
-        footer a { color: #000; text-decoration: none; margin: 0 8px; font-weight: bold; transition: all 0.3s ease; }
+        footer { width: 100%; padding: 20px 0; background: rgba(255,255,255,0.95); border-top: 1.5px solid #000; text-align: center; font-size: 0.75rem; z-index: 100; position: relative; }
+        footer a { color: #000; text-decoration: none; margin: 0 8px; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -151,18 +128,6 @@
         <div class="nav-item nav-item-epk"><a href="epk.html"><span class="nav-label"><i class="fa-solid fa-lock main-icon"></i> EPK / PRESSE</span></a></div>
     </nav>
 
-    <aside class="sidebar-right">
-        <a href="https://www.youtube.com/@antonmusikvevo3861" target="_blank"><i class="fa-brands fa-youtube"></i></a>
-        <a href="https://www.tiktok.com/@anton.familienpop" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
-        <a href="https://www.instagram.com/anton.familienpop" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-        <a href="https://whatsapp.com/channel/0029Vb6WrdZInlqHDsgTp21e" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
-        <a href="https://www.facebook.com/Anton.Familienpop/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
-        <a href="https://www.spotify.com" target="_blank"><i class="fa-brands fa-spotify"></i></a>
-        <a href="https://music.apple.com/de/artist/anton/1687546783" target="_blank"><i class="fa-brands fa-apple"></i></a>
-        <a href="https://www.youtube.com/@AntonMusikVEVO" target="_blank"><i class="fa-solid fa-circle-play"></i></a>
-        <a href="https://music.amazon.de/artists/B0GF2ZR9RR" target="_blank"><i class="fa-brands fa-amazon"></i></a>
-    </aside>
-
     <main>
         <div class="veroff-grid">
             <div class="bento-item item-ertappt">
@@ -176,6 +141,18 @@
             </div>
         </div>
     </main>
+
+    <aside class="sidebar-right">
+        <a href="https://www.youtube.com/@antonmusikvevo3861" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+        <a href="https://www.tiktok.com/@anton.familienpop" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="https://www.instagram.com/anton.familienpop" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://whatsapp.com/channel/0029Vb6WrdZInlqHDsgTp21e" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+        <a href="https://www.facebook.com/Anton.Familienpop/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+        <a href="https://www.spotify.com" target="_blank"><i class="fa-brands fa-spotify"></i></a>
+        <a href="https://music.apple.com/de/artist/anton/1687546783" target="_blank"><i class="fa-brands fa-apple"></i></a>
+        <a href="https://www.youtube.com/@AntonMusikVEVO" target="_blank"><i class="fa-solid fa-circle-play"></i></a>
+        <a href="https://music.amazon.de/artists/B0GF2ZR9RR" target="_blank"><i class="fa-brands fa-amazon"></i></a>
+    </aside>
 
     <footer>
         <div><a href="hauptseite.html">www.anton-familienpop.de</a></div>
