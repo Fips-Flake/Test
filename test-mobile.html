@@ -22,7 +22,8 @@
             background: #fff url('AFaPo Wall.png') center/cover no-repeat;
             background-blend-mode: multiply; z-index: 1; 
             will-change: transform;
-            transform: translateX(-28.33%); /* Fokus: Mitte - 5% Versatz */
+            /* Basis-Fokus: Mitte minus 5% Versatz nach links */
+            transform: translateX(-28.33%);
         }
 
         header { 
@@ -33,38 +34,22 @@
         }
         .header-title { color: var(--anton-red); font-size: 1.8rem; text-decoration: none; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; }
         
-        /* Navigation (Links) */
+        /* Navigation Links */
         .menu-btn { position: fixed; top: 18px; left: 20px; font-size: 24px; cursor: pointer; z-index: 210; background: #000; color: #fff; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 5px; border: 2px solid #000; }
         .sidebar-left { position: fixed; top: 0; bottom: 0; left: -300px; width: var(--sidebar-width); background: rgba(255, 235, 59, 0.98); z-index: 200; display: flex; flex-direction: column; padding: 100px 15px 30px 15px; transition: left 0.4s ease-in-out; border-right: 2px solid #000; box-sizing: border-box; }
         .sidebar-left.open { left: 0; }
         .nav-item { margin-bottom: 20px; }
         .sidebar-left a { display: flex; align-items: center; color: #000; text-decoration: none; font-size: 1.1rem; }
 
-        /* Social Sidebar (Rechts) - KORREKTUR DER BLAUEN STREIFEN */
+        /* Social Sidebar Rechts (Ohne blaue Streifen) */
         .sidebar-right { 
             position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 50px; 
             display: flex; flex-direction: column; align-items: center; gap: 15px; z-index: 999; 
             background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(3px); padding: 25px 0; 
             border-radius: 20px 0 0 20px; 
         }
-        
-        /* Entfernt blaue Unterstreichungen, Outlines und Mobile-Highlights */
-        .sidebar-right a { 
-            text-decoration: none !important; 
-            outline: none !important; 
-            -webkit-tap-highlight-color: transparent; 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .sidebar-right a i { 
-            color: #000; 
-            font-size: 1.2rem; 
-            animation: ultraFlowWave 6s linear infinite; 
-            display: block; 
-            border: none !important; /* Sicherheit gegen unerwünschte Rahmen */
-        }
+        .sidebar-right a { text-decoration: none !important; outline: none !important; -webkit-tap-highlight-color: transparent; display: flex; justify-content: center; align-items: center; }
+        .sidebar-right a i { color: #000; font-size: 1.2rem; animation: ultraFlowWave 6s linear infinite; display: block; }
 
         @keyframes ultraFlowWave { 
             0% { transform: scale(1); color: #000; } 
@@ -72,7 +57,6 @@
             23.33%, 100% { transform: scale(1); color: #000; } 
         }
 
-        /* Branding Socials */
         .sidebar-right a:nth-child(1) i { --brand-color: #f00; animation-delay: 0.0s; }
         .sidebar-right a:nth-child(2) i { animation-delay: 0.25s; } 
         .sidebar-right a:nth-child(3) i { --brand-color: #E1306C; animation-delay: 0.5s; }
@@ -83,7 +67,7 @@
         .sidebar-right a:nth-child(8) i { --brand-color: #f00; animation-delay: 1.75s; }
         .sidebar-right a:nth-child(9) i { --brand-color: #ff9900; animation-delay: 2.0s; }
 
-        /* Swipe-Fläche */
+        /* Swipe-System */
         main { 
             flex: 1; position: relative; z-index: 10; overflow-x: auto; overflow-y: hidden; 
             display: flex; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; 
@@ -96,21 +80,9 @@
         footer { position: fixed; bottom: 0; width: 100%; padding: 10px 0; background: rgba(255,255,255,0.9); border-top: 1.5px solid #000; text-align: center; font-size: 0.75rem; z-index: 100; }
         footer a { color: #000; text-decoration: none; font-weight: bold; }
 
-        /* MOBILE OPTIMIERUNG */
         @media (max-width: 800px) {
-            .background-wall { 
-                width: 300%; 
-                background-position: center center;
-                transform: translateX(-28.33%); 
-            }
-            .sidebar-right { 
-                top: auto; bottom: 60px; right: 0; left: 0; width: 100%; height: auto; 
-                flex-direction: row; justify-content: space-evenly; 
-                transform: none; border-radius: 0; background: rgba(255, 255, 255, 0.85); 
-                border-top: 1.5px solid #000; padding: 12px 5px;
-            }
-            /* Auch mobil Streifen unterbinden */
-            .sidebar-right a { border: none !important; text-decoration: none !important; }
+            .background-wall { width: 300%; background-position: center center; }
+            .sidebar-right { top: auto; bottom: 60px; right: 0; left: 0; width: 100%; height: auto; flex-direction: row; justify-content: space-evenly; transform: none; border-radius: 0; background: rgba(255, 255, 255, 0.85); border-top: 1.5px solid #000; padding: 12px 5px; }
             .sidebar-right a i { font-size: 1.5rem; }
         }
     </style>
@@ -144,10 +116,7 @@
 
     <main id="mainScroll">
         <div class="swipe-content">
-            <section class="section"></section>
-            <section class="section"></section>
-            <section class="section"></section>
-        </div>
+            <section class="section"></section> <section class="section" id="startSection"></section> <section class="section"></section> </div>
     </main>
 
     <footer>
@@ -161,11 +130,22 @@
         const mainScroll = document.getElementById('mainScroll');
         const bgWall = document.getElementById('bgWall');
 
+        // Setze Startposition in die Mitte, damit man nach links und rechts swipen kann
+        window.addEventListener('load', () => {
+            mainScroll.scrollLeft = window.innerWidth;
+        });
+
         mainScroll.addEventListener('scroll', () => {
-            const scrollPercentage = mainScroll.scrollLeft / (mainScroll.scrollWidth - window.innerWidth);
-            const baseOffset = 28.33;
-            const moveRange = 40;
+            // Berechnung der Scroll-Position relativ zur Mitte
+            const maxScroll = mainScroll.scrollWidth - window.innerWidth;
+            const scrollPercentage = mainScroll.scrollLeft / maxScroll;
+            
+            // Bewegungsumfang des Hintergrunds (33% bis 66% des 300%-Bildes)
+            // Startfokus bei 28.33% (Mitte minus 5%)
+            const baseOffset = 18.33; // Angepasst für den 3-Sektionen-Weg
+            const moveRange = 20; 
             const currentMove = baseOffset + (scrollPercentage * moveRange);
+            
             bgWall.style.transform = `translateX(-${currentMove}%)`;
         });
     </script>
