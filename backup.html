@@ -10,7 +10,6 @@
         :root { --anton-red: #ff0000; --anton-yellow: #ffeb3b; --sidebar-width: 240px; }
         html, body { height: 100%; margin: 0; padding: 0; }
         
-        /* Hintergrund auf AFaPo Wall.JPG geändert */
         body { 
             display: flex; 
             flex-direction: column; 
@@ -71,18 +70,28 @@
             cursor: pointer;
         }
 
+        /* Box Links (Ertappt) - vergrößert nach links & oben */
         .box-ertappt {
-            width: 15%;  
-            height: 30%; 
-            top: 30%;    
-            left: 22%;   
+            width: 16.5%;  
+            height: 33%; 
+            top: 27%;    
+            left: 20%;   
         }
 
+        /* Box Mitte - neu hinzugefügt */
+        .box-mitte {
+            width: 16.5%;
+            height: 33%;
+            top: 27%;
+            left: 41.75%;
+        }
+
+        /* Box Rechts (GrossePause) - vergrößert nach rechts & oben */
         .box-pause {
-            width: 15%;
-            height: 30%;
-            top: 30%;
-            left: 58%;
+            width: 16.5%;
+            height: 33%;
+            top: 27%;
+            left: 63.5%;
         }
 
         main { flex: 1; padding: 120px 20px 40px 20px; z-index: 5; width: 100%; box-sizing: border-box; }
@@ -97,6 +106,7 @@
     <div class="menu-btn" onclick="toggleMenu()"><span>☰</span></div>
     
     <a href="veroffentlichungen.html" class="invisible-box box-ertappt"></a>
+    <a href="veroffentlichungen.html" class="invisible-box box-mitte"></a>
     <a href="veroffentlichungen.html" class="invisible-box box-pause"></a>
 
     <nav class="sidebar-left" id="sidebar">
