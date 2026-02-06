@@ -79,7 +79,7 @@
             gap: 50px;
             align-items: flex-start;
             box-shadow: 10px 10px 0px rgba(0,0,0,0.1);
-            position: relative; /* Für absolute Positionierung des Mini-Covers */
+            position: relative;
         }
 
         .image-container {
@@ -88,6 +88,7 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
+            position: relative;
         }
 
         .album-cover {
@@ -103,12 +104,12 @@
             display: block;
         }
 
-        /* MINI COVER - UNTEN RECHTS DER BENTOBOX */
-        .mini-link-bottom-right {
+        /* MINI COVER - UNTEN LINKS DER BENTOBOX */
+        .mini-link-bottom-left {
             position: absolute;
             bottom: 20px;
-            right: 20px;
-            width: 55px; /* 10% größer als vorher (ca. 15-16% des Hauptbildes) */
+            left: 20px;
+            width: 60px; /* 10% größer als die ursprüngliche Miniatur */
             border: 2px solid #000;
             border-radius: 8px;
             overflow: hidden;
@@ -116,11 +117,11 @@
             z-index: 20;
             background: #fff;
         }
-        .mini-link-bottom-right:hover {
-            transform: scale(1.15) rotate(2deg);
+        .mini-link-bottom-left:hover {
+            transform: scale(1.15) rotate(-2deg);
             box-shadow: 0 5px 15px rgba(0,0,0,0.4);
         }
-        .mini-link-bottom-right img {
+        .mini-link-bottom-left img {
             width: 100%;
             display: block;
         }
@@ -137,7 +138,7 @@
             color: #000;
             line-height: 1.6;
             font-size: 1.15rem;
-            padding-bottom: 40px; /* Platz für das Mini-Cover auf Desktop */
+            padding-bottom: 60px; /* Platz für Mini-Cover auf Desktop */
         }
 
         .album-text p {
@@ -149,7 +150,7 @@
             .sidebar-right { position: fixed; bottom: 0; top: auto; right: 0; left: 0; width: 100%; height: 60px; flex-direction: row; justify-content: space-evenly; transform: none; border-radius: 0; background: rgba(255, 255, 255, 0.95); border-top: 2px solid #000; padding: 0; z-index: 1000; }
             .detail-bento { flex-direction: column; margin: 20px 20px 40px 20px; padding: 20px; align-items: center; border-radius: 15px; }
             .image-container { width: 100%; max-width: 280px; align-items: center; }
-            .mini-link-bottom-right { position: relative; bottom: 0; right: 0; margin-top: 20px; width: 80px; }
+            .mini-link-bottom-left { position: relative; bottom: 0; left: 0; margin-top: 20px; width: 80px; }
             .album-text { font-size: 1rem; text-align: center; padding-bottom: 0; }
             main { padding-bottom: 80px; }
         }
@@ -187,12 +188,12 @@
                 <div class="image-source">Quelltext-/bild: Universal Music Group</div>
             </div>
             <div class="album-text">
-                <p>Hier kommt Anton! Er ist ein kleiner Bruder, großer Bruder, Papa und Musiker. Er hat Songs für die Menschen im Gepäck, die zu groß für klassische Kinderlieder sind, aber doch noch ein paar Jahre von den Problemen eines pubertären Teenies entfernt sind. Radio TEDDY-Hörer*Innen kennen und feiern seine coolen Songs zwischen Hiphop und Pop bereits.</p>
+                <p>Hier kommt Anton! Er ist ein kleiner Bruder, großer Bruder, Papa und Musiker. Er hat Songs für die Menschen im Gepäck, die zu groß für klassische Kinderlieder sind, aber doch noch ein paar Jahre von den Problemen eines pubertären Teenies entfernt sind. Viele kennen und feiern seine coolen Songs zwischen Hiphop und Pop bereits.</p>
                 <p>Auf dem Debütalbum “ertappt” singt Anton in 14 Songs über Alltagssituationen im Familienbetrieb und knifflige Entscheidungen. Der Ohrwurm “Monsterparty” darf auf absolut keiner Halloweenparty fehlen und zu “meine Gang” kann gleich weitergetanzt werden. Es geht darin um Antons beste Freunde, die alles für einander tun und niemanden hängen lassen.</p>
                 <p>Auch eine zerbrochene Scheibe oder ein Fall auf den Boden sind nicht schlimm, denn “Fehler passieren”, steh drüber! Antons Musik macht Spaß und gibt Kraft. Auf der Rückbank UND den Vordersitzen der Familienkutsche. Familienpop eben!</p>
             </div>
 
-            <a href="grossepause.html" class="mini-link-bottom-right" title="Zur Großen Pause">
+            <a href="grossepause.html" class="mini-link-bottom-left" title="Zur Großen Pause">
                 <img src="Album Große Pause.jpg" alt="Große Pause">
             </a>
         </div>
