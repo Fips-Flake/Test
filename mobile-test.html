@@ -70,7 +70,7 @@
         .sidebar-right:hover a i { animation-play-state: paused !important; transform: scale(1) !important; color: #000 !important; }
         .sidebar-right a:hover i { color: var(--brand-color) !important; transform: scale(1.55) !important; }
 
-        /* KLICKBOXEN DESKTOP (Master) */
+        /* KLICKBOXEN DESKTOP (Unverändert) */
         .invisible-box { position: fixed; z-index: 10; background: transparent; border: none; cursor: pointer; }
         .box-ertappt { width: 19%; height: 43%; top: 16%; left: 17%; transform: rotate(-4deg); }
         .box-mitte { width: 20%; height: 42%; top: 17%; left: 38%; transform: rotate(3deg); }
@@ -86,13 +86,14 @@
         footer a { color: #000; text-decoration: none; margin: 0 8px; font-weight: bold; transition: all 0.3s ease; }
         footer a:hover { color: var(--anton-yellow) !important; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; }
 
-        /* MOBILE OPTIMIERUNG */
-        .mobile-panorama-container { display: none; }
+        /* --- NEUE MOBILE LÖSUNG --- */
+        .mobile-quick-nav { display: none; }
 
         @media (max-width: 800px) {
             body { background: #000 !important; overflow: hidden; }
-            .invisible-box { display: none; } /* Desktop Boxen aus */
+            .invisible-box { display: none; }
             
+            /* Das Panorama bleibt für die Ästhetik, aber ohne Klickboxen */
             .mobile-panorama-container { 
                 display: block; position: fixed; inset: 0; 
                 overflow-x: auto; overflow-y: hidden; z-index: 2; 
@@ -100,18 +101,22 @@
                 scrollbar-width: none; 
             }
             .panorama-content { 
-                position: relative; width: 300%; height: 100%; 
+                width: 300%; height: 100%; 
                 background: #fff url('AFaPo Wall.jpg') no-repeat center center;
                 background-size: cover; background-blend-mode: multiply;
             }
 
-            /* BOXEN MOBIL (Innerhalb des 300% Containers) */
-            /* Berechnung: Da der Container 300% breit ist, teilen wir Desktop-Positionen durch 3 */
-            .mobile-box { position: absolute; z-index: 10; background: transparent; }
-            .m-ertappt { width: 6.33%; height: 43%; top: 16%; left: 39%; transform: rotate(-4deg); } /* Center-Panel Bereich */
-            .m-mitte { width: 6.66%; height: 42%; top: 17%; left: 46%; transform: rotate(3deg); }
-            .m-pause { width: 3.33%; height: 43%; top: 21%; left: 56.6%; }
-            
+            /* Interaktive Buttons über dem Panorama */
+            .mobile-quick-nav { 
+                display: flex; position: fixed; top: 100px; left: 50%; transform: translateX(-50%);
+                z-index: 1500; width: 90%; justify-content: center; gap: 10px;
+            }
+            .q-btn { 
+                background: rgba(255, 235, 59, 0.9); border: 2px solid #000; padding: 10px 15px;
+                border-radius: 50px; text-decoration: none; color: #000; font-size: 0.8rem;
+                font-weight: bold; box-shadow: 4px 4px 0 #000; white-space: nowrap;
+            }
+
             .sidebar-right { 
                 top: auto; bottom: 0; right: 0; left: 0; width: 100%; height: 55px; 
                 flex-direction: row; justify-content: space-evenly; transform: none; 
@@ -137,12 +142,14 @@
     <a href="meinemusik.html" class="invisible-box box-pause3"></a>
     <a href="neuesingle.html" class="invisible-box box-riesenhunger"></a>
 
+    <div class="mobile-quick-nav">
+        <a href="meinemusik.html" class="q-btn">ERTAPPT!</a>
+        <a href="neuesingle.html" class="q-btn">NEUE SINGLE</a>
+        <a href="meinemusik.html" class="q-btn">PAUSE</a>
+    </div>
+
     <div class="mobile-panorama-container" id="mobileScroll">
-        <div class="panorama-content">
-            <a href="meinemusik.html" class="mobile-box m-ertappt"></a>
-            <a href="neuesingle.html" class="mobile-box m-mitte"></a>
-            <a href="meinemusik.html" class="mobile-box m-pause"></a>
-        </div>
+        <div class="panorama-content"></div>
     </div>
 
     <nav class="sidebar-left" id="sidebar">
@@ -184,7 +191,6 @@
         window.addEventListener('load', () => {
             const sc = document.getElementById('mobileScroll');
             if(sc && window.innerWidth <= 800) { 
-                // Zentriert das Panorama beim Laden
                 sc.scrollLeft = (sc.scrollWidth - window.innerWidth) / 2; 
             }
         });
