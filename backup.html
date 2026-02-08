@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ANTON | HAUPTSEITE</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root { 
             --anton-red: #ff0000; 
@@ -26,21 +26,6 @@
             overflow-x: hidden; 
         }
 
-        /* FIX FÜR DAS GROSSE Ü */
-        .umlaut-fix {
-            position: relative;
-            display: inline-block;
-        }
-        .umlaut-fix::after {
-            content: "..";
-            position: absolute;
-            top: -0.5em;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1.2rem;
-            letter-spacing: -0.1em;
-        }
-        
         header { position: fixed; top: 0; width: 100%; height: 80px; display: flex; justify-content: center; align-items: center; z-index: 100; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border-bottom: 2px solid #000; }
         .header-title { color: var(--anton-red); font-size: 1.8rem; text-decoration: none; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; }
         
@@ -51,7 +36,23 @@
         .menu-btn:hover span { opacity: 0; }
         .menu-btn:hover::after { opacity: 1; }
         
-        .sidebar-left { position: fixed; top: 0; bottom: 0; left: -300px; width: var(--sidebar-width); background: rgba(255, 235, 59, 0.98); z-index: 200; display: flex; flex-direction: column; padding: 100px 15px 30px 15px; transition: left 0.4s ease-in-out; border-right: 2px solid #000; box-sizing: border-box; }
+        /* SIDEBAR MIT COURIER PRIME FÜR KORREKTE UMLAUTE */
+        .sidebar-left { 
+            position: fixed; 
+            top: 0; bottom: 0; 
+            left: -300px; 
+            width: var(--sidebar-width); 
+            background: rgba(255, 235, 59, 0.98); 
+            z-index: 200; 
+            display: flex; 
+            flex-direction: column; 
+            padding: 100px 15px 30px 15px; 
+            transition: left 0.4s ease-in-out; 
+            border-right: 2px solid #000; 
+            box-sizing: border-box; 
+            font-family: 'Courier Prime', monospace; /* Wechsel hier für Ü-Support */
+            font-weight: 700;
+        }
         .sidebar-left.open { left: 0; }
         .nav-item { margin-bottom: 20px; width: 100%; }
         .sidebar-left a { display: flex; align-items: center; color: #000; text-decoration: none; font-size: 1.1rem; width: 100%; }
@@ -59,7 +60,7 @@
         .nav-item-epk { margin-top: auto; }
         .nav-item-epk a { color: var(--anton-red) !important; font-weight: bold; }
         
-        .nav-label { display: flex; align-items: center; width: 100%; }
+        .nav-label { display: flex; align-items: center; width: 100%; text-transform: uppercase; }
         .nav-label i.main-icon { width: 30px; text-align: center; margin-right: 10px; }
         .arrow-wrapper { margin-left: auto; padding-right: 5px; }
         .submenu-indicator { font-size: 0.8rem; transition: transform 0.3s; }
@@ -119,7 +120,7 @@
         <div class="nav-item">
             <a href="meinemusik.html"><span class="nav-label"><i class="fa-solid fa-music main-icon"></i> MEINE MUSIK</span><div class="arrow-wrapper"><i class="fa-solid fa-caret-down submenu-indicator"></i></div></a>
             <div class="submenu">
-                <a href="ueber-mich.html"><i class="fa-regular fa-face-smile"></i> <span class="umlaut-fix">U</span>BER MICH</a>
+                <a href="ueber-mich.html"><i class="fa-regular fa-face-smile"></i> ÜBER MICH</a>
                 <a href="meinemusik.html"><i class="fa-solid fa-volume-high"></i> VERÖFFENTLICHUNGEN</a>
                 <a href="konzerte.html"><i class="fa-solid fa-microphone"></i> KONZERTE</a>
             </div>
