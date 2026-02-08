@@ -25,13 +25,9 @@
             background: #fff url('AFaPo Wall.jpg') no-repeat center center fixed; 
             background-size: cover; 
             background-blend-mode: multiply; 
-            /* overflow-x entfernt für Wischbarkeit */
-            overflow-x: auto; 
         }
 
-        #stable-bg {
-            display: none;
-        }
+        #stable-bg { display: none; }
         
         header { position: fixed; top: 0; width: 100%; height: 80px; display: flex; justify-content: center; align-items: center; z-index: 100; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border-bottom: 2px solid #000; }
         .header-title { color: var(--anton-red); font-size: 1.8rem; text-decoration: none; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; }
@@ -92,29 +88,35 @@
         footer a { color: #000; text-decoration: none; margin: 0 8px; font-weight: bold; transition: all 0.3s ease; }
         footer a:hover { color: var(--anton-yellow) !important; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; }
 
-        /* --- MOBILE MEDIA QUERY --- */
+        /* --- MOBILE MEDIA QUERY (WISCH-LOGIK) --- */
         @media (max-width: 800px) {
             body { 
                 background: #000 !important; 
-                /* Wischbarkeit aktivieren */
-                overflow-x: auto !important;
-                -webkit-overflow-scrolling: touch;
+                overflow-x: auto !important; /* Horizontales Scrollen erlauben */
+                width: 140vw !important; /* Seite künstlich breiter machen für Wisch-Effekt */
             }
             
             #stable-bg { 
                 display: block !important;
                 position: fixed;
                 top: 0; left: 0; 
-                width: 200%; /* Erweitert für Wischspielraum */
+                width: 160vw; /* Hintergrund breiter als Body für Bewegungseffekt */
                 background: url('AFaPo Wall.jpg') no-repeat center center;
                 background-size: cover;
                 z-index: -1;
                 transform: translateZ(0);
             }
 
+            /* Fixierte Elemente müssen an den Viewport (Bildschirm) gebunden bleiben */
+            header, footer, .sidebar-right { 
+                width: 100vw !important; 
+                left: 0 !important;
+                right: auto !important;
+            }
+
             .sidebar-left { 
                 left: 0 !important; top: -150px !important; bottom: auto !important; 
-                width: 100% !important; height: 65px !important; 
+                width: 100vw !important; height: 65px !important; 
                 flex-direction: row !important; justify-content: space-evenly !important; 
                 align-items: center !important; padding: 0 5px !important; 
                 border-right: none !important; border-bottom: 2px solid #000 !important; 
@@ -133,32 +135,23 @@
                 padding: 0 0 0 10px !important; height: 40px !important; 
                 display: flex !important; align-items: center !important;
             }
-            .nav-item-epk .main-icon { display: none !important; }
             .nav-item-epk .nav-label { display: flex !important; flex-direction: column !important; align-items: center !important; line-height: 1.1 !important; }
             .nav-item-epk .nav-label span { display: block !important; font-size: 0.72rem !important; font-weight: bold !important; color: var(--anton-red) !important; text-align: center !important; }
 
             .sidebar-right { 
-                position: fixed !important;
-                top: auto !important; bottom: 45px !important; 
-                right: 0 !important; left: 0 !important; 
-                width: 100% !important; height: 50px !important; 
+                bottom: 45px !important; 
+                height: 50px !important; 
                 flex-direction: row !important; justify-content: space-evenly !important; 
-                transform: translate3d(0,0,0) !important; border-radius: 0 !important; 
                 background: rgba(255, 255, 255, 0.65) !important; 
                 border-top: 1.5px solid #000 !important; padding: 5px 0 !important; 
                 z-index: 1000 !important; backdrop-filter: blur(5px) !important;
-                -webkit-backface-visibility: hidden;
             }
-            .sidebar-right a i { font-size: 1.4rem !important; }
 
             footer { 
-                position: fixed !important; bottom: 0 !important; left: 0 !important;
-                width: 100% !important; height: 45px !important;
+                bottom: 0 !important; height: 45px !important;
                 background: rgba(255, 255, 255, 0.65) !important; 
                 z-index: 1100 !important; border-top: 1px solid #000 !important;
                 display: flex !important; align-items: center !important; justify-content: center !important;
-                padding: 0 !important; transform: translate3d(0,0,0) !important;
-                -webkit-backface-visibility: hidden;
             }
             footer div:first-child { display: none !important; }
             footer div:last-child { font-size: 0.85rem !important; }
@@ -229,14 +222,22 @@
         function fixMobileHeight() {
             if (window.innerWidth <= 800) {
                 const bg = document.getElementById('stable-bg');
-                if (bg) {
-                    bg.style.height = window.innerHeight + 'px';
-                }
+                if (bg) { bg.style.height = window.innerHeight + 'px'; }
             }
         }
         window.addEventListener('load', fixMobileHeight);
-        window.addEventListener('orientationchange', () => {
-            setTimeout(fixMobileHeight, 200);
+        window.addEventListener('orientationchange', () => { setTimeout(fixMobileHeight, 200); });
+
+        // Parallax-Effekt beim horizontalen Wischen
+        window.addEventListener('scroll', () => {
+            if (window.innerWidth <= 800) {
+                const scrollX = window.scrollX;
+                const bg = document.getElementById('stable-bg');
+                if (bg) {
+                    // Das Bild bewegt sich leicht entgegengesetzt zum Wischen
+                    bg.style.transform = `translate3d(-${scrollX * 0.2}px, 0, 0)`;
+                }
+            }
         });
 
         function toggleMenu() { document.getElementById('sidebar').classList.toggle('open'); }
