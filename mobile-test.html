@@ -16,7 +16,7 @@
         }
 
         /* ============================================================
-           ABSOLUTER DESKTOP MASTER (UNANTASTBAR)
+           ABSOLUTER DESKTOP MASTER (STAND 2026)
            ============================================================ */
         html, body { height: 100%; margin: 0; padding: 0; }
         body { 
@@ -32,7 +32,7 @@
         .menu-btn::after { content: 'A'; position: absolute; font-weight: bold; font-size: 28px; opacity: 0; transition: opacity 0.2s; }
         .menu-btn:hover span { opacity: 0; }
         .menu-btn:hover::after { opacity: 1; }
-        .sidebar-left { position: fixed; top: 0; bottom: 0; left: -300px; width: var(--sidebar-width); background: rgba(255, 235, 59, 0.98); z-index: 200; display: flex; flex-direction: column; padding: 100px 15px 30px 15px; transition: left 0.4s ease-in-out; border-right: 2px solid #000; box-sizing: border-box; }
+        .sidebar-left { position: fixed; top: 0; bottom: 0; left: -300px; width: var(--sidebar-width); background: rgba(255, 235, 59, 0.98); z-index: 205; display: flex; flex-direction: column; padding: 100px 15px 30px 15px; transition: all 0.4s ease-in-out; border-right: 2px solid #000; box-sizing: border-box; }
         .sidebar-left.open { left: 0; }
         .nav-item { margin-bottom: 20px; width: 100%; }
         .sidebar-left a { display: flex; align-items: center; color: #000; text-decoration: none; font-size: 1.1rem; width: 100%; transition: color 0.3s; }
@@ -71,60 +71,68 @@
         .box-riesenhunger { width: 10%; height: 3%; top: 67%; left: 43%; }
         main { flex: 1; padding: 120px 20px 40px 20px; z-index: 5; width: 100%; box-sizing: border-box; }
         footer { width: 100%; padding: 10px 0; background: rgba(255,255,255,0.9); border-top: 1.5px solid #000; text-align: center; font-size: 0.75rem; z-index: 100; position: relative; }
-        footer a { color: #000; text-decoration: none; margin: 0 8px; font-weight: bold; transition: all 0.3s ease; }
+        footer a { color: #000; text-decoration: none; margin: 0 8px; font-weight: bold; }
 
         /* ============================================================
-           MOBILER BEREICH (STRENG ISOLIERT)
+           MOBILER BEREICH (MAXIMALE PRÄZISION)
            ============================================================ */
+        #mobile-bg-fix { display: none; }
+
         @media (max-width: 800px) {
-            body { 
-                background: url('AFaPo Wall.jpg') no-repeat !important;
-                background-size: 200% auto !important; /* Bild ist breiter als Screen */
-                background-position: center top !important;
-                overflow-x: hidden !important; 
-                display: block !important; /* Löst Flexbox-Konflikte mobil */
-                position: relative;
+            body { background: #000 !important; overflow: hidden !important; position: fixed; width: 100%; height: 100%; }
+            
+            /* Wischbarer Hintergrund: 300% Breite für extrem viel Spielraum */
+            #mobile-bg-fix { 
+                display: block; position: fixed; top: 0; left: -100%; width: 300%; height: 100%; 
+                background: url('AFaPo Wall.jpg') no-repeat center center; background-size: cover; 
+                z-index: -1; transform: translateX(0); will-change: transform;
             }
 
-            /* Sidebar Oben: Fließt beim Scrollen mit (absolute) */
+            /* Sidebar Oben: Versteckt, fährt von oben ein */
             .sidebar-left { 
-                position: absolute !important; left: 0 !important; top: 0 !important; 
-                width: 100% !important; height: 45px !important; flex-direction: row !important; 
-                padding: 0 !important; border-right: none !important; border-bottom: 2px solid #000 !important; 
-                justify-content: space-evenly !important; align-items: center !important; z-index: 201 !important;
+                left: 0 !important; top: -100% !important; bottom: auto !important; width: 100% !important; 
+                height: 55px !important; flex-direction: row !important; padding: 0 !important; 
+                border-right: none !important; border-bottom: 2px solid #000 !important; 
+                justify-content: space-evenly !important; align-items: center !important; 
+                transition: top 0.4s ease-in-out !important; background: var(--anton-yellow) !important;
             }
+            .sidebar-left.open { top: 0 !important; }
             .sidebar-left .nav-label span, .sidebar-left .arrow-wrapper, .sidebar-left .submenu { display: none !important; }
-            .sidebar-left .nav-label i { font-size: 1.2rem !important; }
+            .sidebar-left .nav-label i { font-size: 1.4rem !important; margin: 0 !important; }
+            .sidebar-left .nav-item { margin: 0 !important; width: auto !important; }
 
-            header { position: absolute !important; top: 45px !important; height: 50px !important; }
-            .menu-btn { position: absolute !important; top: 52px; left: 10px; width: 35px; height: 35px; background: rgba(0,0,0,0.6); border-color: #fff; }
-
+            header { position: fixed !important; top: 0 !important; height: 60px !important; z-index: 100; transition: top 0.4s; }
+            .sidebar-left.open ~ header { top: 55px !important; } /* Header rutscht unter Sidebar wenn offen */
+            
+            .menu-btn { top: 10px; left: 10px; width: 40px; height: 40px; background: rgba(0,0,0,0.7); }
+            
             /* Social Sidebar: Unten fixiert */
             .sidebar-right { 
-                position: fixed !important; top: auto !important; bottom: 50px !important; 
-                left: 0 !important; width: 100% !important; height: 45px !important; 
-                flex-direction: row !important; transform: none !important; border-radius: 0 !important; 
-                border-top: 1.5px solid #000 !important; background: rgba(255,255,255,0.95) !important; 
-                justify-content: space-evenly !important; padding: 0 !important; z-index: 999 !important;
+                top: auto !important; bottom: 50px !important; left: 0 !important; width: 100% !important; 
+                height: 50px !important; flex-direction: row !important; transform: none !important; 
+                border-radius: 0 !important; border-top: 1.5px solid #000 !important; 
+                background: rgba(255,255,255,0.9) !important; justify-content: space-evenly !important; padding: 0 !important; z-index: 998 !important;
             }
 
-            /* Footer Mobil: Angepasste Größe */
-            footer { position: fixed !important; bottom: 0 !important; height: 50px !important; display: flex !important; align-items: center; justify-content: center; font-size: 0.9rem !important; }
+            footer { position: fixed !important; bottom: 0 !important; height: 50px !important; display: flex !important; align-items: center; justify-content: center; font-size: 0.85rem !important; }
             footer div:first-child { display: none !important; }
-            
-            main { padding: 110px 15px 120px 15px !important; min-height: 120vh; }
+
+            main { padding: 80px 15px 110px 15px !important; overflow-y: auto; height: 100%; -webkit-overflow-scrolling: touch; }
             .invisible-box { display: none; }
         }
 
-        /* Querformat Mobil */
         @media (max-width: 800px) and (orientation: landscape) {
-            .sidebar-right { position: relative !important; margin-top: 20px; bottom: 0 !important; }
-            footer { position: relative !important; }
+            header, footer, .sidebar-left { position: absolute !important; }
+            body { overflow-y: auto !important; position: relative !important; }
+            .sidebar-right { position: relative !important; margin-top: 30px; bottom: 0 !important; }
         }
     </style>
 </head>
-<body id="mobile-body">
+<body>
+    <div id="mobile-bg-fix"></div>
+
     <header><div class="header-title">ANTON</div></header>
+    
     <div class="menu-btn" onclick="toggleMenu()"><span>☰</span></div>
     
     <a href="meinemusik.html" class="invisible-box box-ertappt"></a>
@@ -179,27 +187,35 @@
     <script>
         function toggleMenu() { document.getElementById('sidebar').classList.toggle('open'); }
         
-        // WISCH-LOGIK VIA BACKGROUND-POSITION (Verhindert Schwarzränder)
+        // ULTIMATIVE WISCH-LOGIK (300% Width)
         let startX = 0;
-        let bgPos = 50; // Start in der Mitte (50%)
+        let currentTranslate = 0;
+        const bg = document.getElementById('mobile-bg-fix');
+        const screenWidth = window.innerWidth;
 
-        if (window.innerWidth <= 800) {
+        if (screenWidth <= 800) {
             document.addEventListener('touchstart', e => {
                 startX = e.touches[0].clientX;
             }, {passive: true});
 
             document.addEventListener('touchmove', e => {
-                const x = e.touches[0].clientX;
-                const walk = (startX - x) * 0.1; // Sensitivität
-                bgPos += walk;
+                const moveX = e.touches[0].clientX;
+                const diff = moveX - startX;
+                let newX = currentTranslate + diff;
 
-                // Grenzen einhalten (0% bis 100% des Bildes)
-                if (bgPos < 0) bgPos = 0;
-                if (bgPos > 100) bgPos = 100;
+                // Da das Bild bei left: -100% startet und 300% breit ist:
+                // Wir haben 100% Puffer links und 100% Puffer rechts.
+                if (newX > screenWidth) newX = screenWidth;
+                if (newX < -screenWidth) newX = -screenWidth;
 
-                document.body.style.backgroundPosition = `${bgPos}% top`;
-                startX = x;
+                bg.style.transform = `translateX(${newX}px)`;
             }, {passive: true});
+
+            document.addEventListener('touchend', e => {
+                // Speichert die Position für das nächste Wischen
+                const matrix = new WebKitCSSMatrix(window.getComputedStyle(bg).transform);
+                currentTranslate = matrix.m41;
+            });
         }
 
         document.addEventListener('click', function(e) {
