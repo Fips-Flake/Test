@@ -27,11 +27,11 @@
         }
         
         /* HEADER DESKTOP */
-        header { position: fixed; top: 0; width: 100%; height: 80px; display: flex; justify-content: center; align-items: center; z-index: 2000; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border-bottom: 2px solid #000; }
+        header { position: fixed; top: 0; width: 100%; height: 80px; display: flex; justify-content: center; align-items: center; z-index: 3000; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border-bottom: 2px solid #000; }
         .header-title { color: var(--anton-red); font-size: 1.8rem; text-decoration: none; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; }
         
         /* MENU BUTTON */
-        .menu-btn { position: fixed; top: 18px; left: 20px; font-size: 24px; cursor: pointer; z-index: 2100; background: #000; color: #fff; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 5px; transition: all 0.3s ease; border: 2px solid #000; overflow: hidden; }
+        .menu-btn { position: fixed; top: 18px; left: 20px; font-size: 24px; cursor: pointer; z-index: 3100; background: #000; color: #fff; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 5px; transition: all 0.3s ease; border: 2px solid #000; overflow: hidden; }
         .menu-btn:hover { background: var(--anton-yellow); color: #000; }
         .menu-btn span { transition: opacity 0.2s; }
         .menu-btn::after { content: 'A'; position: absolute; font-weight: bold; font-size: 28px; opacity: 0; transition: opacity 0.2s; }
@@ -57,8 +57,8 @@
         .nav-item-epk { margin-top: auto; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 15px; }
         .nav-item-epk a { color: var(--anton-red) !important; font-weight: bold; }
         
-        /* SIDEBAR RIGHT (DESKTOP MASTER - PULSE) */
-        .sidebar-right { position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 50px; display: flex; flex-direction: column; align-items: center; gap: 15px; z-index: 1000; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(3px); padding: 25px 0; border-radius: 20px 0 0 20px; }
+        /* SIDEBAR RIGHT (DESKTOP MASTER) */
+        .sidebar-right { position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 50px; display: flex; flex-direction: column; align-items: center; gap: 15px; z-index: 2000; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(3px); padding: 25px 0; border-radius: 20px 0 0 20px; }
         .sidebar-right a i { color: #000; font-size: 1.2rem; transition: transform 0.4s ease-in-out, color 0.4s ease-in-out; animation: ultraFlowWave 6s linear infinite; }
         @keyframes ultraFlowWave { 0% { transform: scale(1); color: #000; } 9.33% { transform: scale(1.55); color: var(--brand-color); } 23.33%, 100% { transform: scale(1); color: #000; } }
         .sidebar-right a:nth-child(1) i { --brand-color: #f00; animation-delay: 0.0s; }
@@ -73,7 +73,7 @@
         .sidebar-right:hover a i { animation-play-state: paused !important; transform: scale(1) !important; color: #000 !important; }
         .sidebar-right a:hover i { color: var(--brand-color) !important; transform: scale(1.55) !important; }
 
-        /* KLICKBOXEN DESKTOP (UNVERÄNDERT) */
+        /* KLICKBOXEN DESKTOP (MASTER) */
         .invisible-box { position: fixed; z-index: 10; background: transparent; border: none; cursor: pointer; }
         .box-ertappt { width: 19%; height: 43%; top: 16%; left: 17%; transform: rotate(-4deg); }
         .box-mitte { width: 20%; height: 42%; top: 17%; left: 38%; transform: rotate(3deg); }
@@ -82,19 +82,35 @@
         .box-pause3 { width: 5%; height: 18%; top: 21%; left: 66%; transform: rotate(45deg); }
         .box-riesenhunger { width: 10%; height: 3%; top: 67%; left: 43%; }
 
-        /* FOOTER DESKTOP (WIEDERHERGESTELLTER MASTER) */
+        /* FOOTER DESKTOP (MASTER) */
         footer { width: 100%; padding: 10px 0; background: rgba(255,255,255,0.9); border-top: 1.5px solid #000; text-align: center; font-size: 0.75rem; z-index: 100; position: relative; margin-top: auto; }
         footer a { color: #000; text-decoration: none; margin: 0 8px; font-weight: bold; transition: all 0.3s ease; }
         footer a:hover { color: var(--anton-yellow) !important; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; }
 
-        /* --- MOBILE RE-DESIGN --- */
+        /* --- MOBILE LÖSUNG --- */
+        .mobile-panorama-container { display: none; }
+
         @media (max-width: 800px) {
-            body { background-attachment: scroll !important; }
+            body { background: #000 !important; overflow: hidden; }
             .invisible-box { display: none !important; }
+            
+            /* Reaktiviere Wischen ohne Snap (weniger sensibel) */
+            .mobile-panorama-container { 
+                display: block; position: fixed; inset: 0; 
+                overflow-x: auto; overflow-y: hidden; z-index: 1; 
+                -webkit-overflow-scrolling: touch; 
+            }
+            .panorama-content { 
+                width: 300%; height: 100%; 
+                background: #fff url('AFaPo Wall.jpg') no-repeat center center;
+                background-size: cover; background-blend-mode: multiply;
+            }
+
             header { height: 60px; z-index: 3000; }
             .header-title { font-size: 1.4rem; }
             .menu-btn { top: 10px; left: 15px; width: 40px; height: 40px; font-size: 20px; z-index: 3100; }
 
+            /* Sidebar Dropdown Mobile */
             .sidebar-left { 
                 left: 0 !important; top: -100px !important; bottom: auto; 
                 width: 100% !important; height: 60px !important; 
@@ -118,12 +134,10 @@
             
             footer { 
                 position: fixed !important; bottom: 50px !important; left: 0; 
-                width: 100%; height: auto; padding: 8px 0;
+                width: 100%; height: auto; padding: 10px 0;
                 background: rgba(255,255,255,0.95); border-top: 1px solid #000;
                 z-index: 2900; font-size: 0.65rem; margin-top: 0;
             }
-            /* Mobil den Hover-Effekt deaktivieren (optional, da Touch) */
-            footer a:hover { text-shadow: none; }
         }
     </style>
 </head>
@@ -137,6 +151,10 @@
     <a href="meinemusik.html" class="invisible-box box-pause2"></a>
     <a href="meinemusik.html" class="invisible-box box-pause3"></a>
     <a href="neuesingle.html" class="invisible-box box-riesenhunger"></a>
+
+    <div class="mobile-panorama-container" id="mobileScroll">
+        <div class="panorama-content"></div>
+    </div>
 
     <nav class="sidebar-left" id="sidebar">
         <div class="nav-item">
@@ -182,6 +200,10 @@
 
     <script>
         function toggleMenu() { document.getElementById('sidebar').classList.toggle('open'); }
+        window.addEventListener('load', () => {
+            const sc = document.getElementById('mobileScroll');
+            if(sc && window.innerWidth <= 800) { sc.scrollLeft = (sc.scrollWidth - window.innerWidth) / 2; }
+        });
         document.addEventListener('click', function(e) {
             const sb = document.getElementById("sidebar");
             const btn = document.querySelector(".menu-btn");
