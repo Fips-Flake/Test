@@ -91,19 +91,22 @@
         .mobile-panorama-container { display: none; }
 
         @media (max-width: 800px) {
-            body { background: #000 !important; overflow: hidden; }
+            body { background: #000 !important; overflow: hidden; height: 100vh; position: fixed; width: 100%; }
             .invisible-box { display: none !important; }
             
-            /* Reaktiviere Wischen ohne Snap (weniger sensibel) */
+            /* Stabilisiertes Wischen ohne Skalierungs-Effekt */
             .mobile-panorama-container { 
-                display: block; position: fixed; inset: 0; 
+                display: block; position: fixed; 
+                top: 0; left: 0; right: 0; bottom: 0;
                 overflow-x: auto; overflow-y: hidden; z-index: 1; 
                 -webkit-overflow-scrolling: touch; 
             }
             .panorama-content { 
                 width: 300%; height: 100%; 
                 background: #fff url('AFaPo Wall.jpg') no-repeat center center;
-                background-size: cover; background-blend-mode: multiply;
+                background-size: cover; /* Verhindert das Springen durch feste Viewport-Bindung */
+                background-attachment: scroll; 
+                background-blend-mode: multiply;
             }
 
             header { height: 60px; z-index: 3000; }
@@ -125,6 +128,9 @@
             .nav-item { width: auto; margin-bottom: 0; display: flex; align-items: center; }
             .nav-label span, .submenu, .arrow-wrapper { display: none !important; }
             .nav-label i.main-icon { font-size: 1.5rem; margin-right: 0; color: #000; }
+            
+            /* EPK Icon Korrektur Mobil (Rot & Bullhorn) */
+            .nav-item-epk i.main-icon { color: var(--anton-red) !important; }
 
             .sidebar-right { 
                 top: auto; bottom: 0; right: 0; left: 0; width: 100%; height: 50px; 
@@ -138,6 +144,7 @@
                 background: rgba(255,255,255,0.95); border-top: 1px solid #000;
                 z-index: 2900; font-size: 0.65rem; margin-top: 0;
             }
+            footer a:hover { text-shadow: none; }
         }
     </style>
 </head>
