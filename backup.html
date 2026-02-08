@@ -24,7 +24,7 @@
             display: flex; 
             flex-direction: column; 
             font-family: 'Special Elite', cursive; 
-            /* KRITIK: Nutze 100% statt cover für exakte Klickflächen-Positionierung */
+            /* KRITIK: Nutze 100% statt cover, damit die Boxen fest auf dem Motiv sitzen! */
             background: #fff url('AFaPo Wall.jpg') fixed center top no-repeat; 
             background-size: 100%; 
             background-blend-mode: multiply; 
@@ -74,11 +74,6 @@
             overflow: hidden; 
         }
 
-        .menu-btn:hover { 
-            background: var(--anton-yellow); 
-            color: #000; 
-        }
-
         .menu-btn span { transition: opacity 0.2s; }
         .menu-btn::after { 
             content: 'A'; 
@@ -89,10 +84,11 @@
             transition: opacity 0.2s; 
         }
 
+        .menu-btn:hover { background: var(--anton-yellow); color: #000; }
         .menu-btn:hover span { opacity: 0; }
         .menu-btn:hover::after { opacity: 1; }
 
-        /* SIDEBAR LINKS */
+        /* SIDEBAR LEFT */
         .sidebar-left { 
             position: fixed; 
             top: 0; 
@@ -142,7 +138,7 @@
         .submenu a { font-size: 0.95rem; margin-bottom: 10px; }
         .submenu a i { margin-right: 10px; width: 20px; text-align: center; font-size: 0.9rem; }
 
-        /* SIDEBAR RECHTS */
+        /* SIDEBAR RIGHT */
         .sidebar-right { 
             position: fixed; 
             top: 50%; 
@@ -183,12 +179,15 @@
         .sidebar-right a:nth-child(8) i { --brand-color: #f00; animation-delay: 1.75s; }
         .sidebar-right a:nth-child(9) i { --brand-color: #00A8E1; animation-delay: 2.0s; }
 
-        /* ÜBERNOMMENE UNSICHTBARE BENTO-BOXEN (KLICKFLÄCHEN) */
+        .sidebar-right:hover a i { animation-play-state: paused !important; transform: scale(1) !important; color: #000 !important; }
+        .sidebar-right a:hover i { color: var(--brand-color) !important; transform: scale(1.55) !important; transition: transform 0.3s ease-out !important; }
+
+        /* BENTO-BOXEN (TEST-MODUS: ROTER HINTERGRUND) */
         .invisible-box {
             position: fixed;
             z-index: 10;
-            background: transparent; 
-            border: none;
+            background: rgba(255, 0, 0, 0.3); /* Test-Sichtbarkeit */
+            border: 2px solid #000;
             cursor: pointer;
         }
 
@@ -233,7 +232,7 @@
         }
 
         .box-riesenhunger {
-            width: 9%;
+            width: 10%;
             height: 3%;
             top: 67%;
             left: 44%;
