@@ -141,7 +141,7 @@ header {
 .submenu a { font-size: 0.95rem; margin-bottom: 10px; }
 .submenu a i { margin-right: 10px; width: 20px; text-align: center; font-size: 0.9rem; }
 
-/* SIDEBAR RECHTS (STABIL) */
+/* SIDEBAR RECHTS */
 .sidebar-right { 
     position: fixed; 
     top: 50%; 
@@ -185,7 +185,7 @@ header {
 .sidebar-right:hover a i { animation-play-state: paused !important; transform: scale(1) !important; color: #000 !important; }
 .sidebar-right a:hover i { color: var(--brand-color) !important; transform: scale(1.55) !important; transition: transform 0.3s ease-out !important; }
 
-/* KORRIGIERTE TRANSPARENTE BENTO-BOXEN (KLICKFLÄCHEN) */
+/* ÜBERNOMMENE UNSICHTBARE BENTO-BOXEN (KLICKFLÄCHEN) */
 .invisible-box {
     position: fixed;
     z-index: 10;
@@ -194,13 +194,52 @@ header {
     cursor: pointer;
 }
 
-/* Exakte Wiederherstellung der ursprünglichen Koordinaten */
-.box-ertappt { width: 19%; height: 43%; top: 16%; left: 17%; transform: rotate(-4deg); }
-.box-mitte { width: 20%; height: 42%; top: 17%; left: 38%; transform: rotate(3deg); }
-.box-pause { width: 10%; height: 43%; top: 18%; left: 70%; transform: rotate(1deg); }
-.box-pause2 { width: 10%; height: 30%; top: 34%; left: 60%; transform: rotate(1deg); }
-.box-pause3 { width: 5%; height: 18%; top: 21%; left: 66%; transform: rotate(45deg); }
-.box-riesenhunger { width: 9%; height: 3%; top: 67%; left: 44%; }
+.box-ertappt {
+    width: 19%;  
+    height: 43%; 
+    top: 16%;    
+    left: 17%;   
+    transform: rotate(-4deg);
+}
+
+.box-mitte {
+    width: 20%;
+    height: 42%;
+    top: 17%;
+    left: 38%;
+    transform: rotate(3deg);
+}
+
+.box-pause {
+    width: 10%;
+    height: 43%;
+    top: 21%;
+    left: 70%;
+    transform: rotate(1deg);
+}
+
+.box-pause2 {
+    width: 10%;
+    height: 30%;
+    top: 34%;
+    left: 60%;
+    transform: rotate(1deg);
+}
+
+.box-pause3 {
+    width: 5%;
+    height: 18%;
+    top: 21%;
+    left: 66%;
+    transform: rotate(45deg);
+}
+
+.box-riesenhunger {
+    width: 9%;
+    height: 3%;
+    top: 67%;
+    left: 44%;
+}
 
 main { flex: 1; padding: 120px 20px 40px 20px; z-index: 5; width: 100%; box-sizing: border-box; }
 
