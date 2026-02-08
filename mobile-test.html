@@ -15,17 +15,9 @@
             --amazon-blue: #00A8E1; 
         }
 
-        /* --- DESKTOP MASTER (UNVERÄNDERT) --- */
+        /* --- DESKTOP MASTER (STANDFEST) --- */
         html, body { height: 100%; margin: 0; padding: 0; overflow-x: hidden; }
-        
-        body { 
-            display: flex; 
-            flex-direction: column; 
-            font-family: 'Special Elite', cursive; 
-            background: #fff url('AFaPo Wall.jpg') no-repeat center center fixed; 
-            background-size: cover; 
-            background-blend-mode: multiply; 
-        }
+        body { display: flex; flex-direction: column; font-family: 'Special Elite', cursive; background: #fff url('AFaPo Wall.jpg') no-repeat center center fixed; background-size: cover; background-blend-mode: multiply; }
 
         #stable-bg { display: none; }
         
@@ -34,131 +26,67 @@
         
         .menu-btn { position: fixed; top: 18px; left: 20px; font-size: 24px; cursor: pointer; z-index: 210; background: #000; color: #fff; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 5px; transition: all 0.3s ease; border: 2px solid #000; overflow: hidden; }
         .menu-btn:hover { background: var(--anton-yellow); color: #000; }
-        .menu-btn span { transition: opacity 0.2s; }
-        .menu-btn::after { content: 'A'; position: absolute; font-weight: bold; font-size: 28px; opacity: 0; transition: opacity 0.2s; }
-        .menu-btn:hover span { opacity: 0; }
-        .menu-btn:hover::after { opacity: 1; }
         
         .sidebar-left { position: fixed; top: 0; bottom: 0; left: -300px; width: var(--sidebar-width); background: rgba(255, 235, 59, 0.98); z-index: 200; display: flex; flex-direction: column; padding: 100px 15px 30px 15px; transition: left 0.4s ease-in-out; border-right: 2px solid #000; box-sizing: border-box; }
         .sidebar-left.open { left: 0; }
         
-        .nav-item { margin-bottom: 20px; width: 100%; }
-        .sidebar-left a { display: flex; align-items: center; color: #000; text-decoration: none; font-size: 1.1rem; width: 100%; transition: color 0.3s; }
-        .sidebar-left a:hover { color: var(--anton-red); }
-        .nav-label { display: flex; align-items: center; width: 100%; }
-        .nav-label i.main-icon { width: 30px; text-align: center; margin-right: 10px; }
-        .arrow-wrapper { margin-left: auto; padding-right: 5px; }
-        .submenu-indicator { font-size: 0.8rem; transition: transform 0.3s; }
-        .nav-item:hover .submenu-indicator { transform: rotate(180deg); }
-        .submenu { display: none; flex-direction: column; padding-left: 35px; margin-top: 10px; width: 100%; box-sizing: border-box; }
-        .nav-item:hover .submenu { display: flex; }
-        .submenu a { font-size: 0.85rem; margin-bottom: 12px; white-space: nowrap; justify-content: flex-start; padding-top: 4px; }
-        .submenu a i { margin-right: 10px; width: 18px; text-align: center; }
-        .nav-item-epk { margin-top: auto; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 15px; }
-        .nav-item-epk a { color: var(--anton-red) !important; font-weight: bold; }
-        
+        /* Rechte Sidebar (Animationen gemäß Master) */
         .sidebar-right { position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 50px; display: flex; flex-direction: column; align-items: center; gap: 15px; z-index: 999; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(3px); padding: 25px 0; border-radius: 20px 0 0 20px; }
-        .sidebar-right a i { color: #000; font-size: 1.2rem; transition: transform 0.4s ease-in-out, color 0.4s ease-in-out; animation: ultraFlowWave 6s linear infinite; }
-        
+        .sidebar-right a i { color: #000; font-size: 1.2rem; transition: transform 0.4s ease-in-out; animation: ultraFlowWave 6s linear infinite; }
         @keyframes ultraFlowWave { 0% { transform: scale(1); color: #000; } 9.33% { transform: scale(1.55); color: var(--brand-color); } 23.33%, 100% { transform: scale(1); color: #000; } }
-        .sidebar-right a:nth-child(1) i { --brand-color: #f00; animation-delay: 0.0s; }
-        .sidebar-right a:nth-child(2) i { --brand-color: #25F4EE; animation-delay: 0.25s; }
-        .sidebar-right a:nth-child(3) i { --brand-color: #E1306C; animation-delay: 0.5s; }
-        .sidebar-right a:nth-child(4) i { --brand-color: #25D366; animation-delay: 0.75s; }
-        .sidebar-right a:nth-child(5) i { --brand-color: #1877F2; animation-delay: 1.0s; }
-        .sidebar-right a:nth-child(6) i { --brand-color: #1DB954; animation-delay: 1.25s; }
-        .sidebar-right a:nth-child(7) i { --brand-color: var(--apple-gray); animation-delay: 1.5s; }
-        .sidebar-right a:nth-child(8) i { --brand-color: #f00; animation-delay: 1.75s; }
-        .sidebar-right a:nth-child(9) i { --brand-color: var(--amazon-blue); animation-delay: 2.0s; }
-        
-        .sidebar-right:hover a i { animation-play-state: paused !important; transform: scale(1) !important; color: #000 !important; }
-        .sidebar-right a:hover i { color: var(--brand-color) !important; transform: scale(1.55) !important; }
 
-        .invisible-box { position: fixed; z-index: 10; background: transparent; border: none; cursor: pointer; }
-        .box-ertappt { width: 19%; height: 43%; top: 16%; left: 17%; transform: rotate(-4deg); }
-        .box-mitte { width: 20%; height: 42%; top: 17%; left: 38%; transform: rotate(3deg); }
-        .box-pause { width: 10%; height: 43%; top: 21%; left: 70%; transform: rotate(1deg); }
-        .box-pause2 { width: 10%; height: 30%; top: 34%; left: 60%; transform: rotate(1deg); }
-        .box-pause3 { width: 5%; height: 18%; top: 21%; left: 66%; transform: rotate(45deg); }
-        .box-riesenhunger { width: 10%; height: 3%; top: 67%; left: 43%; }
-
-        main { flex: 1; padding: 120px 20px 40px 20px; z-index: 5; width: 100%; box-sizing: border-box; }
-
+        main { flex: 1; padding: 120px 20px 40px 20px; z-index: 5; }
         footer { width: 100%; padding: 10px 0; background: rgba(255,255,255,0.9); border-top: 1.5px solid #000; text-align: center; font-size: 0.75rem; z-index: 100; position: relative; }
-        footer a { color: #000; text-decoration: none; margin: 0 8px; font-weight: bold; transition: all 0.3s ease; }
-        footer a:hover { color: var(--anton-yellow) !important; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; }
 
-        /* --- MOBILE MEDIA QUERY (ERZWUNGEN FÜR MOBILGERÄTE, AUCH QUER) --- */
-        @media screen and (max-width: 1024px), screen and (max-device-width: 1024px) {
-            body { 
-                background: #000 !important; 
-                overflow: hidden !important; /* Verhindert natives Scrollen um Wisch-Script zu nutzen */
-                width: 100vw !important;
-                height: 100vh !important;
-                position: fixed;
-            }
+        /* --- MOBILE & QUERFORMAT LOGIK --- */
+        @media screen and (max-width: 1024px) {
+            body { background: #000 !important; overflow: hidden !important; position: fixed; width: 100vw; height: 100vh; }
             
             #stable-bg { 
-                display: block !important;
-                position: fixed;
+                display: block !important; 
+                position: fixed; 
                 top: 0; 
-                left: -50vw; /* Startet mittig (200vw Breite, also -50vw um Mitte zu sehen) */
+                left: -50vw; 
                 width: 200vw; 
-                height: 100%;
-                background: url('AFaPo Wall.jpg') no-repeat center center;
-                background-size: cover;
+                height: 100%; 
+                background: url('AFaPo Wall.jpg') no-repeat center center; 
+                background-size: cover; 
                 z-index: -1;
-                will-change: transform;
+                /* Weiches Gleiten beim Wischen */
+                transition: left 0.1s ease-out; 
             }
 
-            header { width: 100vw !important; left: 0 !important; }
+            header, .sidebar-right { width: 100vw !important; left: 0 !important; right: auto !important; }
 
             .sidebar-left { 
-                left: 0 !important; top: -150px !important; bottom: auto !important; 
-                width: 100vw !important; height: 65px !important; 
-                flex-direction: row !important; justify-content: space-evenly !important; 
-                align-items: center !important; padding: 0 5px !important; 
-                border-right: none !important; border-bottom: 2px solid #000 !important; 
-                transition: top 0.4s ease-in-out !important; background: var(--anton-yellow) !important;
-                z-index: 90 !important;
+                left: 0 !important; top: -150px !important; width: 100vw !important; height: 65px !important; 
+                flex-direction: row !important; justify-content: space-evenly !important; padding: 0 !important;
+                border-right: none !important; border-bottom: 2px solid #000 !important; z-index: 1001 !important;
             }
             .sidebar-left.open { top: 80px !important; }
-            .sidebar-left .nav-item { width: auto !important; margin: 0 !important; }
-            .sidebar-left .nav-item:not(.nav-item-epk) .nav-label span { display: none !important; }
-            .sidebar-left .nav-item:not(.nav-item-epk) .main-icon { margin-right: 0 !important; font-size: 1.6rem !important; }
-            .sidebar-left .submenu, .sidebar-left .arrow-wrapper { display: none !important; }
-
-            .nav-item-epk { 
-                margin-top: 0 !important; border-top: none !important; 
-                border-left: 1.5px solid rgba(0,0,0,0.2) !important; 
-                padding: 0 0 0 10px !important; height: 40px !important; 
-                display: flex !important; align-items: center !important;
-            }
-            .nav-item-epk .nav-label { display: flex !important; flex-direction: column !important; align-items: center !important; line-height: 1.1 !important; }
-            .nav-item-epk .nav-label span { display: block !important; font-size: 0.72rem !important; font-weight: bold !important; color: var(--anton-red) !important; text-align: center !important; }
+            .nav-item-epk .nav-label { display: flex !important; flex-direction: column !important; line-height: 1 !important; align-items: center; }
+            .nav-item-epk .nav-label span { display: block !important; font-size: 0.7rem !important; font-weight: bold; color: var(--anton-red); }
 
             .sidebar-right { 
-                top: auto !important; bottom: 45px !important; 
-                right: 0 !important; left: 0 !important; 
-                width: 100vw !important; height: 50px !important; 
-                flex-direction: row !important; justify-content: space-evenly !important; 
-                transform: none !important; border-radius: 0 !important; 
-                background: rgba(255, 255, 255, 0.65) !important; 
-                border-top: 1.5px solid #000 !important; padding: 5px 0 !important; 
-                z-index: 1000 !important; backdrop-filter: blur(5px) !important;
+                top: auto !important; bottom: 45px !important; transform: none !important; 
+                height: 50px !important; flex-direction: row !important; 
+                background: rgba(255, 255, 255, 0.65) !important; border-top: 1.5px solid #000 !important;
             }
-            .sidebar-right a i { font-size: 1.4rem !important; }
 
             footer { 
-                position: fixed !important; bottom: 0 !important; left: 0 !important;
-                width: 100vw !important; height: 45px !important;
-                background: rgba(255, 255, 255, 0.65) !important; 
-                z-index: 1100 !important; border-top: 1px solid #000 !important;
-                display: flex !important; align-items: center !important; justify-content: center !important;
-                padding: 0 !important;
+                position: fixed !important; bottom: 0 !important; left: 0 !important; width: 100vw !important; 
+                height: 45px !important; background: rgba(255, 255, 255, 0.65) !important; 
+                display: flex !important; align-items: center; justify-content: center; z-index: 1100; 
             }
-            footer div:first-child { display: none !important; }
-            footer div:last-child { font-size: 0.85rem !important; }
+        }
+
+        /* Spezial-Anpassung für Querformat */
+        @media screen and (max-width: 1024px) and (orientation: landscape) {
+            body { overflow-y: auto !important; position: relative !important; height: auto !important; }
+            #stable-bg { width: 100vw !important; left: 0 !important; background-size: 100% auto !important; position: fixed !important; }
+            header { position: absolute !important; }
+            footer { position: relative !important; margin-top: 50px; }
+            .sidebar-right { position: relative !important; bottom: 0 !important; margin-top: 20px; }
         }
     </style>
 </head>
@@ -167,106 +95,73 @@
     <header><div class="header-title">ANTON</div></header>
     <div class="menu-btn" onclick="toggleMenu()"><span>☰</span></div>
     
-    <a href="meinemusik.html" class="invisible-box box-ertappt"></a>
-    <a href="neuesingle.html" class="invisible-box box-mitte"></a>
-    <a href="meinemusik.html" class="invisible-box box-pause"></a>
-    <a href="meinemusik.html" class="invisible-box box-pause2"></a>
-    <a href="meinemusik.html" class="invisible-box box-pause3"></a>
-    <a href="neuesingle.html" class="invisible-box box-riesenhunger"></a>
-
     <nav class="sidebar-left" id="sidebar">
-        <div class="nav-item">
-            <a href="hauptseite.html"><span class="nav-label"><i class="fa-solid fa-house main-icon"></i> <span>START</span></span></a>
-        </div>
-        <div class="nav-item">
-            <a href="meinemusik.html"><span class="nav-label"><i class="fa-solid fa-music main-icon"></i> <span>MEINE MUSIK</span></span><div class="arrow-wrapper"><i class="fa-solid fa-caret-down submenu-indicator"></i></div></a>
-            <div class="submenu">
-                <a href="ueber-mich.html"><i class="fa-regular fa-face-smile"></i> ÜBER MICH</a>
-                <a href="meinemusik.html"><i class="fa-solid fa-volume-high"></i> VERÖFFENTLICHUNGEN</a>
-                <a href="konzerte.html"><i class="fa-solid fa-microphone-lines"></i> KONZERTE</a>
-            </div>
-        </div>
-        <div class="nav-item">
-            <a href="shop.html"><span class="nav-label"><i class="fa-solid fa-cart-shopping main-icon"></i> <span>SHOP</span></span></a>
-        </div>
-        <div class="nav-item">
-            <a href="kontakt.html"><span class="nav-label"><i class="fa-solid fa-envelope main-icon"></i> <span>KONTAKT</span></span></a>
-        </div>
+        <div class="nav-item"><a href="hauptseite.html"><span class="nav-label"><i class="fa-solid fa-house main-icon"></i> <span>START</span></span></a></div>
+        <div class="nav-item"><a href="meinemusik.html"><span class="nav-label"><i class="fa-solid fa-music main-icon"></i> <span>MUSIK</span></span></a></div>
         <div class="nav-item nav-item-epk">
-            <a href="epk.html">
-                <span class="nav-label">
-                    <i class="fa-solid fa-bullhorn main-icon"></i> 
-                    <span>EPK/</span>
-                    <span>PRESSE</span>
-                </span>
-            </a>
+            <a href="epk.html"><span class="nav-label"><i class="fa-solid fa-bullhorn main-icon"></i><span>EPK/</span><span>PRESSE</span></span></a>
         </div>
     </nav>
 
     <aside class="sidebar-right">
-        <a href="https://www.youtube.com/@antonmusikvevo3861" target="_blank"><i class="fa-brands fa-youtube"></i></a>
-        <a href="https://www.tiktok.com/@anton.familienpop" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
-        <a href="https://www.instagram.com/anton.familienpop" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-        <a href="https://whatsapp.com/channel/0029Vb6WrdZInlqHDsgTp21e" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
-        <a href="https://www.facebook.com/Anton.Familienpop/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
-        <a href="https://open.spotify.com/intl-de/artist/348545011" target="_blank"><i class="fa-brands fa-spotify"></i></a>
-        <a href="https://music.apple.com/de/artist/anton/1687546783" target="_blank"><i class="fa-brands fa-apple"></i></a>
-        <a href="https://www.youtube.com/@AntonMusikVEVO" target="_blank"><i class="fa-solid fa-circle-play"></i></a>
-        <a href="https://music.amazon.de/artists/B0GF2ZR9RR" target="_blank"><i class="fa-brands fa-amazon"></i></a>
+        <a href="#" style="--brand-color: #f00"><i class="fa-brands fa-youtube"></i></a>
+        <a href="#" style="--brand-color: #25F4EE"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="#" style="--brand-color: #E1306C"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" style="--brand-color: #25D366"><i class="fa-brands fa-whatsapp"></i></a>
+        <a href="#" style="--brand-color: #1877F2"><i class="fa-brands fa-facebook"></i></a>
+        <a href="#" style="--brand-color: #1DB954"><i class="fa-brands fa-spotify"></i></a>
+        <a href="#" style="--brand-color: var(--apple-gray)"><i class="fa-brands fa-apple"></i></a>
+        <a href="#" style="--brand-color: #f00"><i class="fa-solid fa-circle-play"></i></a>
+        <a href="#" style="--brand-color: var(--amazon-blue)"><i class="fa-brands fa-amazon"></i></a>
     </aside>
 
     <main></main>
 
     <footer>
-        <div><a href="index.html">www.anton-familienpop.de</a></div>
+        <div><a href="index.html" style="display:none">www.anton-familienpop.de</a></div>
         <div><a href="impressum.html">Impressum</a> | <a href="datenschutz.html">Datenschutz</a></div>
     </footer>
 
     <script>
-        // Mobil-Optimierung für Höhe und Wischen
         let startX = 0;
-        let currentTranslate = -50; // Startwert in vw (Mitte)
+        let currentLeft = -50; // Startwert in vw
         const bg = document.getElementById('stable-bg');
 
-        function fixMobileHeight() {
-            if (window.innerWidth <= 1024) {
-                if (bg) { bg.style.height = window.innerHeight + 'px'; }
-            }
-        }
-
-        // Touch-Events für horizontales Wischen des Hintergrunds
+        // Touch-Handling für echtes Hin- und Herwischen
         document.addEventListener('touchstart', e => {
             startX = e.touches[0].clientX;
+            bg.style.transition = 'none'; // Sofortige Reaktion während des Wischens
         }, {passive: true});
 
         document.addEventListener('touchmove', e => {
-            if (window.innerWidth <= 1024) {
+            if (window.innerWidth <= 1024 && window.innerHeight > window.innerWidth) {
                 const touchX = e.touches[0].clientX;
-                const diff = (startX - touchX) / window.innerWidth * 100; // Differenz in vw
-                let newTranslate = currentTranslate - diff;
+                const moveX = (startX - touchX) / window.innerWidth * 100; // Differenz in vw
+                let newPos = currentLeft - moveX;
 
-                // Grenzen festlegen (man kann nicht unendlich weit wischen)
-                if (newTranslate > 0) newTranslate = 0;
-                if (newTranslate < -100) newTranslate = -100;
+                // Grenzen: Da das Bild 200vw breit ist, kann left von 0 bis -100vw gehen
+                if (newPos > 0) newPos = 0;
+                if (newPos < -100) newPos = -100;
 
-                bg.style.left = newTranslate + 'vw';
+                bg.style.left = newPos + 'vw';
             }
-        }, {passive: true});
+        }, {passive: false});
 
-        document.addEventListener('touchend', e => {
-            // Aktuellen Wert speichern
-            currentTranslate = parseFloat(bg.style.left) || -50;
+        document.addEventListener('touchend', () => {
+            currentLeft = parseFloat(bg.style.left) || -50;
+            bg.style.transition = 'left 0.3s ease-out'; // Sanftes Auslaufen nach dem Loslassen
         });
 
-        window.addEventListener('load', fixMobileHeight);
-        window.addEventListener('resize', fixMobileHeight);
+        // Höhe fixieren
+        function setHeight() {
+            if (window.innerWidth <= 1024) {
+                bg.style.height = window.innerHeight + 'px';
+            }
+        }
+        window.addEventListener('load', setHeight);
+        window.addEventListener('resize', setHeight);
 
         function toggleMenu() { document.getElementById('sidebar').classList.toggle('open'); }
-        document.addEventListener('click', function(e) {
-            const sb = document.getElementById("sidebar");
-            const btn = document.querySelector(".menu-btn");
-            if (sb && !sb.contains(e.target) && !btn.contains(e.target) && sb.classList.contains("open")) sb.classList.remove("open");
-        });
     </script>
 </body>
 </html>
