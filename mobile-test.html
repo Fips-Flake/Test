@@ -93,7 +93,7 @@
         footer a:hover { color: var(--anton-yellow); text-shadow: 1px 1px 1px #000; }
 
         /* ============================================================
-           MOBILER BEREICH (KORRIGIERT)
+           MOBILER BEREICH (SKALIERUNG & FOOTER KORRIGIERT)
            ============================================================ */
         #mobile-bg-fix { display: none; }
 
@@ -115,9 +115,11 @@
                 z-index: 205 !important;
             }
             .sidebar-left.open { top: 60px !important; }
-            .sidebar-left .nav-label { justify-content: center !important; align-items: center !important; height: 100% !important; }
+            
+            /* ICON SKALIERUNG MOBIL */
+            .sidebar-left .nav-label { display: flex !important; justify-content: center !important; align-items: center !important; height: 50px !important; width: 100% !important; }
             .sidebar-left .nav-label span, .sidebar-left .arrow-wrapper, .sidebar-left .submenu { display: none !important; }
-            .sidebar-left .nav-label i { font-size: 1.4rem !important; margin: 0 !important; display: flex !important; align-items: center !important; height: 50px !important; }
+            .sidebar-left .nav-label i { font-size: 1.8rem !important; margin: 0 !important; color: #000 !important; }
 
             header { position: fixed !important; top: 0 !important; height: 60px !important; width: 100% !important; z-index: 210 !important; background: rgba(255, 255, 255, 0.9) !important; }
             .menu-btn { top: 10px; left: 10px; width: 40px; height: 40px; }
@@ -158,12 +160,7 @@
             <a href="hauptseite.html"><span class="nav-label"><i class="fa-solid fa-house main-icon"></i></span></a>
         </div>
         <div class="nav-item">
-            <a href="meinemusik.html"><span class="nav-label"><i class="fa-solid fa-music main-icon"></i></span><div class="arrow-wrapper"><i class="fa-solid fa-caret-down submenu-indicator"></i></div></a>
-            <div class="submenu">
-                <a href="ueber-mich.html"><i class="fa-regular fa-face-smile"></i> ÜBER MICH</a>
-                <a href="meinemusik.html"><i class="fa-solid fa-volume-high"></i> VERÖFFENTLICHUNGEN</a>
-                <a href="konzerte.html"><i class="fa-solid fa-microphone-lines"></i> KONZERTE</a>
-            </div>
+            <a href="meinemusik.html"><span class="nav-label"><i class="fa-solid fa-music main-icon"></i></span></a>
         </div>
         <div class="nav-item">
             <a href="shop.html"><span class="nav-label"><i class="fa-solid fa-cart-shopping main-icon"></i></span></a>
@@ -191,8 +188,7 @@
     <main></main>
 
     <footer>
-        <div><a href="index.html">www.anton-familienpop.de</a></div>
-        <div><a href="impressum.html">Impressum</a> | <a href="datenschutz.html">Datenschutz</a></div>
+        <a href="impressum.html">Impressum</a> | <a href="datenschutz.html">Datenschutz</a>
     </footer>
 
     <script>
@@ -205,7 +201,6 @@
             document.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive: true});
             document.addEventListener('touchmove', e => {
                 let newX = currentTranslate + (e.touches[0].clientX - startX);
-                // MATHEMATISCHES LIMIT: Verhindert schwarze Ränder bei 300% Bildbreite
                 const limit = screenWidth; 
                 if (newX > limit) newX = limit; 
                 if (newX < -limit) newX = -limit;
