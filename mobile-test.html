@@ -15,8 +15,8 @@
             --amazon-blue: #00A8E1; 
         }
 
-        /* --- DESKTOP MASTER (ORIGINAL) --- */
-        html, body { height: 100%; margin: 0; padding: 0; }
+        /* --- DESKTOP MASTER (UNVERÄNDERT) --- */
+        html, body { height: 100%; margin: 0; padding: 0; overflow-x: hidden; }
         
         body { 
             display: flex; 
@@ -88,31 +88,30 @@
         footer a { color: #000; text-decoration: none; margin: 0 8px; font-weight: bold; transition: all 0.3s ease; }
         footer a:hover { color: var(--anton-yellow) !important; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; }
 
-        /* --- MOBILE MEDIA QUERY (WISCH-LOGIK) --- */
-        @media (max-width: 800px) {
+        /* --- MOBILE MEDIA QUERY (ERZWUNGEN FÜR MOBILGERÄTE, AUCH QUER) --- */
+        @media screen and (max-width: 1024px), screen and (max-device-width: 1024px) {
             body { 
                 background: #000 !important; 
-                overflow-x: auto !important; /* Horizontales Scrollen erlauben */
-                width: 140vw !important; /* Seite künstlich breiter machen für Wisch-Effekt */
+                overflow: hidden !important; /* Verhindert natives Scrollen um Wisch-Script zu nutzen */
+                width: 100vw !important;
+                height: 100vh !important;
+                position: fixed;
             }
             
             #stable-bg { 
                 display: block !important;
                 position: fixed;
-                top: 0; left: 0; 
-                width: 160vw; /* Hintergrund breiter als Body für Bewegungseffekt */
+                top: 0; 
+                left: -50vw; /* Startet mittig (200vw Breite, also -50vw um Mitte zu sehen) */
+                width: 200vw; 
+                height: 100%;
                 background: url('AFaPo Wall.jpg') no-repeat center center;
                 background-size: cover;
                 z-index: -1;
-                transform: translateZ(0);
+                will-change: transform;
             }
 
-            /* Fixierte Elemente müssen an den Viewport (Bildschirm) gebunden bleiben */
-            header, footer, .sidebar-right { 
-                width: 100vw !important; 
-                left: 0 !important;
-                right: auto !important;
-            }
+            header { width: 100vw !important; left: 0 !important; }
 
             .sidebar-left { 
                 left: 0 !important; top: -150px !important; bottom: auto !important; 
@@ -139,19 +138,24 @@
             .nav-item-epk .nav-label span { display: block !important; font-size: 0.72rem !important; font-weight: bold !important; color: var(--anton-red) !important; text-align: center !important; }
 
             .sidebar-right { 
-                bottom: 45px !important; 
-                height: 50px !important; 
+                top: auto !important; bottom: 45px !important; 
+                right: 0 !important; left: 0 !important; 
+                width: 100vw !important; height: 50px !important; 
                 flex-direction: row !important; justify-content: space-evenly !important; 
+                transform: none !important; border-radius: 0 !important; 
                 background: rgba(255, 255, 255, 0.65) !important; 
                 border-top: 1.5px solid #000 !important; padding: 5px 0 !important; 
                 z-index: 1000 !important; backdrop-filter: blur(5px) !important;
             }
+            .sidebar-right a i { font-size: 1.4rem !important; }
 
             footer { 
-                bottom: 0 !important; height: 45px !important;
+                position: fixed !important; bottom: 0 !important; left: 0 !important;
+                width: 100vw !important; height: 45px !important;
                 background: rgba(255, 255, 255, 0.65) !important; 
                 z-index: 1100 !important; border-top: 1px solid #000 !important;
                 display: flex !important; align-items: center !important; justify-content: center !important;
+                padding: 0 !important;
             }
             footer div:first-child { display: none !important; }
             footer div:last-child { font-size: 0.85rem !important; }
@@ -219,26 +223,43 @@
     </footer>
 
     <script>
+        // Mobil-Optimierung für Höhe und Wischen
+        let startX = 0;
+        let currentTranslate = -50; // Startwert in vw (Mitte)
+        const bg = document.getElementById('stable-bg');
+
         function fixMobileHeight() {
-            if (window.innerWidth <= 800) {
-                const bg = document.getElementById('stable-bg');
+            if (window.innerWidth <= 1024) {
                 if (bg) { bg.style.height = window.innerHeight + 'px'; }
             }
         }
-        window.addEventListener('load', fixMobileHeight);
-        window.addEventListener('orientationchange', () => { setTimeout(fixMobileHeight, 200); });
 
-        // Parallax-Effekt beim horizontalen Wischen
-        window.addEventListener('scroll', () => {
-            if (window.innerWidth <= 800) {
-                const scrollX = window.scrollX;
-                const bg = document.getElementById('stable-bg');
-                if (bg) {
-                    // Das Bild bewegt sich leicht entgegengesetzt zum Wischen
-                    bg.style.transform = `translate3d(-${scrollX * 0.2}px, 0, 0)`;
-                }
+        // Touch-Events für horizontales Wischen des Hintergrunds
+        document.addEventListener('touchstart', e => {
+            startX = e.touches[0].clientX;
+        }, {passive: true});
+
+        document.addEventListener('touchmove', e => {
+            if (window.innerWidth <= 1024) {
+                const touchX = e.touches[0].clientX;
+                const diff = (startX - touchX) / window.innerWidth * 100; // Differenz in vw
+                let newTranslate = currentTranslate - diff;
+
+                // Grenzen festlegen (man kann nicht unendlich weit wischen)
+                if (newTranslate > 0) newTranslate = 0;
+                if (newTranslate < -100) newTranslate = -100;
+
+                bg.style.left = newTranslate + 'vw';
             }
+        }, {passive: true});
+
+        document.addEventListener('touchend', e => {
+            // Aktuellen Wert speichern
+            currentTranslate = parseFloat(bg.style.left) || -50;
         });
+
+        window.addEventListener('load', fixMobileHeight);
+        window.addEventListener('resize', fixMobileHeight);
 
         function toggleMenu() { document.getElementById('sidebar').classList.toggle('open'); }
         document.addEventListener('click', function(e) {
