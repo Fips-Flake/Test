@@ -30,7 +30,7 @@
             width: 100vw;
             min-height: 100.5vh; 
             touch-action: pan-y; 
-            background: #ffffff; /* Fallback */
+            background: #ffffff;
         }
 
         /* --- DESKTOP HINTERGRUND --- */
@@ -54,7 +54,7 @@
                 display: block; 
                 position: fixed; 
                 top: 0; 
-                left: -100%; /* Startet zentriert bei 300% Breite */
+                left: -100%; 
                 width: 300%; 
                 height: 100%; 
                 background: url('AFaPo Wall.jpg') no-repeat center center; 
@@ -210,10 +210,23 @@
         const idBtn = document.getElementById('id-btn');
         const idPanel = document.getElementById('id-panel');
         const bg = document.getElementById('mobile-bg-fix');
+        let menuTimeout;
+
+        function closeMenu() {
+            sidebar.classList.remove('open');
+            menuBtn.classList.remove('active');
+            if (menuTimeout) clearTimeout(menuTimeout);
+        }
 
         function toggleMenu() { 
-            sidebar.classList.toggle('open'); 
-            menuBtn.classList.toggle('active');
+            if (sidebar.classList.contains('open')) {
+                closeMenu();
+            } else {
+                sidebar.classList.add('open'); 
+                menuBtn.classList.add('active');
+                // Startet den 5-Sekunden-Timer zum Schließen
+                menuTimeout = setTimeout(closeMenu, 5000);
+            }
         }
 
         function openIDMenu() {
@@ -244,7 +257,6 @@
             const diffX = moveX - touchStartX;
             const diffY = moveY - touchStartY;
 
-            // Wenn horizontale Bewegung überwiegt -> Hintergrund wischen
             if (Math.abs(diffX) > Math.abs(diffY)) {
                 if (window.innerWidth <= 800) {
                     let newX = currentTranslateX + diffX;
@@ -267,12 +279,13 @@
                 if (diffY > 60 && touchStartY < 250) { 
                     sidebar.classList.add('open');
                     menuBtn.classList.add('active');
+                    // Auch beim Wischen: Timer starten
+                    if (menuTimeout) clearTimeout(menuTimeout);
+                    menuTimeout = setTimeout(closeMenu, 5000);
                 } else if (diffY < -60) { 
-                    sidebar.classList.remove('open');
-                    menuBtn.classList.remove('active');
+                    closeMenu();
                 }
             } else {
-                // Horizontaler Translate-Wert für Hintergrund speichern
                 const style = window.getComputedStyle(bg);
                 const matrix = new WebKitCSSMatrix(style.transform);
                 currentTranslateX = matrix.m41;
