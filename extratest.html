@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>ANTON | MOBILE 800er PRECISION</title>
+    <title>ANTON | MOBILE 800er I/D UPDATE</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap&subset=latin-ext" rel="stylesheet">
     <style>
@@ -18,8 +18,7 @@
             display: flex; flex-direction: column; 
             background: #ffffff url('AFaPo Wall.jpg') no-repeat center center fixed; 
             background-size: cover; 
-            /* Padding unten, damit der Content nicht hinter dem Footer klebt */
-            padding-bottom: 100px; 
+            overflow-x: hidden;
         }
 
         /* --- HEADER (MOBILE) --- */
@@ -47,44 +46,51 @@
         }
         .sidebar-left.open { top: 0 !important; }
 
-        .nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .nav-item a { text-decoration: none; color: #000; display: flex; flex-direction: column; align-items: center; }
-        
-        /* Icon & Text Zentrierung */
-        .nav-label { display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .nav-label i { font-size: 1.3rem; margin-bottom: 4px; display: block; }
+        .nav-label { display: flex; flex-direction: column; align-items: center; }
+        .nav-label i { font-size: 1.3rem; margin-bottom: 4px; }
         .mobile-tag { font-size: 0.55rem; text-transform: uppercase; font-weight: bold; line-height: 1; }
 
-        /* EPK Box - Absolut rechtsbündig ohne Lücke */
+        /* EPK Box */
         .epk-container { 
             position: absolute !important; right: -1px; top: 0; height: 100%; width: 48px;
             background: #fff; border-left: 3px solid #000; display: flex; align-items: center; justify-content: center; z-index: 1200;
         }
-        .epk-text-only { transform: rotate(-90deg); font-size: 0.7rem; color: var(--anton-red); font-weight: bold; white-space: nowrap; display: block; }
+        .epk-container a { text-decoration: none !important; } /* Unterstrich entfernt */
+        .epk-text-only { transform: rotate(-90deg); font-size: 0.7rem; color: var(--anton-red); font-weight: bold; white-space: nowrap; display: block; text-decoration: none; }
 
         /* --- SOCIALBAR (MOBILE) --- */
         .sidebar-right { 
-            position: fixed; bottom: 40px; left: 0; width: 100%; height: 45px; 
+            position: fixed; bottom: 0; left: 0; width: 100%; height: 45px; 
             display: flex; flex-direction: row; align-items: center; justify-content: space-evenly; 
             z-index: 999; background: rgba(255, 255, 255, 0.95); border-top: 1.5px solid #000; 
             transition: transform 0.6s ease-in-out;
         }
+        .sidebar-right.lowered { transform: translateY(45px); }
         .sidebar-right a i { color: #000; font-size: 1.2rem; }
 
-        /* --- FOOTER (MOBILE) --- */
-        footer { 
-            width: 100%; height: 40px; background: rgba(255,255,255,0.9); border-top: 2px solid #000; 
-            text-align: center; font-size: 0.75rem; z-index: 1000; position: fixed; bottom: 0; 
-            display: flex; align-items: center; justify-content: center; 
-            transition: transform 0.6s ease-in-out;
+        /* --- I/D SIDE MENU (NEU) --- */
+        .id-button {
+            position: fixed; right: 0; bottom: 150px; width: 45px; height: 45px;
+            background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(5px);
+            border: 2px solid #000; border-right: none; border-radius: 8px 0 0 8px;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 1300; font-weight: bold; font-size: 1rem; color: #000;
+            cursor: pointer; transition: transform 0.3s ease;
         }
-        footer a { color: #000; text-decoration: none; margin: 0 10px; font-weight: bold; }
+        .id-panel {
+            position: fixed; right: -300px; bottom: 150px; height: 45px; width: 260px;
+            background: #fff; border: 2px solid #000; border-right: none;
+            display: flex; align-items: center; justify-content: space-evenly;
+            z-index: 1299; transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 8px 0 0 8px;
+        }
+        .id-panel.open { right: 0; }
+        .id-panel a { color: #000; text-decoration: none; font-weight: bold; font-size: 0.9rem; text-transform: uppercase; }
 
-        /* --- ANIMATION STATES --- */
+        /* Animation State */
         header.hide-mobile { transform: translateY(-100%); }
-        footer.hide-mobile { transform: translateY(100%); }
-        /* Socialbar rutscht nach unten wenn Footer weg ist */
-        .sidebar-right.lowered { transform: translateY(40px); }
 
     </style>
 </head>
@@ -118,7 +124,13 @@
         </div>
     </nav>
 
-    <main style="height: 120vh; padding: 100px 20px;">
+    <div class="id-button" onclick="toggleIDPanel()">I/D</div>
+    <div class="id-panel" id="id-panel">
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+    </div>
+
+    <main style="height: 150vh; padding: 100px 20px;">
         </main>
 
     <aside class="sidebar-right" id="social-bar">
@@ -133,19 +145,23 @@
         <a href="#"><i class="fa-brands fa-amazon"></i></a>
     </aside>
 
-    <footer id="footer-main">
-        <a href="impressum.html">Impressum</a> | 
-        <a href="datenschutz.html">Datenschutz</a>
-    </footer>
-
     <script>
         const sidebar = document.getElementById('sidebar');
+        const idPanel = document.getElementById('id-panel');
 
         function toggleMenu() { 
             sidebar.classList.toggle('open'); 
         }
+
+        function toggleIDPanel() {
+            idPanel.classList.toggle('open');
+            // Automatisches Schließen nach 4 Sekunden
+            if(idPanel.classList.contains('open')) {
+                setTimeout(() => { idPanel.classList.remove('open'); }, 4000);
+            }
+        }
         
-        // Swipe Logik
+        // Swipe Logik oben
         let touchStartY = 0;
         document.addEventListener('touchstart', e => { touchStartY = e.changedTouches[0].screenY; }, {passive: true});
         document.addEventListener('touchend', e => {
@@ -154,10 +170,9 @@
             if (swipeDistance < -70) sidebar.classList.remove('open');
         }, {passive: true});
 
-        // Auto-Hide Mechanismus nach 3 Sekunden
+        // Auto-Hide Header & Socialbar nach 3 Sek
         setTimeout(() => { 
             document.getElementById('header-main').classList.add('hide-mobile'); 
-            document.getElementById('footer-main').classList.add('hide-mobile');
             document.getElementById('social-bar').classList.add('lowered');
         }, 3000);
     </script>
