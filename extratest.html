@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>ANTON | MOBILE 800er BURGER-TO-A FIX</title>
+    <title>ANTON | MOBILE 800er REFINED FINAL</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap&subset=latin-ext" rel="stylesheet">
     <style>
@@ -29,24 +29,18 @@
         }
         .header-logo { max-height: 55px; width: auto; }
         
-        /* HYBRIDER BUTTON: BURGER ZU A */
+        /* HYBRIDER BUTTON */
         .menu-btn { 
             position: fixed; top: 18px; left: 15px; z-index: 1500; 
             background: #000; width: 45px; height: 45px; border-radius: 5px; border: 2px solid #000; cursor: pointer;
             display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
         }
-        /* Die Burger-Striche */
-        .menu-btn span { display: block; width: 22px; height: 3px; background: #fff; transition: 0.3s; border-radius: 1px; }
+        .menu-btn span { display: block; width: 22px; height: 3px; background: #fff; border-radius: 1px; }
         
-        /* ZUSTAND: OFFEN (A erscheint) */
-        .menu-btn.active { 
-            background: var(--anton-yellow); 
-            border-color: var(--anton-yellow);
-            border-bottom: 2px solid #000;
-            top: 0; height: 48px; border-radius: 5px 5px 0 0;
-        }
-        .menu-btn.active span { display: none; } /* Striche weg */
+        /* Offener Zustand mit A im Rahmen */
+        .menu-btn.active { background: var(--anton-yellow); border: 2px solid #000; }
+        .menu-btn.active span { display: none; }
         .menu-btn.active::after { 
             content: 'A'; color: #000; font-weight: bold; font-size: 28px; display: block; 
         }
@@ -60,11 +54,14 @@
             transition: top 0.5s cubic-bezier(0.4, 0, 0.2, 1); box-sizing: border-box;
         }
         .sidebar-left.open { top: 0 !important; }
-        .nav-item a { text-decoration: none; color: #000; display: flex; flex-direction: column; align-items: center; }
-        .nav-label i { font-size: 1.3rem; margin-bottom: 4px; }
-        .mobile-tag { font-size: 0.55rem; text-transform: uppercase; font-weight: bold; }
+        
+        /* Navigation Items mit Labels darunter */
+        .nav-item a { text-decoration: none; color: #000; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+        .nav-label { display: flex; flex-direction: column; align-items: center; }
+        .nav-label i { font-size: 1.3rem; }
+        .mobile-tag { font-size: 0.6rem; text-transform: uppercase; font-weight: bold; margin-top: 2px; }
 
-        /* EPK BOX (90° DREHUNG) */
+        /* EPK BOX */
         .epk-container { 
             position: absolute !important; right: 0; top: 0; height: 100%; width: 48px;
             background: #fff; border-left: 3px solid #000; display: flex; align-items: center; justify-content: center; z-index: 1200;
@@ -98,13 +95,23 @@
         .id-panel.open { right: 0; }
         .id-panel a { color: #000; text-decoration: none; margin: 0 8px; text-transform: uppercase; }
 
-        /* --- SOCIALBAR --- */
+        /* --- SOCIALBAR MIT PERMANENTER ANIMATION --- */
         .sidebar-right { 
             position: fixed; bottom: 0; left: 0; width: 100%; height: 45px; 
             display: flex; flex-direction: row; align-items: center; justify-content: space-evenly; 
             z-index: 999; background: rgba(255, 255, 255, 0.95); border-top: 1.5px solid #000; 
         }
-        .sidebar-right a { text-decoration: none; color: #000; font-size: 1.25rem; }
+        .sidebar-right a { 
+            text-decoration: none; color: #000; font-size: 1.25rem; 
+            animation: pulseSocial 3s infinite ease-in-out;
+        }
+        .sidebar-right a:active { transform: scale(1.4); color: var(--anton-red); }
+
+        /* Keyframes für das leichte Pulsieren */
+        @keyframes pulseSocial {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
 
         header.hide-mobile { transform: translateY(-100%); }
 
@@ -119,16 +126,28 @@
     
     <nav class="sidebar-left" id="sidebar">
         <div class="nav-item">
-            <a href="hauptseite.html"><span class="nav-label"><i class="fa-solid fa-house"></i><span class="mobile-tag">Start</span></span></a>
+            <a href="hauptseite.html">
+                <span class="nav-label"><i class="fa-solid fa-house"></i></span>
+                <span class="mobile-tag">Start</span>
+            </a>
         </div>
         <div class="nav-item">
-            <a href="meinemusik.html"><span class="nav-label"><i class="fa-solid fa-music"></i><span class="mobile-tag">Musik</span></span></a>
+            <a href="meinemusik.html">
+                <span class="nav-label"><i class="fa-solid fa-music"></i></span>
+                <span class="mobile-tag">Musik</span>
+            </a>
         </div>
         <div class="nav-item">
-            <a href="shop.html"><span class="nav-label"><i class="fa-solid fa-cart-shopping"></i><span class="mobile-tag">Shop</span></span></a>
+            <a href="shop.html">
+                <span class="nav-label"><i class="fa-solid fa-cart-shopping"></i></span>
+                <span class="mobile-tag">Shop</span>
+            </a>
         </div>
         <div class="nav-item">
-            <a href="kontakt.html"><span class="nav-label"><i class="fa-solid fa-envelope"></i><span class="mobile-tag">Kontakt</span></span></a>
+            <a href="kontakt.html">
+                <span class="nav-label"><i class="fa-solid fa-envelope"></i></span>
+                <span class="mobile-tag">Kontakt</span>
+            </a>
         </div>
         <div class="epk-container">
             <a href="epk.html"><span class="epk-text-only">EPK/PRESSE</span></a>
