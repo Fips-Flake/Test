@@ -3,15 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>ANTON | MASTER CORE</title>
+    <title>ANTON | MASTER NAVIGATION REFIX</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap&subset=latin-ext" rel="stylesheet">
     <style>
         :root { 
             --anton-red: #ff0000; 
             --anton-yellow: #ffeb3b; 
-            --apple-gray: #A2AAAD;
-            --amazon-blue: #00A8E1;
         }
 
         /* --- GLOBAL --- */
@@ -26,7 +24,7 @@
         .header-title { color: var(--anton-red); font-size: 1.8rem; text-decoration: none; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; }
         
         .menu-btn { 
-            position: fixed; top: 18px; left: 20px; z-index: 250; background: #000; color: #fff; 
+            position: fixed; top: 15px; left: 15px; z-index: 250; background: #000; color: #fff; 
             width: 45px; height: 45px; border-radius: 5px; border: 2px solid #000; cursor: pointer;
             display: flex; align-items: center; justify-content: center;
         }
@@ -58,9 +56,9 @@
         .sidebar-right a:nth-child(4) i { --brand-color: #25D366; animation-delay: 0.75s; }
         .sidebar-right a:nth-child(5) i { --brand-color: #1877F2; animation-delay: 1.0s; }
         .sidebar-right a:nth-child(6) i { --brand-color: #1DB954; animation-delay: 1.25s; }
-        .sidebar-right a:nth-child(7) i { --brand-color: var(--apple-gray); animation-delay: 1.5s; }
+        .sidebar-right a:nth-child(7) i { --brand-color: #A2AAAD; animation-delay: 1.5s; }
         .sidebar-right a:nth-child(8) i { --brand-color: #f00; animation-delay: 1.75s; }
-        .sidebar-right a:nth-child(9) i { --brand-color: var(--amazon-blue); animation-delay: 2.0s; }
+        .sidebar-right a:nth-child(9) i { --brand-color: #00A8E1; animation-delay: 2.0s; }
 
         /* --- FOOTER --- */
         footer { width: 100%; padding: 15px 0; background: rgba(255,255,255,0.9); border-top: 2px solid #000; text-align: center; font-size: 0.85rem; z-index: 100; position: fixed; bottom: 0; }
@@ -73,25 +71,28 @@
 
             .sidebar-left { 
                 left: 0 !important; top: -160px !important; bottom: auto !important; width: 100% !important; 
-                height: 75px !important; flex-direction: row !important; padding: 0 10px 0 75px !important; 
+                height: 85px !important; flex-direction: row !important; padding: 0 50px 0 75px !important; 
                 border-right: none !important; border-top: 3px solid #000 !important; border-bottom: 3px solid #000 !important; 
                 justify-content: space-evenly !important; align-items: center !important; 
                 background: var(--anton-yellow) !important; transition: top 0.8s ease-in-out !important;
+                box-sizing: border-box;
             }
             .sidebar-left.open { top: 0 !important; }
             .sidebar-left .nav-item { margin: 0 !important; width: auto !important; }
             
-            /* Icons */
-            .sidebar-left .nav-label { display: flex !important; align-items: center !important; }
-            .sidebar-left .nav-label i { font-size: 1.8rem !important; color: #000 !important; display: block !important; }
+            /* Icons & Labels untereinander */
+            .sidebar-left .nav-label { display: flex !important; flex-direction: column !important; align-items: center !important; }
+            .sidebar-left .nav-label i { font-size: 1.5rem !important; color: #000 !important; display: block !important; margin: 0 !important; }
+            .sidebar-left .mobile-tag { display: block !important; font-size: 0.6rem !important; margin-top: 2px; text-transform: uppercase; font-weight: bold; }
             
-            /* EPK Schriftzug Größe angepasst zu Icons */
-            .epk-text-only { display: block !important; font-size: 0.9rem !important; color: var(--anton-red) !important; font-weight: bold; line-height: 1; text-align: center; }
-            
-            .sidebar-left span:not(.epk-text-only):not(.nav-label) { display: none !important; }
+            /* EPK Rotation */
+            .epk-container { position: absolute !important; right: 5px; top: 50%; transform: translateY(-50%) rotate(-90deg); transform-origin: center right; width: 80px; text-align: center; }
+            .epk-text-only { display: block !important; font-size: 0.7rem !important; color: var(--anton-red) !important; font-weight: bold; white-space: nowrap; }
+
+            .sidebar-left span:not(.mobile-tag):not(.epk-text-only) { display: none !important; }
 
             header.hide-mobile { transform: translateY(-100%); }
-            .menu-btn { top: 15px; left: 15px; width: 45px; height: 45px; }
+            .menu-btn { top: 20px; left: 15px; width: 45px; height: 45px; }
             
             .sidebar-right { 
                 top: auto !important; bottom: 40px !important; left: 0 !important; width: 100% !important; 
@@ -99,7 +100,7 @@
                 border-radius: 0 !important; border-top: 1.5px solid #000 !important; 
                 background: rgba(255,255,255,0.95) !important; justify-content: space-evenly !important; padding: 0 !important; 
             }
-            footer { bottom: 0 !important; height: 40px !important; padding: 0 !important; display: flex !important; align-items: center; justify-content: center; font-size: 0.65rem !important; }
+            footer { bottom: 0 !important; height: 40px !important; padding: 0 !important; display: flex !important; align-items: center; justify-content: center; font-size: 0.7rem !important; }
         }
     </style>
 </head>
@@ -110,21 +111,40 @@
     
     <nav class="sidebar-left" id="sidebar">
         <div class="nav-item">
-            <a href="hauptseite.html"><span class="nav-label"><i class="fa-solid fa-house main-icon"></i></span></a>
+            <a href="hauptseite.html">
+                <span class="nav-label">
+                    <i class="fa-solid fa-house main-icon"></i>
+                    <span class="mobile-tag" style="display:none;">Start</span>
+                </span>
+            </a>
         </div>
         <div class="nav-item">
-            <a href="meinemusik.html"><span class="nav-label"><i class="fa-solid fa-music main-icon"></i></span></a>
+            <a href="meinemusik.html">
+                <span class="nav-label">
+                    <i class="fa-solid fa-music main-icon"></i>
+                    <span class="mobile-tag" style="display:none;">Musik</span>
+                </span>
+            </a>
         </div>
         <div class="nav-item">
-            <a href="shop.html"><span class="nav-label"><i class="fa-solid fa-cart-shopping main-icon"></i></span></a>
+            <a href="shop.html">
+                <span class="nav-label">
+                    <i class="fa-solid fa-cart-shopping main-icon"></i>
+                    <span class="mobile-tag" style="display:none;">Shop</span>
+                </span>
+            </a>
         </div>
         <div class="nav-item">
-            <a href="kontakt.html"><span class="nav-label"><i class="fa-solid fa-envelope main-icon"></i></span></a>
+            <a href="kontakt.html">
+                <span class="nav-label">
+                    <i class="fa-solid fa-envelope main-icon"></i>
+                    <span class="mobile-tag" style="display:none;">Kontakt</span>
+                </span>
+            </a>
         </div>
-        <div class="nav-item">
+        <div class="nav-item epk-container">
             <a href="epk.html">
-                <span class="epk-text-only" style="display:none;">EPK/PRESSE</span>
-                <span class="nav-label"><span style="font-size: 0.9rem; font-weight: bold; color: var(--anton-red);" class="desktop-only-text">EPK/PRESSE</span></span>
+                <span class="epk-text-only">EPK/PRESSE</span>
             </a>
         </div>
     </nav>
@@ -142,7 +162,6 @@
     </aside>
 
     <footer>
-        <a href="index.html">www.anton-familienpop.de</a> | 
         <a href="impressum.html">Impressum</a> | 
         <a href="datenschutz.html">Datenschutz</a>
     </footer>
