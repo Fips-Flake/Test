@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>ANTON | MASTER NAVIGATION REFIX</title>
+    <title>ANTON | MASTER MENU RECOVERY</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap&subset=latin-ext" rel="stylesheet">
     <style>
@@ -71,7 +71,7 @@
 
             .sidebar-left { 
                 left: 0 !important; top: -160px !important; bottom: auto !important; width: 100% !important; 
-                height: 85px !important; flex-direction: row !important; padding: 0 50px 0 75px !important; 
+                height: 85px !important; flex-direction: row !important; padding: 0 80px 0 75px !important; 
                 border-right: none !important; border-top: 3px solid #000 !important; border-bottom: 3px solid #000 !important; 
                 justify-content: space-evenly !important; align-items: center !important; 
                 background: var(--anton-yellow) !important; transition: top 0.8s ease-in-out !important;
@@ -80,15 +80,20 @@
             .sidebar-left.open { top: 0 !important; }
             .sidebar-left .nav-item { margin: 0 !important; width: auto !important; }
             
-            /* Icons & Labels untereinander */
-            .sidebar-left .nav-label { display: flex !important; flex-direction: column !important; align-items: center !important; }
-            .sidebar-left .nav-label i { font-size: 1.5rem !important; color: #000 !important; display: block !important; margin: 0 !important; }
-            .sidebar-left .mobile-tag { display: block !important; font-size: 0.6rem !important; margin-top: 2px; text-transform: uppercase; font-weight: bold; }
+            /* Icons & Labels untereinander - Wiederhergestellt */
+            .sidebar-left .nav-label { display: flex !important; flex-direction: column !important; align-items: center !important; opacity: 1 !important; visibility: visible !important; }
+            .sidebar-left .nav-label i { font-size: 1.5rem !important; color: #000 !important; display: block !important; margin-bottom: 2px !important; }
+            .sidebar-left .mobile-tag { display: block !important; font-size: 0.55rem !important; text-transform: uppercase; font-weight: bold; color: #000; }
             
-            /* EPK Rotation */
-            .epk-container { position: absolute !important; right: 5px; top: 50%; transform: translateY(-50%) rotate(-90deg); transform-origin: center right; width: 80px; text-align: center; }
+            /* EPK Rotation Fix */
+            .epk-container { 
+                position: absolute !important; right: 15px !important; top: 50% !important; 
+                transform: translateY(-50%) rotate(-90deg) !important; 
+                width: auto !important; height: auto !important; margin: 0 !important;
+            }
             .epk-text-only { display: block !important; font-size: 0.7rem !important; color: var(--anton-red) !important; font-weight: bold; white-space: nowrap; }
 
+            /* Verstecke Desktop-Texte */
             .sidebar-left span:not(.mobile-tag):not(.epk-text-only) { display: none !important; }
 
             header.hide-mobile { transform: translateY(-100%); }
