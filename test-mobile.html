@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>ANTON | BACKGROUND RESTORED</title>
+    <title>ANTON | SWIPEABLE MENU & BACKGROUND</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap&subset=latin-ext" rel="stylesheet">
     <style>
@@ -13,15 +13,8 @@
         }
 
         /* --- GLOBAL --- */
-        html, body { 
-            height: 100%; 
-            margin: 0; 
-            padding: 0; 
-            background-color: #ffffff; 
-            font-family: 'Special Elite', cursive; 
-        }
+        html, body { height: 100%; margin: 0; padding: 0; background-color: #ffffff; font-family: 'Special Elite', cursive; }
         
-        /* Hintergrundbild Wiederherstellung */
         body { 
             display: flex; 
             flex-direction: column; 
@@ -66,7 +59,7 @@
             z-index: 999; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(5px); padding: 30px 0; border-radius: 25px 0 0 25px; 
             border: 1px solid rgba(0,0,0,0.1); border-right: none; transition: all 0.5s ease;
         }
-        .sidebar-right a i { color: #000; font-size: 1.4rem; transition: transform 0.3s; }
+        .sidebar-right a i { color: #000; font-size: 1.4rem; }
 
         /* --- FOOTER --- */
         footer { 
@@ -81,7 +74,6 @@
             body { 
                 background: #ffffff url('AFaPo Wall.jpg') no-repeat center center fixed !important; 
                 background-size: cover !important; 
-                overflow-x: hidden !important; 
             }
             
             .sidebar-left { 
@@ -89,7 +81,7 @@
                 height: 85px !important; flex-direction: row !important; padding: 0 45px 0 65px !important; 
                 border-right: none !important; border-top: 3px solid #000 !important; border-bottom: 3px solid #000 !important; 
                 justify-content: space-evenly !important; align-items: center !important; 
-                background: var(--anton-yellow) !important; transition: top 0.8s ease-in-out !important;
+                background: var(--anton-yellow) !important; transition: top 0.6s ease-in-out !important;
                 box-sizing: border-box !important;
             }
             .sidebar-left.open { top: 0 !important; }
@@ -189,17 +181,48 @@
 
     <script>
         let autoCloseTimer;
+        const sidebar = document.getElementById('sidebar');
+
         function toggleMenu() { 
-            const sb = document.getElementById('sidebar');
-            sb.classList.toggle('open'); 
+            sidebar.classList.toggle('open'); 
             if (window.innerWidth <= 800) {
                 clearTimeout(autoCloseTimer);
-                if (sb.classList.contains('open')) {
-                    autoCloseTimer = setTimeout(() => { sb.classList.remove('open'); }, 5000);
+                if (sidebar.classList.contains('open')) {
+                    autoCloseTimer = setTimeout(() => { sidebar.classList.remove('open'); }, 5000);
                 }
             }
         }
         
+        // SWIPE FUNKTIONALITÄT MOBIL
+        let touchStartY = 0;
+        let touchEndY = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartY = e.changedTouches[0].screenY;
+        }, {passive: true});
+
+        document.addEventListener('touchend', e => {
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        }, {passive: true});
+
+        function handleSwipe() {
+            const swipeDistance = touchEndY - touchStartY;
+            // Wischen nach unten (Menü öffnen) - nur wenn man oben startet
+            if (swipeDistance > 70 && touchStartY < 150) {
+                if (!sidebar.classList.contains('open')) {
+                    sidebar.classList.add('open');
+                }
+            }
+            // Wischen nach oben (Menü schließen)
+            if (swipeDistance < -70) {
+                if (sidebar.classList.contains('open')) {
+                    sidebar.classList.remove('open');
+                }
+            }
+        }
+
+        // Auto-Hide Mechanismus
         if (window.innerWidth <= 800) {
             setTimeout(() => { 
                 document.getElementById('header-main').classList.add('hide-mobile'); 
