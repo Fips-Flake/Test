@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>ANTON | HYBRID RESPONSIVE</title>
+    <title>ANTON | THREE-STAGE LAYOUT</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap&subset=latin-ext" rel="stylesheet">
     <style>
@@ -20,7 +20,7 @@
             background-size: cover; overflow-x: hidden; 
         }
 
-        /* --- HEADER --- */
+        /* --- HEADER & TITEL --- */
         header { 
             position: fixed; top: 0; width: 100%; height: 80px; display: flex; justify-content: center; align-items: center; 
             z-index: 1000; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border-bottom: 2px solid #000;
@@ -34,32 +34,33 @@
         }
         .menu-btn::after { content: 'A'; font-weight: bold; font-size: 28px; }
 
-        /* --- NAVIGATION BASIS (DESKTOP) --- */
+        /* --- BASIS SIDEBAR (FÜR APPLE & DESKTOP) --- */
         .sidebar-left { 
-            position: fixed; top: 0; bottom: 0; left: -350px; width: 300px; 
+            position: fixed; top: 0; bottom: 0; left: -400px; 
             background: rgba(255, 235, 59, 0.98); z-index: 1100; 
-            display: flex; flex-direction: column; padding: 120px 25px 30px 25px; 
+            display: flex; flex-direction: column; 
             transition: left 0.5s cubic-bezier(0.77, 0, 0.175, 1); border-right: 3px solid #000; box-sizing: border-box; 
         }
         .sidebar-left.open { left: 0; }
         .nav-item { margin-bottom: 25px; width: 100%; }
-        .sidebar-left a { display: flex; align-items: center; color: #000; text-decoration: none; font-size: 1.2rem; font-weight: bold; }
+        .sidebar-left a { display: flex; align-items: center; color: #000; text-decoration: none; font-weight: bold; }
         .nav-label i { width: 35px; text-align: center; margin-right: 15px; font-size: 1.4rem; }
         .mobile-tag, .epk-text-only { display: none; }
 
-        /* --- HYBRID-ZONE (801PX BIS 1400PX) --- */
-        /* Geräte wie MacBooks, Surface, kleine Laptops */
-        @media (min-width: 801px) and (max-width: 1400px) {
-            .sidebar-left {
-                width: 220px; /* Schmaler als Voll-Desktop */
-                background: rgba(255, 235, 59, 0.92); /* Etwas transparenter */
-                padding: 100px 15px 30px 15px;
-            }
-            .sidebar-left a { font-size: 1rem; } /* Kleinere Schrift für kleine Bildschirme */
-            .header-title { font-size: 1.8rem; }
+        /* --- [DESKTOP / LAPTOP VARIANTE] (ab 1401px) --- */
+        @media (min-width: 1401px) {
+            .sidebar-left { width: 300px; padding: 120px 30px 30px 30px; }
+            .sidebar-left a { font-size: 1.3rem; }
         }
 
-        /* --- MOBILE VARIANTE (BIS 800PX) --- */
+        /* --- [APPLE / MITTLERE VERSION] (801px bis 1400px) --- */
+        @media (min-width: 801px) and (max-width: 1400px) {
+            .sidebar-left { width: 230px; padding: 110px 20px 30px 20px; background: rgba(255, 235, 59, 0.95); }
+            .sidebar-left a { font-size: 1.05rem; }
+            .header-title { font-size: 1.9rem; }
+        }
+
+        /* --- [MOBILE / 800er] (bis 800px) --- */
         @media (max-width: 800px) {
             .sidebar-left { 
                 left: 0 !important; top: -160px !important; bottom: auto !important; width: 100% !important; 
@@ -74,23 +75,26 @@
             .sidebar-left .nav-label i { margin-right: 0 !important; margin-bottom: 2px !important; font-size: 1.3rem !important; }
             .mobile-tag { display: block !important; font-size: 0.5rem !important; text-transform: uppercase; font-weight: bold; }
             .desktop-text { display: none !important; }
+            
             .epk-container { 
                 position: absolute !important; right: 0 !important; top: 0 !important; height: 100% !important; width: 45px !important;
                 background: #fff !important; border-left: 2px solid #000 !important; display: flex !important; align-items: center; justify-content: center; z-index: 5;
             }
             .epk-text-only { transform: rotate(-90deg); font-size: 0.7rem !important; color: var(--anton-red) !important; font-weight: bold; white-space: nowrap; display: block !important; }
+            
             header.hide-mobile { transform: translateY(-100%); }
             footer.hide-mobile { transform: translateY(100%); }
         }
 
-        /* --- SOCIAL & FOOTER --- */
+        /* --- SOCIALBAR & FOOTER --- */
         .sidebar-right { 
             position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 60px; 
             display: flex; flex-direction: column; align-items: center; gap: 15px; 
             z-index: 999; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(5px); padding: 30px 0; border-radius: 25px 0 0 25px; 
         }
-        .sidebar-right a i { color: #000; font-size: 1.4rem; }
-        
+        .sidebar-right a i { color: #000; font-size: 1.4rem; transition: transform 0.3s; }
+        .sidebar-right a:hover i { transform: scale(1.2); color: var(--anton-red); }
+
         footer { width: 100%; height: 50px; background: rgba(255,255,255,0.9); border-top: 2px solid #000; text-align: center; font-size: 0.9rem; z-index: 1000; position: fixed; bottom: 0; display: flex; align-items: center; justify-content: center; transition: transform 0.8s ease; }
         footer a { color: #000; text-decoration: none; margin: 0 15px; font-weight: bold; }
 
@@ -146,7 +150,7 @@
             sidebar.classList.toggle('open'); 
         }
         
-        // Mobile Swipe & Auto-Hide bleibt aktiv wie zuvor
+        // Swipe für die 800er / Mobile Version
         let touchStartY = 0;
         document.addEventListener('touchstart', e => { touchStartY = e.changedTouches[0].screenY; }, {passive: true});
         document.addEventListener('touchend', e => {
@@ -157,6 +161,7 @@
             }
         }, {passive: true});
 
+        // Auto-Hide für die 800er / Mobile Version
         if (window.innerWidth <= 800) {
             setTimeout(() => { 
                 document.getElementById('header-main').classList.add('hide-mobile'); 
