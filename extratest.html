@@ -27,10 +27,11 @@
         body { 
             display: flex; 
             flex-direction: column; 
+            /* KORREKTUR: Kein 'fixed' im Background-Short-Hand für Wischbarkeit */
             background: #ffffff url('AFaPo Wall.jpg') no-repeat center center; 
             background-size: cover; 
             width: 100vw;
-            min-height: 100.5vh; 
+            min-height: 100.5vh; /* Erzeugt den nötigen Scroll-Raum für haptisches Feedback */
             touch-action: pan-y; 
         }
 
@@ -84,7 +85,7 @@
         }
         .epk-text-only { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 0.7rem; color: var(--anton-red); font-weight: bold; text-decoration: none; }
 
-        /* --- I/D SYSTEM (NEU AUS CODE) --- */
+        /* --- I/D SYSTEM (AUS DEM BURGER-CODE ÜBERNOMMEN) --- */
         .id-button {
             position: fixed; right: 0; bottom: 150px; width: 38px; height: 38px;
             background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(4px);
@@ -213,6 +214,7 @@
             const swipeDistanceY = e.changedTouches[0].screenY - touchStartY;
 
             if (Math.abs(swipeDistanceY) > Math.abs(swipeDistanceX)) {
+                // Wischen nach unten (Oben am Bildschirm) öffnet das Menü
                 if (swipeDistanceY > 60 && touchStartY < 250) { 
                     sidebar.classList.add('open');
                     menuBtn.classList.add('active');
