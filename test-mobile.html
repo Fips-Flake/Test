@@ -15,15 +15,20 @@
         }
 
         /* ============================================================
-           DER ABSOLUTE MASTER (DESKTOP) - UNBERÜHRT
+           DER ABSOLUTE MASTER (DESKTOP) - VOLLSTÄNDIG GEPRÜFT
            ============================================================ */
+        html, body { height: 100%; margin: 0; padding: 0; }
+
         body { 
-            margin: 0; 
-            padding: 0; 
             font-family: 'Special Elite', cursive; 
-            background: #ffffff url('AFaPo Wall.jpg') no-repeat center center fixed; 
+            background-color: #ffffff; 
+            background-image: url('AFaPo Wall.jpg'); 
+            background-repeat: no-repeat; 
+            background-position: center center; 
+            background-attachment: fixed; 
             background-size: cover; 
-            background-blend-mode: multiply;
+            background-blend-mode: multiply; 
+            overflow-x: hidden; 
         }
 
         header { 
@@ -32,6 +37,7 @@
             z-index: 100; background: rgba(255, 255, 255, 0.8); 
             backdrop-filter: blur(10px); border-bottom: 2px solid #000; 
         }
+
         .header-title { color: var(--anton-red); font-size: 1.8rem; text-decoration: none; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; }
         
         .menu-btn { 
@@ -40,21 +46,13 @@
             display: flex; align-items: center; justify-content: center; border-radius: 5px; 
             border: 2px solid #000; overflow: hidden;
         }
-        /* Hover-Effekt für Master-Button Desktop */
         .menu-btn span { transition: opacity 0.2s; }
         .menu-btn::after { content: 'A'; position: absolute; font-weight: bold; font-size: 28px; opacity: 0; transition: opacity 0.2s; }
         .menu-btn:hover { background: var(--anton-yellow); color: #000; }
         .menu-btn:hover span { opacity: 0; }
         .menu-btn:hover::after { opacity: 1; }
 
-        .invisible-box { position: fixed; z-index: 10; background: transparent; border: none; cursor: pointer; }
-        .box-ertappt { width: 19%; height: 43%; top: 16%; left: 17%; transform: rotate(-4deg); }
-        .box-mitte { width: 20%; height: 42%; top: 17%; left: 38%; transform: rotate(3deg); }
-        .box-pause { width: 10%; height: 43%; top: 21%; left: 70%; transform: rotate(1deg); }
-        .box-pause2 { width: 10%; height: 30%; top: 34%; left: 60%; transform: rotate(1deg); }
-        .box-pause3 { width: 5%; height: 18%; top: 21%; left: 66%; transform: rotate(45deg); }
-        .box-riesenhunger { width: 10%; height: 3%; top: 67%; left: 43%; }
-
+        /* LEFT SIDEBAR DESKTOP */
         .sidebar-left { 
             position: fixed; top: 0; bottom: 0; left: -300px; width: 240px; 
             background: rgba(255, 235, 59, 0.98); z-index: 205; 
@@ -62,14 +60,34 @@
             transition: left 0.4s ease-in-out; border-right: 2px solid #000; box-sizing: border-box; 
         }
         .sidebar-left.open { left: 0; }
-        .nav-item { margin-bottom: 20px; width: 100%; }
+        
+        .nav-item { margin-bottom: 20px; width: 100%; position: relative; }
         .sidebar-left a { display: flex; align-items: center; color: #000; text-decoration: none; font-size: 1.1rem; transition: color 0.3s; }
+        .sidebar-left a:hover { color: var(--anton-red); }
+        .nav-label { display: flex; align-items: center; width: 100%; }
         .nav-label i.main-icon { width: 30px; text-align: center; margin-right: 10px; }
         
-        .nav-item-epk { margin-top: auto; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 15px; }
-        .nav-item-epk a { color: var(--anton-red) !important; font-weight: bold; }
-        .nav-item-epk a:hover { color: #000 !important; }
+        /* UNTERMENÜ DESKTOP */
+        .arrow-wrapper { margin-left: auto; padding-right: 5px; }
+        .submenu-indicator { font-size: 0.8rem; transition: transform 0.3s; }
+        .nav-item:hover .submenu-indicator { transform: rotate(180deg); }
+        .submenu { display: none; flex-direction: column; padding-left: 35px; margin-top: 10px; width: 100%; }
+        .nav-item:hover .submenu { display: flex; }
+        .submenu a { font-size: 0.85rem; margin-bottom: 12px; }
 
+        /* EPK STYLING - ROT & SCHRÄG */
+        .nav-item-epk { margin-top: auto; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 25px; display: flex; justify-content: center; }
+        .epk-special { 
+            color: var(--anton-red) !important; 
+            font-weight: bold; 
+            transform: rotate(-15deg); 
+            display: inline-block; 
+            font-size: 1.2rem !important;
+            transition: transform 0.3s ease;
+        }
+        .epk-special:hover { color: #000 !important; transform: rotate(0deg) scale(1.1); }
+
+        /* RIGHT SIDEBAR MASTER - ANIMATIONEN */
         .sidebar-right { 
             position: fixed; top: 50%; right: 0; transform: translateY(-50%); 
             width: 50px; display: flex; flex-direction: column; align-items: center; 
@@ -87,6 +105,16 @@
         .sidebar-right a:nth-child(7) i { --brand-color: var(--apple-gray); animation-delay: 1.5s; }
         .sidebar-right a:nth-child(8) i { --brand-color: #f00; animation-delay: 1.75s; }
         .sidebar-right a:nth-child(9) i { --brand-color: var(--amazon-blue); animation-delay: 2.0s; }
+        .sidebar-right a:hover i { animation-play-state: paused; transform: scale(1.55) !important; color: var(--brand-color) !important; }
+
+        /* INVISIBLE BOXEN MASTER */
+        .invisible-box { position: fixed; z-index: 10; background: transparent; border: none; cursor: pointer; }
+        .box-ertappt { width: 19%; height: 43%; top: 16%; left: 17%; transform: rotate(-4deg); }
+        .box-mitte { width: 20%; height: 42%; top: 17%; left: 38%; transform: rotate(3deg); }
+        .box-pause { width: 10%; height: 43%; top: 21%; left: 70%; transform: rotate(1deg); }
+        .box-pause2 { width: 10%; height: 30%; top: 34%; left: 60%; transform: rotate(1deg); }
+        .box-pause3 { width: 5%; height: 18%; top: 21%; left: 66%; transform: rotate(45deg); }
+        .box-riesenhunger { width: 10%; height: 3%; top: 67%; left: 43%; }
 
         footer { 
             position: fixed; bottom: 0; width: 100%; padding: 15px 0; 
@@ -96,20 +124,14 @@
         footer a { color: #000; text-decoration: none; margin: 0 10px; font-weight: bold; }
 
         /* ============================================================
-           MOBILER BEREICH - KORREKTUREN
+           MOBILER BEREICH - STRENG GETRENNT
            ============================================================ */
         #mobile-bg-fix { display: none; }
 
         @media (max-width: 800px) {
             body { background: #ffffff !important; overflow: hidden !important; position: fixed; width: 100%; height: 100%; }
-            #mobile-bg-fix { 
-                display: block; position: fixed; top: 0; left: -100%; width: 300%; height: 100%; 
-                background: url('AFaPo Wall.jpg') no-repeat center center; background-size: cover; z-index: -1; 
-            }
-            /* Korrektur Menü-Button Mobil */
-            .menu-btn { top: 10px; left: 10px; width: 40px; height: 40px; z-index: 1001; }
-
-            /* Korrektur Mobile Top-Navigation */
+            #mobile-bg-fix { display: block; position: fixed; top: 0; left: -100%; width: 300%; height: 100%; background: url('AFaPo Wall.jpg') no-repeat center center; background-size: cover; z-index: -1; }
+            
             .sidebar-left { 
                 left: 0 !important; top: -100% !important; bottom: auto !important; width: 100% !important; 
                 height: 55px !important; flex-direction: row !important; padding: 0 !important; 
@@ -118,26 +140,23 @@
                 background: var(--anton-yellow) !important; z-index: 1000;
             }
             .sidebar-left.open { top: 60px !important; }
-            
             .sidebar-left .nav-item { margin: 0 !important; width: auto !important; height: 100%; display: flex; align-items: center; }
-            .sidebar-left .nav-label { display: flex !important; align-items: center !important; justify-content: center !important; height: 100% !important; }
             .sidebar-left .nav-label i { font-size: 1.6rem !important; margin: 0 !important; color: #000 !important; }
             .sidebar-left span, .sidebar-left .arrow-wrapper, .sidebar-left .submenu { display: none !important; }
-
-            header { height: 60px !important; z-index: 999; }
             
-            /* Korrektur Social Bar Mobil */
+            .sidebar-left .nav-item-epk { margin: 0 !important; border: none !important; padding: 0 !important; }
+            .epk-special { transform: none !important; font-size: 1rem !important; }
+
+            header { height: 60px !important; }
+            .menu-btn { top: 10px; left: 10px; width: 40px; height: 40px; }
+            
             .sidebar-right { 
-                top: auto !important; bottom: 40px !important; right: 0 !important; left: 0 !important; width: 100% !important; 
+                top: auto !important; bottom: 40px !important; left: 0 !important; width: 100% !important; 
                 height: 45px !important; flex-direction: row !important; transform: none !important; 
                 border-radius: 0 !important; border-top: 1.5px solid #000 !important; 
                 background: rgba(255,255,255,0.95) !important; justify-content: space-evenly !important; padding: 0 !important; 
             }
-            /* Korrektur Footer Mobil (Vollständige Links) */
-            footer { 
-                height: 40px !important; padding: 0 !important; display: flex !important; 
-                align-items: center; justify-content: center; background: #fff !important;
-            }
+            footer { height: 40px !important; padding: 0 !important; display: flex !important; align-items: center; justify-content: center; }
             .invisible-box { display: none !important; }
         }
     </style>
@@ -160,16 +179,21 @@
             <a href="hauptseite.html"><span class="nav-label"><i class="fa-solid fa-house main-icon"></i> <span>START</span></span></a>
         </div>
         <div class="nav-item">
-            <a href="meinemusik.html"><span class="nav-label"><i class="fa-solid fa-music main-icon"></i> <span>MEINE MUSIK</span></span></a>
+            <a href="meinemusik.html">
+                <span class="nav-label"><i class="fa-solid fa-music main-icon"></i> <span>MEINE MUSIK</span></span>
+                <div class="arrow-wrapper"><i class="fa-solid fa-caret-down submenu-indicator"></i></div>
+            </a>
+            <div class="submenu">
+                <a href="ueber-mich.html">ÜBER MICH</a>
+                <a href="meinemusik.html">RELEASES</a>
+                <a href="konzerte.html">TERMINE</a>
+            </div>
         </div>
         <div class="nav-item">
             <a href="shop.html"><span class="nav-label"><i class="fa-solid fa-cart-shopping main-icon"></i> <span>SHOP</span></span></a>
         </div>
-        <div class="nav-item">
-            <a href="kontakt.html"><span class="nav-label"><i class="fa-solid fa-envelope main-icon"></i> <span>KONTAKT</span></span></a>
-        </div>
         <div class="nav-item nav-item-epk">
-            <a href="epk.html"><span class="nav-label"><i class="fa-solid fa-bullhorn main-icon"></i> <span>EPK / PRESSE</span></span></a>
+            <a href="epk.html" class="epk-special">EPK / PRESSE</a>
         </div>
     </nav>
 
@@ -179,14 +203,14 @@
         <a href="https://www.instagram.com/anton.familienpop" target="_blank"><i class="fa-brands fa-instagram"></i></a>
         <a href="https://whatsapp.com/channel/0029Vb6WrdZInlqHDsgTp21e" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
         <a href="https://www.facebook.com/Anton.Familienpop/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
-        <a href="https://open.spotify.com/artist/5L1D99G7r7YjG7j8s6H5I9" target="_blank"><i class="fa-brands fa-spotify"></i></a>
+        <a href="https://open.spotify.com/artist/7z" target="_blank"><i class="fa-brands fa-spotify"></i></a>
         <a href="https://music.apple.com/de/artist/anton/1687546783" target="_blank"><i class="fa-brands fa-apple"></i></a>
         <a href="https://www.youtube.com/@AntonMusikVEVO" target="_blank"><i class="fa-solid fa-circle-play"></i></a>
         <a href="https://music.amazon.de/artists/B0GF2ZR9RR" target="_blank"><i class="fa-brands fa-amazon"></i></a>
     </aside>
 
     <footer>
-        <a href="impressum.html">Impressum</a> | <a href="datenschutz.html">Datenschutz</a> | <a href="kontakt.html">Kontakt</a>
+        <a href="impressum.html">Impressum</a> | <a href="datenschutz.html">Datenschutz</a>
     </footer>
 
     <script>
