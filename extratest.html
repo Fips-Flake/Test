@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap&subset=latin-ext" rel="stylesheet">
     <style>
         /* ==========================================================================
-           1. BASIS-STLYES & GEMEINSAME ELEMENTE (Gültig für alle Varianten)
+           1. BASIS-STYLES & GEMEINSAME ELEMENTE (Gültig für alle Varianten)
            ========================================================================== */
         :root { 
             --anton-red: #ff0000; 
@@ -19,14 +19,13 @@
 
         html, body { 
             height: 100%; margin: 0; padding: 0; 
-            background-color: #ffffff; /* Gemäß Ihrer Anweisung auf #ffffff fixiert */
+            background-color: #ffffff; 
             font-family: 'Special Elite', cursive; 
             overflow-x: hidden;
         }
 
         body { display: flex; flex-direction: column; width: 100vw; min-height: 100.5vh; }
 
-        /* Gemeinsamer Header (60px schmaler) */
         header { 
             position: fixed; top: 0; width: 100%; height: 60px; 
             display: flex; justify-content: center; align-items: center; 
@@ -52,11 +51,28 @@
         .menu-btn.active span { display: none; }
         .menu-btn.active::after { content: 'A'; color: #000; font-weight: bold; font-size: 28px; }
 
-        /* Gemeinsame Navigations-Elemente */
         .nav-item a { text-decoration: none; color: #000; display: flex; flex-direction: column; align-items: center; }
         .mobile-tag { font-size: 0.55rem; text-transform: uppercase; font-weight: bold; margin-top: 4px; }
         .epk-container { background: #fff; border-left: 3px solid #000; display: flex; align-items: center; justify-content: center; }
         .epk-text-only { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 0.7rem; color: var(--anton-red); font-weight: bold; text-decoration: none; }
+
+        .id-button { position: fixed; right: 0; bottom: 150px; width: 38px; height: 38px; background: rgba(255,255,255,0.4); border: 2px solid #000; border-right: none; display: flex; align-items: center; justify-content: center; z-index: 1300; cursor: pointer; transition: 0.4s; border-radius: 6px 0 0 6px; font-weight: bold; font-size: 0.85rem; }
+        .id-button.hidden { transform: translateX(100%); }
+        .id-panel { position: fixed; right: -250px; bottom: 150px; height: 45px; width: 230px; background: rgba(255,255,255,0.7); border: 2px solid #000; border-right: none; display: flex; align-items: center; justify-content: center; z-index: 1299; transition: 0.5s; border-radius: 8px 0 0 8px; }
+        .id-panel.open { right: 0; }
+        .id-panel a { color: #000; text-decoration: none; margin: 0 8px; font-weight: bold; font-size: 0.85rem; text-transform: uppercase; }
+
+        .sidebar-right a i { color: #000; font-size: 1.5rem; display: inline-block; animation: ultraFlowWave 6s linear infinite; }
+        @keyframes ultraFlowWave { 0% { transform: scale(1); } 9.33% { transform: scale(1.4); color: var(--brand-color); } 23.33%, 100% { transform: scale(1); color: #000; } }
+        .sidebar-right a:nth-child(1) i { --brand-color: #f00; }
+        .sidebar-right a:nth-child(2) i { --brand-color: #25F4EE; }
+        .sidebar-right a:nth-child(3) i { --brand-color: #E1306C; }
+        .sidebar-right a:nth-child(4) i { --brand-color: #25D366; }
+        .sidebar-right a:nth-child(5) i { --brand-color: #1877F2; }
+        .sidebar-right a:nth-child(6) i { --brand-color: #1DB954; }
+        .sidebar-right a:nth-child(7) i { --brand-color: var(--apple-gray); }
+        .sidebar-right a:nth-child(8) i { --brand-color: #f00; }
+        .sidebar-right a:nth-child(9) i { --brand-color: var(--amazon-blue); }
 
         /* ==========================================================================
            2. VARIANTE: MOBIL (0px bis 800px)
@@ -135,25 +151,6 @@
             }
             .epk-container { position: absolute; right: 0; top: 0; height: 100%; width: 60px; }
         }
-
-        /* --- I/D SYSTEM & SOCIAL ANIMATION --- */
-        .id-button { position: fixed; right: 0; bottom: 150px; width: 38px; height: 38px; background: rgba(255,255,255,0.4); border: 2px solid #000; border-right: none; display: flex; align-items: center; justify-content: center; z-index: 1300; cursor: pointer; transition: 0.4s; border-radius: 6px 0 0 6px; font-weight: bold; font-size: 0.85rem; }
-        .id-button.hidden { transform: translateX(100%); }
-        .id-panel { position: fixed; right: -250px; bottom: 150px; height: 45px; width: 230px; background: rgba(255,255,255,0.7); border: 2px solid #000; border-right: none; display: flex; align-items: center; justify-content: center; z-index: 1299; transition: 0.5s; border-radius: 8px 0 0 8px; }
-        .id-panel.open { right: 0; }
-        .id-panel a { color: #000; text-decoration: none; margin: 0 8px; font-weight: bold; font-size: 0.85rem; text-transform: uppercase; }
-
-        .sidebar-right a i { color: #000; font-size: 1.5rem; display: inline-block; animation: ultraFlowWave 6s linear infinite; }
-        @keyframes ultraFlowWave { 0% { transform: scale(1); } 9.33% { transform: scale(1.4); color: var(--brand-color); } 23.33%, 100% { transform: scale(1); color: #000; } }
-        .sidebar-right a:nth-child(1) i { --brand-color: #f00; }
-        .sidebar-right a:nth-child(2) i { --brand-color: #25F4EE; }
-        .sidebar-right a:nth-child(3) i { --brand-color: #E1306C; }
-        .sidebar-right a:nth-child(4) i { --brand-color: #25D366; }
-        .sidebar-right a:nth-child(5) i { --brand-color: #1877F2; }
-        .sidebar-right a:nth-child(6) i { --brand-color: #1DB954; }
-        .sidebar-right a:nth-child(7) i { --brand-color: var(--apple-gray); }
-        .sidebar-right a:nth-child(8) i { --brand-color: #f00; }
-        .sidebar-right a:nth-child(9) i { --brand-color: var(--amazon-blue); }
     </style>
 </head>
 <body>
@@ -233,10 +230,8 @@
             if (!sidebar.contains(e.target) && !menuBtn.contains(e.target) && !idPanel.contains(e.target) && !idBtn.contains(e.target)) closeAllMenus();
         });
 
-        // Automatisches Header-Ausblenden
         setTimeout(() => { document.getElementById('header-main').style.transform = 'translateY(-100%)'; }, 3000);
 
-        // Mobile Wisch-Logik
         let touchStartX = 0, currentTranslateX = 0;
         document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive: true});
         document.addEventListener('touchmove', e => {
