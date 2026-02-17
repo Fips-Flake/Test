@@ -49,72 +49,77 @@
                 background-size: cover;
             }
 
+            /* Navigation als Sidebar links - startet GESCHLOSSEN */
+            .sidebar-left {
+                position: fixed !important;
+                left: -120px !important; /* Versteckt */
+                top: 0 !important; 
+                width: 100px !important; 
+                height: 100vh !important;
+                flex-direction: column !important; 
+                padding: 100px 0 0 0 !important;
+                border-bottom: none !important; 
+                border-right: 3px solid #000 !important;
+                justify-content: flex-start !important;
+                background: var(--anton-yellow) !important;
+                transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
+                z-index: 1100 !important;
+            }
+            .sidebar-left.open { left: 0 !important; }
+            
+            .nav-item { flex: none !important; margin-bottom: 30px !important; width: 100% !important; }
+
+            /* Socialbar als Sidebar rechts sauber integriert */
+            .sidebar-right {
+                bottom: auto !important; 
+                top: 0 !important; 
+                left: auto !important; 
+                right: 0 !important;
+                width: 65px !important; 
+                height: 100vh !important;
+                flex-direction: column !important; 
+                border-top: none !important;
+                border-left: 2px solid #000 !important; 
+                padding: 100px 0 !important;
+                background: rgba(255, 255, 255, 0.7) !important;
+                justify-content: center !important;
+                gap: 20px !important;
+            }
+
+            /* EPK Anpassung */
+            .epk-container {
+                position: absolute !important; 
+                bottom: 0 !important; 
+                left: 0 !important; 
+                top: auto !important;
+                right: auto !important;
+                width: 100% !important; 
+                height: 150px !important;
+                border-left: none !important; 
+                border-top: 3px solid #000 !important;
+                background: #fff !important;
+            }
+
             .header-logo {
                 top: 110%;
                 max-height: 150px;
             }
-
-            /* Navigation als Sidebar links */
-            .sidebar-left {
-                left: -100px; top: 0 !important; width: 85px !important; height: 100vh !important;
-                flex-direction: column !important; padding: 100px 0 0 0 !important;
-                border-bottom: none !important; border-right: 3px solid #000 !important;
-                justify-content: flex-start !important;
-                transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
-            }
-            .sidebar-left.open { left: 0 !important; }
-            
-            .nav-item { flex: none !important; margin-bottom: 25px !important; width: 100% !important; }
-
-            /* Socialbar als Sidebar rechts */
-            .sidebar-right {
-                bottom: auto !important; top: 0 !important; left: auto !important; right: 0 !important;
-                width: 60px !important; height: 100vh !important;
-                flex-direction: column !important; border-top: none !important;
-                border-left: 2px solid #000 !important; padding: 80px 0 !important;
-                background: rgba(255, 255, 255, 0.7) !important;
-            }
-
-            /* EPK Anpassung für vertikale Sidebar */
-            .epk-container {
-                position: relative !important; right: auto !important; top: auto !important;
-                width: 100% !important; height: 120px !important;
-                border-left: none !important; border-top: 3px solid #000 !important;
-                margin-top: auto !important;
-            }
         }
 
         /* --- MOBILE VERSION (GESPERRT / FINISHED) --- */
-        #mobile-bg-fix { 
-            display: none; 
-        }
-
+        #mobile-bg-fix { display: none; }
         @media (max-width: 800px) {
             body { background: #000 !important; overflow: hidden !important; position: fixed; width: 100%; height: 100%; }
-            
             #mobile-bg-fix { 
-                display: block; 
-                position: fixed; 
-                top: 0; 
-                left: -100%; 
-                width: 300%; 
-                height: 100%; 
-                background: url('Background.jpg') no-repeat center center; 
-                background-size: cover; 
-                z-index: -1; 
-                will-change: transform;
+                display: block; position: fixed; top: 0; left: -100%; width: 300%; height: 100%; 
+                background: url('Background.jpg') no-repeat center center; background-size: cover; z-index: -1; will-change: transform;
             }
-
-            .header-logo { 
-                top: 120%; 
-                max-height: 185px; 
-            }
+            .header-logo { top: 120%; max-height: 185px; }
         }
 
-        /* --- ALLGEMEINER HEADER --- */
+        /* --- BASIS STRUKTUREN --- */
         header { 
-            position: fixed; 
-            top: 0; width: 100%; height: 80px; 
+            position: fixed; top: 0; width: 100%; height: 80px; 
             display: flex; justify-content: center; align-items: center; 
             z-index: 1000; background: rgba(255, 255, 255, 0.8); 
             backdrop-filter: blur(10px); border-bottom: 2px solid #000;
@@ -122,9 +127,7 @@
         }
         
         .header-logo { 
-            position: absolute; 
-            transform: translateY(-50%);
-            width: auto; 
+            position: absolute; transform: translateY(-50%); width: auto; 
             filter: brightness(0) saturate(100%) invert(13%) sepia(95%) saturate(7408%) hue-rotate(359deg) brightness(97%) contrast(113%);
         }
         
@@ -139,7 +142,6 @@
         .menu-btn.active span { display: none; }
         .menu-btn.active::after { content: 'A'; color: #000; font-weight: bold; font-size: 28px; }
 
-        /* Sidebar Standard (wird via Media Queries überschrieben) */
         .sidebar-left { 
             position: fixed; left: 0; top: -120px; width: 100%; height: 95px; 
             background: var(--anton-yellow); z-index: 1100; 
@@ -294,60 +296,24 @@
             }
         });
 
+        // Mobile-Logic (Gesperrt für 800px und kleiner)
         let touchStartX = 0;
         let touchStartY = 0;
         let currentTranslateX = 0;
-        const screenWidth = window.innerWidth;
-
-        document.addEventListener('touchstart', e => { 
-            touchStartX = e.touches[0].clientX; 
-            touchStartY = e.touches[0].clientY; 
-        }, {passive: true});
-
+        document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY; }, {passive: true});
         document.addEventListener('touchmove', e => {
             if (window.innerWidth > 800) return; 
             const moveX = e.touches[0].clientX;
-            const moveY = e.touches[0].clientY;
             const diffX = moveX - touchStartX;
-            const diffY = moveY - touchStartY;
-
-            if (Math.abs(diffX) > 10 || Math.abs(diffY) > 10) {
-                if (!sidebar.contains(e.target)) closeAllMenus();
-            }
-
-            if (Math.abs(diffX) > Math.abs(diffY)) {
+            if (Math.abs(diffX) > 10) {
                 let newX = currentTranslateX + diffX;
-                const limit = screenWidth; 
-                if (newX > limit) newX = limit; 
-                if (newX < -limit) newX = -limit;
+                if (newX > window.innerWidth) newX = window.innerWidth; 
+                if (newX < -window.innerWidth) newX = -window.innerWidth;
                 bg.style.transform = `translateX(${newX}px)`;
             }
         }, {passive: true});
 
-        document.addEventListener('touchend', e => {
-            if (window.innerWidth > 800) return;
-            const endX = e.changedTouches[0].clientX;
-            const endY = e.changedTouches[0].clientY;
-            const diffX = endX - touchStartX;
-            const diffY = endY - touchStartY;
-
-            if (Math.abs(diffY) > Math.abs(diffX)) {
-                if (diffY > 60 && touchStartY < 250) { 
-                    closeAllMenus();
-                    sidebar.classList.add('open');
-                    menuBtn.classList.add('active');
-                    menuTimeout = setTimeout(closeAllMenus, 5000);
-                }
-            } else {
-                const style = window.getComputedStyle(bg);
-                const matrix = new WebKitCSSMatrix(style.transform);
-                currentTranslateX = matrix.m41;
-            }
-        }, {passive: true});
-
-        setTimeout(() => { 
-            document.getElementById('header-main').style.transform = 'translateY(-100%)'; 
-        }, 3000);
+        setTimeout(() => { document.getElementById('header-main').style.transform = 'translateY(-100%)'; }, 3000);
     </script>
 </body>
 </html>
