@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>ANTON | MASTER SPLIT</title>
+    <title>ANTON | MASTER FINAL</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap&subset=latin-ext" rel="stylesheet">
     <style>
@@ -84,7 +84,6 @@
             .mobile-tag { font-size: 0.55rem; text-transform: uppercase; font-weight: bold; margin-top: 4px; }
             .nav-item i { font-size: 1.2rem; }
 
-            /* EPK Box Mobil */
             .epk-container { 
                 position: absolute; right: 0; top: 0; height: 100%; width: 45px;
                 background: #fff; border-left: 3px solid #000; 
@@ -101,8 +100,7 @@
             }
             .sidebar-right a i { font-size: 1.5rem; animation: ultraFlowWave 6s linear infinite; }
             
-            /* Verstecke Desktop-Elemente auf Mobil */
-            footer, .invisible-box, .submenu, .arrow-wrapper { display: none; }
+            footer, .invisible-box, .desktop-only { display: none !important; }
         }
 
         /* ==========================================================================
@@ -115,7 +113,6 @@
             }
             #mobile-bg-fix { display: none; }
 
-            /* Desktop Sidebar (Vertikal von Links) */
             .sidebar-left { 
                 position: fixed; top: 0; bottom: 0; left: -300px; width: var(--sidebar-width); 
                 background: rgba(255, 235, 59, 0.98); z-index: 1100; 
@@ -123,22 +120,24 @@
                 transition: left 0.4s ease-in-out; border-right: 2px solid #000; box-sizing: border-box; 
             }
             .sidebar-left.open { left: 0 !important; }
-            .nav-item { width: 100%; margin-bottom: 20px; }
-            .nav-item a { display: flex; align-items: center; color: #000; text-decoration: none; font-size: 1.1rem; }
-            .nav-item i { width: 30px; text-align: center; margin-right: 10px; }
+            
+            /* Desktop spezifische Nav-Anpassung */
+            .sidebar-left .nav-item { width: 100%; margin-bottom: 20px; text-align: left; flex: none; }
+            .sidebar-left .nav-item a { flex-direction: row; align-items: center; font-size: 1.1rem; }
+            .sidebar-left .nav-item i { width: 30px; margin-right: 10px; font-size: 1.1rem; }
             .mobile-tag { display: none; }
 
             /* Desktop Untermenü */
-            .arrow-wrapper { margin-left: auto; padding-right: 5px; }
+            .arrow-wrapper { margin-left: auto; padding-right: 5px; display: block; }
             .submenu-indicator { font-size: 0.8rem; transition: transform 0.3s; }
             .nav-item:hover .submenu-indicator { transform: rotate(180deg); }
             .submenu { display: none; flex-direction: column; padding-left: 35px; margin-top: 10px; }
             .nav-item:hover .submenu { display: flex; }
-            .submenu a { font-size: 0.85rem; margin-bottom: 12px; }
+            .submenu a { font-size: 0.85rem; margin-bottom: 12px; display: block; text-decoration: none; color: #000; }
 
-            /* Desktop EPK Trenner */
-            .epk-container { margin-top: auto; border-top: 1px solid rgba(0,0,0,0.2); padding-top: 15px; }
-            .epk-text-only { color: var(--anton-red); font-weight: bold; text-decoration: none; font-size: 1.1rem; }
+            /* Desktop EPK (Trennstrich & Logo) */
+            .epk-container { margin-top: auto; border-top: 1px solid rgba(0,0,0,0.2); padding-top: 20px; position: static; width: 100%; background: transparent; border-left: none; }
+            .epk-text-only { writing-mode: horizontal-tb; transform: none; color: var(--anton-red); font-size: 1.1rem; display: flex; align-items: center; }
             .epk-text-only::before { content: "\f0a1"; font-family: "Font Awesome 6 Free"; font-weight: 900; margin-right: 10px; }
 
             /* Desktop Social Bar (Rechts) */
@@ -152,7 +151,6 @@
             .sidebar-right:hover a i { animation-play-state: paused; transform: scale(1); color: #000; }
             .sidebar-right a:hover i { color: var(--brand-color) !important; transform: scale(1.5); }
 
-            /* Desktop Footer */
             footer { 
                 position: fixed; bottom: 0; width: 100%; padding: 15px 0; 
                 background: rgba(255,255,255,0.9); border-top: 1.5px solid #000; 
@@ -160,7 +158,6 @@
             }
             footer a { color: #000; text-decoration: none; margin: 0 8px; font-weight: bold; }
 
-            /* Desktop Klick-Boxen */
             .invisible-box { position: fixed; z-index: 10; background: transparent; cursor: pointer; }
             .box-ertappt { width: 19%; height: 43%; top: 16%; left: 17%; transform: rotate(-4deg); }
             .box-mitte { width: 20%; height: 42%; top: 17%; left: 38%; transform: rotate(3deg); }
@@ -170,7 +167,7 @@
             .box-riesenhunger { width: 10%; height: 3%; top: 67%; left: 43%; }
         }
 
-        /* I/D System (beide) */
+        /* I/D System */
         .id-button {
             position: fixed; right: 0; bottom: 150px; width: 38px; height: 38px;
             background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(4px);
@@ -191,7 +188,7 @@
         .id-panel.open { right: 0; }
         .id-panel a { color: #000; text-decoration: none; margin: 0 8px; text-transform: uppercase; }
 
-        /* Animation Delays */
+        /* Icon Delays */
         .sidebar-right a:nth-child(1) i { --brand-color: #f00; animation-delay: 0.0s; }
         .sidebar-right a:nth-child(2) i { --brand-color: #25F4EE; animation-delay: 0.25s; }
         .sidebar-right a:nth-child(3) i { --brand-color: #E1306C; animation-delay: 0.5s; }
@@ -223,24 +220,38 @@
 
     <nav class="sidebar-left" id="sidebar">
         <div class="nav-item">
-            <a href="hauptseite.html"><i class="fa-solid fa-house"></i><span class="mobile-tag">Start</span> START</a>
+            <a href="hauptseite.html">
+                <i class="fa-solid fa-house"></i>
+                <span class="mobile-tag">Start</span>
+                <span class="desktop-only">START</span>
+            </a>
         </div>
         <div class="nav-item">
             <a href="meinemusik.html">
-                <i class="fa-solid fa-music"></i><span class="mobile-tag">Musik</span> MUSIK
-                <div class="arrow-wrapper"><i class="fa-solid fa-caret-down submenu-indicator"></i></div>
+                <i class="fa-solid fa-music"></i>
+                <span class="mobile-tag">Musik</span>
+                <span class="desktop-only">MUSIK</span>
+                <div class="arrow-wrapper desktop-only"><i class="fa-solid fa-caret-down submenu-indicator"></i></div>
             </a>
-            <div class="submenu">
+            <div class="submenu desktop-only">
                 <a href="ueber-mich.html"><i class="fa-regular fa-face-smile"></i> ÜBER MICH</a>
                 <a href="meinemusik.html"><i class="fa-solid fa-volume-high"></i> RELEASES</a>
                 <a href="konzerte.html"><i class="fa-solid fa-microphone-lines"></i> KONZERTE</a>
             </div>
         </div>
         <div class="nav-item">
-            <a href="shop.html"><i class="fa-solid fa-cart-shopping"></i><span class="mobile-tag">Shop</span> SHOP</a>
+            <a href="shop.html">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="mobile-tag">Shop</span>
+                <span class="desktop-only">SHOP</span>
+            </a>
         </div>
         <div class="nav-item">
-            <a href="kontakt.html"><i class="fa-solid fa-envelope"></i><span class="mobile-tag">Kontakt</span> KONTAKT</a>
+            <a href="kontakt.html">
+                <i class="fa-solid fa-envelope"></i>
+                <span class="mobile-tag">Kontakt</span>
+                <span class="desktop-only">KONTAKT</span>
+            </a>
         </div>
         <div class="epk-container">
             <a href="epk.html" class="epk-text-only">EPK/PRESSE</a>
@@ -313,11 +324,10 @@
             }
         });
 
-        // Swipe & Background Logic
+        // Swipe & Background Logic Master-Style
         let touchStartX = 0;
         let touchStartY = 0;
         let currentTranslateX = 0;
-        const screenWidth = window.innerWidth;
 
         document.addEventListener('touchstart', e => { 
             touchStartX = e.touches[0].clientX; 
@@ -330,6 +340,9 @@
                 const diffY = e.touches[0].clientY - touchStartY;
                 if (Math.abs(diffX) > Math.abs(diffY)) {
                     let newX = currentTranslateX + diffX;
+                    const limit = window.innerWidth;
+                    if (newX > limit) newX = limit;
+                    if (newX < -limit) newX = -limit;
                     bg.style.transform = `translateX(${newX}px)`;
                 }
             }
