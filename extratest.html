@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>ANTON | MASTER 1:1 FINAL</title>
+    <title>ANTON | MASTER HYBRID FIXED</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap&subset=latin-ext" rel="stylesheet">
     <style>
@@ -27,15 +27,7 @@
             min-height: 100.5vh; touch-action: pan-y; background: #ffffff;
         }
 
-        /* --- DESKTOP HINTERGRUND --- */
-        @media (min-width: 801px) {
-            body {
-                background: #ffffff url('Background.jpg') no-repeat center center fixed; 
-                background-size: cover; background-blend-mode: multiply;
-            }
-        }
-
-        /* --- MOBILER HINTERGRUND (WISCHBAR - 1:1) --- */
+        /* --- MOBILER HINTERGRUND (WISCHBAR - UNVERÄNDERT) --- */
         #mobile-bg-fix { display: none; }
         @media (max-width: 800px) {
             body { background: #000 !important; overflow: hidden !important; position: fixed; width: 100%; height: 100%; }
@@ -46,7 +38,7 @@
             }
         }
 
-        /* --- HEADER --- */
+        /* --- HEADER & LOGO --- */
         header { 
             position: fixed; top: 0; width: 100%; height: 80px; 
             display: flex; justify-content: center; align-items: center; 
@@ -77,7 +69,7 @@
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* MOBILE SIDEBAR (1:1 ORIGINAL) */
+        /* --- MOBILE ANSICHT (STRENG 1:1) --- */
         @media (max-width: 800px) {
             .sidebar-left {
                 left: 0; top: -120px; width: 100%; height: 95px; 
@@ -87,7 +79,6 @@
             }
             .sidebar-left.open { top: 0 !important; }
             .desktop-label { display: none; }
-            
             .epk-container { 
                 position: absolute; right: 0; top: 0; height: 100%; width: 45px;
                 background: #fff; border-left: 3px solid #000; 
@@ -97,37 +88,59 @@
                 writing-mode: vertical-rl; transform: rotate(180deg); 
                 font-size: 0.7rem; color: var(--anton-red); font-weight: bold; text-decoration: none; 
             }
+            .sidebar-right { 
+                position: fixed; bottom: 0; left: 0; width: 100%; height: 65px; 
+                display: flex; flex-direction: row; align-items: center; 
+                z-index: 999; background: rgba(255, 255, 255, 0.7); 
+                backdrop-filter: blur(8px); border-top: 2px solid #000;
+                padding: 0 15px; justify-content: space-around; 
+            }
         }
 
-        /* TABLET SIDEBAR (AB 801px) */
+        /* --- TABLET ANSICHT (AB 801px) --- */
         @media (min-width: 801px) {
+            body {
+                background: #ffffff url('Background.jpg') no-repeat center center fixed; 
+                background-size: cover;
+            }
             .sidebar-left {
-                top: 0; bottom: 0; left: -300px; width: 260px; height: 100%;
-                flex-direction: column; padding: 110px 25px 30px 25px;
-                border-right: 3px solid #000; justify-content: flex-start;
+                top: 0; bottom: 0; left: -320px; width: 280px; height: 100%;
+                flex-direction: column; padding: 120px 30px 40px 30px;
+                border-right: 4px solid #000; border-bottom: none;
+                justify-content: flex-start;
             }
             .sidebar-left.open { left: 0 !important; }
-            .nav-item { width: 100%; text-align: left; margin-bottom: 25px; flex: none; }
-            .nav-item a { flex-direction: row; gap: 15px; align-items: center; }
-            .nav-item i { font-size: 1.5rem; width: 30px; }
-            .mobile-tag { display: none; }
-            .desktop-label { display: block; font-size: 1.2rem; font-weight: bold; }
             
+            .nav-item { width: 100%; margin-bottom: 30px; flex: none; }
+            .nav-item a { flex-direction: row; gap: 20px; align-items: center; }
+            .nav-item i { font-size: 1.8rem; width: 35px; text-align: center; }
+            .mobile-tag { display: none; }
+            .desktop-label { display: block; font-size: 1.4rem; font-weight: bold; letter-spacing: 1px; }
+
             .epk-container { 
-                margin-top: auto; padding-top: 20px; border-top: 2px solid #000; width: 100%;
+                margin-top: auto; padding-top: 25px; border-top: 3px solid #000; width: 100%;
                 background: transparent; border-left: none; position: static; height: auto;
             }
             .epk-text-only { 
                 writing-mode: horizontal-tb; transform: none; 
-                font-size: 1.1rem; color: var(--anton-red); font-weight: bold; text-decoration: none;
-                display: block;
+                font-size: 1.3rem; color: var(--anton-red); font-weight: bold; 
+                text-decoration: none; display: block;
+            }
+
+            .sidebar-right {
+                position: fixed; top: 50%; right: 20px; transform: translateY(-50%);
+                width: 65px; height: auto; flex-direction: column;
+                background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(10px);
+                border: 3px solid #000; border-radius: 50px; 
+                padding: 30px 0; gap: 25px; z-index: 999;
+                display: flex; align-items: center; justify-content: center;
             }
         }
 
+        /* --- ALLGEMEINE ELEMENTE --- */
         .nav-item a { text-decoration: none; color: #000; display: flex; flex-direction: column; align-items: center; }
         .mobile-tag { font-size: 0.55rem; text-transform: uppercase; font-weight: bold; margin-top: 4px; }
 
-        /* --- I/D SYSTEM --- */
         .id-button {
             position: fixed; right: 0; bottom: 150px; width: 38px; height: 38px;
             background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(4px);
@@ -146,27 +159,6 @@
         }
         .id-panel.open { right: 0; }
         .id-panel a { color: #000; text-decoration: none; margin: 0 8px; text-transform: uppercase; font-weight: bold; font-size: 0.85rem; }
-
-        /* --- SOCIALBAR --- */
-        .sidebar-right { 
-            position: fixed; bottom: 0; left: 0; width: 100%; height: 65px; 
-            display: flex; flex-direction: row; align-items: center; 
-            z-index: 999; background: rgba(255, 255, 255, 0.7); 
-            backdrop-filter: blur(8px); border-top: 2px solid #000;
-            /* ZENTRIERUNG OPTIMIERT */
-            padding: 0 15px; justify-content: space-around; 
-            box-sizing: border-box;
-        }
-
-        @media (min-width: 801px) {
-            .sidebar-right {
-                top: 50%; right: 0; left: auto; transform: translateY(-50%);
-                width: 60px; height: auto; flex-direction: column;
-                border-top: 2px solid #000; border-left: 2px solid #000; border-bottom: 2px solid #000;
-                border-radius: 15px 0 0 15px; padding: 25px 0; gap: 20px;
-                justify-content: center;
-            }
-        }
 
         .sidebar-right a { display: flex; align-items: center; justify-content: center; text-decoration: none; }
         .sidebar-right a i { color: #000; font-size: 1.5rem; display: inline-block; animation: ultraFlowWaveMobile 6s linear infinite; }
@@ -252,40 +244,22 @@
             if (!sidebar.contains(e.target) && !menuBtn.contains(e.target) && !idPanel.contains(e.target) && !idBtn.contains(e.target)) closeAllMenus();
         });
 
-        // SWIPE & TOUCH LOGIC (1:1 ORIGINAL)
+        // SWIPE & TOUCH LOGIC (1:1 ORIGINAL FÜR MOBILE)
         let touchStartX = 0, touchStartY = 0, currentTranslateX = 0;
-        const screenWidth = window.innerWidth;
-
         document.addEventListener('touchstart', e => { 
             touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY; 
         }, {passive: true});
 
         document.addEventListener('touchmove', e => {
-            const moveX = e.touches[0].clientX, moveY = e.touches[0].clientY;
-            const diffX = moveX - touchStartX, diffY = moveY - touchStartY;
-
-            if (Math.abs(diffX) > 10 || Math.abs(diffY) > 10) { if (!sidebar.contains(e.target)) closeAllMenus(); }
-
-            if (Math.abs(diffX) > Math.abs(diffY)) {
-                if (window.innerWidth <= 800) {
-                    let newX = currentTranslateX + diffX;
-                    if (newX > screenWidth) newX = screenWidth; 
-                    if (newX < -screenWidth) newX = -screenWidth;
-                    bg.style.transform = `translateX(${newX}px)`;
-                }
+            if (window.innerWidth <= 800) {
+                const moveX = e.touches[0].clientX, moveY = e.touches[0].clientY;
+                const diffX = moveX - touchStartX;
+                if (Math.abs(diffX) > 10) bg.style.transform = `translateX(${currentTranslateX + diffX}px)`;
             }
         }, {passive: true});
 
         document.addEventListener('touchend', e => {
-            const endX = e.changedTouches[0].clientX, endY = e.changedTouches[0].clientY;
-            const diffX = endX - touchStartX, diffY = endY - touchStartY;
-
-            if (Math.abs(diffY) > Math.abs(diffX)) {
-                if (diffY > 60 && touchStartY < 250) { 
-                    closeAllMenus(); sidebar.classList.add('open'); menuBtn.classList.add('active');
-                    menuTimeout = setTimeout(closeAllMenus, 5000);
-                }
-            } else {
+            if (window.innerWidth <= 800) {
                 const matrix = new WebKitCSSMatrix(window.getComputedStyle(bg).transform);
                 currentTranslateX = matrix.m41;
             }
