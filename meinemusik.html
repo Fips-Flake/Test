@@ -15,6 +15,7 @@
             --amazon-blue: #00A8E1;
         }
 
+        /* Grundlegende Einstellungen - Hintergrund gemäß Vorgabe #ffffff */
         html, body { 
             margin: 0; 
             padding: 0; 
@@ -74,9 +75,6 @@
             .d-nav-item { margin-bottom: 20px; width: 100%; }
             .d-sidebar-left a { display: flex; align-items: center; color: #000; text-decoration: none; font-size: 1.1rem; width: 100%; }
             
-            .d-sidebar-right { position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 50px; display: flex; flex-direction: column; align-items: center; gap: 15px; z-index: 999; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(3px); padding: 25px 0; border-radius: 20px 0 0 20px; }
-            .d-sidebar-right a i { color: #000; font-size: 1.2rem; }
-
             main { 
                 flex: 1; 
                 padding: 220px 5% 120px 5%; 
@@ -133,6 +131,7 @@
             body { 
                 height: 100vh; width: 100vw; overflow: hidden !important; 
                 position: fixed; display: flex; flex-direction: column;
+                background-color: #ffffff;
             }
             #m-bg-fix { 
                 display: block; position: fixed; top: 0; left: -100%; 
@@ -174,11 +173,6 @@
             }
             .bento-box i { font-size: 1.8rem; margin-bottom: 8px; color: var(--anton-red); }
             .bento-box span { font-size: 0.8rem; font-weight: bold; text-transform: uppercase; }
-
-            .m-menu-btn { position: fixed; top: 18px; left: 15px; z-index: 1500; background: #000; width: 45px; height: 45px; border-radius: 5px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; }
-            .m-menu-btn span { display: block; width: 22px; height: 3px; background: #fff; }
-            
-            .m-sidebar-right { position: fixed; bottom: 0; left: 0; width: 100%; height: 65px; display: flex; flex-direction: row; align-items: center; z-index: 999; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(8px); border-top: 2px solid #000; justify-content: space-evenly; }
         }
     </style>
 </head>
@@ -221,7 +215,9 @@
 
     <div id="mobile-wrapper">
         <div id="m-bg-fix"></div>
-        <header class="m-header"><img src="Antonlogo.png" alt="ANTON Logo" class="m-header-logo"></header>
+        <header class="m-header">
+            <img src="Antonlogo.png" alt="ANTON Logo" class="m-header-logo">
+        </header>
         
         <div class="m-scroll-content">
             <div class="bento-grid">
@@ -242,9 +238,14 @@
     </div>
 
     <script>
+        /**
+         * Öffnet oder schließt die Seitenleiste in der Desktop-Ansicht.
+         */
         function toggleDesktopMenu() {
-            const s = document.getElementById('d-sidebar');
-            s.classList.toggle('open');
+            const sidebar = document.getElementById('d-sidebar');
+            if (sidebar) {
+                sidebar.classList.toggle('open');
+            }
         }
     </script>
 </body>
