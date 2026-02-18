@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>ANTON | MASTER 1:1 RECOVERY</title>
+    <title>ANTON | MASTER FINAL WHITE</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap&subset=latin-ext" rel="stylesheet">
     <style>
@@ -16,15 +16,17 @@
 
         html, body { 
             height: 100%; margin: 0; padding: 0; 
-            background-color: #ffffff; 
+            background-color: #ffffff !important; 
             font-family: 'Special Elite', cursive; 
             overflow-x: hidden;
             overflow-y: auto; 
         }
 
-        body { display: flex; flex-direction: column; width: 100vw; min-height: 100.5vh; background: #ffffff; }
+        body { 
+            display: flex; flex-direction: column; width: 100vw; 
+            min-height: 100.5vh; background: #ffffff !important; 
+        }
 
-        /* --- HEADER & LOGO --- */
         header { 
             position: fixed; top: 0; width: 100%; height: 80px; 
             display: flex; justify-content: center; align-items: center; 
@@ -32,13 +34,13 @@
             backdrop-filter: blur(10px); border-bottom: 2px solid #000;
             transition: transform 0.6s ease-in-out;
         }
+
         .header-logo { 
             position: absolute; top: 120%; transform: translateY(-50%);
             max-height: 185px; width: auto; 
             filter: brightness(0) saturate(100%) invert(13%) sepia(95%) saturate(7408%) hue-rotate(359deg) brightness(97%) contrast(113%);
         }
 
-        /* --- MENU BUTTON BASIS --- */
         .menu-btn { 
             position: fixed; left: 15px; z-index: 1500; 
             background: #000; width: 45px; height: 45px; border-radius: 5px; 
@@ -50,7 +52,6 @@
         .menu-btn.active span { display: none; }
         .menu-btn.active::after { content: 'A'; color: #000; font-weight: bold; font-size: 28px; }
 
-        /* --- ELEMENT BASIS --- */
         .sidebar-left { position: fixed; left: 0; width: 100%; background: var(--anton-yellow); z-index: 1100; border-bottom: 3px solid #000; transition: top 0.5s ease; display: flex; align-items: center; box-sizing: border-box; }
         .sidebar-right { position: fixed; bottom: 0; left: 0; width: 100%; z-index: 999; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(8px); border-top: 2px solid #000; display: flex; align-items: center; box-sizing: border-box; }
         
@@ -62,30 +63,24 @@
         .epk-container { position: absolute; right: 0; top: 0; height: 100%; width: 45px; background: #fff; border-left: 3px solid #000; display: flex; align-items: center; justify-content: center; }
         .epk-text-only { writing-mode: vertical-rl; transform: rotate(180deg); color: var(--anton-red); font-weight: bold; text-decoration: none; font-size: 0.7rem; }
 
-        /* --- MOBILE STANDARDS (1:1) --- */
         @media (max-width: 800px) {
-            body { background: #000 !important; overflow: hidden !important; position: fixed; height: 100%; }
-            #mobile-bg-fix { display: block; position: fixed; top: 0; left: -100%; width: 300%; height: 100%; background: url('Background.jpg') no-repeat center center; background-size: cover; z-index: -1; }
-            
+            body { background-color: #ffffff !important; }
             .sidebar-left { height: 95px; top: -120px; padding: 0 55px 0 75px; justify-content: space-between; }
             .sidebar-right { height: 65px; padding: 0 10px; justify-content: space-around; }
-            .menu-btn { top: 25px; } /* Zentriert in 95px */
-            
+            .menu-btn { top: 25px; } 
             .mobile-tag { font-size: 0.55rem; text-transform: uppercase; font-weight: bold; margin-top: 4px; }
         }
 
-        /* --- TABLET ADAPTATION (ISOLIERT) --- */
         @media (min-width: 801px) {
-            body { background: #ffffff url('Background.jpg') no-repeat center center fixed; background-size: cover; }
+            body { background-color: #ffffff !important; }
             .sidebar-left { height: 75px; top: -110px; padding: 0 15%; justify-content: space-between; }
             .sidebar-right { height: 55px; padding: 0 10%; justify-content: space-between; }
-            .menu-btn { top: 15px; } /* Zentriert in 75px */
+            .menu-btn { top: 15px; } 
             .mobile-tag { font-size: 0.5rem; text-transform: uppercase; font-weight: bold; margin-top: 2px; }
         }
 
         .sidebar-left.open { top: 0 !important; }
 
-        /* --- ANIMATION & ID --- */
         @keyframes ultraFlowWaveMobile { 0% { transform: scale(1); color: #000; } 9.33% { transform: scale(1.4); color: var(--brand-color); } 23.33%, 100% { transform: scale(1); color: #000; } }
         .sidebar-right a:nth-child(1) i { --brand-color: #f00; animation-delay: 0s; }
         .sidebar-right a:nth-child(2) i { --brand-color: #25F4EE; animation-delay: 0.2s; }
@@ -105,8 +100,6 @@
     </style>
 </head>
 <body>
-    <div id="mobile-bg-fix"></div>
-
     <header id="header-main">
         <img src="Antonlogo.png" alt="ANTON Logo" class="header-logo">
     </header>
@@ -143,8 +136,7 @@
         const menuBtn = document.getElementById('menu-trigger');
         const idBtn = document.getElementById('id-btn');
         const idPanel = document.getElementById('id-panel');
-        const bg = document.getElementById('mobile-bg-fix');
-        let menuTimeout, idTimeout, currentTranslateX = 0;
+        let menuTimeout, idTimeout;
 
         function closeAllMenus() {
             sidebar.classList.remove('open');
@@ -169,21 +161,11 @@
             if (!sidebar.contains(e.target) && !menuBtn.contains(e.target) && !idPanel.contains(e.target) && !idBtn.contains(e.target)) closeAllMenus();
         });
 
-        let touchStartX = 0, touchStartY = 0;
-        document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY; }, {passive: true});
-        document.addEventListener('touchmove', e => {
-            if (window.innerWidth <= 800) {
-                const moveX = e.touches[0].clientX;
-                bg.style.transform = `translateX(${currentTranslateX + (moveX - touchStartX)}px)`;
-            }
-        }, {passive: true});
+        let touchStartY = 0;
+        document.addEventListener('touchstart', e => { touchStartY = e.touches[0].clientY; }, {passive: true});
         document.addEventListener('touchend', e => {
             const endY = e.changedTouches[0].clientY;
             if (endY - touchStartY > 60 && touchStartY < 200) { closeAllMenus(); sidebar.classList.add('open'); menuBtn.classList.add('active'); }
-            if (window.innerWidth <= 800) {
-                const matrix = new WebKitCSSMatrix(window.getComputedStyle(bg).transform);
-                currentTranslateX = matrix.m41;
-            }
         }, {passive: true});
 
         setTimeout(() => { document.getElementById('header-main').style.transform = 'translateY(-100%)'; }, 3000);
