@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>ANTON | TABLET FOCUS</title>
+    <title>ANTON | TABLET FIX EPK</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap&subset=latin-ext" rel="stylesheet">
     <style>
@@ -28,7 +28,7 @@
             min-height: 100.5vh; touch-action: pan-y; 
         }
 
-        /* --- MOBILER CODE: GESPERRT & UNVERÄNDERT --- */
+        /* --- MOBILER CODE: GESPERRT --- */
         #mobile-bg-fix { 
             display: block; position: fixed; top: 0; left: -100%; width: 300%; height: 100%; 
             background: url('Background.jpg') no-repeat center center; 
@@ -37,7 +37,12 @@
 
         @media (max-width: 800px) {
             body { background: #000 !important; overflow: hidden !important; position: fixed; width: 100%; height: 100%; }
-            .desktop-tablet-only { display: none !important; }
+            .epk-container { 
+                position: absolute; right: 0; top: 0; height: 100%; width: 45px;
+                background: #fff; border-left: 3px solid #000; 
+                display: flex; align-items: center; justify-content: center;
+            }
+            .epk-text-only { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 0.7rem; color: var(--anton-red); font-weight: bold; text-decoration: none; }
         }
 
         /* --- TABLET & DESKTOP LOGIK (AB 801px) --- */
@@ -46,7 +51,6 @@
             body { 
                 background: #ffffff url('Background.jpg') no-repeat center center fixed; 
                 background-size: cover; 
-                background-blend-mode: normal; /* Klarer Fokus auf das Bild */
             }
 
             .sidebar-left { 
@@ -60,20 +64,28 @@
             .nav-item { width: 100%; margin-bottom: 20px; }
             .nav-item a { text-decoration: none; color: #000; display: flex; flex-direction: row; align-items: center; font-size: 1.1rem; }
             .nav-item i { width: 30px; margin-right: 10px; font-size: 1.1rem; }
-            
+
+            /* Trennstrich und EPK am Ende */
+            .epk-container { 
+                margin-top: auto; 
+                padding-top: 20px; 
+                border-top: 2px solid rgba(0,0,0,0.8); 
+                width: 100%;
+            }
+            .epk-text-only { 
+                color: var(--anton-red); 
+                font-weight: bold; 
+                text-decoration: none; 
+                font-size: 1.1rem;
+                display: block;
+            }
+
             .sidebar-right { 
                 position: fixed; top: 50%; right: 0; transform: translateY(-50%); 
                 width: 50px; display: flex; flex-direction: column; align-items: center; 
                 gap: 15px; z-index: 999; background: rgba(255, 255, 255, 0.2); 
                 backdrop-filter: blur(3px); padding: 25px 0; border-radius: 20px 0 0 20px; 
             }
-        }
-
-        /* --- SPEZIFISCHES TABLET-FEINTUNING --- */
-        @media (min-width: 801px) and (max-width: 1200px) {
-            :root { --sidebar-width: 220px; }
-            .nav-item a { font-size: 1rem; }
-            .sidebar-right { gap: 12px; width: 45px; }
         }
 
         /* --- HEADER --- */
@@ -107,9 +119,7 @@
             position: fixed; right: 0; bottom: 150px; width: 38px; height: 38px;
             background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(4px);
             border: 2px solid #000; border-right: none; border-radius: 6px 0 0 6px;
-            display: flex; align-items: center; justify-content: center;
-            z-index: 1300; font-weight: bold; font-size: 0.85rem; color: #000;
-            cursor: pointer; transition: transform 0.4s ease-in-out;
+            z-index: 1300; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.85rem; cursor: pointer;
         }
         .id-panel {
             position: fixed; right: -250px; bottom: 150px; height: 45px; width: 230px;
@@ -129,7 +139,7 @@
             23.33%, 100% { transform: scale(1); color: #000; } 
         }
         
-        .sidebar-right a i { animation: ultraFlowWave 6s linear infinite; color: #000; }
+        .sidebar-right a i { animation: ultraFlowWave 6s linear infinite; color: #000; font-size: 1.5rem; }
         .sidebar-right a:nth-child(1) i { --brand-color: #f00; animation-delay: 0.0s; }
         .sidebar-right a:nth-child(2) i { --brand-color: #25F4EE; animation-delay: 0.25s; }
         .sidebar-right a:nth-child(3) i { --brand-color: #E1306C; animation-delay: 0.5s; }
@@ -157,6 +167,10 @@
         <div class="nav-item"><a href="meinemusik.html"><i class="fa-solid fa-music"></i><span>MUSIK</span></a></div>
         <div class="nav-item"><a href="shop.html"><i class="fa-solid fa-cart-shopping"></i><span>SHOP</span></a></div>
         <div class="nav-item"><a href="kontakt.html"><i class="fa-solid fa-envelope"></i><span>KONTAKT</span></a></div>
+        
+        <div class="epk-container">
+            <a href="epk.html" class="epk-text-only">EPK/PRESSE</a>
+        </div>
     </nav>
 
     <div class="id-button" id="id-btn" onclick="openIDMenu(event)">I/D</div>
@@ -205,14 +219,13 @@
             if (!sidebar.contains(e.target) && !menuBtn.contains(e.target) && !idPanel.contains(e.target) && !idBtn.contains(e.target)) closeAllMenus();
         });
 
-        // Die Swipe-Logik bleibt hier im Script, wird aber durch das CSS (display:none) auf Tablets inaktiv geschaltet.
+        // Mobile-Only Logik (unverändert)
         let touchStartX = 0, currentTranslateX = 0;
         document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive: true});
         document.addEventListener('touchmove', e => {
             if (window.innerWidth <= 800) {
                 let diffX = e.touches[0].clientX - touchStartX;
-                let newX = currentTranslateX + diffX;
-                bg.style.transform = `translateX(${newX}px)`;
+                bg.style.transform = `translateX(${currentTranslateX + diffX}px)`;
             }
         }, {passive: true});
 
