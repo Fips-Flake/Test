@@ -15,7 +15,6 @@
             --amazon-blue: #00A8E1;
         }
 
-        /* Grundkonfiguration laut Vorgabe */
         html, body { 
             margin: 0; 
             padding: 0; 
@@ -26,7 +25,7 @@
         }
 
         /* ================================================================= */
-        /* 1. DESKTOP STYLES (Breite > 800px)                                */
+        /* 1. DESKTOP STYLES                                                 */
         /* ================================================================= */
         @media (min-width: 801px) {
             #mobile-wrapper { display: none !important; }
@@ -42,45 +41,25 @@
             }
             
             .d-header { 
-                position: fixed; 
-                top: 0; 
-                width: 100%; 
-                height: 80px; 
-                display: flex; 
-                justify-content: center; 
-                align-items: center; 
-                z-index: 100; 
-                background: rgba(255, 255, 255, 0.8); 
-                backdrop-filter: blur(10px); 
-                border-bottom: 2px solid #000; 
+                position: fixed; top: 0; width: 100%; height: 80px; 
+                display: flex; justify-content: center; align-items: center; 
+                z-index: 100; background: rgba(255, 255, 255, 0.8); 
+                backdrop-filter: blur(10px); border-bottom: 2px solid #000; 
             }
             
-            /* Desktop Logo: 50% größer, Rot gefiltert, 30% (24px) tiefer */
             .d-header-logo {
-                max-height: 285px; 
+                max-height: 90px; 
                 width: auto;
                 object-fit: contain;
                 filter: brightness(0) saturate(100%) invert(13%) sepia(95%) saturate(7408%) hue-rotate(359deg) brightness(97%) contrast(113%);
-                transform: translateY(82px); 
+                transform: translateY(24px); 
             }
             
             .d-menu-btn { 
-                position: fixed; 
-                top: 18px; 
-                left: 20px; 
-                font-size: 24px; 
-                cursor: pointer; 
-                z-index: 210; 
-                background: #000; 
-                color: #fff; 
-                width: 45px; 
-                height: 45px; 
-                display: flex; 
-                align-items: center; 
-                justify-content: center; 
-                border-radius: 5px; 
-                transition: all 0.3s ease; 
-                border: 2px solid #000; 
+                position: fixed; top: 18px; left: 20px; font-size: 24px; cursor: pointer; 
+                z-index: 210; background: #000; color: #fff; width: 45px; height: 45px; 
+                display: flex; align-items: center; justify-content: center; 
+                border-radius: 5px; transition: all 0.3s ease; border: 2px solid #000; 
                 overflow: hidden; 
             }
             .d-menu-btn:hover { background: var(--anton-yellow); color: #000; }
@@ -90,19 +69,10 @@
             .d-menu-btn:hover::after { opacity: 1; }
             
             .d-sidebar-left { 
-                position: fixed; 
-                top: 0; 
-                bottom: 0; 
-                left: -300px; 
-                width: var(--sidebar-width); 
-                background: rgba(255, 235, 59, 0.98); 
-                z-index: 200; 
-                display: flex; 
-                flex-direction: column; 
-                padding: 100px 15px 30px 15px; 
-                transition: left 0.4s ease-in-out; 
-                border-right: 2px solid #000; 
-                box-sizing: border-box; 
+                position: fixed; top: 0; bottom: 0; left: -300px; width: var(--sidebar-width); 
+                background: rgba(255, 235, 59, 0.98); z-index: 200; display: flex; 
+                flex-direction: column; padding: 100px 15px 30px 15px; 
+                transition: left 0.4s ease-in-out; border-right: 2px solid #000; box-sizing: border-box; 
             }
             .d-sidebar-left.open { left: 0; }
             
@@ -152,30 +122,37 @@
             main { flex: 1; padding: 120px 20px 80px 20px; z-index: 5; width: 100%; box-sizing: border-box; }
 
             .d-footer { 
-                width: 100%; 
-                padding: 15px 0; 
-                background: rgba(255,255,255,0.95); 
-                border-top: 1.5px solid #000; 
-                text-align: center; 
-                font-size: 0.75rem; 
-                z-index: 100; 
-                position: fixed; 
-                bottom: 0; 
-                left: 0; 
+                width: 100%; padding: 15px 0; background: rgba(255,255,255,0.95); 
+                border-top: 1.5px solid #000; text-align: center; font-size: 0.75rem; 
+                z-index: 100; position: fixed; bottom: 0; left: 0; 
             }
             .d-footer a { color: #000; text-decoration: none; margin: 0 12px; font-weight: bold; transition: all 0.3s ease; }
             .d-footer a:hover { color: var(--anton-yellow) !important; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; }
         }
 
         /* ================================================================= */
-        /* 2. MOBILE STYLES (Breite <= 800px)                                */
+        /* 2. MOBILE STYLES                                                  */
         /* ================================================================= */
         @media (max-width: 800px) {
             #desktop-wrapper { display: none !important; }
 
-            body { height: 100vh; width: 100vw; overflow: hidden !important; position: fixed; display: flex; flex-direction: column; touch-action: pan-y; }
-            #m-bg-fix { display: block; position: fixed; top: 0; left: -100%; width: 300%; height: 100%; background: url('Background.jpg') no-repeat center center; background-size: cover; z-index: -1; will-change: transform; }
-            .m-header { position: fixed; top: 0; width: 100%; height: 80px; display: flex; justify-content: center; align-items: center; z-index: 1000; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border-bottom: 2px solid #000; transition: transform 0.6s ease-in-out; }
+            body { 
+                height: 100vh; width: 100vw; overflow: hidden !important; 
+                position: fixed; display: flex; flex-direction: column; touch-action: pan-y;
+                overscroll-behavior-x: none; /* Lösung gegen weiße Ränder */
+            }
+            #m-bg-fix { 
+                display: block; position: fixed; top: 0; left: -100%; 
+                width: 300%; height: 100%; background: url('Background.jpg') no-repeat center center; 
+                background-size: cover; z-index: -1; will-change: transform; 
+            }
+            .m-header { 
+                position: fixed; top: 0; width: 100%; height: 80px; 
+                display: flex; justify-content: center; align-items: center; 
+                z-index: 1000; background: rgba(255, 255, 255, 0.8); 
+                backdrop-filter: blur(10px); border-bottom: 2px solid #000; 
+                transition: transform 0.6s ease-in-out; 
+            }
             .m-header-logo { position: absolute; top: 120%; transform: translateY(-50%); max-height: 185px; width: auto; filter: brightness(0) saturate(100%) invert(13%) sepia(95%) saturate(7408%) hue-rotate(359deg) brightness(97%) contrast(113%); }
             .m-menu-btn { position: fixed; top: 18px; left: 15px; z-index: 1500; background: #000; width: 45px; height: 45px; border-radius: 5px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; cursor: pointer; border: 2px solid #000; }
             .m-menu-btn span { display: block; width: 22px; height: 3px; background: #fff; transition: 0.3s; }
@@ -297,7 +274,7 @@
             if (dSidebar && dSidebar.classList.contains('open')) {
                 dSidebarTimeout = setTimeout(() => {
                     dSidebar.classList.remove('open');
-                }, 5000); // 5 Sekunden Inaktivität
+                }, 5000); 
             }
         }
 
@@ -305,9 +282,7 @@
         function toggleDesktopMenu() {
             if (dSidebar) {
                 dSidebar.classList.toggle('open');
-                if (dSidebar.classList.contains('open')) {
-                    resetDSidebarTimer();
-                }
+                if (dSidebar.classList.contains('open')) resetDSidebarTimer();
             }
         }
 
@@ -356,7 +331,9 @@
             mIdTimeout = setTimeout(mCloseAllMenus, 5000);
         }
 
+        /* MOBILE TOUCH & SWIPE MIT HARD-LIMIT GEGEN WEISSE RÄNDER */
         let touchStartX = 0, touchStartY = 0, currentTranslateX = 0;
+
         document.addEventListener('touchstart', e => { 
             touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY; 
         }, {passive: true});
@@ -365,9 +342,19 @@
             if(window.innerWidth <= 800) {
                 const moveX = e.touches[0].clientX, moveY = e.touches[0].clientY;
                 const diffX = moveX - touchStartX, diffY = moveY - touchStartY;
-                if (Math.abs(diffX) > 10 || Math.abs(diffY) > 10) { if (!mSidebar.contains(e.target)) mCloseAllMenus(); }
+
+                if (Math.abs(diffX) > 10 || Math.abs(diffY) > 10) { 
+                    if (!mSidebar.contains(e.target)) mCloseAllMenus(); 
+                }
+
                 if (Math.abs(diffX) > Math.abs(diffY)) {
                     let newX = currentTranslateX + diffX;
+                    
+                    // Begrenzung berechnen: Das 300% Bild darf nicht über die Screen-Breite hinaus
+                    const limit = window.innerWidth; 
+                    if (newX > limit) newX = limit;
+                    if (newX < -limit) newX = -limit;
+
                     if(mBg) mBg.style.transform = `translateX(${newX}px)`;
                 }
             }
