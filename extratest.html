@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>ANTON | MASTER 1:1 FIXED</title>
+    <title>ANTON | MASTER 1:1 FINAL</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap&subset=latin-ext" rel="stylesheet">
     <style>
@@ -153,7 +153,9 @@
             display: flex; flex-direction: row; align-items: center; 
             z-index: 999; background: rgba(255, 255, 255, 0.7); 
             backdrop-filter: blur(8px); border-top: 2px solid #000;
-            padding: 0 10px; justify-content: space-evenly; 
+            /* ZENTRIERUNG OPTIMIERT */
+            padding: 0 15px; justify-content: space-around; 
+            box-sizing: border-box;
         }
 
         @media (min-width: 801px) {
@@ -162,10 +164,13 @@
                 width: 60px; height: auto; flex-direction: column;
                 border-top: 2px solid #000; border-left: 2px solid #000; border-bottom: 2px solid #000;
                 border-radius: 15px 0 0 15px; padding: 25px 0; gap: 20px;
+                justify-content: center;
             }
         }
 
+        .sidebar-right a { display: flex; align-items: center; justify-content: center; text-decoration: none; }
         .sidebar-right a i { color: #000; font-size: 1.5rem; display: inline-block; animation: ultraFlowWaveMobile 6s linear infinite; }
+        
         @keyframes ultraFlowWaveMobile { 
             0% { transform: scale(1); color: #000; } 
             9.33% { transform: scale(1.4); color: var(--brand-color); } 
