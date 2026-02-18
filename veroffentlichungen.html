@@ -305,20 +305,14 @@
                 
                 <div class="release-grid">
                     <div class="release-card">
-                        <div class="release-cover">COVER 1 (Album.jpg)</div>
+                        <div class="release-cover">COVER 1</div>
                         <span class="release-title">Album Name</span>
                         <span class="release-date">VÖ: 2024</span>
                         <a href="#" class="btn-stream">Anhören</a>
                     </div>
                     <div class="release-card">
-                        <div class="release-cover">COVER 2 (Single.jpg)</div>
+                        <div class="release-cover">COVER 2</div>
                         <span class="release-title">Single Name</span>
-                        <span class="release-date">VÖ: 2023</span>
-                        <a href="#" class="btn-stream">Anhören</a>
-                    </div>
-                    <div class="release-card">
-                        <div class="release-cover">COVER 3</div>
-                        <span class="release-title">Titel 3</span>
                         <span class="release-date">VÖ: 2023</span>
                         <a href="#" class="btn-stream">Anhören</a>
                     </div>
@@ -344,17 +338,17 @@
             <div class="m-epk-container"><a href="epk.html" class="m-epk-text">EPK/PRESSE</a></div>
         </nav>
 
-        <div style="margin-top: 100px; padding: 20px; overflow-y: auto; height: calc(100vh - 165px); -webkit-overflow-scrolling: touch;">
-            <h1 style="color: var(--anton-red); text-transform: uppercase; text-align: center; font-size: 1.5rem;">Veröffentlichungen</h1>
+        <div style="margin-top: 100px; padding: 20px; overflow-y: auto; height: calc(100vh - 165px); -webkit-overflow-scrolling: touch; z-index: 5; position: relative;">
+            <h1 style="color: var(--anton-red); text-transform: uppercase; text-align: center; font-size: 1.5rem; background: rgba(255,255,255,0.8); padding: 10px; border: 2px solid #000;">Veröffentlichungen</h1>
             
             <div style="display: flex; flex-direction: column; gap: 20px; padding-bottom: 40px;">
                 <div style="background: rgba(255,255,255,0.9); border: 2px solid #000; padding: 15px; text-align: center;">
-                    <div style="width: 100%; aspect-ratio: 1/1; background: #ddd; margin-bottom: 10px;">COVER</div>
+                    <div style="width: 100%; aspect-ratio: 1/1; background: #ddd; margin-bottom: 10px; display: flex; align-items: center; justify-content: center;">COVER</div>
                     <div style="font-weight: bold;">Titel der Veröffentlichung</div>
                     <div style="font-size: 0.8rem; margin: 5px 0 10px 0;">VÖ: 2024</div>
                     <a href="#" style="display: block; background: #000; color: #fff; text-decoration: none; padding: 10px; font-size: 0.8rem; border-radius: 5px;">ANHÖREN</a>
                 </div>
-                </div>
+            </div>
         </div>
 
         <div class="m-id-button" id="m-id-btn" onclick="mOpenIDMenu(event)">I/D</div>
@@ -375,7 +369,7 @@
     </div>
 
     <script>
-        /* --- GLOBAL VARIABLES & HELPER --- */
+        /* --- JS LOGIC (Identisch zum Framework für Konsistenz) --- */
         let dSidebarTimeout;
         const dSidebar = document.getElementById('d-sidebar');
 
@@ -388,7 +382,6 @@
             }
         }
 
-        /* --- DESKTOP LOGIC --- */
         function toggleDesktopMenu() {
             if (dSidebar) {
                 dSidebar.classList.toggle('open');
@@ -411,7 +404,6 @@
             }
         });
 
-        /* --- MOBILE LOGIC --- */
         const mSidebar = document.getElementById('m-sidebar');
         const mMenuBtn = document.getElementById('m-menu-trigger');
         const mIdBtn = document.getElementById('m-id-btn');
@@ -443,7 +435,6 @@
 
         /* MOBILE TOUCH & SWIPE */
         let touchStartX = 0, touchStartY = 0, currentTranslateX = 0;
-
         document.addEventListener('touchstart', e => { 
             touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY; 
         }, {passive: true});
@@ -452,11 +443,9 @@
             if(window.innerWidth <= 800) {
                 const moveX = e.touches[0].clientX, moveY = e.touches[0].clientY;
                 const diffX = moveX - touchStartX, diffY = moveY - touchStartY;
-
                 if (Math.abs(diffX) > 10 || Math.abs(diffY) > 10) { 
                     if (!mSidebar.contains(e.target)) mCloseAllMenus(); 
                 }
-
                 if (Math.abs(diffX) > Math.abs(diffY)) {
                     let newX = currentTranslateX + diffX;
                     const limit = window.innerWidth; 
