@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>ANTON | MASTER FINAL FIXED</title>
+    <title>ANTON | MASTER FINAL FIXED BG</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap&subset=latin-ext" rel="stylesheet">
     <style>
@@ -55,11 +55,20 @@
 
         @media (max-width: 800px) {
             body { background: #000 !important; overflow: hidden !important; position: fixed; width: 100%; height: 100%; }
+            
             #mobile-bg-fix { 
-                display: block; position: fixed; top: 0; left: -100%; width: 300%; height: 100%; 
-                background: url('Background.jpg') no-repeat center center; background-size: cover; 
-                z-index: -1; will-change: transform;
+                display: block; 
+                position: fixed; 
+                top: 0; 
+                left: -150%; /* Mehr Puffer nach links */
+                width: 400%; /* Mehr Gesamtbreite gegen Ränder */
+                height: 100%; 
+                background: url('Background.jpg') no-repeat center center; 
+                background-size: cover; 
+                z-index: -1; 
+                will-change: transform;
             }
+
             .sidebar-left { 
                 position: fixed; left: 0; top: -120px; width: 100%; height: 95px; 
                 background: var(--anton-yellow); z-index: 1100; 
@@ -87,10 +96,7 @@
                 backdrop-filter: blur(8px); border-top: 2px solid #000;
                 padding: 0; margin: 0;
             }
-            .sidebar-right a { 
-                flex: 1; display: flex; justify-content: center; align-items: center; 
-                text-decoration: none; min-width: 0;
-            }
+            .sidebar-right a { flex: 1; display: flex; justify-content: center; align-items: center; text-decoration: none; }
             .sidebar-right a i { font-size: 1.5rem; animation: ultraFlowWave 6s linear infinite; }
             footer, .invisible-box, .desktop-only { display: none !important; }
         }
@@ -192,8 +198,13 @@
 
     <nav class="sidebar-left" id="sidebar">
         <div class="nav-item"><a href="hauptseite.html"><i class="fa-solid fa-house"></i><span class="mobile-tag">Start</span><span class="desktop-only">START</span></a></div>
-        <div class="nav-item"><a href="meinemusik.html"><i class="fa-solid fa-music"></i><span class="mobile-tag">Musik</span><span class="desktop-only">MUSIK</span><div class="arrow-wrapper desktop-only"><i class="fa-solid fa-caret-down submenu-indicator"></i></div></a>
-            <div class="submenu desktop-only"><a href="ueber-mich.html"><i class="fa-regular fa-face-smile"></i> ÜBER MICH</a><a href="meinemusik.html"><i class="fa-solid fa-volume-high"></i> RELEASES</a><a href="konzerte.html"><i class="fa-solid fa-microphone-lines"></i> KONZERTE</a></div>
+        <div class="nav-item">
+            <a href="meinemusik.html"><i class="fa-solid fa-music"></i><span class="mobile-tag">Musik</span><span class="desktop-only">MUSIK</span><div class="arrow-wrapper desktop-only"><i class="fa-solid fa-caret-down submenu-indicator"></i></div></a>
+            <div class="submenu desktop-only">
+                <a href="ueber-mich.html"><i class="fa-regular fa-face-smile"></i> ÜBER MICH</a>
+                <a href="meinemusik.html"><i class="fa-solid fa-volume-high"></i> RELEASES</a>
+                <a href="konzerte.html"><i class="fa-solid fa-microphone-lines"></i> KONZERTE</a>
+            </div>
         </div>
         <div class="nav-item"><a href="shop.html"><i class="fa-solid fa-cart-shopping"></i><span class="mobile-tag">Shop</span><span class="desktop-only">SHOP</span></a></div>
         <div class="nav-item"><a href="kontakt.html"><i class="fa-solid fa-envelope"></i><span class="mobile-tag">Kontakt</span><span class="desktop-only">KONTAKT</span></a></div>
@@ -259,6 +270,10 @@
                 const diffY = e.touches[0].clientY - touchStartY;
                 if (Math.abs(diffX) > Math.abs(diffY)) {
                     let newX = currentTranslateX + diffX;
+                    // Begrenzung, damit das Bild nicht über seine Ränder hinaus geschoben wird
+                    const limit = window.innerWidth * 1.2; 
+                    if (newX > limit) newX = limit;
+                    if (newX < -limit) newX = -limit;
                     bg.style.transform = `translateX(${newX}px)`;
                 }
             }
