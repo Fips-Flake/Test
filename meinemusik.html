@@ -74,9 +74,6 @@
             .d-nav-item { margin-bottom: 20px; width: 100%; }
             .d-sidebar-left a { display: flex; align-items: center; color: #000; text-decoration: none; font-size: 1.1rem; width: 100%; }
             
-            .d-sidebar-right { position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 50px; display: flex; flex-direction: column; align-items: center; gap: 15px; z-index: 999; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(3px); padding: 25px 0; border-radius: 20px 0 0 20px; }
-            .d-sidebar-right a i { color: #000; font-size: 1.2rem; }
-
             main { 
                 flex: 1; 
                 padding: 220px 5% 120px 5%; 
@@ -88,7 +85,7 @@
 
             .bento-grid {
                 display: grid;
-                grid-template-columns: repeat(3, auto);
+                grid-template-columns: repeat(3, 168px); /* Festgelegte Spaltenanzahl ohne Geisterboxen */
                 gap: 25px;
                 max-width: 100%;
             }
@@ -148,7 +145,7 @@
             .m-header-logo { max-height: 140px; filter: brightness(0) saturate(100%) invert(13%) sepia(95%) saturate(7408%) hue-rotate(359deg) brightness(97%) contrast(113%); transform: translateY(30px); }
             
             .m-scroll-content {
-                position: absolute; top: 120px; bottom: 80px; width: 100%;
+                position: absolute; top: 120px; bottom: 20px; width: 100%;
                 overflow-y: auto; padding: 20px; box-sizing: border-box;
                 display: flex; flex-direction: column; align-items: center;
             }
@@ -174,11 +171,6 @@
             }
             .bento-box i { font-size: 1.8rem; margin-bottom: 8px; color: var(--anton-red); }
             .bento-box span { font-size: 0.8rem; font-weight: bold; text-transform: uppercase; }
-
-            .m-menu-btn { position: fixed; top: 18px; left: 15px; z-index: 1500; background: #000; width: 45px; height: 45px; border-radius: 5px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; }
-            .m-menu-btn span { display: block; width: 22px; height: 3px; background: #fff; }
-            
-            .m-sidebar-right { position: fixed; bottom: 0; left: 0; width: 100%; height: 65px; display: flex; flex-direction: row; align-items: center; z-index: 999; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(8px); border-top: 2px solid #000; justify-content: space-evenly; }
         }
     </style>
 </head>
@@ -196,262 +188,6 @@
             <div class="d-nav-item"><a href="shop.html">SHOP</a></div>
             <div class="d-nav-item"><a href="kontakt.html">KONTAKT</a></div>
         </nav>
-
-        <main>
-            <div class="bento-grid">
-                <a href="ueber-mich.html" class="bento-box">
-                    <i class="fa-regular fa-face-smile"></i>
-                    <span>Über mich</span>
-                </a>
-                <a href="meinemusik.html" class="bento-box">
-                    <i class="fa-solid fa-volume-high"></i>
-                    <span>Musik</span>
-                </a>
-                <a href="konzerte.html" class="bento-box">
-                    <i class="fa-solid fa-microphone-lines"></i>
-                    <span>Live</span>
-                </a>
-            </div>
-        </main>
-
-        <footer class="d-footer">
-            <a href="impressum.html">Impressum</a> | <a href="datenschutz.html">Datenschutz</a>
-        </footer>
-    </div>
-
-    <div id="mobile-wrapper">
-        <div id="m-bg-fix"></div>
-        <header class="m-header"><img src="Antonlogo.png" alt="ANTON Logo" class="m-header-logo"></header>
-        
-        <div class="m-scroll-content">
-            <div class="bento-grid">
-                <a href="ueber-mich.html" class="bento-box">
-                    <i class="fa-regular fa-face-smile"></i>
-                    <span>Über mich</span>
-                </a>
-                <a href="meinemusik.html" class="bento-box">
-                    <i class="fa-solid fa-volume-high"></i>
-                    <span>Musik</span>
-                </a>
-                <a href="konzerte.html" class="bento-box">
-                    <i class="fa-solid fa-microphone-lines"></i>
-                    <span>Live</span>
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function toggleDesktopMenu() {
-            const s = document.getElementById('d-sidebar');
-            s.classList.toggle('open');
-        }
-    </script>
-</body>
-</html><!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>ANTON | MEINE MUSIK</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap&subset=latin-ext" rel="stylesheet">
-    <style>
-        :root { 
-            --anton-red: #ff0000; 
-            --anton-yellow: #ffeb3b; 
-            --sidebar-width: 240px; 
-            --apple-gray: #A2AAAD;
-            --amazon-blue: #00A8E1;
-        }
-
-        html, body { 
-            margin: 0; 
-            padding: 0; 
-            background-color: #ffffff; 
-            font-family: 'Special Elite', cursive;
-            height: 100%; 
-            width: 100%;
-        }
-
-        /* ================================================================= */
-        /* 1. DESKTOP STYLES                                                 */
-        /* ================================================================= */
-        @media (min-width: 801px) {
-            #mobile-wrapper { display: none !important; }
-
-            body { 
-                background: #ffffff url('Background.jpg') no-repeat center center fixed; 
-                background-size: cover !important; 
-                background-attachment: fixed;
-                overflow-x: hidden;
-                display: flex;
-                flex-direction: column;
-                min-height: 100vh;
-            }
-            
-            .d-header { 
-                position: fixed; top: 0; width: 100%; height: 80px; 
-                display: flex; justify-content: center; align-items: center; 
-                z-index: 100; background: rgba(255, 255, 255, 0.8); 
-                backdrop-filter: blur(10px); border-bottom: 2px solid #000; 
-            }
-            
-            .d-header-logo {
-                max-height: 140px; 
-                width: auto;
-                object-fit: contain;
-                filter: brightness(0) saturate(100%) invert(13%) sepia(95%) saturate(7408%) hue-rotate(359deg) brightness(97%) contrast(113%);
-                transform: translateY(40px); 
-            }
-            
-            .d-menu-btn { 
-                position: fixed; top: 18px; left: 20px; font-size: 24px; cursor: pointer; 
-                z-index: 210; background: #000; color: #fff; width: 45px; height: 45px; 
-                display: flex; align-items: center; justify-content: center; 
-                border-radius: 5px; transition: all 0.3s ease; border: 2px solid #000; 
-            }
-            .d-menu-btn:hover { background: var(--anton-yellow); color: #000; }
-            
-            .d-sidebar-left { 
-                position: fixed; top: 0; bottom: 0; left: -300px; width: var(--sidebar-width); 
-                background: rgba(255, 235, 59, 0.98); z-index: 200; display: flex; 
-                flex-direction: column; padding: 100px 15px 30px 15px; 
-                transition: left 0.4s ease-in-out; border-right: 2px solid #000; box-sizing: border-box; 
-            }
-            .d-sidebar-left.open { left: 0; }
-            
-            .d-nav-item { margin-bottom: 20px; width: 100%; }
-            .d-sidebar-left a { display: flex; align-items: center; color: #000; text-decoration: none; font-size: 1.1rem; width: 100%; }
-            
-            .d-sidebar-right { position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 50px; display: flex; flex-direction: column; align-items: center; gap: 15px; z-index: 999; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(3px); padding: 25px 0; border-radius: 20px 0 0 20px; }
-            .d-sidebar-right a i { color: #000; font-size: 1.2rem; }
-
-            main { 
-                flex: 1; 
-                padding: 240px 5% 120px 5%; 
-                z-index: 5; 
-                display: flex; 
-                justify-content: center; 
-                align-items: flex-start;
-            }
-
-            .bento-grid {
-                display: grid;
-                grid-template-columns: repeat(3, auto);
-                gap: 30px;
-                max-width: 100%;
-            }
-            .bento-box {
-                background: rgba(255, 255, 255, 0.6); 
-                border: 2px solid #000;
-                padding: 20px;
-                width: 168px; 
-                height: 168px;
-                border-radius: 20px;
-                text-align: center;
-                text-decoration: none;
-                color: #000;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                transition: all 0.3s ease;
-                backdrop-filter: blur(5px);
-            }
-            .bento-box:hover {
-                background: rgba(255, 235, 59, 0.8);
-                transform: scale(1.05);
-            }
-            .bento-box i { font-size: 2.2rem; margin-bottom: 12px; }
-            .bento-box span { font-size: 0.9rem; font-weight: bold; text-transform: uppercase; line-height: 1.1; }
-
-            .d-footer { 
-                width: 100%; padding: 15px 0; background: rgba(255,255,255,0.95); 
-                border-top: 1.5px solid #000; text-align: center; font-size: 0.75rem; 
-                z-index: 100; position: fixed; bottom: 0; left: 0; 
-            }
-            .d-footer a { color: #000; text-decoration: none; margin: 0 12px; }
-        }
-
-        /* ================================================================= */
-        /* 2. MOBILE STYLES                                                 */
-        /* ================================================================= */
-        @media (max-width: 800px) {
-            #desktop-wrapper { display: none !important; }
-
-            body { 
-                height: 100vh; width: 100vw; overflow: hidden !important; 
-                position: fixed; display: flex; flex-direction: column;
-            }
-            #m-bg-fix { 
-                display: block; position: fixed; top: 0; left: -100%; 
-                width: 300%; height: 100%; background: url('Background.jpg') no-repeat center center; 
-                background-size: cover; z-index: -1; 
-            }
-            .m-header { 
-                position: fixed; top: 0; width: 100%; height: 80px; 
-                display: flex; justify-content: center; align-items: center; 
-                z-index: 1000; background: rgba(255, 255, 255, 0.8); 
-                backdrop-filter: blur(10px); border-bottom: 2px solid #000; 
-            }
-            .m-header-logo { 
-                max-height: 140px; 
-                filter: brightness(0) saturate(100%) invert(13%) sepia(95%) saturate(7408%) hue-rotate(359deg) brightness(97%) contrast(113%); 
-                transform: translateY(40px); 
-            }
-            
-            .m-scroll-content {
-                position: absolute; top: 160px; bottom: 80px; width: 100%;
-                overflow-y: auto; padding: 20px; box-sizing: border-box;
-                display: flex; flex-direction: column; align-items: center;
-            }
-
-            .bento-grid {
-                display: flex;
-                flex-direction: column;
-                gap: 20px;
-            }
-            .bento-box {
-                background: rgba(255, 255, 255, 0.65);
-                border: 2px solid #000;
-                padding: 15px;
-                width: 196px;
-                border-radius: 20px;
-                text-align: center;
-                text-decoration: none;
-                color: #000;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                box-shadow: 4px 4px 0px #000;
-            }
-            .bento-box i { font-size: 1.8rem; margin-bottom: 8px; color: var(--anton-red); }
-            .bento-box span { font-size: 0.9rem; font-weight: bold; text-transform: uppercase; }
-
-            .m-menu-btn { position: fixed; top: 18px; left: 15px; z-index: 1500; background: #000; width: 45px; height: 45px; border-radius: 5px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; }
-            .m-menu-btn span { display: block; width: 22px; height: 3px; background: #fff; }
-            
-            .m-sidebar-right { position: fixed; bottom: 0; left: 0; width: 100%; height: 65px; display: flex; flex-direction: row; align-items: center; z-index: 999; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(8px); border-top: 2px solid #000; justify-content: space-evenly; }
-        }
-    </style>
-</head>
-<body>
-
-    <div id="desktop-wrapper">
-        <header class="d-header">
-            <img src="Antonlogo.png" alt="ANTON Logo" class="d-header-logo">
-        </header>
-        <div class="d-menu-btn" onclick="toggleDesktopMenu()"><span>☰</span></div>
-        
-        <nav class="d-sidebar-left" id="d-sidebar">
-            <div class="d-nav-item"><a href="hauptseite.html">START</a></div>
-            <div class="d-nav-item"><a href="meinemusik.html">MUSIK</a></div>
-            <div class="d-nav-item"><a href="shop.html">SHOP</a></div>
-            <div class="d-nav-item"><a href="kontakt.html">KONTAKT</a></div>
-        </nav>
-
-        <aside class="d-sidebar-right"></aside>
 
         <main>
             <div class="bento-grid">
