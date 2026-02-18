@@ -64,7 +64,111 @@
             .d-nav-item { margin-bottom: 20px; width: 100%; }
             .d-sidebar-left a { display: flex; align-items: center; color: #000; text-decoration: none; font-size: 1.1rem; width: 100%; transition: color 0.3s; }
             .d-sidebar-left a:hover { color: var(--anton-red); }
-            
+            <script>
+        /* --- GLOBAL VARIABLES & HELPER --- */
+        let dSidebarTimeout;
+        const dSidebar = document.getElementById('d-sidebar');
+
+        function resetDSidebarTimer() {
+            clearTimeout(dSidebarTimeout);
+            if (dSidebar && dSidebar.classList.contains('open')) {
+                dSidebarTimeout = setTimeout(() => {
+                    dSidebar.classList.remove('open');
+                }, 5000); // 5 Sekunden Inaktivität
+            }
+        }
+
+        /* --- DESKTOP LOGIC --- */
+        function toggleDesktopMenu() {
+            if (dSidebar) {
+                dSidebar.classList.toggle('open');
+                if (dSidebar.classList.contains('open')) {
+                    resetDSidebarTimer();
+                }
+            }
+        }
+
+        if (dSidebar) {
+            dSidebar.addEventListener('mousemove', resetDSidebarTimer);
+            dSidebar.addEventListener('click', resetDSidebarTimer);
+        }
+
+        document.addEventListener('click', function(e) {
+            if(window.innerWidth > 800) {
+                const btn = document.querySelector(".d-menu-btn");
+                if (dSidebar && !dSidebar.contains(e.target) && !btn.contains(e.target) && dSidebar.classList.contains("open")) {
+                    dSidebar.classList.remove("open");
+                    clearTimeout(dSidebarTimeout);
+                }
+            }
+        });
+
+        /* --- MOBILE LOGIC --- */
+        const mSidebar = document.getElementById('m-sidebar');
+        const mMenuBtn = document.getElementById('m-menu-trigger');
+        const mIdBtn = document.getElementById('m-id-btn');
+        const mIdPanel = document.getElementById('m-id-panel');
+        const mBg = document.getElementById('m-bg-fix');
+        let mMenuTimeout, mIdTimeout;
+
+        function mCloseAllMenus() {
+            if(mSidebar) mSidebar.classList.remove('open');
+            if(mMenuBtn) mMenuBtn.classList.remove('active');
+            if(mMenuTimeout) clearTimeout(mMenuTimeout);
+            if(mIdPanel) mIdPanel.classList.remove('open');
+            if(mIdBtn) mIdBtn.classList.remove('hidden');
+            if(mIdTimeout) clearTimeout(mIdTimeout);
+        }
+
+        function mToggleMenu(e) { 
+            e.stopPropagation();
+            if (mSidebar.classList.contains('open')) { mCloseAllMenus(); } 
+            else { mCloseAllMenus(); mSidebar.classList.add('open'); mMenuBtn.classList.add('active'); mMenuTimeout = setTimeout(mCloseAllMenus, 5000); }
+        }
+
+        function mOpenIDMenu(e) {
+            e.stopPropagation(); mCloseAllMenus();
+            if(mIdBtn) mIdBtn.classList.add('hidden'); 
+            if(mIdPanel) mIdPanel.classList.add('open');
+            mIdTimeout = setTimeout(mCloseAllMenus, 5000);
+        }
+
+        let touchStartX = 0, touchStartY = 0, currentTranslateX = 0;
+        document.addEventListener('touchstart', e => { 
+            touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY; 
+        }, {passive: true});
+
+        document.addEventListener('touchmove', e => {
+            if(window.innerWidth <= 800) {
+                const moveX = e.touches[0].clientX, moveY = e.touches[0].clientY;
+                const diffX = moveX - touchStartX, diffY = moveY - touchStartY;
+                if (Math.abs(diffX) > 10 || Math.abs(diffY) > 10) { if (!mSidebar.contains(e.target)) mCloseAllMenus(); }
+                if (Math.abs(diffX) > Math.abs(diffY)) {
+                    let newX = currentTranslateX + diffX;
+                    if(mBg) mBg.style.transform = `translateX(${newX}px)`;
+                }
+            }
+        }, {passive: true});
+
+        document.addEventListener('touchend', e => {
+            if(window.innerWidth <= 800 && mBg) {
+                const style = window.getComputedStyle(mBg);
+                const matrix = new WebKitCSSMatrix(style.transform);
+                currentTranslateX = matrix.m41;
+            }
+        }, {passive: true});
+
+        document.addEventListener('click', (e) => {
+            if(window.innerWidth <= 800) {
+                if (!mSidebar.contains(e.target) && !mMenuBtn.contains(e.target) && !mIdPanel.contains(e.target) && !mIdBtn.contains(e.target)) mCloseAllMenus();
+            }
+        });
+
+        setTimeout(() => { 
+            const mh = document.getElementById('m-header-main');
+            if(mh && window.innerWidth <= 800) mh.style.transform = 'translateY(-100%)'; 
+        }, 3000);
+    </script>
             .d-nav-label { display: flex; align-items: center; width: 100%; }
             .d-nav-label i.main-icon { width: 30px; text-align: center; margin-right: 10px; }
             .d-arrow-wrapper { margin-left: auto; padding-right: 5px; }
