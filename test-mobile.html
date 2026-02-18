@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANTON | DESKTOP</title>
+    <title>ANTON | HAUPTSEITE</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap&subset=latin-ext" rel="stylesheet">
     <style>
@@ -105,7 +105,7 @@
     <a href="meinemusik.html" class="invisible-box box-pause3"></a>
     <a href="neuesingle.html" class="invisible-box box-riesenhunger"></a>
 
-    <nav class="sidebar-left" id="sidebar-desktop">
+    <nav class="sidebar-left" id="sidebar">
         <div class="nav-item">
             <a href="hauptseite.html"><span class="nav-label"><i class="fa-solid fa-house main-icon"></i> START</span></a>
         </div>
@@ -140,19 +140,23 @@
         <a href="https://music.amazon.de/artists/B0GF2ZR9RR" target="_blank"><i class="fa-brands fa-amazon"></i></a>
     </aside>
 
+    <main></main>
+
+    <footer>
+        <div><a href="index.html">www.anton-familienpop.de</a></div>
+        <div><a href="impressum.html">Impressum</a> | <a href="datenschutz.html">Datenschutz</a></div>
+    </footer>
+
     <script>
-        function toggleMenu() { document.getElementById('sidebar-desktop').classList.toggle('open'); }
+        function toggleMenu() { document.getElementById('sidebar').classList.toggle('open'); }
         document.addEventListener('click', function(e) {
-            const sb = document.getElementById("sidebar-desktop");
+            const sb = document.getElementById("sidebar");
             const btn = document.querySelector(".menu-btn");
             if (sb && !sb.contains(e.target) && !btn.contains(e.target) && sb.classList.contains("open")) sb.classList.remove("open");
         });
     </script>
 </body>
 </html>
-
-<hr>
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -187,6 +191,7 @@
             touch-action: pan-y; 
         }
 
+        /* --- MOBILER HINTERGRUND (WISCHBAR) --- */
         #mobile-bg-fix { 
             display: block; 
             position: fixed; 
@@ -200,6 +205,7 @@
             will-change: transform;
         }
 
+        /* --- HEADER --- */
         header { 
             position: fixed; 
             top: 0; width: 100%; height: 80px; 
@@ -218,18 +224,19 @@
             filter: brightness(0) saturate(100%) invert(13%) sepia(95%) saturate(7408%) hue-rotate(359deg) brightness(97%) contrast(113%);
         }
         
-        .menu-btn-mob { 
+        .menu-btn { 
             position: fixed; top: 18px; left: 15px; z-index: 1500; 
             background: #000; width: 45px; height: 45px; border-radius: 5px; 
             display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
             cursor: pointer; border: 2px solid #000;
         }
-        .menu-btn-mob span { display: block; width: 22px; height: 3px; background: #fff; transition: 0.3s; }
-        .menu-btn-mob.active { background: var(--anton-yellow); }
-        .menu-btn-mob.active span { display: none; }
-        .menu-btn-mob.active::after { content: 'A'; color: #000; font-weight: bold; font-size: 28px; }
+        .menu-btn span { display: block; width: 22px; height: 3px; background: #fff; transition: 0.3s; }
+        .menu-btn.active { background: var(--anton-yellow); }
+        .menu-btn.active span { display: none; }
+        .menu-btn.active::after { content: 'A'; color: #000; font-weight: bold; font-size: 28px; }
 
-        .sidebar-left-mob { 
+        /* --- SIDEBAR OBEN --- */
+        .sidebar-left { 
             position: fixed; left: 0; top: -120px; width: 100%; height: 95px; 
             background: var(--anton-yellow); z-index: 1100; 
             display: flex; flex-direction: row; padding: 0 55px 0 75px; 
@@ -237,20 +244,21 @@
             justify-content: space-between; align-items: center; 
             transition: top 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .sidebar-left-mob.open { top: 0 !important; }
+        .sidebar-left.open { top: 0 !important; }
         
-        .nav-item-mob { flex: 1; text-align: center; }
-        .nav-item-mob a { text-decoration: none; color: #000; display: flex; flex-direction: column; align-items: center; }
+        .nav-item { flex: 1; text-align: center; }
+        .nav-item a { text-decoration: none; color: #000; display: flex; flex-direction: column; align-items: center; }
         .mobile-tag { font-size: 0.55rem; text-transform: uppercase; font-weight: bold; margin-top: 4px; }
 
-        .epk-container-mob { 
+        .epk-container { 
             position: absolute; right: 0; top: 0; height: 100%; width: 45px;
             background: #fff; border-left: 3px solid #000; 
             display: flex; align-items: center; justify-content: center;
         }
-        .epk-text-only-mob { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 0.7rem; color: var(--anton-red); font-weight: bold; text-decoration: none; }
+        .epk-text-only { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 0.7rem; color: var(--anton-red); font-weight: bold; text-decoration: none; }
 
-        .id-button-mob {
+        /* --- I/D SYSTEM --- */
+        .id-button {
             position: fixed; right: 0; bottom: 150px; width: 38px; height: 38px;
             background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(4px);
             border: 2px solid #000; border-right: none; border-radius: 6px 0 0 6px;
@@ -258,9 +266,9 @@
             z-index: 1300; font-weight: bold; font-size: 0.85rem; color: #000;
             cursor: pointer; transition: transform 0.4s ease-in-out;
         }
-        .id-button-mob.hidden { transform: translateX(100%); }
+        .id-button.hidden { transform: translateX(100%); }
 
-        .id-panel-mob {
+        .id-panel {
             position: fixed; right: -250px; bottom: 150px; height: 45px; width: 230px;
             background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(8px);
             border: 2px solid #000; border-right: none;
@@ -268,65 +276,176 @@
             z-index: 1299; transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             border-radius: 8px 0 0 8px; font-weight: bold; font-size: 0.85rem;
         }
-        .id-panel-mob.open { right: 0; }
-        .id-panel-mob a { color: #000; text-decoration: none; margin: 0 8px; text-transform: uppercase; }
+        .id-panel.open { right: 0; }
+        .id-panel a { color: #000; text-decoration: none; margin: 0 8px; text-transform: uppercase; }
 
-        .sidebar-right-mob { 
+        /* --- SOCIALBAR --- */
+        .sidebar-right { 
             position: fixed; bottom: 0; left: 0; width: 100%; height: 65px; 
             display: flex; flex-direction: row; align-items: center; 
             z-index: 999; background: rgba(255, 255, 255, 0.7); 
             backdrop-filter: blur(8px); border-top: 2px solid #000;
             padding: 0 10px; justify-content: space-evenly; 
         }
-        .sidebar-right-mob a i { color: #000; font-size: 1.5rem; display: inline-block; animation: ultraFlowWaveMob 6s linear infinite; }
-        @keyframes ultraFlowWaveMob { 0% { transform: scale(1); color: #000; } 9.33% { transform: scale(1.4); color: var(--brand-color); } 23.33%, 100% { transform: scale(1); color: #000; } }
+
+        .sidebar-right a i { 
+            color: #000; font-size: 1.5rem; display: inline-block;
+            animation: ultraFlowWaveMobile 6s linear infinite; 
+        }
+        
+        @keyframes ultraFlowWaveMobile { 
+            0% { transform: scale(1); color: #000; } 
+            9.33% { transform: scale(1.4); color: var(--brand-color); } 
+            23.33%, 100% { transform: scale(1); color: #000; } 
+        }
+        
+        .sidebar-right a:nth-child(1) i { --brand-color: #f00; animation-delay: 0.0s; }
+        .sidebar-right a:nth-child(2) i { --brand-color: #25F4EE; animation-delay: 0.25s; }
+        .sidebar-right a:nth-child(3) i { --brand-color: #E1306C; animation-delay: 0.5s; }
+        .sidebar-right a:nth-child(4) i { --brand-color: #25D366; animation-delay: 0.75s; }
+        .sidebar-right a:nth-child(5) i { --brand-color: #1877F2; animation-delay: 1.0s; }
+        .sidebar-right a:nth-child(6) i { --brand-color: #1DB954; animation-delay: 1.25s; }
+        .sidebar-right a:nth-child(7) i { --brand-color: var(--apple-gray); animation-delay: 1.5s; }
+        .sidebar-right a:nth-child(8) i { --brand-color: #f00; animation-delay: 1.75s; }
+        .sidebar-right a:nth-child(9) i { --brand-color: var(--amazon-blue); animation-delay: 2.0s; }
     </style>
 </head>
 <body>
     <div id="mobile-bg-fix"></div>
-    <header id="header-mobile"><img src="Antonlogo.png" alt="ANTON Logo" class="header-logo"></header>
-    <div class="menu-btn-mob" id="menu-trigger-mob" onclick="toggleMenuMob(event)"><span></span><span></span><span></span></div>
-    <nav class="sidebar-left-mob" id="sidebar-mobile">
-        <div class="nav-item-mob"><a href="hauptseite.html"><i class="fa-solid fa-house"></i><span class="mobile-tag">Start</span></a></div>
-        <div class="nav-item-mob"><a href="meinemusik.html"><i class="fa-solid fa-music"></i><span class="mobile-tag">Musik</span></a></div>
-        <div class="nav-item-mob"><a href="shop.html"><i class="fa-solid fa-cart-shopping"></i><span class="mobile-tag">Shop</span></a></div>
-        <div class="nav-item-mob"><a href="kontakt.html"><i class="fa-solid fa-envelope"></i><span class="mobile-tag">Kontakt</span></a></div>
-        <div class="epk-container-mob"><a href="epk.html" class="epk-text-only-mob">EPK/PRESSE</a></div>
-    </nav>
-    <div class="id-button-mob" id="id-btn-mob" onclick="openIDMenuMob(event)">I/D</div>
-    <div class="id-panel-mob" id="id-panel-mob">
-        <a href="impressum.html">Impressum</a><span>|</span><a href="datenschutz.html">Datenschutz</a>
+
+    <header id="header-main">
+        <img src="Antonlogo.png" alt="ANTON Logo" class="header-logo">
+    </header>
+
+    <div class="menu-btn" id="menu-trigger" onclick="toggleMenu(event)">
+        <span></span><span></span><span></span>
     </div>
-    <aside class="sidebar-right-mob">
-        <a href="#"><i class="fa-brands fa-youtube" style="--brand-color: #f00;"></i></a>
-        <a href="#"><i class="fa-brands fa-tiktok" style="--brand-color: #25F4EE;"></i></a>
-        <a href="#"><i class="fa-brands fa-instagram" style="--brand-color: #E1306C;"></i></a>
+
+    <nav class="sidebar-left" id="sidebar">
+        <div class="nav-item"><a href="hauptseite.html"><i class="fa-solid fa-house"></i><span class="mobile-tag">Start</span></a></div>
+        <div class="nav-item"><a href="meinemusik.html"><i class="fa-solid fa-music"></i><span class="mobile-tag">Musik</span></a></div>
+        <div class="nav-item"><a href="shop.html"><i class="fa-solid fa-cart-shopping"></i><span class="mobile-tag">Shop</span></a></div>
+        <div class="nav-item"><a href="kontakt.html"><i class="fa-solid fa-envelope"></i><span class="mobile-tag">Kontakt</span></a></div>
+        <div class="epk-container"><a href="epk.html" class="epk-text-only">EPK/PRESSE</a></div>
+    </nav>
+
+    <div class="id-button" id="id-btn" onclick="openIDMenu(event)">I/D</div>
+    <div class="id-panel" id="id-panel">
+        <a href="impressum.html">Impressum</a>
+        <span>|</span>
+        <a href="datenschutz.html">Datenschutz</a>
+    </div>
+
+    <aside class="sidebar-right">
+        <a href="https://www.youtube.com/@antonmusikvevo3861" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+        <a href="https://www.tiktok.com/@anton.familienpop" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="https://www.instagram.com/anton.familienpop" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://whatsapp.com/channel/0029Vb6WrdZInlqHDsgTp21e" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+        <a href="https://www.facebook.com/Anton.Familienpop/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+        <a href="https://open.spotify.com/intl-de/artist/348545011" target="_blank"><i class="fa-brands fa-spotify"></i></a>
+        <a href="https://music.apple.com/de/artist/anton/1687546783" target="_blank"><i class="fa-brands fa-apple"></i></a>
+        <a href="https://www.youtube.com/@AntonMusikVEVO" target="_blank"><i class="fa-solid fa-circle-play"></i></a>
+        <a href="https://music.amazon.de/artists/B0GF2ZR9RR" target="_blank"><i class="fa-brands fa-amazon"></i></a>
     </aside>
 
     <script>
-        const sbMob = document.getElementById('sidebar-mobile');
-        const btnMob = document.getElementById('menu-trigger-mob');
-        const idBtnMob = document.getElementById('id-btn-mob');
-        const idPanMob = document.getElementById('id-panel-mob');
-        const bgMob = document.getElementById('mobile-bg-fix');
-        let mTimeout, iTimeout;
+        const sidebar = document.getElementById('sidebar');
+        const menuBtn = document.getElementById('menu-trigger');
+        const idBtn = document.getElementById('id-btn');
+        const idPanel = document.getElementById('id-panel');
+        const bg = document.getElementById('mobile-bg-fix');
+        let menuTimeout;
+        let idTimeout;
 
-        function closeAll() {
-            sbMob.classList.remove('open'); btnMob.classList.remove('active');
-            idPanMob.classList.remove('open'); idBtnMob.classList.remove('hidden');
+        function closeAllMenus() {
+            sidebar.classList.remove('open');
+            menuBtn.classList.remove('active');
+            if (menuTimeout) clearTimeout(menuTimeout);
+            idPanel.classList.remove('open');
+            idBtn.classList.remove('hidden');
+            if (idTimeout) clearTimeout(idTimeout);
         }
 
-        function toggleMenuMob(e) { 
+        function toggleMenu(e) { 
             e.stopPropagation();
-            if (sbMob.classList.contains('open')) closeAll();
-            else { closeAll(); sbMob.classList.add('open'); btnMob.classList.add('active'); mTimeout = setTimeout(closeAll, 5000); }
+            if (sidebar.classList.contains('open')) {
+                closeAllMenus();
+            } else {
+                closeAllMenus();
+                sidebar.classList.add('open'); 
+                menuBtn.classList.add('active');
+                menuTimeout = setTimeout(closeAllMenus, 5000);
+            }
         }
 
-        function openIDMenuMob(e) {
-            e.stopPropagation(); closeAll(); idBtnMob.classList.add('hidden'); idPanMob.classList.add('open'); iTimeout = setTimeout(closeAll, 5000);
+        function openIDMenu(e) {
+            e.stopPropagation();
+            closeAllMenus();
+            idBtn.classList.add('hidden');
+            idPanel.classList.add('open');
+            idTimeout = setTimeout(closeAllMenus, 5000);
         }
 
-        setTimeout(() => { document.getElementById('header-mobile').style.transform = 'translateY(-100%)'; }, 3000);
+        document.addEventListener('click', (e) => {
+            if (!sidebar.contains(e.target) && !menuBtn.contains(e.target) && !idPanel.contains(e.target) && !idBtn.contains(e.target)) {
+                closeAllMenus();
+            }
+        });
+
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let currentTranslateX = 0;
+        const screenWidth = window.innerWidth;
+
+        document.addEventListener('touchstart', e => { 
+            touchStartX = e.touches[0].clientX; 
+            touchStartY = e.touches[0].clientY; 
+        }, {passive: true});
+
+        document.addEventListener('touchmove', e => {
+            const moveX = e.touches[0].clientX;
+            const moveY = e.touches[0].clientY;
+            const diffX = moveX - touchStartX;
+            const diffY = moveY - touchStartY;
+
+            if (Math.abs(diffX) > 10 || Math.abs(diffY) > 10) {
+                if (!sidebar.contains(e.target)) {
+                    closeAllMenus();
+                }
+            }
+
+            if (Math.abs(diffX) > Math.abs(diffY)) {
+                let newX = currentTranslateX + diffX;
+                const limit = screenWidth; 
+                if (newX > limit) newX = limit; 
+                if (newX < -limit) newX = -limit;
+                bg.style.transform = `translateX(${newX}px)`;
+            }
+        }, {passive: true});
+
+        document.addEventListener('touchend', e => {
+            const endX = e.changedTouches[0].clientX;
+            const endY = e.changedTouches[0].clientY;
+            const diffX = endX - touchStartX;
+            const diffY = endY - touchStartY;
+
+            if (Math.abs(diffY) > Math.abs(diffX)) {
+                if (diffY > 60 && touchStartY < 250) { 
+                    closeAllMenus();
+                    sidebar.classList.add('open');
+                    menuBtn.classList.add('active');
+                    menuTimeout = setTimeout(closeAllMenus, 5000);
+                }
+            } else {
+                const style = window.getComputedStyle(bg);
+                const matrix = new WebKitCSSMatrix(style.transform);
+                currentTranslateX = matrix.m41;
+            }
+        }, {passive: true});
+
+        setTimeout(() => { 
+            document.getElementById('header-main').style.transform = 'translateY(-100%)'; 
+        }, 3000);
     </script>
 </body>
 </html>
