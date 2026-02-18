@@ -33,7 +33,10 @@
             body { 
                 background: #ffffff url('Background.jpg') no-repeat center center fixed; 
                 background-size: cover !important; 
-                overflow: hidden; /* Karussell braucht festen Viewport */
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
             }
             
             .d-header { 
@@ -65,33 +68,37 @@
             }
             .d-sidebar-left.open { left: 0; }
             
-            /* Submenü Styles */
             .d-nav-item { margin-bottom: 20px; width: 100%; }
             .d-sidebar-left a { display: flex; align-items: center; color: #000; text-decoration: none; font-size: 1.1rem; width: 100%; }
             .d-submenu { display: none; flex-direction: column; padding-left: 35px; margin-top: 10px; }
             .d-nav-item:hover .d-submenu { display: flex; }
             .d-submenu a { font-size: 0.85rem; margin-bottom: 12px; }
 
-            /* KARUSSELL DESKTOP */
-            .carousel-container {
+            /* 3D KARUSSELL DESKTOP */
+            .carousel-wrapper {
                 position: absolute; top: 55%; left: 50%; transform: translate(-50%, -50%);
-                width: 100%; height: 450px; perspective: 1000px; display: flex; align-items: center; justify-content: center;
+                width: 100%; height: 450px; perspective: 1200px; display: flex; align-items: center; justify-content: center;
             }
-            .carousel {
-                width: 300px; height: 300px; position: relative; transform-style: preserve-3d; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            .carousel-3d {
+                width: 320px; height: 320px; position: relative; transform-style: preserve-3d; transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
             }
-            .carousel-item {
-                position: absolute; width: 300px; height: 300px; background: #fff; border: 4px solid #000;
-                display: flex; flex-direction: column; align-items: center; justify-content: center;
-                backface-visibility: hidden; transition: transform 0.5s, opacity 0.5s;
+            .carousel-3d-item {
+                position: absolute; width: 320px; height: 320px; background: #fff; border: 3px solid #000;
+                display: flex; flex-direction: column; align-items: center; padding: 10px; box-sizing: border-box;
+                backface-visibility: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.2);
             }
-            .carousel-item img { width: 100%; height: 100%; object-fit: cover; }
-            .carousel-nav { position: absolute; bottom: 50px; display: flex; gap: 40px; z-index: 10; }
-            .nav-btn { background: #000; color: #fff; border: none; padding: 10px 20px; cursor: pointer; font-family: 'Special Elite'; }
-            .nav-btn:hover { background: var(--anton-red); }
+            .carousel-3d-item img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border: 1px solid #000; }
+            .carousel-3d-item h3 { margin: 10px 0 5px; font-size: 1rem; color: #000; }
+            
+            .carousel-controls { position: absolute; bottom: -80px; display: flex; gap: 30px; }
+            .c-btn { background: #000; color: #fff; border: 2px solid #000; padding: 10px 25px; cursor: pointer; font-family: 'Special Elite'; font-size: 1rem; }
+            .c-btn:hover { background: var(--anton-yellow); color: #000; }
 
             .d-sidebar-right { position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 50px; display: flex; flex-direction: column; align-items: center; gap: 15px; z-index: 999; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(3px); padding: 25px 0; border-radius: 20px 0 0 20px; }
-            .d-sidebar-right a i { color: #000; font-size: 1.2rem; }
+            .d-sidebar-right a i { color: #000; font-size: 1.2rem; transition: transform 0.4s; }
+            .d-sidebar-right a:hover i { transform: scale(1.5); }
+
+            .d-footer { width: 100%; padding: 15px 0; background: rgba(255,255,255,0.95); border-top: 1.5px solid #000; text-align: center; font-size: 0.75rem; z-index: 100; position: fixed; bottom: 0; left: 0; }
         }
 
         /* ================================================================= */
@@ -99,140 +106,169 @@
         /* ================================================================= */
         @media (max-width: 800px) {
             #desktop-wrapper { display: none !important; }
-            body { height: 100vh; width: 100vw; overflow: hidden; position: fixed; }
+            body { height: 100vh; width: 100vw; overflow: hidden !important; position: fixed; display: flex; flex-direction: column; }
             
-            .m-header { position: fixed; top: 0; width: 100%; height: 80px; z-index: 1000; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border-bottom: 2px solid #000; display: flex; justify-content: center; align-items: center; }
+            #m-bg-fix { display: block; position: fixed; top: 0; left: -100%; width: 300%; height: 100%; background: url('Background.jpg') no-repeat center center; background-size: cover; z-index: -1; }
+            
+            .m-header { position: fixed; top: 0; width: 100%; height: 80px; z-index: 1000; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border-bottom: 2px solid #000; transition: transform 0.6s; display: flex; justify-content: center; align-items: center; }
             .m-header-logo { max-height: 185px; width: auto; filter: brightness(0) saturate(100%) invert(13%) sepia(95%) saturate(7408%) hue-rotate(359deg) brightness(97%) contrast(113%); transform: translateY(40px); }
             
-            .m-menu-btn { position: fixed; top: 18px; left: 15px; z-index: 1500; background: #000; width: 45px; height: 45px; border-radius: 5px; display: flex; align-items: center; justify-content: center; border: 2px solid #000; }
-            .m-menu-btn span { width: 22px; height: 3px; background: #fff; position: relative; }
-            .m-menu-btn span::before, .m-menu-btn span::after { content: ''; position: absolute; width: 22px; height: 3px; background: #fff; left: 0; }
-            .m-menu-btn span::before { top: -8px; }
-            .m-menu-btn span::after { top: 8px; }
+            .m-menu-btn { position: fixed; top: 18px; left: 15px; z-index: 1500; background: #000; width: 45px; height: 45px; border-radius: 5px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; }
+            .m-menu-btn span { width: 22px; height: 3px; background: #fff; }
 
-            .m-sidebar { position: fixed; left: 0; top: -120px; width: 100%; height: 95px; background: var(--anton-yellow); z-index: 1100; display: flex; padding: 0 50px; box-sizing: border-box; border-bottom: 3px solid #000; align-items: center; justify-content: space-around; transition: top 0.5s ease; }
-            .m-sidebar.open { top: 0; }
+            .m-sidebar { position: fixed; left: 0; top: -120px; width: 100%; height: 95px; background: var(--anton-yellow); z-index: 1100; display: flex; padding: 0 50px; box-sizing: border-box; border-bottom: 3px solid #000; align-items: center; justify-content: space-around; transition: top 0.5s; }
+            .m-sidebar.open { top: 0 !important; }
 
-            /* MOBILE RELEASE SLIDER */
-            .m-content { position: absolute; top: 150px; bottom: 80px; width: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-            .m-slider { display: flex; transition: transform 0.4s ease-out; width: 100%; height: 100%; }
-            .m-slide { min-width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
-            .m-slide img { width: 80%; max-width: 300px; border: 3px solid #000; box-shadow: 10px 10px 0 #000; }
-            .m-slide h3 { margin-top: 20px; color: var(--anton-red); }
+            /* MOBILE INFINITE SLIDER */
+            .m-content-slider {
+                position: absolute; top: 140px; bottom: 100px; width: 100%; overflow: hidden; display: flex; align-items: center;
+            }
+            .m-slider-track {
+                display: flex; height: 80%; transition: transform 0.4s ease-out; width: 100%;
+            }
+            .m-slide {
+                min-width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box;
+            }
+            .m-slide img { width: 280px; height: 280px; border: 3px solid #000; box-shadow: 10px 10px 0 var(--anton-yellow); object-fit: cover; }
+            .m-slide h3 { margin-top: 25px; background: #000; color: #fff; padding: 5px 15px; }
 
-            .m-sidebar-right { position: fixed; bottom: 0; width: 100%; height: 65px; background: rgba(255,255,255,0.8); border-top: 2px solid #000; display: flex; justify-content: space-evenly; align-items: center; z-index: 1000; }
+            .m-sidebar-right { position: fixed; bottom: 0; left: 0; width: 100%; height: 65px; display: flex; align-items: center; z-index: 999; background: rgba(255, 255, 255, 0.7); border-top: 2px solid #000; justify-content: space-evenly; }
         }
     </style>
 </head>
 <body>
 
     <div id="desktop-wrapper">
-        <header class="d-header"><img src="Antonlogo.png" alt="ANTON" class="d-header-logo"></header>
-        <div class="d-menu-btn" onclick="toggleDesktopMenu()">☰</div>
+        <header class="d-header"><img src="Antonlogo.png" class="d-header-logo"></header>
+        <div class="d-menu-btn" onclick="toggleDesktopMenu()"><span>☰</span></div>
         
         <nav class="d-sidebar-left" id="d-sidebar">
-            <div class="d-nav-item"><a href="hauptseite.html"><i class="fa-solid fa-house"></i> START</a></div>
+            <div class="d-nav-item"><a href="hauptseite.html"><i class="fa-solid fa-house" style="margin-right:10px"></i> START</a></div>
             <div class="d-nav-item">
-                <a href="meinemusik.html"><i class="fa-solid fa-music"></i> MEINE MUSIK</a>
+                <a href="meinemusik.html"><i class="fa-solid fa-music" style="margin-right:10px"></i> MEINE MUSIK</a>
                 <div class="d-submenu">
                     <a href="ueber-mich.html">ÜBER MICH</a>
-                    <a href="meinemusik.html" style="color: var(--anton-red);">VERÖFFENTLICHUNGEN</a>
+                    <a href="meinemusik.html" style="color:var(--anton-red)">VERÖFFENTLICHUNGEN</a>
                     <a href="konzerte.html">KONZERTE</a>
                 </div>
             </div>
-            <div class="d-nav-item"><a href="shop.html">SHOP</a></div>
-            <div class="d-nav-item d-nav-item-epk"><a href="epk.html" style="color:red">EPK / PRESSE</a></div>
+            <div class="d-nav-item"><a href="shop.html"><i class="fa-solid fa-cart-shopping" style="margin-right:10px"></i> SHOP</a></div>
+            <div class="d-nav-item" style="margin-top:auto"><a href="epk.html" style="color:red">EPK / PRESSE</a></div>
         </nav>
 
-        <div class="carousel-container">
-            <div class="carousel" id="carousel">
-                <div class="carousel-item" style="transform: rotateY(0deg) translateZ(350px);">
-                    <img src="cover1.jpg" alt="Release 1">
-                    <p>Single Eins</p>
-                </div>
-                <div class="carousel-item" style="transform: rotateY(120deg) translateZ(350px);">
-                    <img src="cover2.jpg" alt="Release 2">
-                    <p>Album Zwei</p>
-                </div>
-                <div class="carousel-item" style="transform: rotateY(240deg) translateZ(350px);">
-                    <img src="cover3.jpg" alt="Release 3">
-                    <p>EP Drei</p>
-                </div>
+        <div class="carousel-wrapper">
+            <div class="carousel-3d" id="carousel-3d">
+                <div class="carousel-3d-item"><img src="cover1.jpg"><h3>Release 1</h3><small>Single</small></div>
+                <div class="carousel-3d-item"><img src="cover2.jpg"><h3>Release 2</h3><small>Album</small></div>
+                <div class="carousel-3d-item"><img src="cover3.jpg"><h3>Release 3</h3><small>EP</small></div>
+                <div class="carousel-3d-item"><img src="cover4.jpg"><h3>Release 4</h3><small>Single</small></div>
             </div>
-            <div class="carousel-nav">
-                <button class="nav-btn" onclick="rotateCarousel(-1)">PREV</button>
-                <button class="nav-btn" onclick="rotateCarousel(1)">NEXT</button>
+            <div class="carousel-controls">
+                <button class="c-btn" onclick="rotate3D(-1)">ZURÜCK</button>
+                <button class="c-btn" onclick="rotate3D(1)">VOR</button>
             </div>
         </div>
+
+        <footer class="d-footer">
+            <a href="impressum.html">Impressum</a> | <a href="datenschutz.html">Datenschutz</a>
+        </footer>
     </div>
 
     <div id="mobile-wrapper">
-        <header class="m-header"><img src="Antonlogo.png" class="m-header-logo"></header>
-        <div class="m-menu-btn" onclick="toggleMobileMenu()"><span></span></div>
+        <div id="m-bg-fix"></div>
+        <header class="m-header" id="m-header-main"><img src="Antonlogo.png" class="m-header-logo"></header>
+        <div class="m-menu-btn" onclick="mToggleMenu(event)"><span></span><span></span><span></span></div>
+        
         <nav class="m-sidebar" id="m-sidebar">
             <a href="hauptseite.html">START</a>
             <a href="meinemusik.html">MUSIK</a>
             <a href="shop.html">SHOP</a>
         </nav>
 
-        <div class="m-content" id="swipe-area">
-            <div class="m-slider" id="m-slider">
+        <div class="m-content-slider" id="swipe-area">
+            <div class="m-slider-track" id="m-slider-track">
                 <div class="m-slide"><img src="cover1.jpg"><h3>Release 1</h3></div>
                 <div class="m-slide"><img src="cover2.jpg"><h3>Release 2</h3></div>
                 <div class="m-slide"><img src="cover3.jpg"><h3>Release 3</h3></div>
+                <div class="m-slide"><img src="cover4.jpg"><h3>Release 4</h3></div>
             </div>
         </div>
 
         <aside class="m-sidebar-right">
-            <a href="#"><i class="fa-brands fa-spotify"></i></a>
             <a href="#"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#"><i class="fa-brands fa-spotify"></i></a>
             <a href="#"><i class="fa-brands fa-instagram"></i></a>
         </aside>
     </div>
 
     <script>
-        /* DESKTOP LOGIC */
-        let rotation = 0;
-        function rotateCarousel(dir) {
-            rotation += dir * -120; // 360 / 3 Items
-            document.getElementById('carousel').style.transform = `rotateY(${rotation}deg)`;
+        /* --- DESKTOP 3D LOGIC --- */
+        let currentRotation = 0;
+        const carousel = document.getElementById('carousel-3d');
+        const items = document.querySelectorAll('.carousel-3d-item');
+        const itemCount = items.length;
+        const angle = 360 / itemCount;
+        const tz = Math.round((160) / Math.tan(Math.PI / itemCount)); // Dynamischer Abstand
+
+        // Initialisierung der Items im Raum
+        items.forEach((item, i) => {
+            item.style.transform = `rotateY(${i * angle}deg) translateZ(${tz + 50}px)`;
+        });
+
+        function rotate3D(dir) {
+            currentRotation += (angle * -dir);
+            carousel.style.transform = `rotateY(${currentRotation}deg)`;
         }
 
         function toggleDesktopMenu() {
             document.getElementById('d-sidebar').classList.toggle('open');
         }
 
-        /* MOBILE LOGIC & SWIPE */
-        function toggleMobileMenu() {
-            document.getElementById('m-sidebar').classList.toggle('open');
-        }
-
-        let currentSlide = 0;
-        const slider = document.getElementById('m-slider');
-        const slides = document.querySelectorAll('.m-slide');
+        /* --- MOBILE INFINITE SWIPE LOGIC --- */
+        let mSidebar = document.getElementById('m-sidebar');
+        let track = document.getElementById('m-slider-track');
+        let slides = document.querySelectorAll('.m-slide');
+        let currentIndex = 0;
         let startX = 0;
 
+        function mToggleMenu(e) {
+            e.stopPropagation();
+            mSidebar.classList.toggle('open');
+        }
+
         const swipeArea = document.getElementById('swipe-area');
-        swipeArea.addEventListener('touchstart', e => {
-            startX = e.touches[0].clientX;
-        });
+        swipeArea.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive: true});
 
         swipeArea.addEventListener('touchend', e => {
             let endX = e.changedTouches[0].clientX;
-            if (startX - endX > 50) { // Swipe Links -> Next
-                if (currentSlide < slides.length - 1) currentSlide++;
-            } else if (endX - startX > 50) { // Swipe Rechts -> Prev
-                if (currentSlide > 0) currentSlide--;
-            }
-            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
-        });
+            let diff = startX - endX;
 
-        /* Header Auto-Hide Mobile */
-        setTimeout(() => {
-            if(window.innerWidth <= 800) {
-                document.querySelector('.m-header').style.transform = 'translateY(-100%)';
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) {
+                    // Swipe nach Links -> Weiter
+                    currentIndex = (currentIndex + 1) % slides.length;
+                } else {
+                    // Swipe nach Rechts -> Zurück
+                    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                }
+                updateSlider();
             }
+        }, {passive: true});
+
+        function updateSlider() {
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        // Auto-Hide Header Mobile
+        setTimeout(() => {
+            const mh = document.getElementById('m-header-main');
+            if(mh && window.innerWidth <= 800) mh.style.transform = 'translateY(-100%)';
         }, 3000);
+
+        // Klick außerhalb schließt Menüs
+        document.addEventListener('click', () => {
+            if(mSidebar.classList.contains('open')) mSidebar.classList.remove('open');
+        });
     </script>
 </body>
 </html>
