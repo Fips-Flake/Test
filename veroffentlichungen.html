@@ -10,9 +10,6 @@
         :root { 
             --anton-red: #ff0000; 
             --anton-yellow: #ffeb3b; 
-            --sidebar-width: 240px; 
-            --apple-gray: #A2AAAD;
-            --amazon-blue: #00A8E1;
             --box-width: 216px; /* 10% kleiner als 240px */
             --box-height: 160px;
         }
@@ -20,17 +17,18 @@
         html, body { 
             margin: 0; padding: 0; background-color: #ffffff; 
             font-family: 'Special Elite', cursive; height: 100%; width: 100%;
-            user-select: none; /* Verhindert Textmarkierung beim Draggen */
+            user-select: none; /* Verhindert Textmarkierung beim Ziehen */
+            overflow: hidden;
         }
 
         /* ================================================================= */
-        /* 1. DESKTOP STYLES (3D Carousel with Drag)                         */
+        /* 1. DESKTOP STYLES (3D Drag Carousel)                              */
         /* ================================================================= */
         @media (min-width: 801px) {
             #mobile-wrapper { display: none !important; }
             body { 
                 background: #ffffff url('Background.jpg') no-repeat center center fixed; 
-                background-size: cover !important; overflow: hidden;
+                background-size: cover !important;
                 display: flex; flex-direction: column; min-height: 100vh;
             }
             
@@ -52,6 +50,7 @@
                 align-items: center;
                 position: relative;
                 cursor: grab;
+                z-index: 10;
             }
             .carousel-container:active { cursor: grabbing; }
 
@@ -60,11 +59,9 @@
                 height: var(--box-height);
                 position: relative;
                 transform-style: preserve-3d;
-                transition: transform 0.1s linear; /* Kurze Transition für flüssiges Draggen */
-                animation: rotateAuto 25s linear infinite;
+                /* Start-Animation */
+                animation: rotateAuto 30s linear infinite;
             }
-
-            .carousel-scene.manual { animation: none; } /* Stoppt Auto-Rotation beim Draggen */
 
             @keyframes rotateAuto {
                 from { transform: rotateY(0deg); }
@@ -92,23 +89,22 @@
             .carousel-item:hover { background: var(--anton-yellow); }
             .carousel-item a { 
                 text-decoration: none; color: #000; width: 100%; height: 100%; 
-                display: flex; align-items: center; justify-content: center; padding: 10px; 
-                pointer-events: auto; /* Erlaubt Klicks auf Links trotz Drag-Container */
+                display: flex; align-items: center; justify-content: center; padding: 20px;
             }
 
-            /* 12 Items Positionierung */
-            .carousel-item:nth-child(1)  { transform: rotateY(0deg) translateZ(450px); }
-            .carousel-item:nth-child(2)  { transform: rotateY(30deg) translateZ(450px); }
-            .carousel-item:nth-child(3)  { transform: rotateY(60deg) translateZ(450px); }
-            .carousel-item:nth-child(4)  { transform: rotateY(90deg) translateZ(450px); }
-            .carousel-item:nth-child(5)  { transform: rotateY(120deg) translateZ(450px); }
-            .carousel-item:nth-child(6)  { transform: rotateY(150deg) translateZ(450px); }
-            .carousel-item:nth-child(7)  { transform: rotateY(180deg) translateZ(450px); }
-            .carousel-item:nth-child(8)  { transform: rotateY(210deg) translateZ(450px); }
-            .carousel-item:nth-child(9)  { transform: rotateY(240deg) translateZ(450px); }
-            .carousel-item:nth-child(10) { transform: rotateY(270deg) translateZ(450px); }
-            .carousel-item:nth-child(11) { transform: rotateY(300deg) translateZ(450px); }
-            .carousel-item:nth-child(12) { transform: rotateY(330deg) translateZ(450px); }
+            /* 12 Items Positionierung im Kreis */
+            .carousel-item:nth-child(1)  { transform: rotateY(0deg) translateZ(500px); }
+            .carousel-item:nth-child(2)  { transform: rotateY(30deg) translateZ(500px); }
+            .carousel-item:nth-child(3)  { transform: rotateY(60deg) translateZ(500px); }
+            .carousel-item:nth-child(4)  { transform: rotateY(90deg) translateZ(500px); }
+            .carousel-item:nth-child(5)  { transform: rotateY(120deg) translateZ(500px); }
+            .carousel-item:nth-child(6)  { transform: rotateY(150deg) translateZ(500px); }
+            .carousel-item:nth-child(7)  { transform: rotateY(180deg) translateZ(500px); }
+            .carousel-item:nth-child(8)  { transform: rotateY(210deg) translateZ(500px); }
+            .carousel-item:nth-child(9)  { transform: rotateY(240deg) translateZ(500px); }
+            .carousel-item:nth-child(10) { transform: rotateY(270deg) translateZ(500px); }
+            .carousel-item:nth-child(11) { transform: rotateY(300deg) translateZ(500px); }
+            .carousel-item:nth-child(12) { transform: rotateY(330deg) translateZ(500px); }
         }
 
         /* ================================================================= */
@@ -116,7 +112,7 @@
         /* ================================================================= */
         @media (max-width: 800px) {
             #desktop-wrapper { display: none !important; }
-            body { background: #ffffff url('Background.jpg') no-repeat center center fixed; background-size: cover; overflow: hidden; }
+            body { background: #ffffff url('Background.jpg') no-repeat center center fixed; background-size: cover; }
             .m-swipe-container {
                 display: flex; align-items: center; height: 100vh; overflow-x: auto;
                 scroll-snap-type: x mandatory; padding: 0 40px; gap: 25px;
@@ -126,9 +122,8 @@
             .m-box { 
                 flex: 0 0 153px; min-height: 108px; background: rgba(255, 255, 255, 0.7); 
                 border: 3px solid #000; border-radius: 20px; box-shadow: 5px 5px 0 #000; 
-                scroll-snap-align: center; overflow: hidden; transition: background 0.2s;
+                scroll-snap-align: center; overflow: hidden;
             }
-            .m-box:active { background: var(--anton-yellow); }
             .m-box a { text-decoration: none; color: #000; font-weight: bold; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; text-align: center; padding: 15px; }
         }
     </style>
@@ -176,33 +171,34 @@
     </div>
 
     <script>
-        /* --- DRAG LOGIC FOR DESKTOP --- */
         const container = document.getElementById('drag-container');
         const scene = document.getElementById('scene');
         
         let isDragging = false;
         let startX;
         let rotationY = 0;
-        let autoRotationActive = true;
+        let isManual = false;
 
-        // Hilfsfunktion um die aktuelle Rotation aus der Animation zu holen
-        function getCurrentRotation() {
+        // Funktion zum Ermitteln des aktuellen Winkels während der CSS-Animation
+        function getRotationFromMatrix() {
             const style = window.getComputedStyle(scene);
             const matrix = new WebKitCSSMatrix(style.transform);
-            // Wir berechnen den Winkel aus der Matrix
             return Math.round(Math.atan2(matrix.m13, matrix.m11) * (180 / Math.PI));
         }
 
         container.addEventListener('mousedown', (e) => {
             isDragging = true;
-            if(autoRotationActive) {
-                // Bei erstem Drag: Aktuellen Winkel festschreiben und Auto-Animation stoppen
-                rotationY = getCurrentRotation();
-                scene.classList.add('manual');
+            
+            if (!isManual) {
+                // Einmaliger Stop der Animation beim ersten Klick
+                rotationY = getRotationFromMatrix();
                 scene.style.animation = 'none';
-                autoRotationActive = false;
+                scene.style.transform = `rotateY(${rotationY}deg)`;
+                isManual = true;
             }
+            
             startX = e.pageX - rotationY;
+            e.preventDefault();
         });
 
         window.addEventListener('mouseup', () => {
@@ -211,18 +207,20 @@
 
         window.addEventListener('mousemove', (e) => {
             if (!isDragging) return;
-            e.preventDefault();
-            // Die 0.5 bestimmt die Empfindlichkeit der Drehung
+            
+            // Sensibilität der Drehung (0.5 für geschmeidiges Ziehen)
             rotationY = (e.pageX - startX) * 0.5;
             scene.style.transform = `rotateY(${rotationY}deg)`;
         });
 
-        // Verhindert, dass Links beim Draggen versehentlich ausgelöst werden
+        // Verhindert, dass das Ziehen als Klick auf den Link gewertet wird
         const links = document.querySelectorAll('.carousel-item a');
         links.forEach(link => {
             link.addEventListener('click', (e) => {
-                // Wenn wir gerade draggten, klick verhindern
-                // (Optional: Hier könnte man eine Schwellenwert-Logik einbauen)
+                if (Math.abs(getRotationFromMatrix() - rotationY) > 2) {
+                    // Falls wir uns beim Klicken bewegt haben -> kein Link öffnen
+                    e.preventDefault();
+                }
             });
         });
     </script>
