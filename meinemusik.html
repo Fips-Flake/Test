@@ -135,9 +135,12 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                transition: transform 0.3s ease;
+                transition: all 0.3s ease;
             }
-            .d-bento-box:hover { transform: scale(1.05); }
+            .d-bento-box:hover { 
+                transform: scale(1.05); 
+                background: var(--anton-yellow);
+            }
             .d-bento-box a { 
                 text-decoration: none; 
                 color: #000; 
@@ -213,6 +216,10 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                transition: background 0.2s ease;
+            }
+            .m-bento-box:active {
+                background: var(--anton-yellow);
             }
             .m-bento-box a { 
                 text-decoration: none; 
