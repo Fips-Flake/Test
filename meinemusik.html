@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>ANTON | MASTER RESPONSIVE</title>
+    <title>ANTON | MEINE MUSIK</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap&subset=latin-ext" rel="stylesheet">
     <style>
@@ -132,9 +132,11 @@
                 max-width: 240px;
                 min-height: 180px;
                 border-radius: 20px;
-                overflow: hidden; /* Behält Rundung beim Hover bei */
+                overflow: hidden;
                 transition: all 0.3s ease;
+                cursor: pointer;
             }
+            /* Hover Effekt über die gesamte Fläche */
             .d-bento-box:hover { 
                 transform: scale(1.05); 
                 background: var(--anton-yellow);
@@ -149,7 +151,7 @@
                 justify-content: center; 
                 font-weight: bold;
                 text-align: center;
-                padding: 0; /* Padding entfernt, damit Link Fläche füllt */
+                padding: 20px; /* Textabstand innerhalb der Fläche */
             }
 
             .d-footer { 
@@ -228,7 +230,7 @@
                 font-weight: bold;
                 font-size: 0.9rem;
                 text-align: center;
-                padding: 0;
+                padding: 15px;
             }
 
             .m-id-button { position: fixed; right: 0; bottom: 150px; width: 38px; height: 38px; background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(4px); border: 2px solid #000; border-right: none; border-radius: 6px 0 0 6px; display: flex; align-items: center; justify-content: center; z-index: 1300; font-weight: bold; font-size: 0.85rem; color: #000; cursor: pointer; transition: transform 0.4s ease-in-out; }
