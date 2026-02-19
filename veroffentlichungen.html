@@ -21,7 +21,7 @@
         html, body { 
             margin: 0; padding: 0; background-color: #ffffff; 
             font-family: 'Special Elite', cursive; height: 100%; width: 100%;
-            user-select: none;
+            overflow: hidden;
         }
 
         /* ================================================================= */
@@ -31,8 +31,7 @@
             #mobile-wrapper { display: none !important; }
             body { 
                 background: #ffffff url('Background.jpg') no-repeat center center fixed; 
-                background-size: cover !important; overflow: hidden;
-                display: flex; flex-direction: column; min-height: 100vh;
+                background-size: cover !important; display: flex; flex-direction: column; min-height: 100vh;
             }
 
             .d-header { 
@@ -50,7 +49,8 @@
                 border-radius: 5px; transition: all 0.3s ease; border: 2px solid #000; 
             }
             .d-menu-btn:hover { background: var(--anton-yellow); color: #000; }
-            .d-menu-btn::after { content: 'A'; position: absolute; font-weight: bold; font-size: 28px; opacity: 0; }
+            .d-menu-btn span { transition: opacity 0.2s; }
+            .d-menu-btn::after { content: 'A'; position: absolute; font-weight: bold; font-size: 28px; opacity: 0; transition: opacity 0.2s; }
             .d-menu-btn:hover span { opacity: 0; }
             .d-menu-btn:hover::after { opacity: 1; }
 
@@ -62,16 +62,18 @@
             }
             .d-sidebar-left.open { left: 0; }
             .d-nav-item { margin-bottom: 20px; width: 100%; }
-            .d-sidebar-left a { display: flex; align-items: center; color: #000; text-decoration: none; font-size: 1.1rem; }
+            .d-sidebar-left a { display: flex; align-items: center; color: #000; text-decoration: none; font-size: 1.1rem; transition: color 0.3s; }
+            .d-sidebar-left a:hover { color: var(--anton-red); }
+            .d-nav-label { display: flex; align-items: center; width: 100%; }
             .d-nav-label i.main-icon { width: 30px; text-align: center; margin-right: 10px; }
+            
             .d-submenu { display: none; flex-direction: column; padding-left: 35px; margin-top: 10px; }
             .d-nav-item:hover .d-submenu { display: flex; }
             .d-submenu a { font-size: 0.85rem; margin-bottom: 12px; }
 
-            /* CAROUSEL DESKTOP INTEGRATION */
+            /* CAROUSEL DESKTOP */
             .carousel-container {
-                perspective: 1200px;
-                width: 100%; height: 100vh;
+                perspective: 1200px; width: 100%; height: 100vh;
                 display: flex; justify-content: center; align-items: center;
                 position: relative; cursor: grab; z-index: 10;
             }
@@ -89,12 +91,11 @@
                 background: rgba(255, 255, 255, 0.7); border: 3px solid #000;
                 border-radius: 20px; box-shadow: 6px 6px 0 #000;
                 display: flex; align-items: center; justify-content: center;
-                backface-visibility: hidden; transition: background 0.3s;
+                backface-visibility: hidden; transition: 0.3s;
             }
-            .carousel-item:hover { background: var(--anton-yellow); }
-            .carousel-item a { text-decoration: none; color: #000; font-weight: bold; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; padding: 20px; }
+            .carousel-item:hover { background: var(--anton-yellow); transform: scale(1.05); }
+            .carousel-item a { text-decoration: none; color: #000; font-weight: bold; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; text-align: center; }
 
-            /* 12 Items */
             .carousel-item:nth-child(1)  { transform: rotateY(0deg) translateZ(500px); }
             .carousel-item:nth-child(2)  { transform: rotateY(30deg) translateZ(500px); }
             .carousel-item:nth-child(3)  { transform: rotateY(60deg) translateZ(500px); }
@@ -109,11 +110,22 @@
             .carousel-item:nth-child(12) { transform: rotateY(330deg) translateZ(500px); }
 
             .d-sidebar-right { position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 50px; display: flex; flex-direction: column; align-items: center; gap: 15px; z-index: 999; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(3px); padding: 25px 0; border-radius: 20px 0 0 20px; }
-            .d-sidebar-right a i { color: #000; font-size: 1.2rem; transition: transform 0.4s; animation: ultraFlowWave 6s linear infinite; }
-            @keyframes ultraFlowWave { 0% { transform: scale(1); color: #000; } 9% { transform: scale(1.5); color: var(--brand-color); } 23%, 100% { transform: scale(1); color: #000; } }
+            .d-sidebar-right a i { color: #000; font-size: 1.2rem; transition: transform 0.4s ease-in-out, color 0.4s ease-in-out; animation: ultraFlowWave 6s linear infinite; }
+            @keyframes ultraFlowWave { 0% { transform: scale(1); color: #000; } 9.33% { transform: scale(1.55); color: var(--brand-color); } 23.33%, 100% { transform: scale(1); color: #000; } }
             
+            .d-sidebar-right a:nth-child(1) i { --brand-color: #f00; animation-delay: 0.0s; }
+            .d-sidebar-right a:nth-child(2) i { --brand-color: #25F4EE; animation-delay: 0.25s; }
+            .d-sidebar-right a:nth-child(3) i { --brand-color: #E1306C; animation-delay: 0.5s; }
+            .d-sidebar-right a:nth-child(4) i { --brand-color: #25D366; animation-delay: 0.75s; }
+            .d-sidebar-right a:nth-child(5) i { --brand-color: #1877F2; animation-delay: 1.0s; }
+            .d-sidebar-right a:nth-child(6) i { --brand-color: #1DB954; animation-delay: 1.25s; }
+            .d-sidebar-right a:nth-child(7) i { --brand-color: var(--apple-gray); animation-delay: 1.5s; }
+            .d-sidebar-right a:nth-child(8) i { --brand-color: #f00; animation-delay: 1.75s; }
+            .d-sidebar-right a:nth-child(9) i { --brand-color: var(--amazon-blue); animation-delay: 2.0s; }
+
             .d-footer { width: 100%; padding: 15px 0; background: rgba(255,255,255,0.95); border-top: 1.5px solid #000; text-align: center; font-size: 0.75rem; z-index: 100; position: fixed; bottom: 0; }
-            .d-footer a { color: #000; text-decoration: none; margin: 0 12px; font-weight: bold; }
+            .d-footer a { color: #000; text-decoration: none; margin: 0 12px; font-weight: bold; transition: 0.3s; }
+            .d-footer a:hover { color: var(--anton-yellow); text-shadow: 1px 1px 0 #000; }
         }
 
         /* ================================================================= */
@@ -121,21 +133,33 @@
         /* ================================================================= */
         @media (max-width: 800px) {
             #desktop-wrapper { display: none !important; }
-            body { height: 100vh; width: 100vw; overflow: hidden; position: fixed; display: flex; flex-direction: column; }
+            body { height: 100vh; width: 100vw; overflow: hidden; position: fixed; display: flex; flex-direction: column; touch-action: pan-y; }
             
-            #m-bg-fix { position: fixed; top: 0; left: -100%; width: 300%; height: 100%; background: url('Background.jpg') no-repeat center center; background-size: cover; z-index: -1; }
+            #m-bg-fix { position: fixed; top: 0; left: -100%; width: 300%; height: 100%; background: url('Background.jpg') no-repeat center center; background-size: cover; z-index: -1; will-change: transform; }
             
             .m-header { position: fixed; top: 0; width: 100%; height: 80px; display: flex; justify-content: center; align-items: center; z-index: 1000; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border-bottom: 2px solid #000; transition: transform 0.6s ease-in-out; }
             .m-header-logo { position: absolute; top: 120%; max-height: 185px; filter: brightness(0) saturate(100%) invert(13%) sepia(95%) saturate(7408%) hue-rotate(359deg) brightness(97%) contrast(113%); }
             
             .m-menu-btn { position: fixed; top: 18px; left: 15px; z-index: 1500; background: #000; width: 45px; height: 45px; border-radius: 5px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; border: 2px solid #000; }
-            .m-menu-btn span { width: 22px; height: 3px; background: #fff; }
+            .m-menu-btn span { width: 22px; height: 3px; background: #fff; transition: 0.3s; }
             .m-menu-btn.active span { display: none; }
             .m-menu-btn.active::after { content: 'A'; color: #000; font-weight: bold; font-size: 28px; }
 
-            .m-sidebar { position: fixed; left: 0; top: -120px; width: 100%; height: 95px; background: var(--anton-yellow); z-index: 1100; display: flex; padding: 0 55px 0 75px; box-sizing: border-box; border-bottom: 3px solid #000; justify-content: space-between; align-items: center; transition: top 0.5s; }
+            .m-sidebar { position: fixed; left: 0; top: -120px; width: 100%; height: 95px; background: var(--anton-yellow); z-index: 1100; display: flex; padding: 0 55px 0 75px; box-sizing: border-box; border-bottom: 3px solid #000; justify-content: space-between; align-items: center; transition: top 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
             .m-sidebar.open { top: 0 !important; }
-            
+            .m-nav-item a { text-decoration: none; color: #000; display: flex; flex-direction: column; align-items: center; font-size: 1.2rem; }
+            .mobile-tag { font-size: 0.55rem; text-transform: uppercase; font-weight: bold; margin-top: 4px; }
+
+            .m-epk-container { position: absolute; right: 0; top: 0; height: 100%; width: 45px; background: #fff; border-left: 3px solid #000; display: flex; align-items: center; justify-content: center; }
+            .m-epk-text { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 0.7rem; color: var(--anton-red); font-weight: bold; text-decoration: none; }
+
+            /* I/D MENU MOBILE */
+            .m-id-button { position: fixed; right: 0; bottom: 150px; width: 38px; height: 38px; background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(4px); border: 2px solid #000; border-right: none; border-radius: 6px 0 0 6px; display: flex; align-items: center; justify-content: center; z-index: 1300; font-weight: bold; font-size: 0.85rem; cursor: pointer; transition: 0.4s; }
+            .m-id-button.hidden { transform: translateX(100%); }
+            .m-id-panel { position: fixed; right: -250px; bottom: 150px; height: 45px; width: 230px; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(8px); border: 2px solid #000; border-right: none; display: flex; align-items: center; justify-content: center; z-index: 1299; transition: right 0.5s; border-radius: 8px 0 0 8px; }
+            .m-id-panel.open { right: 0; }
+            .m-id-panel a { color: #000; text-decoration: none; margin: 0 8px; font-size: 0.85rem; font-weight: bold; }
+
             /* SWIPE SLIDER MOBILE */
             .m-swipe-container {
                 display: flex; align-items: center; height: 100vh; overflow-x: auto;
@@ -143,12 +167,22 @@
                 scrollbar-width: none; -webkit-overflow-scrolling: touch;
             }
             .m-swipe-container::-webkit-scrollbar { display: none; }
-            .m-box { flex: 0 0 153px; min-height: 108px; background: rgba(255, 255, 255, 0.7); border: 3px solid #000; border-radius: 20px; box-shadow: 5px 5px 0 #000; scroll-snap-align: center; overflow: hidden; }
+            .m-box { flex: 0 0 160px; min-height: 120px; background: rgba(255, 255, 255, 0.7); border: 3px solid #000; border-radius: 20px; box-shadow: 5px 5px 0 #000; scroll-snap-align: center; }
             .m-box a { text-decoration: none; color: #000; font-weight: bold; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; text-align: center; padding: 15px; }
 
             .m-sidebar-right { position: fixed; bottom: 0; left: 0; width: 100%; height: 65px; display: flex; align-items: center; z-index: 999; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(8px); border-top: 2px solid #000; justify-content: space-evenly; }
             .m-sidebar-right a i { color: #000; font-size: 1.5rem; animation: ultraFlowWaveMobile 6s linear infinite; }
-            @keyframes ultraFlowWaveMobile { 0% { transform: scale(1); color: #000; } 9% { transform: scale(1.4); color: var(--brand-color); } 23%, 100% { transform: scale(1); color: #000; } }
+            @keyframes ultraFlowWaveMobile { 0% { transform: scale(1); color: #000; } 9.33% { transform: scale(1.4); color: var(--brand-color); } 23.33%, 100% { transform: scale(1); color: #000; } }
+            
+            .m-sidebar-right a:nth-child(1) i { --brand-color: #f00; animation-delay: 0.0s; }
+            .m-sidebar-right a:nth-child(2) i { --brand-color: #25F4EE; animation-delay: 0.25s; }
+            .m-sidebar-right a:nth-child(3) i { --brand-color: #E1306C; animation-delay: 0.5s; }
+            .m-sidebar-right a:nth-child(4) i { --brand-color: #25D366; animation-delay: 0.75s; }
+            .m-sidebar-right a:nth-child(5) i { --brand-color: #1877F2; animation-delay: 1.0s; }
+            .m-sidebar-right a:nth-child(6) i { --brand-color: #1DB954; animation-delay: 1.25s; }
+            .m-sidebar-right a:nth-child(7) i { --brand-color: var(--apple-gray); animation-delay: 1.5s; }
+            .m-sidebar-right a:nth-child(8) i { --brand-color: #f00; animation-delay: 1.75s; }
+            .m-sidebar-right a:nth-child(9) i { --brand-color: var(--amazon-blue); animation-delay: 2.0s; }
         }
     </style>
 </head>
@@ -165,9 +199,9 @@
             <div class="d-nav-item">
                 <a href="#"><span class="d-nav-label"><i class="fa-solid fa-music main-icon"></i> MEINE MUSIK</span></a>
                 <div class="d-submenu">
-                    <a href="ueber-mich.html">ÜBER MICH</a>
-                    <a href="meinemusik.html">VERÖFFENTLICHUNGEN</a>
-                    <a href="konzerte.html">KONZERTE</a>
+                    <a href="ueber-mich.html"><i class="fa-regular fa-face-smile"></i> ÜBER MICH</a>
+                    <a href="meinemusik.html"><i class="fa-solid fa-volume-high"></i> VERÖFFENTLICHUNGEN</a>
+                    <a href="konzerte.html"><i class="fa-solid fa-microphone-lines"></i> KONZERTE</a>
                 </div>
             </div>
             <div class="d-nav-item"><a href="shop.html"><span class="d-nav-label"><i class="fa-solid fa-cart-shopping main-icon"></i> SHOP</span></a></div>
@@ -192,14 +226,19 @@
         </div>
 
         <aside class="d-sidebar-right">
-            <a href="#" style="--brand-color: #f00;"><i class="fa-brands fa-youtube"></i></a>
-            <a href="#" style="--brand-color: #25F4EE;"><i class="fa-brands fa-tiktok"></i></a>
-            <a href="#" style="--brand-color: #E1306C;"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#" style="--brand-color: #1DB954;"><i class="fa-brands fa-spotify"></i></a>
+            <a href="https://www.youtube.com/@antonmusikvevo3861" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://www.tiktok.com/@anton.familienpop" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://www.instagram.com/anton.familienpop" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://whatsapp.com/channel/0029Vb6WrdZInlqHDsgTp21e" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://www.facebook.com/Anton.Familienpop/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://open.spotify.com/intl-de/artist/348545011" target="_blank"><i class="fa-brands fa-spotify"></i></a>
+            <a href="https://music.apple.com/de/artist/anton/1687546783" target="_blank"><i class="fa-brands fa-apple"></i></a>
+            <a href="https://www.youtube.com/@AntonMusikVEVO" target="_blank"><i class="fa-solid fa-circle-play"></i></a>
+            <a href="https://music.amazon.de/artists/B0GF2ZR9RR" target="_blank"><i class="fa-brands fa-amazon"></i></a>
         </aside>
 
         <footer class="d-footer">
-            <a href="impressum.html">Impressum</a> | <a href="datenschutz.html">Datenschutz</a>
+            <a href="index.html">www.anton-familienpop.de</a> | <a href="impressum.html">Impressum</a> | <a href="datenschutz.html">Datenschutz</a>
         </footer>
     </div>
 
@@ -209,10 +248,17 @@
         <div class="m-menu-btn" onclick="mToggleMenu(event)" id="m-menu-trigger"><span></span><span></span><span></span></div>
         
         <nav class="m-sidebar" id="m-sidebar">
-            <div class="m-nav-item"><a href="hauptseite.html"><i class="fa-solid fa-house"></i></a></div>
-            <div class="m-nav-item"><a href="meinemusik.html"><i class="fa-solid fa-music"></i></a></div>
-            <div class="m-nav-item"><a href="shop.html"><i class="fa-solid fa-cart-shopping"></i></a></div>
+            <div class="m-nav-item"><a href="hauptseite.html"><i class="fa-solid fa-house"></i><span class="mobile-tag">Start</span></a></div>
+            <div class="m-nav-item"><a href="meinemusik.html"><i class="fa-solid fa-music"></i><span class="mobile-tag">Musik</span></a></div>
+            <div class="m-nav-item"><a href="shop.html"><i class="fa-solid fa-cart-shopping"></i><span class="mobile-tag">Shop</span></a></div>
+            <div class="m-nav-item"><a href="kontakt.html"><i class="fa-solid fa-envelope"></i><span class="mobile-tag">Kontakt</span></a></div>
+            <div class="m-epk-container"><a href="epk.html" class="m-epk-text">EPK/PRESSE</a></div>
         </nav>
+
+        <div class="m-id-button" id="m-id-btn" onclick="mOpenIDMenu(event)">I/D</div>
+        <div class="m-id-panel" id="m-id-panel">
+            <a href="impressum.html">Impressum</a><span>|</span><a href="datenschutz.html">Datenschutz</a>
+        </div>
 
         <div class="m-swipe-container">
             <div class="m-box"><a href="#">Album 1</a></div>
@@ -221,38 +267,44 @@
             <div class="m-box"><a href="#">Single 4</a></div>
             <div class="m-box"><a href="#">Album 2</a></div>
             <div class="m-box"><a href="#">Single 5</a></div>
-            <div class="m-box"><a href="#">Live 6</a></div>
-            <div class="m-box"><a href="#">Single 7</a></div>
         </div>
 
         <aside class="m-sidebar-right">
-            <a href="#" style="--brand-color: #f00;"><i class="fa-brands fa-youtube"></i></a>
-            <a href="#" style="--brand-color: #E1306C;"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#" style="--brand-color: #1DB954;"><i class="fa-brands fa-spotify"></i></a>
+            <a href="https://www.youtube.com/@antonmusikvevo3861" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://www.tiktok.com/@anton.familienpop" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://www.instagram.com/anton.familienpop" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://whatsapp.com/channel/0029Vb6WrdZInlqHDsgTp21e" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://www.facebook.com/Anton.Familienpop/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://open.spotify.com/intl-de/artist/348545011" target="_blank"><i class="fa-brands fa-spotify"></i></a>
+            <a href="https://music.apple.com/de/artist/anton/1687546783" target="_blank"><i class="fa-brands fa-apple"></i></a>
+            <a href="https://www.youtube.com/@AntonMusikVEVO" target="_blank"><i class="fa-solid fa-circle-play"></i></a>
+            <a href="https://music.amazon.de/artists/B0GF2ZR9RR" target="_blank"><i class="fa-brands fa-amazon"></i></a>
         </aside>
     </div>
 
     <script>
-        /* --- DESKTOP SIDEBAR --- */
+        /* --- GLOBAL DESKTOP LOGIC --- */
+        let dSidebarTimeout;
         const dSidebar = document.getElementById('d-sidebar');
-        function toggleDesktopMenu() { dSidebar.classList.toggle('open'); }
 
-        /* --- MOBILE SIDEBAR --- */
-        const mSidebar = document.getElementById('m-sidebar');
-        const mMenuBtn = document.getElementById('m-menu-trigger');
-        function mToggleMenu(e) {
-            e.stopPropagation();
-            mSidebar.classList.toggle('open');
-            mMenuBtn.classList.toggle('active');
+        function resetDSidebarTimer() {
+            clearTimeout(dSidebarTimeout);
+            if (dSidebar && dSidebar.classList.contains('open')) {
+                dSidebarTimeout = setTimeout(() => { dSidebar.classList.remove('open'); }, 5000);
+            }
+        }
+
+        function toggleDesktopMenu() {
+            if (dSidebar) {
+                dSidebar.classList.toggle('open');
+                if (dSidebar.classList.contains('open')) resetDSidebarTimer();
+            }
         }
 
         /* --- CAROUSEL DRAG LOGIC --- */
         const container = document.getElementById('drag-container');
         const scene = document.getElementById('scene');
-        let isDragging = false;
-        let startX;
-        let rotationY = 0;
-        let isManual = false;
+        let isDragging = false, startX, rotationY = 0, isManual = false;
 
         function getRotationFromMatrix() {
             const style = window.getComputedStyle(scene);
@@ -260,26 +312,61 @@
             return Math.round(Math.atan2(matrix.m13, matrix.m11) * (180 / Math.PI));
         }
 
-        container.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            if (!isManual) {
-                rotationY = getRotationFromMatrix();
-                scene.style.animation = 'none';
+        if(container) {
+            container.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                if (!isManual) {
+                    rotationY = getRotationFromMatrix();
+                    scene.style.animation = 'none';
+                    scene.style.transform = `rotateY(${rotationY}deg)`;
+                    isManual = true;
+                }
+                startX = e.pageX - rotationY;
+                e.preventDefault();
+            });
+            window.addEventListener('mouseup', () => { isDragging = false; });
+            window.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                rotationY = (e.pageX - startX) * 0.5;
                 scene.style.transform = `rotateY(${rotationY}deg)`;
-                isManual = true;
+            });
+        }
+
+        /* --- MOBILE LOGIC --- */
+        const mSidebar = document.getElementById('m-sidebar');
+        const mMenuBtn = document.getElementById('m-menu-trigger');
+        const mIdBtn = document.getElementById('m-id-btn');
+        const mIdPanel = document.getElementById('m-id-panel');
+        let mMenuTimeout, mIdTimeout;
+
+        function mCloseAllMenus() {
+            if(mSidebar) mSidebar.classList.remove('open');
+            if(mMenuBtn) mMenuBtn.classList.remove('active');
+            if(mIdPanel) mIdPanel.classList.remove('open');
+            if(mIdBtn) mIdBtn.classList.remove('hidden');
+            clearTimeout(mMenuTimeout); clearTimeout(mIdTimeout);
+        }
+
+        function mToggleMenu(e) {
+            e.stopPropagation();
+            if (mSidebar.classList.contains('open')) mCloseAllMenus();
+            else { mCloseAllMenus(); mSidebar.classList.add('open'); mMenuBtn.classList.add('active'); mMenuTimeout = setTimeout(mCloseAllMenus, 5000); }
+        }
+
+        function mOpenIDMenu(e) {
+            e.stopPropagation(); mCloseAllMenus();
+            mIdBtn.classList.add('hidden'); mIdPanel.classList.add('open');
+            mIdTimeout = setTimeout(mCloseAllMenus, 5000);
+        }
+
+        document.addEventListener('click', (e) => {
+            if(window.innerWidth <= 800) {
+                if (!mSidebar.contains(e.target) && !mMenuBtn.contains(e.target) && !mIdPanel.contains(e.target)) mCloseAllMenus();
+            } else {
+                if (dSidebar && !dSidebar.contains(e.target) && !e.target.closest('.d-menu-btn')) dSidebar.classList.remove('open');
             }
-            startX = e.pageX - rotationY;
-            e.preventDefault();
         });
 
-        window.addEventListener('mouseup', () => { isDragging = false; });
-        window.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-            rotationY = (e.pageX - startX) * 0.5;
-            scene.style.transform = `rotateY(${rotationY}deg)`;
-        });
-
-        /* Header Animation Mobile */
         setTimeout(() => { 
             const mh = document.getElementById('m-header-main');
             if(mh && window.innerWidth <= 800) mh.style.transform = 'translateY(-100%)'; 
