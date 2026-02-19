@@ -22,7 +22,9 @@
             font-family: 'Special Elite', cursive; height: 100%; width: 100%;
         }
 
-        /* DESKTOP STYLES */
+        /* ================================================================= */
+        /* 1. DESKTOP STYLES (3D Carousel)                                   */
+        /* ================================================================= */
         @media (min-width: 801px) {
             #mobile-wrapper { display: none !important; }
             body { 
@@ -40,7 +42,6 @@
             
             .d-header-logo { max-height: 285px; transform: translateY(82px); filter: brightness(0) saturate(100%) invert(13%) sepia(95%) saturate(7408%) hue-rotate(359deg) brightness(97%) contrast(113%); }
 
-            /* 3D CAROUSEL CORE */
             .carousel-container {
                 perspective: 1200px;
                 width: 100%;
@@ -102,20 +103,58 @@
             .carousel-item:nth-child(11) { transform: rotateY(300deg) translateZ(450px); }
             .carousel-item:nth-child(12) { transform: rotateY(330deg) translateZ(450px); }
 
-            /* Click Controls */
             .nav-area { position: absolute; top: 0; height: 100%; width: 25%; z-index: 10; cursor: pointer; }
             .nav-left { left: 0; }
             .nav-right { right: 0; }
         }
 
-        /* MOBILE STYLES (Simple List for Performance) */
+        /* ================================================================= */
+        /* 2. MOBILE STYLES (Swipe Slider)                                   */
+        /* ================================================================= */
         @media (max-width: 800px) {
             #desktop-wrapper { display: none !important; }
-            body { background: #ffffff url('Background.jpg') no-repeat center center fixed; background-size: cover; }
-            .m-content-scroll { margin-top: 100px; padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 20px; }
-            .m-box { width: 153px; min-height: 108px; background: rgba(255, 255, 255, 0.7); border: 3px solid #000; border-radius: 20px; box-shadow: 5px 5px 0 #000; overflow: hidden; }
-            .m-box a { text-decoration: none; color: #000; font-weight: bold; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; padding: 10px; }
+            body { 
+                background: #ffffff url('Background.jpg') no-repeat center center fixed; 
+                background-size: cover; 
+                overflow: hidden;
+            }
+            .m-swipe-container {
+                display: flex;
+                align-items: center;
+                height: 100vh;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                padding: 0 40px;
+                gap: 25px;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none; /* Firefox */
+            }
+            .m-swipe-container::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+
+            .m-box { 
+                flex: 0 0 153px; /* 10% kleiner als mobile Basis */
+                min-height: 108px; 
+                background: rgba(255, 255, 255, 0.7); 
+                border: 3px solid #000; 
+                border-radius: 20px; 
+                box-shadow: 5px 5px 0 #000; 
+                scroll-snap-align: center;
+                overflow: hidden;
+                transition: background 0.2s;
+            }
             .m-box:active { background: var(--anton-yellow); }
+            .m-box a { 
+                text-decoration: none; 
+                color: #000; 
+                font-weight: bold; 
+                width: 100%; 
+                height: 100%; 
+                display: flex; 
+                align-items: center; 
+                justify-content: center; 
+                text-align: center;
+                padding: 15px;
+            }
         }
     </style>
 </head>
@@ -148,7 +187,7 @@
     </div>
 
     <div id="mobile-wrapper">
-        <div class="m-content-scroll">
+        <div class="m-swipe-container">
             <div class="m-box"><a href="#">Album 1</a></div>
             <div class="m-box"><a href="#">Single 2</a></div>
             <div class="m-box"><a href="#">EP 3</a></div>
@@ -170,9 +209,11 @@
 
         function rotateManual(deg) {
             // Stoppe Auto-Animation bei manuellem Klick
-            scene.style.animation = 'none';
-            currentRotation += deg;
-            scene.style.transform = `rotateY(${currentRotation}deg)`;
+            if(scene) {
+                scene.style.animation = 'none';
+                currentRotation += deg;
+                scene.style.transform = `rotateY(${currentRotation}deg)`;
+            }
         }
     </script>
 </body>
