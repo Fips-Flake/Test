@@ -114,7 +114,6 @@
             .d-sidebar-right:hover a i { animation-play-state: paused !important; transform: scale(1) !important; color: #000 !important; }
             .d-sidebar-right a:hover i { color: var(--brand-color) !important; transform: scale(1.55) !important; }
 
-            /* Desktop Main & Carousel Styling */
             main.d-main-content { 
                 flex: 1; padding: 120px 20px 80px 20px; z-index: 5; width: 100%; box-sizing: border-box;
                 display: flex; justify-content: center; align-items: center; perspective: 2000px; 
@@ -238,6 +237,7 @@
             .m-epk-container { position: absolute; right: 0; top: 0; height: 100%; width: 45px; background: #fff; border-left: 3px solid #000; display: flex; align-items: center; justify-content: center; }
             .m-epk-text { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 0.7rem; color: var(--anton-red); font-weight: bold; text-decoration: none; }
             
+            /* Bento Box System */
             .m-bento-container {
                 position: absolute; top: 52%; left: 50%; transform: translate(-50%, -50%);
                 width: 90vw; max-width: 350px; background: rgba(255, 255, 255, 0.3);
@@ -250,11 +250,14 @@
             .m-frame { display: flex; overflow-x: scroll; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
             .m-frame::-webkit-scrollbar { display: none; }
             .m-slide { min-width: 100%; display: flex; justify-content: center; align-items: center; scroll-snap-align: center; }
+            
             .m-card { 
-                width: 250px; height: 250px; background: #fff; border: 4px solid #000; 
+                width: 260px; height: 260px; background: #fff; border: 4px solid #000; 
                 border-radius: 20px; position: relative; overflow: hidden; 
                 box-shadow: 0 10px 20px rgba(0,0,0,0.2); 
             }
+            .m-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+            .m-card-label { position: absolute; bottom: 0; left: 0; width: 100%; background: rgba(255,255,255,0.85); color: #000; text-align: center; padding: 8px 0; font-size: 0.7rem; border-top: 2px solid #000; font-weight: bold; }
 
             .m-id-button { position: fixed; right: 0; bottom: 150px; width: 38px; height: 38px; background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(4px); border: 2px solid #000; border-right: none; border-radius: 6px 0 0 6px; display: flex; align-items: center; justify-content: center; z-index: 1300; font-weight: bold; font-size: 0.85rem; color: #000; cursor: pointer; transition: transform 0.4s ease-in-out; }
             .m-id-button.hidden { transform: translateX(100%); }
@@ -329,6 +332,7 @@
         <div id="m-bg-fix"></div>
         <header class="m-header" id="m-header-main"><img src="Antonlogo.png" alt="ANTON Logo" class="m-header-logo"></header>
         <div class="m-menu-btn" id="m-menu-trigger" onclick="mToggleMenu(event)"><span></span><span></span><span></span></div>
+        
         <nav class="m-sidebar" id="m-sidebar">
             <div class="m-nav-item"><a href="hauptseite.html"><i class="fa-solid fa-house"></i><span class="mobile-tag">Start</span></a></div>
             <div class="m-nav-item"><a href="meinemusik.html"><i class="fa-solid fa-music"></i><span class="mobile-tag">Musik</span></a></div>
@@ -339,10 +343,17 @@
 
         <div class="m-bento-container">
             <div class="m-swiper-viewport">
-                <div class="m-frame">
-                    <div class="m-slide"><div class="m-card">Slide 1</div></div>
-                    <div class="m-slide"><div class="m-card">Slide 2</div></div>
-                    <div class="m-slide"><div class="m-card">Slide 3</div></div>
+                <div class="m-frame" id="m-frame-swiper">
+                    <div class="m-slide"><div class="m-card"><img src="Hunger.JPG"><div class="m-card-label">neue Single (Februar 2026)</div></div></div>
+                    <div class="m-slide"><div class="m-card"><img src="fanny-furzfliege-ecover-3k-srgb-lzwjpg.jpg"><div class="m-card-label">Single</div></div></div>
+                    <div class="m-slide"><div class="m-card"><img src="anton-noch-5-minuten.jpg"><div class="m-card-label">Single</div></div></div>
+                    <div class="m-slide"><div class="m-card"><img src="anton-eiswurfel-coverjpg.jpg"><div class="m-card-label">Single</div></div></div>
+                    <div class="m-slide"><div class="m-card"><img src="anton-cover-single-weihnachtenjpg.jpg"><div class="m-card-label">Single</div></div></div>
+                    <div class="m-slide"><div class="m-card"><img src="anton-cover-single-raumschiff-1jpg.jpg"><div class="m-card-label">Single</div></div></div>
+                    <div class="m-slide"><div class="m-card"><img src="cover-mein-name-ist-hase-esinglejpg.jpg"><div class="m-card-label">Meist gehört (2023)</div></div></div>
+                    <div class="m-slide"><div class="m-card"><img src="anton-album-cover-grosse-pause-vjpg.jpg"><div class="m-card-label">2. Album (2023)</div></div></div>
+                    <div class="m-slide"><div class="m-card"><img src="Album Ertappt.jpg"><div class="m-card-label">Debütalbum (2021)</div></div></div>
+                    <div class="m-slide"><div class="m-card"><img src="monsterparty-anton.jpg"><div class="m-card-label">Debütsingle (2020)</div></div></div>
                 </div>
             </div>
         </div>
@@ -351,6 +362,7 @@
         <div class="m-id-panel" id="m-id-panel">
             <a href="impressum.html">Impressum</a><span>|</span><a href="datenschutz.html">Datenschutz</a>
         </div>
+
         <aside class="m-sidebar-right">
             <a href="https://www.youtube.com/@antonmusikvevo3861" target="_blank"><i class="fa-brands fa-youtube"></i></a>
             <a href="https://www.tiktok.com/@anton.familienpop" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
@@ -365,7 +377,7 @@
     </div>
 
     <script>
-        /* --- SIDEBAR & HEADER CONTROL --- */
+        /* --- SIDEBAR & GLOBAL CONTROL --- */
         let dSidebarTimeout;
         const dSidebar = document.getElementById('d-sidebar');
 
@@ -415,17 +427,17 @@
             mIdTimeout = setTimeout(mCloseAllMenus, 5000);
         }
 
-        /* --- 3D CAROUSEL LOGIC --- */
+        /* --- 3D CAROUSEL (DESKTOP) --- */
         const viewport = document.getElementById('carouselViewport');
         const inner = document.getElementById('carouselInner');
-        const items = document.querySelectorAll('.carousel-item');
+        const dItems = document.querySelectorAll('.carousel-item');
         
-        if (viewport && inner && items.length > 0) {
-            const itemCount = items.length;
+        if (viewport && inner && dItems.length > 0) {
+            const itemCount = dItems.length;
             const angleStep = 360 / itemCount;
             const radius = 500;
 
-            items.forEach((item, index) => {
+            dItems.forEach((item, index) => {
                 const angle = index * angleStep;
                 item.style.setProperty('--current-angle', `${angle}deg`);
                 item.style.transform = `rotateY(${angle}deg) translateZ(${radius}px)`;
@@ -463,7 +475,7 @@
             });
         }
 
-        /* Global Document Clicks & Header Delay */
+        /* --- GLOBAL CLICKS & ANIMATIONS --- */
         document.addEventListener('click', (e) => {
             if(window.innerWidth > 800) {
                 const btn = document.querySelector(".d-menu-btn");
@@ -473,10 +485,26 @@
             }
         });
 
+        // Versteckt den mobilen Header nach 3 Sek.
         setTimeout(() => { 
             const mh = document.getElementById('m-header-main');
             if(mh && window.innerWidth <= 800) mh.style.transform = 'translateY(-100%)'; 
         }, 3000);
+
+        // Hintergrund-Parallaxe-Logik für Mobile
+        let touchStartX = 0, currentTranslateX = 0;
+        const mBg = document.getElementById('m-bg-fix');
+
+        document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive: true});
+        document.addEventListener('touchmove', e => {
+            if(window.innerWidth <= 800 && mBg) {
+                const moveX = e.touches[0].clientX;
+                const diffX = moveX - touchStartX;
+                const limit = window.innerWidth;
+                let newX = currentTranslateX + (diffX * 0.1); // Sanfte Bewegung
+                mBg.style.transform = `translateX(${newX}px)`;
+            }
+        }, {passive: true});
     </script>
 </body>
 </html>
