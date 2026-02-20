@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>ANTON | MASTER CODE 2026</title>
+    <title>ANTON | OFFIZIELLE SEITE</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap&subset=latin-ext" rel="stylesheet">
     <style>
@@ -12,87 +12,97 @@
             --anton-yellow: #ffeb3b; 
             --apple-gray: #A2AAAD;
             --amazon-blue: #00A8E1;
-            --sidebar-width: 240px;
+            --sidebar-width: 250px;
             --item-size: 250px;
         }
 
-        /* BASIS-EINSTELLUNGEN */
+        /* GLOBALE BASIS */
         html, body { 
-            margin: 0; 
-            padding: 0; 
+            margin: 0; padding: 0; 
             background-color: #ffffff; 
             font-family: 'Special Elite', cursive;
-            height: 100vh; 
-            width: 100vw; 
+            height: 100vh; width: 100vw; 
             overflow: hidden; 
         }
 
-        /* ========================================== */
-        /* 1. DESKTOP STYLES (ab 801px)               */
-        /* ========================================== */
+        /* ================================================================= */
+        /* 1. DESKTOP BEREICH (ab 801px)                                     */
+        /* ================================================================= */
         @media (min-width: 801px) {
-            #mobile-section { display: none !important; }
+            #mobile-wrapper { display: none !important; }
 
             body { 
                 background: #ffffff url('Background.jpg') no-repeat center center fixed; 
                 background-size: cover;
             }
 
+            /* Desktop Header */
             .d-header { 
                 position: fixed; top: 0; width: 100%; height: 80px; 
                 display: flex; justify-content: center; align-items: center; 
                 z-index: 1000; background: rgba(255, 255, 255, 0.85); 
                 backdrop-filter: blur(8px); border-bottom: 2px solid #000; 
             }
-            
             .d-header-logo { 
                 max-height: 280px; 
                 filter: brightness(0) saturate(100%) invert(13%) sepia(95%) saturate(7408%) hue-rotate(359deg) brightness(97%) contrast(113%); 
                 transform: translateY(85px);
             }
 
+            /* Desktop Menu Button & Sidebar */
             .d-menu-btn { 
                 position: fixed; top: 18px; left: 20px; z-index: 1500; 
                 background: #000; color: #fff; width: 45px; height: 45px; 
                 border-radius: 8px; display: flex; align-items: center; 
                 justify-content: center; cursor: pointer; transition: 0.3s;
             }
+            .d-menu-btn:hover { background: var(--anton-yellow); color: #000; }
 
             .d-sidebar { 
                 position: fixed; left: -300px; top: 0; bottom: 0; width: var(--sidebar-width); 
-                background: var(--anton-yellow); z-index: 1100; border-right: 3px solid #000; 
-                transition: left 0.4s ease; padding-top: 100px;
+                background: var(--anton-yellow); z-index: 1400; border-right: 3px solid #000; 
+                transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1); padding-top: 100px;
             }
             .d-sidebar.open { left: 0; }
             .d-sidebar a { 
-                display: block; padding: 15px 25px; color: #000; 
+                display: flex; align-items: center; padding: 15px 25px; color: #000; 
                 text-decoration: none; font-weight: bold; border-bottom: 1px solid rgba(0,0,0,0.1);
             }
+            .d-sidebar a:hover { background: rgba(0,0,0,0.05); color: var(--anton-red); }
+            .d-sidebar i { width: 30px; }
 
-            .d-main { 
+            /* 3D Carousel */
+            .d-main-container { 
                 height: 100vh; display: flex; justify-content: center; 
                 align-items: center; perspective: 1200px; 
             }
             .carousel-viewport { width: var(--item-size); height: var(--item-size); position: relative; transform-style: preserve-3d; }
-            .carousel-inner { width: 100%; height: 100%; position: absolute; transform-style: preserve-3d; transition: transform 0.1s linear; }
+            .carousel-inner { width: 100%; height: 100%; position: absolute; transform-style: preserve-3d; }
             .carousel-item { 
                 position: absolute; width: var(--item-size); height: var(--item-size); 
                 border: 4px solid #000; border-radius: 15px; overflow: hidden; 
-                background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: transform 0.5s ease;
             }
             .carousel-item img { width: 100%; height: 100%; object-fit: cover; }
-            
             .item-label { 
                 position: absolute; bottom: 0; width: 100%; background: rgba(255,255,255,0.9); 
-                color: #000; text-align: center; padding: 5px 0; font-size: 0.7rem; border-top: 2px solid #000;
+                color: #000; text-align: center; padding: 5px 0; font-size: 0.75rem; border-top: 2px solid #000;
             }
+
+            /* Desktop Footer */
+            .d-footer {
+                position: fixed; bottom: 0; width: 100%; padding: 10px 0;
+                background: rgba(255,255,255,0.9); border-top: 1.5px solid #000;
+                text-align: center; font-size: 0.7rem; z-index: 900;
+            }
+            .d-footer a { color: #000; text-decoration: none; margin: 0 10px; font-weight: bold; }
         }
 
-        /* ========================================== */
-        /* 2. MOBILE STYLES (bis 800px)               */
-        /* ========================================== */
+        /* ================================================================= */
+        /* 2. MOBILE BEREICH (bis 800px)                                     */
+        /* ================================================================= */
         @media (max-width: 800px) {
-            #desktop-section { display: none !important; }
+            #desktop-wrapper { display: none !important; }
             body { position: fixed; }
 
             #m-bg-fix { 
@@ -105,9 +115,9 @@
                 position: fixed; top: 0; width: 100%; height: 70px; 
                 display: flex; justify-content: center; align-items: center; 
                 z-index: 1000; background: rgba(255, 255, 255, 0.85); 
-                backdrop-filter: blur(8px); border-bottom: 2px solid #000; 
+                backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+                border-bottom: 2px solid #000; transition: transform 0.6s ease;
             }
-            
             .m-header-logo { 
                 max-height: 50px; 
                 filter: brightness(0) saturate(100%) invert(13%) sepia(95%) saturate(7408%) hue-rotate(359deg) brightness(97%) contrast(113%); 
@@ -119,7 +129,10 @@
                 display: flex; flex-direction: column; align-items: center; 
                 justify-content: center; gap: 4px; 
             }
-            .m-menu-btn span { width: 22px; height: 3px; background: #fff; }
+            .m-menu-btn span { width: 22px; height: 3px; background: #fff; transition: 0.3s; }
+            .m-menu-btn.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+            .m-menu-btn.active span:nth-child(2) { opacity: 0; }
+            .m-menu-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
             .m-sidebar { 
                 position: fixed; left: 0; top: -120px; width: 100%; height: 95px; 
@@ -128,17 +141,17 @@
                 border-bottom: 3px solid #000; transition: top 0.4s ease; 
             }
             .m-sidebar.open { top: 0; }
-            .m-sidebar a { color: #000; text-decoration: none; font-weight: bold; font-size: 0.7rem; text-align: center; }
+            .m-sidebar a { color: #000; text-decoration: none; font-weight: bold; font-size: 0.65rem; text-align: center; }
 
+            /* Bento Swiper */
             .m-bento-container {
                 position: absolute; top: 52%; left: 50%; transform: translate(-50%, -50%);
                 width: 90vw; max-width: 350px; background: rgba(255, 255, 255, 0.3);
                 backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-                border: 1px solid rgba(255, 255, 255, 0.5);
-                border-radius: 35px; padding: 30px 0; display: flex; flex-direction: column; 
-                align-items: center; box-shadow: 0 15px 35px rgba(0,0,0,0.1); z-index: 10;
+                border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 35px;
+                padding: 30px 0; display: flex; flex-direction: column; align-items: center;
+                box-shadow: 0 15px 35px rgba(0,0,0,0.1); z-index: 10;
             }
-
             .m-swiper-viewport { width: 100%; overflow: visible; }
             .m-frame { 
                 display: flex; overflow-x: scroll; scroll-snap-type: x mandatory; 
@@ -146,7 +159,6 @@
             }
             .m-frame::-webkit-scrollbar { display: none; }
             .m-slide { min-width: 100%; display: flex; justify-content: center; align-items: center; scroll-snap-align: center; }
-            
             .m-card { 
                 width: 250px; height: 250px; background: #fff; border: 4px solid #000; 
                 border-radius: 20px; position: relative; overflow: hidden; 
@@ -159,59 +171,76 @@
             }
         }
 
-        /* GEMEINSAME SOCIAL SIDEBAR */
-        .social-sidebar { 
+        /* SOCIAL BAR (BEIDE) */
+        .social-bar { 
             position: fixed; right: 0; top: 50%; transform: translateY(-50%); 
-            display: flex; flex-direction: column; gap: 15px; padding: 15px 10px; 
+            display: flex; flex-direction: column; gap: 15px; padding: 20px 10px; 
             z-index: 2000; background: rgba(255,255,255,0.2); backdrop-filter: blur(5px);
-            border-radius: 20px 0 0 20px;
+            border-radius: 20px 0 0 20px; border: 1px solid rgba(0,0,0,0.1);
         }
         @media (max-width: 800px) {
-            .social-sidebar { 
+            .social-bar { 
                 top: auto; bottom: 0; width: 100%; flex-direction: row; 
-                justify-content: center; transform: none; border-radius: 0; 
-                height: 60px; border-top: 2px solid #000; background: rgba(255,255,255,0.8);
+                justify-content: space-evenly; transform: none; border-radius: 0; 
+                height: 60px; border: none; border-top: 2px solid #000; background: rgba(255,255,255,0.9);
             }
         }
-        .social-sidebar i { font-size: 1.4rem; color: #000; transition: 0.3s; }
+        .social-bar i { font-size: 1.4rem; color: #000; transition: 0.3s; }
+        .social-bar a:hover i { color: var(--anton-red); transform: scale(1.2); }
     </style>
 </head>
 <body>
 
-    <div id="desktop-section">
-        <header class="d-header"><img src="Antonlogo.png" class="d-header-logo"></header>
+    <div id="desktop-wrapper">
+        <header class="d-header">
+            <img src="Antonlogo.png" alt="ANTON" class="d-header-logo">
+        </header>
+
         <div class="d-menu-btn" onclick="toggleDMenu()">☰</div>
-        <nav class="d-sidebar" id="dSidebar">
-            <a href="hauptseite.html">START</a>
-            <a href="meinemusik.html">MUSIK</a>
-            <a href="shop.html">SHOP</a>
-            <a href="kontakt.html">KONTAKT</a>
+
+        <nav class="d-sidebar" id="d-sidebar">
+            <a href="hauptseite.html"><i class="fa-solid fa-house"></i> START</a>
+            <a href="meinemusik.html"><i class="fa-solid fa-music"></i> MUSIK</a>
+            <a href="shop.html"><i class="fa-solid fa-cart-shopping"></i> SHOP</a>
+            <a href="kontakt.html"><i class="fa-solid fa-envelope"></i> KONTAKT</a>
+            <a href="epk.html" style="color:var(--anton-red); margin-top:20px;"><i class="fa-solid fa-bullhorn"></i> EPK / PRESSE</a>
         </nav>
-        <main class="d-main">
+
+        <main class="d-main-container">
             <div class="carousel-viewport">
-                <div class="carousel-inner" id="desktop-inner">
-                    <div class="carousel-item"><img src="Hunger.JPG"><div class="item-label">Februar 2026</div></div>
-                    <div class="carousel-item"><img src="fanny-furzfliege-ecover-3k-srgb-lzwjpg.jpg"><div class="item-label">Single</div></div>
-                    <div class="carousel-item"><img src="anton-noch-5-minuten.jpg"><div class="item-label">Single</div></div>
-                    <div class="carousel-item"><img src="anton-eiswurfel-coverjpg.jpg"><div class="item-label">Single</div></div>
-                    <div class="carousel-item"><img src="anton-cover-single-weihnachtenjpg.jpg"><div class="item-label">Single</div></div>
-                    <div class="carousel-item"><img src="anton-cover-single-raumschiff-1jpg.jpg"><div class="item-label">Single</div></div>
+                <div class="carousel-inner" id="d-carousel-inner">
+                    <div class="carousel-item"><img src="Hunger.JPG"><div class="item-label">Neu: Hunger (2026)</div></div>
+                    <div class="carousel-item"><img src="fanny-furzfliege-ecover-3k-srgb-lzwjpg.jpg"><div class="item-label">Fanny Furzfliege</div></div>
+                    <div class="carousel-item"><img src="anton-noch-5-minuten.jpg"><div class="item-label">Noch 5 Minuten</div></div>
+                    <div class="carousel-item"><img src="anton-eiswurfel-coverjpg.jpg"><div class="item-label">Eiswürfel</div></div>
+                    <div class="carousel-item"><img src="anton-cover-single-weihnachtenjpg.jpg"><div class="item-label">Weihnachten</div></div>
+                    <div class="carousel-item"><img src="anton-cover-single-raumschiff-1jpg.jpg"><div class="item-label">Raumschiff</div></div>
                 </div>
             </div>
         </main>
+
+        <footer class="d-footer">
+            <a href="impressum.html">Impressum</a> | <a href="datenschutz.html">Datenschutz</a> | <span>&copy; 2026 ANTON</span>
+        </footer>
     </div>
 
-    <div id="mobile-section">
+    <div id="mobile-wrapper">
         <div id="m-bg-fix"></div>
-        <header class="m-header"><img src="Antonlogo.png" class="m-header-logo"></header>
-        <div class="m-menu-btn" onclick="toggleMMenu()">
+        
+        <header class="m-header" id="m-header">
+            <img src="Antonlogo.png" alt="ANTON" class="m-header-logo">
+        </header>
+
+        <div class="m-menu-btn" id="m-menu-btn" onclick="toggleMMenu()">
             <span></span><span></span><span></span>
         </div>
-        <nav class="m-sidebar" id="mSidebar">
+
+        <nav class="m-sidebar" id="m-sidebar">
             <a href="hauptseite.html"><i class="fa-solid fa-house"></i><br>START</a>
             <a href="meinemusik.html"><i class="fa-solid fa-music"></i><br>MUSIK</a>
             <a href="shop.html"><i class="fa-solid fa-cart-shopping"></i><br>SHOP</a>
             <a href="kontakt.html"><i class="fa-solid fa-envelope"></i><br>KONTAKT</a>
+            <a href="epk.html" style="color:var(--anton-red)"><i class="fa-solid fa-bullhorn"></i><br>EPK</a>
         </nav>
 
         <div class="m-bento-container">
@@ -227,51 +256,72 @@
         </div>
     </div>
 
-    <aside class="social-sidebar">
-        <a href="#"><i class="fa-brands fa-youtube"></i></a>
-        <a href="#"><i class="fa-brands fa-tiktok"></i></a>
-        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#"><i class="fa-brands fa-spotify"></i></a>
+    <aside class="social-bar">
+        <a href="https://www.youtube.com/@antonmusikvevo3861" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+        <a href="https://www.tiktok.com/@anton.familienpop" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="https://www.instagram.com/anton.familienpop" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://open.spotify.com/intl-de/artist/348545011" target="_blank"><i class="fa-brands fa-spotify"></i></a>
+        <a href="https://music.apple.com/de/artist/anton/1687546783" target="_blank"><i class="fa-brands fa-apple"></i></a>
     </aside>
 
     <script>
-        /* SKRIPT DESKTOP: 3D Karussell */
+        // 1. DESKTOP LOGIK
         if (window.innerWidth > 800) {
-            const inner = document.getElementById('desktop-inner');
+            const inner = document.getElementById('d-carousel-inner');
             const items = inner.querySelectorAll('.carousel-item');
             const angleStep = 360 / items.length;
             let rotation = 0;
 
+            // Karussell Positionen setzen
             items.forEach((item, i) => {
-                item.style.transform = `rotateY(${i * angleStep}deg) translateZ(450px)`;
+                item.style.transform = `rotateY(${i * angleStep}deg) translateZ(480px)`;
             });
 
+            // Rotation
             function animate() {
-                rotation -= 0.15;
+                rotation -= 0.15; // Drehgeschwindigkeit
                 inner.style.transform = `rotateY(${rotation}deg)`;
                 requestAnimationFrame(animate);
             }
             animate();
 
+            // Sidebar Toggle Desktop
             function toggleDMenu() {
-                document.getElementById('dSidebar').classList.toggle('open');
+                document.getElementById('d-sidebar').classList.toggle('open');
             }
         }
 
-        /* SKRIPT MOBILE: Menü & Header */
+        // 2. MOBILE LOGIC
         if (window.innerWidth <= 800) {
             function toggleMMenu() {
-                document.getElementById('mSidebar').classList.toggle('open');
+                const sidebar = document.getElementById('m-sidebar');
+                const btn = document.getElementById('m-menu-btn');
+                sidebar.classList.toggle('open');
+                btn.classList.toggle('active');
             }
 
+            // Header Auto-Hide nach 3 Sekunden
             setTimeout(() => {
-                const mh = document.querySelector('.m-header');
-                if(mh) {
-                    mh.style.transition = 'transform 0.8s ease';
-                    mh.style.transform = 'translateY(-100%)';
-                }
+                const header = document.getElementById('m-header');
+                if (header) header.style.transform = 'translateY(-100%)';
             }, 3000);
         }
+
+        // Klick außerhalb schließt Menüs
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth > 800) {
+                const sidebar = document.getElementById('d-sidebar');
+                const btn = document.querySelector('.d-menu-btn');
+                if (!sidebar.contains(e.target) && !btn.contains(e.target)) sidebar.classList.remove('open');
+            } else {
+                const sidebar = document.getElementById('m-sidebar');
+                const btn = document.getElementById('m-menu-btn');
+                if (!sidebar.contains(e.target) && !btn.contains(e.target)) {
+                    sidebar.classList.remove('open');
+                    btn.classList.remove('active');
+                }
+            }
+        });
     </script>
 </body>
 </html>
