@@ -131,22 +131,23 @@
                 pointer-events: none;
             }
 
+            /* Balken: Vollflächig, weiß-transparent, schmaler in der Höhe */
             .item-label {
                 position: absolute;
                 bottom: 0;
+                left: 0;
                 width: 100%;
                 background: rgba(255, 255, 255, 0.7);
                 color: #000;
                 text-align: center;
-                padding: 10px 0 15px 0; 
+                padding: 8px 0; /* 10% schmaler von oben nach unten */
                 font-size: 0.75rem;
                 border-top: 2px solid #000;
                 box-sizing: border-box;
                 z-index: 10;
-                clip-path: polygon(0% 0%, 100% 0%, 70% 100%, 30% 100%);
             }
 
-            /* Umgekehrte Drehrichtung (-360deg statt 360deg) */
+            /* Umgekehrte Drehrichtung */
             @keyframes rotateCarousel {
                 from { transform: rotateY(0deg); }
                 to { transform: rotateY(-360deg); }
