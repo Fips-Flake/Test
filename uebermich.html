@@ -54,7 +54,6 @@
             #mobile-wrapper { display: none !important; }
 
             body { 
-                /* FEHLER BEHOBEN: Weißer Fallback entfernt, der als Balken erschien */
                 background: url('Background.jpg') no-repeat center center fixed; 
                 background-size: cover !important; 
                 overflow-x: hidden;
@@ -187,9 +186,10 @@
             .m-id-panel.open { right: 0; }
             .m-id-panel a { color: #000; text-decoration: none; margin: 0 8px; text-transform: uppercase; }
             
-            main { padding: 120px 15px 100px 15px; overflow-y: auto; height: 100%; }
+            main { padding: 120px 15px 100px 15px; overflow-y: auto !important; height: 100%; -webkit-overflow-scrolling: touch; }
             .detail-bento { flex-direction: column; padding: 25px; gap: 20px; align-items: center; }
-            .image-container { width: 150px; position: relative; top: 0; }
+            .image-container { width: 150px; position: relative; top: 0; flex-shrink: 0; }
+            .album-text { font-size: 1rem; }
 
             .m-sidebar-right { position: fixed; bottom: 0; left: 0; width: 100%; height: 65px; display: flex; flex-direction: row; align-items: center; z-index: 999; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(8px); border-top: 2px solid #000; padding: 0 10px; justify-content: space-evenly; }
             .m-sidebar-right a i { color: #000; font-size: 1.5rem; display: inline-block; animation: ultraFlowWaveMobile 6s linear infinite; }
@@ -277,8 +277,16 @@
             <div class="detail-bento">
                 <div class="image-container"><div class="album-cover"><img src="Ich.jpg" alt="ANTON"></div></div>
                 <div class="album-text">
-                    <p class="intro">Ihr wollt mehr über mich und mein laaaanges Leben wissen?</p>
-                    <p>Anton ist Papa. Und Bruder. Geboren wurde er als Anton Nachtwey in Berlin-Friedenau...</p>
+                    <p class="intro">Ihr wollt mehr über mich und mein laaaanges Leben wissen? Wer Anton ist? Na dann passt mal auf:</p>
+                    <p>Anton ist Papa. Und Bruder. Geboren wurde er als Anton Nachtwey in Berlin-Friedenau.</p>
+                    <p>Mit sechs sitzt er am Klavier, und bleibt da auch erst mal zwölf Jahre. Klassische Ausbildung, Tonleitern, Disziplin. Seit seinem zehnten Lebensjahr steht er außerdem auf Bühnen.</p>
+                    <p>Irgendwann merkt er: Ein Klavier passt schlecht in einen Rucksack. Also bringt er sich selbst Gitarre bei. Autodidaktisch, nach Gehör, nach Gefühl. Ende der 90er baut er sein eigenes Studio auf, schreibt Songs, produziert.</p>
+                    <p>2004 macht Anton seinen Abschluss als Audio Engineer. 2005 läuft er dann bei Unser Block auf VIVA im Fernsehen – als Hauptdarsteller.</p>
+                    <p>Danach wird’s voll. Studios. Nächte. Bühnen. Er arbeitet mit Leuten wie Mark Forster, Havoc (Mobb Deep), Kool Savas. Nicht als Fan. Sondern mittendrin.</p>
+                    <p>2014 und 2015 steht er mit Sido auf der Bühne – Abend für Abend, Halle für Halle. In dieser Zeit entsteht unter dem Namen BSH das Album „Endlich erwachsen“. Platz 3 der deutschen Charts.</p>
+                    <p>Dann folgte Werbung, Kunst und Leben.</p>
+                    <p>Kurz gesagt: Anton kennt große Bühnen. Er weiß, wie sich 15.000 Leute anhören. Aber er kennt auch die Familyparty im Wohnzimmer. Und wie sich ein Raum anfühlt, kurz bevor jemand sagt: „Mach mal lauter“.</p>
+                    <p>Anton gehört nicht dazu.</p>
                 </div>
             </div>
         </main>
@@ -297,6 +305,7 @@
     </div>
 
     <script>
+        /* --- DESKTOP LOGIC --- */
         let dSidebarTimeout;
         const dSidebar = document.getElementById('d-sidebar');
 
@@ -331,11 +340,11 @@
             }
         });
 
+        /* --- MOBILE LOGIC --- */
         const mSidebar = document.getElementById('m-sidebar');
         const mMenuBtn = document.getElementById('m-menu-trigger');
         const mIdBtn = document.getElementById('m-id-btn');
         const mIdPanel = document.getElementById('m-id-panel');
-        const mBg = document.getElementById('m-bg-fix');
         let mMenuTimeout, mIdTimeout;
 
         function mCloseAllMenus() {
