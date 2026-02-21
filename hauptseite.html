@@ -113,8 +113,17 @@
 
             main { flex: 1; padding: 120px 20px 80px 20px; z-index: 5; width: 100%; box-sizing: border-box; }
 
-            /* BENTOBOXEN – DESKTOP */
-            .invisible-box { position: fixed; z-index: 10; background: transparent; border: none; cursor: pointer; }
+            /* BENTOBOXEN – DESKTOP (leicht transparent) */
+            .invisible-box { 
+                position: fixed; z-index: 10; 
+                background: rgba(255, 255, 255, 0.15); 
+                border: none; cursor: pointer; 
+                border-radius: 6px; 
+                transition: background 0.3s ease; 
+            }
+            .invisible-box:hover { 
+                background: rgba(255, 255, 255, 0.28); 
+            }
             .box-ertappt { width: 19%; height: 43%; top: 16%; left: 17%; transform: rotate(-4deg); }
             .box-mitte   { width: 20%; height: 42%; top: 17%; left: 38%; transform: rotate(3deg); }
             .box-pause   { width: 10%; height: 43%; top: 21%; left: 70%; transform: rotate(1deg); }
@@ -140,8 +149,16 @@
                 display: flex; align-items: center;
             }
             .d-footer-ff a { margin: 0; }
-            .d-footer-ff img { height: 32px; width: auto; display: block; opacity: 0.85; transition: opacity 0.3s; }
-            .d-footer-ff img:hover { opacity: 1; }
+            /* FF.png – Hover weiß */
+            .d-footer-ff img { 
+                height: 32px; width: auto; display: block; 
+                opacity: 0.85; 
+                transition: opacity 0.3s ease, filter 0.3s ease; 
+            }
+            .d-footer-ff img:hover { 
+                opacity: 1; 
+                filter: brightness(0) invert(1); 
+            }
         }
 
         /* ================================================================= */
@@ -222,7 +239,7 @@
             .m-sidebar-right a:nth-child(8) i { --brand-color: #f00; animation-delay: 1.75s; }
             .m-sidebar-right a:nth-child(9) i { --brand-color: var(--amazon-blue); animation-delay: 2.0s; }
 
-            /* BENTOBOXEN – MOBILE */
+            /* BENTOBOXEN – MOBILE (unverändert) */
             .invisible-box { position: fixed; z-index: 10; background: transparent; border: none; cursor: pointer; }
             .box-ertappt { width: 19%; height: 43%; top: 16%; left: 17%; transform: rotate(-4deg); }
             .box-mitte   { width: 20%; height: 42%; top: 17%; left: 38%; transform: rotate(3deg); }
