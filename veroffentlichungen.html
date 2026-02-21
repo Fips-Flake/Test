@@ -593,24 +593,28 @@
                 item.style.transform = `rotateY(${angle}deg) translateZ(${radius}px)`;
             });
 
-            let isDragging = false, startX = 0, rotationOnStart = 0;
+            let isDragging = false, startX = 0, currentRotation = 0;
 
             viewport.addEventListener('mousedown', (e) => {
+                e.preventDefault();
                 isDragging = true;
                 startX = e.pageX;
                 inner.style.animation = 'none';
-                const matrix = new WebKitCSSMatrix(window.getComputedStyle(inner).transform);
-                rotationOnStart = Math.round(Math.atan2(matrix.m13, matrix.m11) * (180 / Math.PI));
                 viewport.style.cursor = 'grabbing';
             });
 
             window.addEventListener('mousemove', (e) => {
                 if (!isDragging) return;
-                inner.style.transform = `rotateY(${rotationOnStart + ((e.pageX - startX) * 0.4)}deg)`;
+                const deltaX = e.pageX - startX;
+                inner.style.transform = `rotateY(${currentRotation + deltaX * 0.4}deg)`;
             });
 
-            window.addEventListener('mouseup', () => {
-                if (isDragging) { isDragging = false; viewport.style.cursor = 'grab'; }
+            window.addEventListener('mouseup', (e) => {
+                if (!isDragging) return;
+                isDragging = false;
+                viewport.style.cursor = 'grab';
+                const deltaX = e.pageX - startX;
+                currentRotation += deltaX * 0.4;
             });
 
             viewport.addEventListener('mouseleave', () => {
