@@ -600,7 +600,7 @@
                 startX = e.pageX;
                 // Echte aktuelle Rotation aus der laufenden Animation auslesen
                 const matrix = new DOMMatrix(window.getComputedStyle(inner).transform);
-                currentRotation = Math.atan2(-matrix.m31, matrix.m11) * (180 / Math.PI);
+                currentRotation = Math.atan2(matrix.m31, matrix.m33) * (180 / Math.PI);
                 inner.style.animation = 'none';
                 inner.style.transform = `rotateY(${currentRotation}deg)`;
                 viewport.style.cursor = 'grabbing';
