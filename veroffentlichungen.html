@@ -223,20 +223,36 @@
         @media (max-width: 800px) {
             #desktop-wrapper { display: none !important; }
 
+            html {
+                overscroll-behavior: none;
+                overflow: hidden;
+                height: 100%;
+            }
+
             body { 
-                height: 100vh; width: 100vw; overflow: hidden !important; 
-                position: fixed; display: flex; flex-direction: column; touch-action: pan-y;
-                overscroll-behavior-x: none;
+                height: 100vh;
+                height: 100dvh;
+                width: 100vw;
+                overflow: hidden !important; 
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                touch-action: pan-y;
+                overscroll-behavior: none;
             }
 
             #m-bg-fix { 
                 display: block; position: fixed; top: 0; left: 0; 
-                width: 100%; height: 100%; background: url('Background.jpg') no-repeat center center; 
+                width: 100%; height: 100%;
+                height: 100dvh;
+                background: url('Background.jpg') no-repeat center center; 
                 background-size: cover; z-index: -1; 
             }
 
             .m-header { 
-                position: fixed; top: 0; width: 100%; height: 80px; 
+                position: fixed; top: 0; left: 0; width: 100%; height: 60px; 
                 display: flex; justify-content: center; align-items: center; 
                 z-index: 1000; background: rgba(255, 255, 255, 0.8); 
                 backdrop-filter: blur(10px); border-bottom: 2px solid #000; 
@@ -384,7 +400,9 @@
 
             /* I/D Button & Panel */
             .m-id-button { 
-                position: fixed; right: 0; bottom: 150px; width: 38px; height: 38px; 
+                position: fixed; right: 0; 
+                bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+                width: 38px; height: 38px; 
                 background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(4px); 
                 border: 2px solid #000; border-right: none; border-radius: 6px 0 0 6px; 
                 display: flex; align-items: center; justify-content: center; z-index: 1300; 
@@ -393,7 +411,9 @@
             }
             .m-id-button.hidden { transform: translateX(100%); }
             .m-id-panel { 
-                position: fixed; right: -250px; bottom: 150px; height: 45px; width: 230px; 
+                position: fixed; right: -250px; 
+                bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+                height: 45px; width: 230px; 
                 background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(8px); 
                 border: 2px solid #000; border-right: none; display: flex; align-items: center; 
                 justify-content: center; z-index: 1299; 
@@ -405,10 +425,14 @@
 
             /* Social Bar unten */
             .m-sidebar-right { 
-                position: fixed; bottom: 0; left: 0; width: 100%; height: 65px; 
+                position: fixed; bottom: 0; left: 0; width: 100%; 
+                height: calc(65px + env(safe-area-inset-bottom, 0px));
+                padding-bottom: env(safe-area-inset-bottom, 0px);
                 display: flex; flex-direction: row; align-items: center; z-index: 999; 
                 background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(8px); 
-                border-top: 2px solid #000; padding: 0 10px; justify-content: space-evenly; 
+                border-top: 2px solid #000; padding-left: 10px; padding-right: 10px;
+                justify-content: space-evenly; 
+                box-sizing: border-box;
             }
             .m-sidebar-right a i { color: #000; font-size: 1.5rem; display: inline-block; animation: ultraFlowWaveMobile 6s linear infinite; }
             @keyframes ultraFlowWaveMobile { 0% { transform: scale(1); color: #000; } 9.33% { transform: scale(1.4); color: var(--brand-color); } 23.33%, 100% { transform: scale(1); color: #000; } }
