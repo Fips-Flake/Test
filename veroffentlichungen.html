@@ -178,6 +178,7 @@
                 overflow: hidden;
                 box-shadow: 0 10px 25px rgba(0,0,0,0.4);
                 flex-shrink: 0;
+                box-sizing: border-box;
             }
 
             .carousel-item img {
@@ -189,7 +190,7 @@
             }
 
             .item-label {
-                width: calc(var(--item-size) - 0px);
+                width: var(--item-size);
                 background: rgba(255, 255, 255, 0.9);
                 color: #000;
                 text-align: center;
@@ -336,6 +337,7 @@
                 overflow: hidden;
                 box-shadow: 0 8px 20px rgba(0,0,0,0.25);
                 flex-shrink: 0;
+                box-sizing: border-box;
             }
 
             .m-card img {
