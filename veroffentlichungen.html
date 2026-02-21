@@ -27,21 +27,20 @@
         }
 
         /* ================================================================= */
-        /* 1. DESKTOP STYLES                                                 */
+        /* 1. DESKTOP STYLES (Min-Width: 801px)                              */
         /* ================================================================= */
         @media (min-width: 801px) {
             #mobile-wrapper { display: none !important; }
+            #desktop-wrapper { display: block !important; }
             body { 
                 background: #ffffff url('Background.jpg') no-repeat center center fixed; 
                 background-size: cover !important; 
                 overflow-x: hidden;
-                display: flex;
-                flex-direction: column;
-                min-height: 100vh;
             }
             .d-header { position: fixed; top: 0; width: 100%; height: 80px; display: flex; justify-content: center; align-items: center; z-index: 100; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border-bottom: 2px solid #000; }
             .d-header-logo { max-height: 285px; width: auto; object-fit: contain; filter: brightness(0) saturate(100%) invert(13%) sepia(95%) saturate(7408%) hue-rotate(359deg) brightness(97%) contrast(113%); transform: translateY(82px); }
             .d-menu-btn { position: fixed; top: 18px; left: 20px; font-size: 24px; cursor: pointer; z-index: 210; background: #000; color: #fff; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 5px; border: 2px solid #000; }
+            
             .d-sidebar-left { position: fixed; top: 0; bottom: 0; left: -300px; width: var(--sidebar-width); background: rgba(255, 235, 59, 0.98); z-index: 200; display: flex; flex-direction: column; padding: 100px 15px 30px 15px; transition: left 0.4s ease-in-out; border-right: 2px solid #000; box-sizing: border-box; }
             .d-sidebar-left.open { left: 0; }
             .d-nav-item { margin-bottom: 20px; }
@@ -53,22 +52,24 @@
             
             @keyframes ultraFlowWave { 0% { transform: scale(1); color: #000; } 9.33% { transform: scale(1.55); color: var(--brand-color); } 23.33%, 100% { transform: scale(1); color: #000; } }
 
-            main.d-main-content { flex: 1; padding: 120px 20px 80px 20px; z-index: 5; display: flex; justify-content: center; align-items: center; perspective: 2000px; height: 80vh; }
-            .carousel-viewport { width: var(--item-size); height: var(--item-size); position: relative; transform-style: preserve-3d; cursor: grab; }
+            main.d-main-content { padding: 120px 20px 80px 20px; display: flex; justify-content: center; align-items: center; perspective: 2000px; height: 100vh; box-sizing: border-box; }
+            .carousel-viewport { width: var(--item-size); height: var(--item-size); position: relative; transform-style: preserve-3d; }
             .carousel-inner { width: 100%; height: 100%; position: absolute; transform-style: preserve-3d; animation: rotateCarousel var(--carousel-speed) infinite linear; }
             .carousel-item { position: absolute; width: var(--item-size); height: var(--item-size); border: 4px solid #000; border-radius: 15px; overflow: hidden; background: #fff; }
             .carousel-item img { width: 100%; height: 100%; object-fit: cover; }
             @keyframes rotateCarousel { from { transform: rotateY(0deg); } to { transform: rotateY(-360deg); } }
+            
             .d-footer { width: 100%; padding: 15px 0; background: rgba(255,255,255,0.95); border-top: 1.5px solid #000; text-align: center; font-size: 0.75rem; z-index: 100; position: fixed; bottom: 0; }
         }
 
         /* ================================================================= */
-        /* 2. MOBILE STYLES                                                 */
+        /* 2. MOBILE STYLES (Max-Width: 800px)                              */
         /* ================================================================= */
         @media (max-width: 800px) {
             #desktop-wrapper { display: none !important; }
-            body { height: 100vh; width: 100vw; overflow: hidden; position: fixed; display: flex; flex-direction: column; background-color: #ffffff; }
-            #m-bg-fix { display: block; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: url('Background.jpg') no-repeat center center; background-size: cover; z-index: -1; }
+            #mobile-wrapper { display: block !important; }
+            body { height: 100vh; width: 100vw; overflow: hidden; position: fixed; background-color: #ffffff; }
+            #m-bg-fix { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: url('Background.jpg') no-repeat center center; background-size: cover; z-index: -1; }
             
             .m-header { position: fixed; top: 0; width: 100%; height: 80px; display: flex; justify-content: center; align-items: center; z-index: 1000; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border-bottom: 2px solid #000; transition: transform 0.6s ease-in-out; }
             .m-header-logo { position: absolute; top: 120%; max-height: 185px; filter: brightness(0) saturate(100%) invert(13%) sepia(95%) saturate(7408%) hue-rotate(359deg) brightness(97%) contrast(113%); }
@@ -76,30 +77,32 @@
             .m-menu-btn { position: fixed; top: 18px; left: 15px; z-index: 1500; background: #000; width: 45px; height: 45px; border-radius: 5px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; border: 2px solid #000; }
             .m-menu-btn span { display: block; width: 22px; height: 3px; background: #fff; }
             
-            .m-sidebar { position: fixed; left: 0; top: -120px; width: 100%; height: 95px; background: var(--anton-yellow); z-index: 1100; display: flex; padding: 0 55px 0 75px; border-bottom: 3px solid #000; align-items: center; transition: top 0.5s cubic-bezier(0.4, 0, 0.2, 1); justify-content: space-between; }
+            .m-sidebar { position: fixed; left: 0; top: -120px; width: 100%; height: 95px; background: var(--anton-yellow); z-index: 1100; display: flex; padding: 0 55px 0 75px; border-bottom: 3px solid #000; align-items: center; transition: top 0.5s cubic-bezier(0.4, 0, 0.2, 1); box-sizing: border-box; justify-content: space-around; }
             .m-sidebar.open { top: 0 !important; }
+            .m-sidebar a { color: #000; text-decoration: none; font-size: 1.4rem; }
 
             .m-bento-container { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 92vw; max-width: 360px; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.4); border-radius: 35px; padding: 30px 0 15px 0; z-index: 10; }
-            .m-frame { display: flex; overflow-x: scroll; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+            .m-frame { display: flex; overflow-x: scroll; scroll-snap-type: x mandatory; scrollbar-width: none; }
             .m-frame::-webkit-scrollbar { display: none; }
-            .m-slide { min-width: 100%; display: flex; justify-content: center; scroll-snap-align: center; scroll-snap-stop: always; }
+            .m-slide { min-width: 100%; display: flex; justify-content: center; scroll-snap-align: center; }
             .m-card { width: 270px; height: 270px; background: #fff; border: 4px solid #000; border-radius: 20px; position: relative; overflow: hidden; box-shadow: 0 12px 24px rgba(0,0,0,0.25); }
             .m-card img { width: 100%; height: 100%; object-fit: cover; }
             .m-card-label { position: absolute; bottom: 0; width: 100%; background: rgba(255,255,255,0.9); color: #000; text-align: center; padding: 8px 0; font-size: 0.7rem; border-top: 2px solid #000; font-weight: bold; }
 
-            /* Dots Style */
             .m-dots-container { display: flex; justify-content: center; gap: 8px; margin-top: 15px; }
-            .m-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(0,0,0,0.3); transition: all 0.3s; border: 1px solid #000; }
+            .m-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(0,0,0,0.3); border: 1px solid #000; transition: all 0.3s; }
             .m-dot.active { background: #000; transform: scale(1.3); }
 
             .m-id-button { position: fixed; right: 0; bottom: 150px; width: 42px; height: 38px; background: rgba(255,255,255,0.4); backdrop-filter: blur(4px); border: 2px solid #000; border-right: none; border-radius: 6px 0 0 6px; display: flex; align-items: center; justify-content: center; z-index: 1300; font-weight: bold; }
-            .m-id-panel { position: fixed; right: -250px; bottom: 150px; height: 45px; width: 230px; background: rgba(255,255,255,0.9); backdrop-filter: blur(8px); border: 2px solid #000; border-right: none; display: flex; align-items: center; justify-content: center; z-index: 1299; transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1); border-radius: 8px 0 0 8px; font-weight: bold; gap: 10px; }
+            .m-id-panel { position: fixed; right: -250px; bottom: 150px; height: 45px; width: 230px; background: rgba(255,255,255,0.9); backdrop-filter: blur(8px); border: 2px solid #000; border-right: none; display: flex; align-items: center; justify-content: center; z-index: 1299; transition: right 0.5s; border-radius: 8px 0 0 8px; font-weight: bold; gap: 10px; }
             .m-id-panel.open { right: 0; }
+            .m-id-panel a { color: #000; text-decoration: none; font-size: 0.8rem; }
             
-            .m-sidebar-right { position: fixed; bottom: 0; left: 0; width: 100%; height: 65px; display: flex; z-index: 999; background: rgba(255,255,255,0.7); backdrop-filter: blur(8px); border-top: 2px solid #000; justify-content: space-evenly; align-items: center; }
+            /* Sticky Mobile Social Bar */
+            .m-sidebar-right { position: fixed; bottom: 0; left: 0; width: 100%; height: 65px; display: flex; z-index: 999; background: rgba(255,255,255,0.7); backdrop-filter: blur(8px); border-top: 2px solid #000; justify-content: space-evenly; align-items: center; padding: 0 5px; box-sizing: border-box; }
             .m-sidebar-right a i { color: #000; font-size: 1.5rem; animation: ultraFlowWaveMobile 6s linear infinite; }
-            @keyframes ultraFlowWaveMobile { 0% { transform: scale(1); color: #000; } 9.33% { transform: scale(1.35); color: var(--brand-color); } 23.33%, 100% { transform: scale(1); color: #000; } }
             
+            @keyframes ultraFlowWaveMobile { 0% { transform: scale(1); color: #000; } 9.33% { transform: scale(1.35); color: var(--brand-color); } 23.33%, 100% { transform: scale(1); color: #000; } }
             .m-sidebar-right a:nth-child(1) i { --brand-color: #f00; animation-delay: 0.0s; }
             .m-sidebar-right a:nth-child(2) i { --brand-color: #25F4EE; animation-delay: 0.25s; }
             .m-sidebar-right a:nth-child(3) i { --brand-color: #E1306C; animation-delay: 0.5s; }
@@ -205,36 +208,33 @@
             if(sb.classList.contains('open')) dSidebarTimer = setTimeout(() => sb.classList.remove('open'), 5000);
         }
 
+        const inner = document.getElementById('carouselInner');
+        const dItems = document.querySelectorAll('.carousel-item');
+        if (inner && dItems.length > 0) {
+            const step = 360 / dItems.length;
+            dItems.forEach((item, i) => { item.style.transform = `rotateY(${i * step}deg) translateZ(500px)`; });
+        }
+
         // --- MOBILE LOGIC ---
         const mFrame = document.getElementById('m-frame');
         const mDotsContainer = document.getElementById('m-dots');
         const realSlideCount = 10;
         let isTicking = false;
 
-        // Create Dots
         for(let i=0; i<realSlideCount; i++) {
             const dot = document.createElement('div');
             dot.className = 'm-dot' + (i === 0 ? ' active' : '');
             mDotsContainer.appendChild(dot);
         }
 
-        // Scroll Handling (Endless & Dots)
-        mFrame.scrollLeft = mFrame.offsetWidth; // Start at first real slide
-
+        mFrame.scrollLeft = mFrame.offsetWidth;
         mFrame.addEventListener('scroll', () => {
             if(!isTicking) {
                 window.requestAnimationFrame(() => {
                     const width = mFrame.offsetWidth;
                     const scrollLeft = mFrame.scrollLeft;
-                    
-                    // Endless Logic
-                    if (scrollLeft <= 0) {
-                        mFrame.scrollLeft = width * realSlideCount;
-                    } else if (scrollLeft >= width * (realSlideCount + 1)) {
-                        mFrame.scrollLeft = width;
-                    }
-
-                    // Dot Update
+                    if (scrollLeft <= 0) mFrame.scrollLeft = width * realSlideCount;
+                    else if (scrollLeft >= width * (realSlideCount + 1)) mFrame.scrollLeft = width;
                     const activeIndex = Math.round(mFrame.scrollLeft / width) - 1;
                     const dots = document.querySelectorAll('.m-dot');
                     dots.forEach((dot, i) => {
@@ -253,14 +253,6 @@
         function mCloseAllMenus() { mSidebar.classList.remove('open'); mIdPanel.classList.remove('open'); mIdBtn.style.display = 'flex'; }
         function mToggleMenu(e) { e.stopPropagation(); mSidebar.classList.toggle('open'); }
         function mOpenIDMenu(e) { e.stopPropagation(); mIdPanel.classList.add('open'); mIdBtn.style.display = 'none'; }
-
-        // --- COMMON ---
-        const inner = document.getElementById('carouselInner');
-        const dItems = document.querySelectorAll('.carousel-item');
-        if (inner && dItems.length > 0) {
-            const step = 360 / dItems.length;
-            dItems.forEach((item, i) => { item.style.transform = `rotateY(${i * step}deg) translateZ(500px)`; });
-        }
 
         document.addEventListener('click', mCloseAllMenus);
         setTimeout(() => { if(window.innerWidth <= 800) document.getElementById('m-header-main').style.transform = 'translateY(-100%)'; }, 3000);
