@@ -221,9 +221,9 @@
             }
 
             #m-bg-fix { 
-                display: block; position: fixed; top: 0; left: -100%; 
-                width: 300%; height: 100%; background: url('Background.jpg') no-repeat center center; 
-                background-size: cover; z-index: -1; will-change: transform; 
+                display: block; position: fixed; top: 0; left: 0; 
+                width: 100%; height: 100%; background: url('Background.jpg') no-repeat center center; 
+                background-size: cover; z-index: -1; 
             }
 
             .m-header { 
@@ -668,22 +668,10 @@
                 if (Math.abs(diffX) > 10 || Math.abs(diffY) > 10) { 
                     if (mSidebar && !mSidebar.contains(e.target)) mCloseAllMenus(); 
                 }
-                if (Math.abs(diffX) > Math.abs(diffY)) {
-                    let newX = currentTranslateX + diffX;
-                    const limit = window.innerWidth; 
-                    if (newX > limit) newX = limit;
-                    if (newX < -limit) newX = -limit;
-                    if(mBg) mBg.style.transform = `translateX(${newX}px)`;
-                }
             }
         }, {passive: true});
 
-        document.addEventListener('touchend', e => {
-            if(window.innerWidth <= 800 && mBg) {
-                const matrix = new WebKitCSSMatrix(window.getComputedStyle(mBg).transform);
-                currentTranslateX = matrix.m41;
-            }
-        }, {passive: true});
+        document.addEventListener('touchend', e => {}, {passive: true});
 
         document.addEventListener('click', (e) => {
             if(window.innerWidth <= 800) {
