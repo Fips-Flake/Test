@@ -121,7 +121,7 @@
 
             main { 
                 flex: 1; padding: 100px 80px 100px 80px; 
-                z-index: 5; width: 100%; box-sizing: border-box;
+                position: relative; z-index: 5; width: 100%; box-sizing: border-box;
                 overflow-y: auto;
             }
 
@@ -433,7 +433,7 @@
                     <p>Der Schutz Ihrer persönlichen Daten ist uns ein besonderes Anliegen. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.</p>
 
                     <h3>1. Verantwortliche Stelle</h3>
-                    <p>Anton Nachtwey<br>Karl-Liebknecht-Strasse 15<br>14612 Falkensee<br>E-Mail: info@anton-familienpop.de</p>
+                    <p>Anton Nachtwey<br>Karl-Liebknecht-Strasse 15<br>14612 Falkensee<br>E-Mail: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a1c8cfc7cee1c0cfd5cecf8cc7c0ccc8cdc8c4cfd1ced18fc5c4">[email&#160;protected]</a></p>
 
                     <h3>2. Datenerfassung auf dieser Website</h3>
                     <p>Die Datennutzung auf dieser Website beschränkt sich auf das technisch notwendige Minimum. Beim Aufruf der Seite werden durch den Webhosting-Anbieter automatisch Informationen in sogenannten Server-Log-Files erhoben (z.B. Browsertyp, Betriebssystem, Referrer URL, IP-Adresse). Diese Daten sind nicht unmittelbar bestimmten Personen zuordbar.</p>
@@ -504,7 +504,7 @@
                     <p>Der Schutz Ihrer persönlichen Daten ist uns ein besonderes Anliegen. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.</p>
 
                     <h3>1. Verantwortliche Stelle</h3>
-                    <p>Anton Nachtwey<br>Karl-Liebknecht-Strasse 15<br>14612 Falkensee<br>E-Mail: info@anton-familienpop.de</p>
+                    <p>Anton Nachtwey<br>Karl-Liebknecht-Strasse 15<br>14612 Falkensee<br>E-Mail: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="523b3c343d12333c263d3c7f34333f3b3e3b373c223d227c3637">[email&#160;protected]</a></p>
 
                     <h3>2. Datenerfassung auf dieser Website</h3>
                     <p>Die Datennutzung auf dieser Website beschränkt sich auf das technisch notwendige Minimum. Beim Aufruf der Seite werden durch den Webhosting-Anbieter automatisch Informationen in sogenannten Server-Log-Files erhoben (z.B. Browsertyp, Betriebssystem, Referrer URL, IP-Adresse). Diese Daten sind nicht unmittelbar bestimmten Personen zuordbar.</p>
@@ -534,7 +534,7 @@
         </aside>
     </div>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         /* --- GLOBAL VARIABLES & HELPER --- */
         let dSidebarTimeout;
         const dSidebar = document.getElementById('d-sidebar');
@@ -696,14 +696,4 @@
                     if (!mBgEl) return;
                     const img = new Image();
                     img.onload = function() { mBgEl.style.backgroundImage = `url('${src}')`; };
-                    img.onerror = function() { if (fallback) mBgEl.style.backgroundImage = `url('${fallback}')`; };
-                    img.src = src;
-                }
-            }
-
-            setBackground(filename, 'Background.jpg');
-            console.log(`[ANTON BG] Saison: ${season} | Tageszeit: ${daytime} | Bild: ${filename}`);
-        })();
-
-        setTimeout(() => { 
-            const mh = document.getElementById('m-header-main');
+                    img.onerror = function() { if (fallback) mBgEl.style.backgroundImage
