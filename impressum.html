@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>ANTON | KONTAKT</title>
+    <title>ANTON | IMPRESSUM</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap&subset=latin-ext" rel="stylesheet">
     <style>
@@ -58,16 +58,11 @@
             .d-sidebar-right a:hover i { color: var(--brand-color) !important; transform: scale(1.55) !important; }
             main { flex: 1; padding: 100px 80px 100px 80px; position: relative; z-index: 5; width: 100%; box-sizing: border-box; overflow-y: auto; }
             .page-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; max-width: 900px; margin: 0 auto; }
-            .page-box { background: rgba(255,255,255,0.92); border: 3px solid #000; border-radius: 20px; padding: 35px; box-sizing: border-box; display: flex; flex-direction: column; }
+            .page-box { background: rgba(255,255,255,0.92); border: 3px solid #000; border-radius: 20px; padding: 35px; box-sizing: border-box; }
             .page-box.box-full { grid-column: span 2; }
-            .page-box h2 { margin: 0 0 12px 0; color: var(--anton-red); text-transform: uppercase; font-size: 1.4rem; border-bottom: 2px solid #000; padding-bottom: 5px; }
-            .page-box p { line-height: 1.6; font-size: 1rem; margin: 0 0 12px 0; }
-            .page-box a { color: #000; }
-            .contact-form { display: flex; flex-direction: column; gap: 15px; }
-            .contact-form input, .contact-form textarea { font-family: 'Special Elite', cursive; padding: 12px; border: 2px solid #000; border-radius: 10px; background: #fff; font-size: 1rem; outline: none; }
-            .contact-form input:focus, .contact-form textarea:focus { background: var(--anton-yellow); }
-            .contact-form button { font-family: 'Special Elite', cursive; background: #000; color: #fff; padding: 15px; border: none; border-radius: 10px; cursor: pointer; text-transform: uppercase; font-weight: bold; transition: all 0.3s ease; }
-            .contact-form button:hover { background: var(--anton-red); transform: scale(1.02); }
+            .page-box h2 { margin: 0 0 15px 0; color: var(--anton-red); text-transform: uppercase; font-size: 1.4rem; border-bottom: 2px solid #000; padding-bottom: 5px; }
+            .impressum-text { line-height: 1.7; font-size: 1rem; }
+            .impressum-text a { color: inherit; text-decoration: underline; }
             .d-footer { width: 100%; padding: 15px 0; background: rgba(255,255,255,0.95); border-top: 1.5px solid #000; text-align: center; font-size: 0.75rem; z-index: 100; position: fixed; bottom: 0; left: 0; display: flex; flex-direction: column; align-items: center; gap: 4px; }
             .d-footer-inner { width: 100%; display: flex; align-items: center; justify-content: center; position: relative; }
             .d-footer-links { display: flex; flex-direction: column; align-items: center; gap: 4px; }
@@ -122,14 +117,9 @@
             .m-sidebar-right a:nth-child(9) i { --brand-color: var(--amazon-blue); animation-delay: 2.0s; }
             .m-page-scroll { position: fixed; top: 80px; bottom: 65px; left: 0; right: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; z-index: 5; padding: 20px 15px; box-sizing: border-box; }
             .page-box { background: rgba(255,255,255,0.92); border: 2px solid #000; border-radius: 16px; padding: 25px 20px; box-sizing: border-box; margin-bottom: 20px; }
-            .page-box h2 { margin: 0 0 10px 0; color: var(--anton-red); text-transform: uppercase; font-size: 1.2rem; border-bottom: 2px solid #000; padding-bottom: 5px; }
-            .page-box p { line-height: 1.6; font-size: 0.9rem; margin: 0 0 10px 0; }
-            .page-box a { color: #000; }
-            .contact-form { display: flex; flex-direction: column; gap: 12px; }
-            .contact-form input, .contact-form textarea { font-family: 'Special Elite', cursive; padding: 10px; border: 2px solid #000; border-radius: 10px; background: #fff; font-size: 0.9rem; outline: none; }
-            .contact-form input:focus, .contact-form textarea:focus { background: var(--anton-yellow); }
-            .contact-form button { font-family: 'Special Elite', cursive; background: #000; color: #fff; padding: 14px; border: none; border-radius: 10px; cursor: pointer; text-transform: uppercase; font-weight: bold; transition: all 0.3s ease; font-size: 0.9rem; }
-            .contact-form button:active { background: var(--anton-red); }
+            .page-box h2 { margin: 0 0 12px 0; color: var(--anton-red); text-transform: uppercase; font-size: 1.2rem; border-bottom: 2px solid #000; padding-bottom: 5px; }
+            .impressum-text { line-height: 1.6; font-size: 0.9rem; }
+            .impressum-text a { color: inherit; text-decoration: underline; }
         }
 
         /* 2a. PORTRAIT */
@@ -196,24 +186,21 @@
 
         <main>
             <div class="page-grid">
-                <div class="page-box">
-                    <h2>Booking</h2>
-                    <p>Du möchtest Anton live erleben? Wir freuen uns auf deine Anfrage für Konzerte und Events.</p>
-                    <a href="mailto:booking@anton-familienpop.de" style="font-weight:bold;">Anfrage senden</a>
-                </div>
-                <div class="page-box">
-                    <h2>Presse</h2>
-                    <p>Pressematerial, Fotos und Interview-Anfragen findest du im Menü im geschützten bereich unter <a href="epk-login.html" style="color:var(--anton-red); font-weight:bold; text-decoration:underline;">EPK/Presse</a>.</p>
+                <div class="page-box box-full">
+                    <div class="impressum-text">
+                        <strong>Angaben gemäß § 5 TMG:</strong><br><br>
+                        <a href="index.html">www.anton-familienpop.de</a><br>
+                        Anton Nachtwey<br>
+                        Karl-Liebknecht-Strasse 15<br>
+                        14612 Falkensee<br><br>
+                        <strong>Kontakt:</strong><br>
+                        Telefon: 030/34080992<br>
+                        E-Mail: info@anton-familienpop.de
+                    </div>
                 </div>
                 <div class="page-box box-full">
-                    <h2>Schreib mir</h2>
-                    <form class="contact-form" action="#" method="post">
-                        <input type="text" name="name" placeholder="Dein Name" required>
-                        <input type="email" name="email" placeholder="Deine E-Mail Adresse" required>
-                        <input type="text" name="subject" placeholder="Betreff">
-                        <textarea name="message" rows="5" placeholder="Deine Nachricht an Anton..." required></textarea>
-                        <button type="submit">Nachricht Absenden</button>
-                    </form>
+                    <h2>Haftungsausschluss</h2>
+                    <p class="impressum-text">Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.</p>
                 </div>
             </div>
         </main>
@@ -251,23 +238,20 @@
 
         <div class="m-page-scroll">
             <div class="page-box">
-                <h2>Booking</h2>
-                <p>Du möchtest Anton live erleben? Wir freuen uns auf deine Anfrage für Konzerte und Events.</p>
-                <a href="mailto:booking@anton-familienpop.de" style="font-weight:bold;">Anfrage senden</a>
+                <div class="impressum-text">
+                    <strong>Angaben gemäß § 5 TMG:</strong><br><br>
+                    <a href="index.html">www.anton-familienpop.de</a><br>
+                    Anton Nachtwey<br>
+                    Karl-Liebknecht-Strasse 15<br>
+                    14612 Falkensee<br><br>
+                    <strong>Kontakt:</strong><br>
+                    Telefon: 030/34080992<br>
+                    E-Mail: info@anton-familienpop.de
+                </div>
             </div>
             <div class="page-box">
-                <h2>Presse</h2>
-                <p>Pressematerial, Fotos und Interview-Anfragen findest du im Menü im geschützten bereich unter <a href="epk-login.html" style="color:var(--anton-red); font-weight:bold; text-decoration:underline;">EPK/Presse</a>.</p>
-            </div>
-            <div class="page-box">
-                <h2>Schreib mir</h2>
-                <form class="contact-form" action="#" method="post">
-                    <input type="text" name="name" placeholder="Dein Name" required>
-                    <input type="email" name="email" placeholder="Deine E-Mail Adresse" required>
-                    <input type="text" name="subject" placeholder="Betreff">
-                    <textarea name="message" rows="4" placeholder="Deine Nachricht an Anton..." required></textarea>
-                    <button type="submit">Nachricht Absenden</button>
-                </form>
+                <h2>Haftungsausschluss</h2>
+                <p class="impressum-text">Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.</p>
             </div>
         </div>
 
@@ -324,7 +308,9 @@
         var mBg      = document.getElementById('m-bg-fix');
         var mMenuTimeout, mIdTimeout;
 
-        function isLandscapeMobile() { return window.innerHeight <= 500 && window.innerWidth > window.innerHeight; }
+        function isLandscapeMobile() {
+            return window.innerHeight <= 500 && window.innerWidth > window.innerHeight;
+        }
 
         function mCloseAllMenus() {
             if (mSidebar) mSidebar.classList.remove('open');
