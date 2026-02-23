@@ -130,14 +130,14 @@
         @media (min-width: 801px) {
             #mobile-wrapper { display: none !important; }
 
+            html { height: 100%; }
+
             body {
                 background: #ffffff url('Background.jpg') no-repeat center center fixed;
                 background-size: cover !important;
-                background-attachment: fixed;
                 overflow-x: hidden;
-                display: flex;
-                flex-direction: column;
-                min-height: 100vh;
+                overflow-y: auto;
+                min-height: 100%;
             }
 
             .d-header {
@@ -221,8 +221,7 @@
             .construction-overlay { z-index: 400; }
 
             main {
-                flex: 1;
-                padding: 120px 80px 80px 80px;
+                padding: 110px 80px 100px 80px;
                 max-width: 1100px;
                 margin: 0 auto;
                 z-index: 10;
@@ -414,13 +413,13 @@
         <div class="d-menu-btn" onclick="toggleDesktopMenu()"><span>☰</span></div>
 
         <nav class="d-sidebar-left" id="d-sidebar">
-            <div class="d-nav-item"><a href="hauptseite.html"><span class="d-nav-label"><i class="fa-solid fa-house main-icon"></i> START</span></a></div>
+            <div class="d-nav-item"><a href="index.html"><span class="d-nav-label"><i class="fa-solid fa-house main-icon"></i> START</span></a></div>
             <div class="d-nav-item">
                 <a href="meinemusik.html"><span class="d-nav-label"><i class="fa-solid fa-music main-icon"></i> MEINE MUSIK</span><div class="d-arrow-wrapper"><i class="fa-solid fa-caret-down d-submenu-indicator"></i></div></a>
                 <div class="d-submenu">
                     <a href="uebermich.html"><i class="fa-regular fa-face-smile"></i> ÜBER MICH</a>
                     <a href="veroffentlichungen.html"><i class="fa-solid fa-volume-high"></i> VERÖFFENTLICHUNGEN</a>
-                    <a href="konzerte.html"><i class="fa-solid fa-microphone-lines"></i> KONZERTE</a>
+                    <a href="konzerte.html" style="color: var(--anton-red); font-weight: bold;"><i class="fa-solid fa-microphone-lines"></i> KONZERTE</a>
                 </div>
             </div>
             <div class="d-nav-item"><a href="shop.html"><span class="d-nav-label"><i class="fa-solid fa-cart-shopping main-icon"></i> SHOP</span></a></div>
@@ -434,9 +433,9 @@
             <a href="https://www.instagram.com/anton.familienpop" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
             <a href="https://whatsapp.com/channel/0029Vb6WrdZInlqHDsgTp21e" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
             <a href="https://www.facebook.com/Anton.Familienpop/" target="_blank" rel="noopener"><i class="fa-brands fa-facebook"></i></a>
-            <a href="https://open.spotify.com/intl-de/artist/348545011" target="_blank" rel="noopener"><i class="fa-brands fa-spotify"></i></a>
+            <a href="https://open.spotify.com/intl-de/artist/4W56IJDi1Hn7IAYXXQkYte" target="_blank" rel="noopener"><i class="fa-brands fa-spotify"></i></a>
             <a href="https://music.apple.com/de/artist/anton/1687546783" target="_blank" rel="noopener"><i class="fa-brands fa-apple"></i></a>
-            <a href="https://www.youtube.com/@AntonMusikVEVO" target="_blank" rel="noopener"><i class="fa-solid fa-circle-play"></i></a>
+            <a href="https://music.youtube.com/channel/UCv-LSCzk64M7Ri9pkzqsiQg" target="_blank" rel="noopener"><i class="fa-solid fa-circle-play"></i></a>
             <a href="https://music.amazon.de/artists/B0GF2ZR9RR" target="_blank" rel="noopener"><i class="fa-brands fa-amazon"></i></a>
         </aside>
 
@@ -458,7 +457,7 @@
         </main>
 
         <footer class="d-footer">
-            <div><a href="hauptseite.html">www.anton-familienpop.de</a></div>
+            <div><a href="index.html">www.anton-familienpop.de</a></div>
             <div><a href="impressum.html">Impressum</a> | <a href="datenschutz.html">Datenschutz</a></div>
         </footer>
     </div>
@@ -475,8 +474,8 @@
         </div>
 
         <nav class="m-sidebar" id="m-sidebar">
-            <div class="m-nav-item"><a href="hauptseite.html"><i class="fa-solid fa-house"></i><span class="mobile-tag">Start</span></a></div>
-            <div class="m-nav-item"><a href="veroffentlichungen.html"><i class="fa-solid fa-music"></i><span class="mobile-tag">Musik</span></a></div>
+            <div class="m-nav-item"><a href="index.html"><i class="fa-solid fa-house"></i><span class="mobile-tag">Start</span></a></div>
+            <div class="m-nav-item"><a href="meinemusik.html"><i class="fa-solid fa-music"></i><span class="mobile-tag">Musik</span></a></div>
             <div class="m-nav-item"><a href="shop.html"><i class="fa-solid fa-cart-shopping"></i><span class="mobile-tag">Shop</span></a></div>
             <div class="m-nav-item"><a href="kontakt.html"><i class="fa-solid fa-envelope"></i><span class="mobile-tag">Kontakt</span></a></div>
             <div class="m-epk-container"><a href="epk.html" class="m-epk-text">EPK/PRESSE</a></div>
@@ -510,9 +509,9 @@
             <a href="https://www.instagram.com/anton.familienpop" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
             <a href="https://whatsapp.com/channel/0029Vb6WrdZInlqHDsgTp21e" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
             <a href="https://www.facebook.com/Anton.Familienpop/" target="_blank" rel="noopener"><i class="fa-brands fa-facebook"></i></a>
-            <a href="https://open.spotify.com/intl-de/artist/348545011" target="_blank" rel="noopener"><i class="fa-brands fa-spotify"></i></a>
+            <a href="https://open.spotify.com/intl-de/artist/4W56IJDi1Hn7IAYXXQkYte" target="_blank" rel="noopener"><i class="fa-brands fa-spotify"></i></a>
             <a href="https://music.apple.com/de/artist/anton/1687546783" target="_blank" rel="noopener"><i class="fa-brands fa-apple"></i></a>
-            <a href="https://www.youtube.com/@AntonMusikVEVO" target="_blank" rel="noopener"><i class="fa-solid fa-circle-play"></i></a>
+            <a href="https://music.youtube.com/channel/UCv-LSCzk64M7Ri9pkzqsiQg" target="_blank" rel="noopener"><i class="fa-solid fa-circle-play"></i></a>
             <a href="https://music.amazon.de/artists/B0GF2ZR9RR" target="_blank" rel="noopener"><i class="fa-brands fa-amazon"></i></a>
         </aside>
     </div>
