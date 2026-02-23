@@ -30,13 +30,16 @@
         @media (min-width: 801px) {
             #mobile-wrapper { display: none !important; }
 
+            html {
+                height: 100%;
+            }
+
             body { 
                 background: url('Background.jpg') no-repeat center center fixed; 
                 background-size: cover !important; 
                 overflow-x: hidden;
-                display: flex;
-                flex-direction: column;
-                min-height: 100vh;
+                overflow-y: auto;
+                min-height: 100%;
             }
             
             .d-header { 
@@ -106,7 +109,12 @@
             .d-sidebar-right:hover a i { animation-play-state: paused !important; transform: scale(1) !important; color: #000 !important; }
             .d-sidebar-right a:hover i { color: var(--brand-color) !important; transform: scale(1.55) !important; }
 
-            main { flex: 1; padding: 180px 20px 100px 20px; z-index: 5; width: 100%; box-sizing: border-box; }
+            main { 
+                padding: 110px 20px 100px 20px;
+                z-index: 5; 
+                width: 100%; 
+                box-sizing: border-box; 
+            }
 
             .detail-bento {
                 max-width: 1100px; 
@@ -199,11 +207,10 @@
             .m-epk-container { position: absolute; right: 0; top: 0; height: 100%; width: 45px; background: #fff; border-left: 3px solid #000; display: flex; align-items: center; justify-content: center; }
             .m-epk-text { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 0.7rem; color: var(--anton-red); font-weight: bold; text-decoration: none; }
 
-            /* ---- SCROLL-FIX: main bekommt feste Grenzen ---- */
             main {
                 position: fixed;
-                top: 80px;        /* unter dem Header */
-                bottom: 65px;     /* über der Social Bar */
+                top: 80px;
+                bottom: 65px;
                 left: 0;
                 right: 0;
                 overflow-y: auto;
@@ -290,7 +297,7 @@
         <div class="d-menu-btn" onclick="toggleDesktopMenu()"><span>☰</span></div>
         
         <nav class="d-sidebar-left" id="d-sidebar">
-            <div class="d-nav-item"><a href="hauptseite.html"><span class="d-nav-label"><i class="fa-solid fa-house main-icon"></i> START</span></a></div>
+            <div class="d-nav-item"><a href="index.html"><span class="d-nav-label"><i class="fa-solid fa-house main-icon"></i> START</span></a></div>
             <div class="d-nav-item">
                 <a href="meinemusik.html"><span class="d-nav-label"><i class="fa-solid fa-music main-icon"></i> MEINE MUSIK</span><div class="d-arrow-wrapper"><i class="fa-solid fa-caret-down d-submenu-indicator"></i></div></a>
                 <div class="d-submenu">
@@ -310,9 +317,9 @@
             <a href="https://www.instagram.com/anton.familienpop" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
             <a href="https://whatsapp.com/channel/0029Vb6WrdZInlqHDsgTp21e" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
             <a href="https://www.facebook.com/Anton.Familienpop/" target="_blank" rel="noopener"><i class="fa-brands fa-facebook"></i></a>
-            <a href="https://open.spotify.com/intl-de/artist/348545011" target="_blank" rel="noopener"><i class="fa-brands fa-spotify"></i></a>
+            <a href="https://open.spotify.com/intl-de/artist/4W56IJDi1Hn7IAYXXQkYte" target="_blank" rel="noopener"><i class="fa-brands fa-spotify"></i></a>
             <a href="https://music.apple.com/de/artist/anton/1687546783" target="_blank" rel="noopener"><i class="fa-brands fa-apple"></i></a>
-            <a href="https://www.youtube.com/@AntonMusikVEVO" target="_blank" rel="noopener"><i class="fa-solid fa-circle-play"></i></a>
+            <a href="https://music.youtube.com/channel/UCv-LSCzk64M7Ri9pkzqsiQg" target="_blank" rel="noopener"><i class="fa-solid fa-circle-play"></i></a>
             <a href="https://music.amazon.de/artists/B0GF2ZR9RR" target="_blank" rel="noopener"><i class="fa-brands fa-amazon"></i></a>
         </aside>
 
@@ -324,21 +331,20 @@
                 <div class="album-text">
                     <p class="intro">Ihr wollt mehr über mich und mein laaaanges Leben wissen? Wer Anton ist? Na dann passt mal auf:</p>
                     <p>Anton ist Papa. Und Bruder. Geboren wurde er als Anton Nachtwey in Berlin-Friedenau.</p>
-                    <p>Mit sechs sitzt er am Klavier und bleibt da auch erst mal zwölf Jahre. Klassische Ausbildung, Tonleitern, Disziplin. Seit seinem zehnten Lebensjahr steht er außerdem auf Bühnen.</p>
-                    <p>Irgendwann merkt er: Ein Klavier passt schlecht in einen Rucksack, also bringt er sich selbst Gitarre bei. Autodidaktisch, nach Gehör, nach Gefühl. Ende der 90er baut er sein eigenes Studio auf, schreibt Songs, produziert.</p>
-                    <p>2004 macht Anton seinen Abschluss als Audio Engineer. 2005 läuft er dann bei "Unser Block" auf VIVA im Fernsehen – als Hauptdarsteller.</p>
+                    <p>Mit sechs sitzt er am Klavier, und bleibt da auch erst mal zwölf Jahre. Klassische Ausbildung, Tonleitern, Disziplin. Seit seinem zehnten Lebensjahr steht er außerdem auf Bühnen.</p>
+                    <p>Irgendwann merkt er: Ein Klavier passt schlecht in einen Rucksack. Also bringt er sich selbst Gitarre bei. Autodidaktisch, nach Gehör, nach Gefühl. Ende der 90er baut er sein eigenes Studio auf, schreibt Songs, produziert.</p>
+                    <p>2004 macht Anton seinen Abschluss als Audio Engineer. 2005 läuft er dann bei Unser Block auf VIVA im Fernsehen – als Hauptdarsteller.</p>
                     <p>Danach wird's voll. Studios. Nächte. Bühnen. Er arbeitet mit Leuten wie Mark Forster, Havoc (Mobb Deep), Kool Savas. Nicht als Fan. Sondern mittendrin.</p>
                     <p>2014 und 2015 steht er mit Sido auf der Bühne – Abend für Abend, Halle für Halle. In dieser Zeit entsteht unter dem Namen BSH das Album „Endlich erwachsen". Platz 3 der deutschen Charts.</p>
                     <p>Dann folgte Werbung, Kunst und Leben.</p>
                     <p>Kurz gesagt: Anton kennt große Bühnen. Er weiß, wie sich 15.000 Leute anhören. Aber er kennt auch die Familyparty im Wohnzimmer. Und wie sich ein Raum anfühlt, kurz bevor jemand sagt: „Mach mal lauter".</p>
-                    <p>Man kann vielen runterregeln...</p>
                     <p>Anton gehört nicht dazu.</p>
                 </div>
             </div>
         </main>
 
         <footer class="d-footer">
-            <div><a href="hauptseite.html">www.anton-familienpop.de</a></div>
+            <div><a href="index.html">www.anton-familienpop.de</a></div>
             <div><a href="impressum.html">Impressum</a> | <a href="datenschutz.html">Datenschutz</a></div>
         </footer>
     </div>
@@ -355,7 +361,7 @@
         </div>
 
         <nav class="m-sidebar" id="m-sidebar">
-            <div class="m-nav-item"><a href="hauptseite.html"><i class="fa-solid fa-house"></i><span class="mobile-tag">Start</span></a></div>
+            <div class="m-nav-item"><a href="index.html"><i class="fa-solid fa-house"></i><span class="mobile-tag">Start</span></a></div>
             <div class="m-nav-item"><a href="veroffentlichungen.html"><i class="fa-solid fa-music"></i><span class="mobile-tag">Musik</span></a></div>
             <div class="m-nav-item"><a href="shop.html"><i class="fa-solid fa-cart-shopping"></i><span class="mobile-tag">Shop</span></a></div>
             <div class="m-nav-item"><a href="kontakt.html"><i class="fa-solid fa-envelope"></i><span class="mobile-tag">Kontakt</span></a></div>
@@ -393,9 +399,9 @@
             <a href="https://www.instagram.com/anton.familienpop" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
             <a href="https://whatsapp.com/channel/0029Vb6WrdZInlqHDsgTp21e" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
             <a href="https://www.facebook.com/Anton.Familienpop/" target="_blank" rel="noopener"><i class="fa-brands fa-facebook"></i></a>
-            <a href="https://open.spotify.com/intl-de/artist/348545011" target="_blank" rel="noopener"><i class="fa-brands fa-spotify"></i></a>
+            <a href="https://open.spotify.com/intl-de/artist/4W56IJDi1Hn7IAYXXQkYte" target="_blank" rel="noopener"><i class="fa-brands fa-spotify"></i></a>
             <a href="https://music.apple.com/de/artist/anton/1687546783" target="_blank" rel="noopener"><i class="fa-brands fa-apple"></i></a>
-            <a href="https://www.youtube.com/@AntonMusikVEVO" target="_blank" rel="noopener"><i class="fa-solid fa-circle-play"></i></a>
+            <a href="https://music.youtube.com/channel/UCv-LSCzk64M7Ri9pkzqsiQg" target="_blank" rel="noopener"><i class="fa-solid fa-circle-play"></i></a>
             <a href="https://music.amazon.de/artists/B0GF2ZR9RR" target="_blank" rel="noopener"><i class="fa-brands fa-amazon"></i></a>
         </aside>
     </div>
@@ -480,6 +486,3 @@
     </script>
 </body>
 </html>
-
-
-
