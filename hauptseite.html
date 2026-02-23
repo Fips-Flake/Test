@@ -398,8 +398,24 @@
                 overflow: hidden !important;
             }
 
-            /* Neuigkeiten-Box im Landscape ausblenden – zu wenig Platz */
-            #mobile-wrapper .m-news-box { display: none !important; }
+            /* Neuigkeiten-Box im Landscape – kompakt, als Leiste am unteren Rand */
+            #mobile-wrapper .m-news-box {
+                display: block !important;
+                bottom: -4px !important;
+                left: 50px !important;
+                right: 56px !important;
+                transform: none !important;
+                width: auto !important;
+                max-width: none !important;
+                padding: 6px 14px 8px 14px !important;
+                border-radius: 10px 10px 0 0 !important;
+                border: 2px solid #000 !important;
+                background: rgba(255, 255, 255, 0.35) !important;
+                backdrop-filter: blur(8px) !important;
+            }
+            #mobile-wrapper .m-news-box h3 { font-size: 0.6rem !important; margin-bottom: 2px !important; }
+            #mobile-wrapper .m-news-box h2 { font-size: 0.78rem !important; margin-bottom: 3px !important; }
+            #mobile-wrapper .m-news-box p  { font-size: 0.66rem !important; line-height: 1.35 !important; }
         }
     </style>
 </head>
