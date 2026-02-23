@@ -24,6 +24,9 @@
             width: 100%;
         }
 
+        /* Globaler Link-Reset – verhindert blaue Unterstreichungen überall */
+        a { color: inherit; text-decoration: none; -webkit-tap-highlight-color: transparent; }
+
         /* ================================================================= */
         /* 1. DESKTOP STYLES                                                 */
         /* ================================================================= */
@@ -287,9 +290,36 @@
             }
             #mobile-wrapper .m-sidebar.open { left: 0 !important; top: 0 !important; }
             #mobile-wrapper .m-nav-item { flex: none !important; width: 100%; text-align: left; margin-bottom: 16px; }
-            #mobile-wrapper .m-nav-item a { flex-direction: row !important; gap: 10px; font-size: 0.85rem; }
+            #mobile-wrapper .m-nav-item a { flex-direction: row !important; gap: 10px; font-size: 0.85rem; color: #000; text-decoration: none; }
             #mobile-wrapper .m-nav-item a i { font-size: 1rem; width: 22px; text-align: center; }
             #mobile-wrapper .mobile-tag { font-size: 0.72rem; writing-mode: horizontal-tb !important; transform: none !important; margin-top: 0; }
+
+            /* Untermenü in der Landscape-Sidebar */
+            #mobile-wrapper .m-submenu {
+                display: none;
+                flex-direction: column;
+                padding-left: 28px;
+                margin-top: 6px;
+                gap: 8px;
+            }
+            #mobile-wrapper .m-submenu a {
+                font-size: 0.75rem !important;
+                color: #000 !important;
+                text-decoration: none !important;
+                display: flex !important;
+                align-items: center !important;
+                gap: 8px !important;
+                flex-direction: row !important;
+            }
+            #mobile-wrapper .m-nav-item.sub-open > .m-submenu { display: flex !important; }
+            #mobile-wrapper .m-sub-toggle {
+                background: none; border: none; padding: 0; cursor: pointer;
+                font-family: 'Special Elite', cursive;
+                display: flex; align-items: center; gap: 10px;
+                font-size: 0.85rem; color: #000; width: 100%;
+            }
+            #mobile-wrapper .m-sub-arrow { margin-left: auto; font-size: 0.7rem; transition: transform 0.3s; }
+            #mobile-wrapper .m-nav-item.sub-open .m-sub-arrow { transform: rotate(180deg); }
 
             #mobile-wrapper .m-epk-container { 
                 position: static !important; width: 100% !important; height: auto !important;
@@ -344,9 +374,8 @@
 
             /* ────────────────────────────────────────────────────────────
                NEUIGKEITEN BOX – LANDSCAPE
-               Sitzt direkt am unteren Rand, vollständig eingerahmt,
-               links (linke Sidebar: 46px) und rechts (Social-Bar: 46px)
-               kompakt eingeklemmt. Kein Schweben, kein border-radius oben.
+               Schmale Box rechts neben der linken Sidebar, am unteren Rand.
+               Mehrzeilig gestapelt, nicht einzeilig.
             ──────────────────────────────────────────────────────────── */
             #mobile-wrapper .m-news-box {
                 display: block !important;
@@ -356,50 +385,47 @@
                 right: 46px !important;
                 transform: none !important;
                 width: auto !important;
-                max-width: none !important;
-                /* Vollständiger Rahmen – eingerahmt wie auf dem mobilen Portrait */
+                max-width: 260px !important;       /* schmaler begrenzen */
+                margin: 0 !important;
                 border: 2px solid #000 !important;
                 border-bottom: none !important;
                 border-radius: 10px 10px 0 0 !important;
                 box-shadow: none !important;
-                background: rgba(255, 255, 255, 0.75) !important;
+                background: rgba(255, 255, 255, 0.88) !important;
                 backdrop-filter: blur(8px) !important;
-                padding: 5px 14px 6px 14px !important;
+                padding: 6px 12px 7px 12px !important;
                 box-sizing: border-box !important;
                 z-index: 20 !important;
-                /* Einzeilig mit Flexbox */
-                display: flex !important;
-                flex-direction: row !important;
-                align-items: center !important;
-                gap: 10px !important;
-                flex-wrap: nowrap !important;
+                /* Gestapelt statt einzeilig */
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 2px !important;
             }
             #mobile-wrapper .m-news-box h3 {
-                font-size: 0.55rem !important;
-                margin: 0 !important;
+                font-size: 0.52rem !important;
+                margin: 0 0 1px 0 !important;
                 color: var(--anton-red) !important;
-                white-space: nowrap !important;
                 text-transform: uppercase !important;
                 letter-spacing: 0.1em !important;
-                flex-shrink: 0 !important;
+                white-space: nowrap !important;
             }
             #mobile-wrapper .m-news-box h2 {
-                font-size: 0.7rem !important;
-                margin: 0 !important;
+                font-size: 0.72rem !important;
+                margin: 0 0 3px 0 !important;
                 color: #000 !important;
-                white-space: nowrap !important;
-                flex-shrink: 0 !important;
+                white-space: normal !important;
+                line-height: 1.2 !important;
             }
             #mobile-wrapper .m-news-box p {
                 font-size: 0.58rem !important;
                 margin: 0 !important;
                 color: #333 !important;
-                line-height: 1.3 !important;
+                line-height: 1.35 !important;
+                white-space: normal !important;
                 overflow: hidden !important;
-                white-space: nowrap !important;
-                text-overflow: ellipsis !important;
-                flex: 1 !important;
-                min-width: 0 !important;
+                display: -webkit-box !important;
+                -webkit-line-clamp: 2 !important;
+                -webkit-box-orient: vertical !important;
             }
 
             /* Seite im Landscape scrollbar */
@@ -482,7 +508,18 @@
 
         <nav class="m-sidebar" id="m-sidebar">
             <div class="m-nav-item"><a href="index.html"><i class="fa-solid fa-house"></i><span class="mobile-tag">Start</span></a></div>
-            <div class="m-nav-item"><a href="meinemusik.html"><i class="fa-solid fa-music"></i><span class="mobile-tag">Musik</span></a></div>
+            <div class="m-nav-item" id="m-musik-item">
+                <button class="m-sub-toggle" onclick="mToggleSubMenu(event)">
+                    <i class="fa-solid fa-music"></i>
+                    <span class="mobile-tag">Musik</span>
+                    <i class="fa-solid fa-caret-down m-sub-arrow"></i>
+                </button>
+                <div class="m-submenu">
+                    <a href="uebermich.html"><i class="fa-regular fa-face-smile"></i> Über mich</a>
+                    <a href="veroffentlichungen.html"><i class="fa-solid fa-volume-high"></i> Veröffentlichungen</a>
+                    <a href="konzerte.html"><i class="fa-solid fa-microphone-lines"></i> Konzerte</a>
+                </div>
+            </div>
             <div class="m-nav-item"><a href="shop.html"><i class="fa-solid fa-cart-shopping"></i><span class="mobile-tag">Shop</span></a></div>
             <div class="m-nav-item"><a href="kontakt.html"><i class="fa-solid fa-envelope"></i><span class="mobile-tag">Kontakt</span></a></div>
             <div class="m-epk-container"><a href="epk.html" class="m-epk-text">EPK/PRESSE</a></div>
@@ -580,6 +617,12 @@
             e.stopPropagation();
             if (mSidebar.classList.contains('open')) { mCloseAllMenus(); } 
             else { mCloseAllMenus(); mSidebar.classList.add('open'); mMenuBtn.classList.add('active'); mMenuTimeout = setTimeout(mCloseAllMenus, 5000); }
+        }
+
+        function mToggleSubMenu(e) {
+            e.stopPropagation();
+            const item = document.getElementById('m-musik-item');
+            if (item) item.classList.toggle('sub-open');
         }
 
         function mOpenIDMenu(e) {
