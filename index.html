@@ -24,9 +24,6 @@
             width: 100%;
         }
 
-        /* ================================================================= */
-        /* 1. DESKTOP STYLES                                                 */
-        /* ================================================================= */
         @media (min-width: 801px) and (min-height: 500px) {
             #mobile-wrapper { display: none !important; }
             #desktop-wrapper { display: block !important; }
@@ -39,7 +36,6 @@
                 min-height: 100vh;
             }
 
-            /* Hintergrund-Crossfade Layer – Desktop */
             #bg-layer-a, #bg-layer-b {
                 position: fixed; top: 0; left: 0; width: 100%; height: 100%;
                 background-size: cover; background-position: center center;
@@ -122,7 +118,6 @@
 
             main { flex: 1; padding: 120px 20px 80px 20px; z-index: 5; width: 100%; box-sizing: border-box; }
 
-            /* BENTOBOXEN – DESKTOP (unsichtbare Klick-Bereiche auf Plakaten) */
             .invisible-box { position: fixed; z-index: 10; background: transparent; border: none; cursor: pointer; }
             .box-ertappt { width: 19%; height: 43%; top: 16%; left: 17%; transform: rotate(-4deg); }
             .box-mitte   { width: 20%; height: 42%; top: 17%; left: 38%; transform: rotate(3deg); z-index: 1001; }
@@ -130,7 +125,6 @@
             .box-pause2  { width: 10%; height: 30%; top: 34%; left: 60%; transform: rotate(1deg); }
             .box-pause3  { width: 5%;  height: 18%; top: 21%; left: 66%; transform: rotate(45deg); }
 
-            /* NEUIGKEITEN BOX – DESKTOP */
             .d-news-box {
                 position: fixed;
                 bottom: 60px;
@@ -164,7 +158,6 @@
                 color: #222;
             }
 
-            /* FOOTER – DESKTOP */
             .d-footer { 
                 width: 100%; padding: 15px 0; background: rgba(255,255,255,0.95); 
                 border-top: 1.5px solid #000; text-align: center; font-size: 0.75rem; 
@@ -180,14 +173,10 @@
             .d-footer a:hover { color: var(--anton-yellow) !important; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; }
         }
 
-        /* ================================================================= */
-        /* 2. MOBILE BASIS – gilt für Portrait UND Landscape                 */
-        /* ================================================================= */
         @media (max-width: 800px), (orientation: landscape) and (max-height: 500px) {
             #desktop-wrapper { display: none !important; }
             #mobile-wrapper  { display: block !important; }
 
-            /* BENTOBOXEN – MOBILE */
             .invisible-box { position: fixed; z-index: 10; background: transparent; border: none; cursor: pointer; }
             .box-ertappt { width: 19%; height: 43%; top: 16%; left: 17%; transform: rotate(-4deg); }
             .box-mitte   { width: 20%; height: 42%; top: 17%; left: 38%; transform: rotate(3deg); z-index: 1001; }
@@ -207,7 +196,6 @@
                 backdrop-filter: blur(10px); border-bottom: 2px solid #000; 
                 transition: transform 0.6s ease-in-out; 
             }
-            /* ✅ Logo-Position von meinemusik.html übernommen: top: 120% */
             .m-header-logo { position: absolute; top: 120%; transform: translateY(-50%); max-height: 185px; width: auto; filter: brightness(0) saturate(100%) invert(13%) sepia(95%) saturate(7408%) hue-rotate(359deg) brightness(97%) contrast(113%); }
             .m-menu-btn { position: fixed; top: 18px; left: 15px; z-index: 1500; background: #000; width: 45px; height: 45px; border-radius: 5px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; cursor: pointer; border: 2px solid #000; }
             .m-menu-btn span { display: block; width: 22px; height: 3px; background: #fff; transition: 0.3s; }
@@ -237,7 +225,6 @@
             .m-id-panel.open { right: 0; }
             .m-id-panel a { color: #000; text-decoration: none; margin: 0 8px; text-transform: uppercase; }
 
-            /* NEUIGKEITEN BOX – MOBILE */
             .m-news-box {
                 position: fixed;
                 bottom: 75px;
@@ -287,9 +274,6 @@
             .m-sidebar-right a:nth-child(9) i { --brand-color: var(--amazon-blue); animation-delay: 2.0s; }
         }
 
-        /* ================================================================= */
-        /* 2a. MOBILE PORTRAIT – Swipe-Hintergrund                          */
-        /* ================================================================= */
         @media (max-width: 800px) and (orientation: portrait) {
             #m-bg-fix { 
                 display: block; position: fixed; top: 0; left: -100%; 
@@ -298,9 +282,6 @@
             }
         }
 
-        /* ================================================================= */
-        /* 3. MOBILE LANDSCAPE                                                */
-        /* ================================================================= */
         @media (orientation: landscape) and (max-height: 500px) {
 
             #mobile-wrapper #m-bg-fix { 
@@ -398,7 +379,6 @@
                 overflow: hidden !important;
             }
 
-            /* Neuigkeiten-Box im Landscape – kompakt, sitzt über dem I/D-Panel */
             #mobile-wrapper .m-news-box {
                 display: block !important;
                 position: fixed !important;
@@ -419,7 +399,6 @@
             #mobile-wrapper .m-news-box h2 { font-size: 0.75rem !important; margin-bottom: 2px !important; }
             #mobile-wrapper .m-news-box p  { font-size: 0.63rem !important; line-height: 1.3 !important; }
 
-            /* Seite im Landscape scrollbar machen */
             #mobile-wrapper { overflow-y: auto !important; }
             body { overflow-y: auto !important; position: static !important; height: auto !important; }
         }
@@ -427,9 +406,6 @@
 </head>
 <body>
 
-    <!-- ================================================================= -->
-    <!-- DESKTOP WRAPPER                                                    -->
-    <!-- ================================================================= -->
     <div id="desktop-wrapper">
         <div id="bg-layer-a"></div>
         <div id="bg-layer-b"></div>
@@ -438,14 +414,12 @@
         </header>
         <div class="d-menu-btn" onclick="toggleDesktopMenu()"><span>☰</span></div>
 
-        <!-- BENTOBOXEN – DESKTOP -->
         <a href="veroffentlichungen.html" class="invisible-box box-ertappt"></a>
         <a href="neuesingle.html" class="invisible-box box-mitte"></a>
         <a href="veroffentlichungen.html" class="invisible-box box-pause"></a>
         <a href="veroffentlichungen.html" class="invisible-box box-pause2"></a>
         <a href="veroffentlichungen.html" class="invisible-box box-pause3"></a>
 
-        <!-- NEUIGKEITEN BOX – DESKTOP -->
         <div class="d-news-box">
             <h3>Neuigkeiten</h3>
             <h2>Die neue Webseite ist da!</h2>
@@ -458,7 +432,7 @@
                 <a href="meinemusik.html"><span class="d-nav-label"><i class="fa-solid fa-music main-icon"></i> MEINE MUSIK</span><div class="d-arrow-wrapper"><i class="fa-solid fa-caret-down d-submenu-indicator"></i></div></a>
                 <div class="d-submenu">
                     <a href="uebermich.html"><i class="fa-regular fa-face-smile"></i> ÜBER MICH</a>
-                    <a href="meinemusik.html"><i class="fa-solid fa-volume-high"></i> VERÖFFENTLICHUNGEN</a>
+                    <a href="veroffentlichungen.html"><i class="fa-solid fa-volume-high"></i> VERÖFFENTLICHUNGEN</a>
                     <a href="konzerte.html"><i class="fa-solid fa-microphone-lines"></i> KONZERTE</a>
                 </div>
             </div>
@@ -491,9 +465,6 @@
         </footer>
     </div>
 
-    <!-- ================================================================= -->
-    <!-- MOBILE WRAPPER                                                     -->
-    <!-- ================================================================= -->
     <div id="mobile-wrapper">
         <div id="m-bg-fix"></div>
         <header class="m-header" id="m-header-main"><img src="Antonlogo.png" alt="ANTON Logo" class="m-header-logo"></header>
@@ -509,14 +480,12 @@
 
         <div class="m-id-button" id="m-id-btn" onclick="mOpenIDMenu(event)">I/D</div>
 
-        <!-- BENTOBOXEN – MOBILE -->
         <a href="veroffentlichungen.html" class="invisible-box box-ertappt"></a>
         <a href="neuesingle.html" class="invisible-box box-mitte"></a>
         <a href="veroffentlichungen.html" class="invisible-box box-pause"></a>
         <a href="veroffentlichungen.html" class="invisible-box box-pause2"></a>
         <a href="veroffentlichungen.html" class="invisible-box box-pause3"></a>
 
-        <!-- NEUIGKEITEN BOX – MOBILE -->
         <div class="m-news-box">
             <h3>Neuigkeiten</h3>
             <h2>Die neue Webseite ist da!</h2>
@@ -543,20 +512,16 @@
     </div>
 
     <script>
-        /* --- GLOBAL VARIABLES & HELPER --- */
         let dSidebarTimeout;
         const dSidebar = document.getElementById('d-sidebar');
 
         function resetDSidebarTimer() {
             clearTimeout(dSidebarTimeout);
             if (dSidebar && dSidebar.classList.contains('open')) {
-                dSidebarTimeout = setTimeout(() => {
-                    dSidebar.classList.remove('open');
-                }, 5000); 
+                dSidebarTimeout = setTimeout(() => { dSidebar.classList.remove('open'); }, 5000); 
             }
         }
 
-        /* --- DESKTOP LOGIC --- */
         function toggleDesktopMenu() {
             if (dSidebar) {
                 dSidebar.classList.toggle('open');
@@ -579,7 +544,6 @@
             }
         });
 
-        /* --- MOBILE LOGIC --- */
         const mSidebar = document.getElementById('m-sidebar');
         const mMenuBtn = document.getElementById('m-menu-trigger');
         const mIdBtn = document.getElementById('m-id-btn');
@@ -628,7 +592,6 @@
         window.addEventListener('orientationchange', () => setTimeout(applyLandscapeState, 100));
         applyLandscapeState();
 
-        /* MOBILE TOUCH & SWIPE */
         let touchStartX = 0, touchStartY = 0, currentTranslateX = 0;
 
         document.addEventListener('touchstart', e => { 
@@ -639,11 +602,9 @@
             if(window.innerWidth <= 800) {
                 const moveX = e.touches[0].clientX, moveY = e.touches[0].clientY;
                 const diffX = moveX - touchStartX, diffY = moveY - touchStartY;
-
                 if (Math.abs(diffX) > 10 || Math.abs(diffY) > 10) { 
                     if (!mSidebar.contains(e.target)) mCloseAllMenus(); 
                 }
-
                 if (Math.abs(diffX) > Math.abs(diffY)) {
                     let newX = currentTranslateX + diffX;
                     const limit = window.innerWidth; 
@@ -668,9 +629,6 @@
             }
         });
 
-        /* ================================================================= */
-        /* DYNAMISCHES HINTERGRUNDBILD – Tageszeit + Saison                  */
-        /* ================================================================= */
         (function() {
             const now   = new Date();
             const hour  = now.getHours();
@@ -731,7 +689,6 @@
             }
 
             setBackground(filename, 'Background.jpg');
-            console.log(`[ANTON BG] Saison: ${season} | Tageszeit: ${daytime} | Bild: ${filename}`);
         })();
 
         setTimeout(() => { 
