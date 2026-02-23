@@ -338,13 +338,47 @@
     </div>
 
     <script>
+        /* ── Helpers ─────────────────────────────────────────── */
+        function isMobileDevice() {
+            // True for portrait mobile AND landscape mobile (phones rotated)
+            // Uses CSS media-query logic: landscape mobile has height ≤ 500px
+            return window.innerWidth <= 800 || (window.innerHeight <= 500 && window.innerWidth > window.innerHeight);
+        }
+        function isLandscapeMobile() {
+            return window.innerHeight <= 500 && window.innerWidth > window.innerHeight;
+        }
+
+        /* ── Desktop sidebar ─────────────────────────────────── */
         let dSidebarTimeout;
         const dSidebar = document.getElementById('d-sidebar');
-        function resetDSidebarTimer() { clearTimeout(dSidebarTimeout); if (dSidebar && dSidebar.classList.contains('open')) dSidebarTimeout = setTimeout(() => dSidebar.classList.remove('open'), 5000); }
-        function toggleDesktopMenu() { if (dSidebar) { dSidebar.classList.toggle('open'); if (dSidebar.classList.contains('open')) resetDSidebarTimer(); } }
-        if (dSidebar) { dSidebar.addEventListener('mousemove', resetDSidebarTimer); dSidebar.addEventListener('click', resetDSidebarTimer); }
-        document.addEventListener('click', function(e) { if (window.innerWidth > 800) { const btn = document.querySelector('.d-menu-btn'); if (dSidebar && !dSidebar.contains(e.target) && btn && !btn.contains(e.target) && dSidebar.classList.contains('open')) { dSidebar.classList.remove('open'); clearTimeout(dSidebarTimeout); } } });
 
+        function resetDSidebarTimer() {
+            clearTimeout(dSidebarTimeout);
+            if (dSidebar && dSidebar.classList.contains('open'))
+                dSidebarTimeout = setTimeout(() => dSidebar.classList.remove('open'), 5000);
+        }
+        function toggleDesktopMenu() {
+            if (dSidebar) {
+                dSidebar.classList.toggle('open');
+                if (dSidebar.classList.contains('open')) resetDSidebarTimer();
+            }
+        }
+        if (dSidebar) {
+            dSidebar.addEventListener('mousemove', resetDSidebarTimer);
+            dSidebar.addEventListener('click', resetDSidebarTimer);
+        }
+        // Only close desktop sidebar on click-outside when actually on desktop
+        document.addEventListener('click', function(e) {
+            if (!isMobileDevice()) {
+                const btn = document.querySelector('.d-menu-btn');
+                if (dSidebar && !dSidebar.contains(e.target) && btn && !btn.contains(e.target) && dSidebar.classList.contains('open')) {
+                    dSidebar.classList.remove('open');
+                    clearTimeout(dSidebarTimeout);
+                }
+            }
+        });
+
+        /* ── Mobile sidebar / menus ──────────────────────────── */
         const mSidebar = document.getElementById('m-sidebar');
         const mMenuBtn = document.getElementById('m-menu-trigger');
         const mIdBtn   = document.getElementById('m-id-btn');
@@ -352,30 +386,102 @@
         const mBg      = document.getElementById('m-bg-fix');
         let mMenuTimeout, mIdTimeout;
 
-        function isLandscapeMobile() { return window.innerHeight <= 500 && window.innerWidth > window.innerHeight; }
-
         function mCloseAllMenus() {
             if (mSidebar) mSidebar.classList.remove('open');
             if (mMenuBtn) mMenuBtn.classList.remove('active');
             clearTimeout(mMenuTimeout);
-            if (!isLandscapeMobile()) { if (mIdPanel) mIdPanel.classList.remove('open'); if (mIdBtn) mIdBtn.classList.remove('hidden'); clearTimeout(mIdTimeout); }
+            if (!isLandscapeMobile()) {
+                if (mIdPanel) mIdPanel.classList.remove('open');
+                if (mIdBtn)   mIdBtn.classList.remove('hidden');
+                clearTimeout(mIdTimeout);
+            }
         }
-        function mToggleMenu(e) { e.stopPropagation(); if (mSidebar.classList.contains('open')) { mCloseAllMenus(); } else { mCloseAllMenus(); mSidebar.classList.add('open'); mMenuBtn.classList.add('active'); mMenuTimeout = setTimeout(mCloseAllMenus, 5000); } }
-        function mOpenIDMenu(e) { e.stopPropagation(); mCloseAllMenus(); if (mIdBtn) mIdBtn.classList.add('hidden'); if (mIdPanel) mIdPanel.classList.add('open'); mIdTimeout = setTimeout(mCloseAllMenus, 5000); }
+        function mToggleMenu(e) {
+            e.stopPropagation();
+            if (mSidebar && mSidebar.classList.contains('open')) {
+                mCloseAllMenus();
+            } else {
+                mCloseAllMenus();
+                if (mSidebar) mSidebar.classList.add('open');
+                if (mMenuBtn) mMenuBtn.classList.add('active');
+                mMenuTimeout = setTimeout(mCloseAllMenus, 5000);
+            }
+        }
+        function mOpenIDMenu(e) {
+            e.stopPropagation();
+            mCloseAllMenus();
+            if (mIdBtn)   mIdBtn.classList.add('hidden');
+            if (mIdPanel) mIdPanel.classList.add('open');
+            mIdTimeout = setTimeout(mCloseAllMenus, 5000);
+        }
 
+        // Close mobile menus on outside click – works for ALL mobile (portrait + landscape)
+        document.addEventListener('click', e => {
+            if (isMobileDevice()) {
+                const insideSidebar = mSidebar && mSidebar.contains(e.target);
+                const insideBtn     = mMenuBtn && mMenuBtn.contains(e.target);
+                const insideIdPanel = mIdPanel && mIdPanel.contains(e.target);
+                const insideIdBtn   = mIdBtn   && mIdBtn.contains(e.target);
+                if (!insideSidebar && !insideBtn && !insideIdPanel && !insideIdBtn) {
+                    mCloseAllMenus();
+                }
+            }
+        });
+
+        /* ── Swipe / parallax (portrait only) ───────────────── */
+        let touchStartX = 0, touchStartY = 0, currentTranslateX = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+
+        document.addEventListener('touchmove', e => {
+            if (isMobileDevice() && !isLandscapeMobile()) {
+                const diffX = e.touches[0].clientX - touchStartX;
+                const diffY = e.touches[0].clientY - touchStartY;
+                if (Math.abs(diffX) > 10 || Math.abs(diffY) > 10) {
+                    if (mSidebar && !mSidebar.contains(e.target)) mCloseAllMenus();
+                }
+                if (mBg && Math.abs(diffX) > Math.abs(diffY)) {
+                    let newX = currentTranslateX + diffX;
+                    const limit = window.innerWidth;
+                    if (newX >  limit) newX =  limit;
+                    if (newX < -limit) newX = -limit;
+                    mBg.style.transform = `translateX(${newX}px)`;
+                }
+            }
+        }, { passive: true });
+
+        document.addEventListener('touchend', () => {
+            if (isMobileDevice() && !isLandscapeMobile() && mBg) {
+                const matrix = new WebKitCSSMatrix(window.getComputedStyle(mBg).transform);
+                currentTranslateX = matrix.m41;
+            }
+        }, { passive: true });
+
+        /* ── I/D panel landscape state ───────────────────────── */
         function applyLandscapeState() {
-            if (isLandscapeMobile()) { if (mIdPanel) mIdPanel.style.cssText = ''; if (mIdBtn) mIdBtn.style.display = 'none'; }
-            else { if (mIdBtn) mIdBtn.style.display = ''; if (mIdPanel) mIdPanel.classList.remove('open'); }
+            if (isLandscapeMobile()) {
+                if (mIdBtn)   mIdBtn.style.display = 'none';
+                // panel is always visible via CSS in landscape, clear any inline styles
+                if (mIdPanel) { mIdPanel.style.cssText = ''; }
+            } else {
+                if (mIdBtn)   mIdBtn.style.display = '';
+                if (mIdPanel) mIdPanel.classList.remove('open');
+            }
         }
         window.addEventListener('resize', applyLandscapeState);
-        window.addEventListener('orientationchange', () => setTimeout(applyLandscapeState, 100));
+        window.addEventListener('orientationchange', () => setTimeout(applyLandscapeState, 200));
         applyLandscapeState();
 
-        document.addEventListener('click', e => { if (window.innerWidth <= 800) { if (mSidebar && !mSidebar.contains(e.target) && mMenuBtn && !mMenuBtn.contains(e.target) && mIdPanel && !mIdPanel.contains(e.target) && mIdBtn && !mIdBtn.contains(e.target)) mCloseAllMenus(); } });
-
+        /* ── Header auto-hide after 3s on mobile ─────────────── */
         setTimeout(() => {
             const mh = document.getElementById('m-header-main');
-            if (mh && (window.innerWidth <= 800 || isLandscapeMobile())) { mh.style.transform = 'translateY(0)'; setTimeout(() => { mh.style.transform = 'translateY(-100%)'; }, 3000); }
+            if (mh && isMobileDevice()) {
+                mh.style.transform = 'translateY(0)';
+                setTimeout(() => { mh.style.transform = 'translateY(-100%)'; }, 3000);
+            }
         }, 100);
     </script>
 </body>
