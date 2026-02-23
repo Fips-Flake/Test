@@ -57,9 +57,9 @@
             .d-sidebar-right:hover a i { animation-play-state: paused !important; transform: scale(1) !important; color: #000 !important; }
             .d-sidebar-right a:hover i { color: var(--brand-color) !important; transform: scale(1.55) !important; }
             main { flex: 1; padding: 100px 80px 100px 80px; position: relative; z-index: 5; width: 100%; box-sizing: border-box; overflow-y: auto; }
-            .page-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; max-width: 900px; margin: 0 auto; }
-            .page-box { background: rgba(255,255,255,0.92); border: 3px solid #000; border-radius: 20px; padding: 35px; box-sizing: border-box; }
-            .page-box.box-full { grid-column: span 2; }
+            .page-grid { display: flex; flex-direction: column; align-items: center; gap: 25px; max-width: 900px; margin: 0 auto; }
+            .page-box { background: rgba(255,255,255,0.92); border: 3px solid #000; border-radius: 20px; padding: 35px; box-sizing: border-box; width: 100%; }
+            .page-box.box-auto { width: auto; align-self: center; }
             .page-box h2 { margin: 0 0 15px 0; color: var(--anton-red); text-transform: uppercase; font-size: 1.4rem; border-bottom: 2px solid #000; padding-bottom: 5px; }
             .impressum-text { line-height: 1.7; font-size: 1rem; }
             .impressum-text a { color: inherit; text-decoration: underline; }
@@ -186,7 +186,7 @@
 
         <main>
             <div class="page-grid">
-                <div class="page-box box-full">
+                <div class="page-box box-auto">
                     <div class="impressum-text">
                         <strong>Angaben gemäß § 5 TMG:</strong><br><br>
                         <a href="index.html">www.anton-familienpop.de</a><br>
@@ -198,7 +198,7 @@
                         E-Mail: info@anton-familienpop.de
                     </div>
                 </div>
-                <div class="page-box box-full">
+                <div class="page-box">
                     <h2>Haftungsausschluss</h2>
                     <p class="impressum-text">Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.</p>
                 </div>
@@ -308,9 +308,7 @@
         var mBg      = document.getElementById('m-bg-fix');
         var mMenuTimeout, mIdTimeout;
 
-        function isLandscapeMobile() {
-            return window.innerHeight <= 500 && window.innerWidth > window.innerHeight;
-        }
+        function isLandscapeMobile() { return window.innerHeight <= 500 && window.innerWidth > window.innerHeight; }
 
         function mCloseAllMenus() {
             if (mSidebar) mSidebar.classList.remove('open');
@@ -402,7 +400,6 @@
                 }
             }
             setBackground(filename, 'Background.jpg');
-            console.log('[ANTON BG] Saison: ' + season + ' | Tageszeit: ' + daytime + ' | Bild: ' + filename);
         })();
 
         setTimeout(function() {
