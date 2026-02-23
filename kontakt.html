@@ -24,6 +24,21 @@
             width: 100%;
         }
 
+        /* FEEDBACK BANNER */
+        .form-feedback {
+            display: none;
+            padding: 14px 20px;
+            border-radius: 10px;
+            border: 2px solid #000;
+            font-weight: bold;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .form-feedback.success { background: #d4edda; color: #155724; border-color: #155724; }
+        .form-feedback.error   { background: #f8d7da; color: #721c24; border-color: #721c24; }
+        .form-feedback.visible { display: block; }
+
         /* ================================================================= */
         /* 1. DESKTOP STYLES                                                  */
         /* ================================================================= */
@@ -140,7 +155,7 @@
             }
 
             .bento-box {
-                background: rgba(255, 255, 255, 0.95);
+                background: rgba(255, 255, 255, 0.55);
                 border: 3px solid #000;
                 box-shadow: 6px 6px 0 #000;
                 padding: 30px;
@@ -277,7 +292,7 @@
             }
 
             .m-bento-box {
-                background: rgba(255, 255, 255, 0.92);
+                background: rgba(255, 255, 255, 0.55);
                 border: 3px solid #000;
                 box-shadow: 5px 5px 0 #000;
                 padding: 20px;
@@ -379,7 +394,7 @@
         <div class="d-menu-btn" onclick="toggleDesktopMenu()"><span>☰</span></div>
 
         <nav class="d-sidebar-left" id="d-sidebar">
-            <div class="d-nav-item"><a href="hauptseite.html"><span class="d-nav-label"><i class="fa-solid fa-house main-icon"></i> START</span></a></div>
+            <div class="d-nav-item"><a href="index.html"><span class="d-nav-label"><i class="fa-solid fa-house main-icon"></i> START</span></a></div>
             <div class="d-nav-item">
                 <a href="meinemusik.html"><span class="d-nav-label"><i class="fa-solid fa-music main-icon"></i> MEINE MUSIK</span><div class="d-arrow-wrapper"><i class="fa-solid fa-caret-down d-submenu-indicator"></i></div></a>
                 <div class="d-submenu">
@@ -410,7 +425,8 @@
                 <div class="bento-box">
                     <h2>Booking</h2>
                     <p>Du möchtest Anton live erleben? Wir freuen uns auf deine Anfrage für Konzerte und Events.</p>
-                    <a href="mailto:booking@anton-familienpop.de" style="font-weight:bold; color:#000;">Anfrage senden</a>
+                    <!-- ✅ GEÄNDERT: organizer@anton-familienpop.de -->
+                    <a href="/cdn-cgi/l/email-protection#4c233e2b2d222536293e0c2d22382322612a2d2125202529223c233c622829" style="font-weight:bold; color:#000;">Anfrage senden</a>
                 </div>
                 <div class="bento-box">
                     <h2>Presse</h2>
@@ -418,11 +434,13 @@
                 </div>
                 <div class="bento-box box-full">
                     <h2>Schreib mir</h2>
-                    <form class="contact-form" action="#" method="post">
-                        <input type="text" name="name" placeholder="Dein Name" required>
-                        <input type="email" name="email" placeholder="Deine E-Mail Adresse" required>
-                        <input type="text" name="subject" placeholder="Betreff">
-                        <textarea name="message" rows="5" placeholder="Deine Nachricht an Anton..." required></textarea>
+                    <!-- ✅ GEÄNDERT: action auf info@anton-familienpop.de, enctype für korrekte Übertragung -->
+                    <div id="d-feedback" class="form-feedback"></div>
+                    <form class="contact-form" id="d-contact-form" action="send_mail.php" method="post">
+                        <input type="text" name="Name" placeholder="Dein Name" required>
+                        <input type="email" name="E-Mail" placeholder="Deine E-Mail Adresse" required>
+                        <input type="text" name="Betreff" placeholder="Betreff">
+                        <textarea name="Nachricht" rows="5" placeholder="Deine Nachricht an Anton..." required></textarea>
                         <button type="submit">Nachricht Absenden</button>
                     </form>
                 </div>
@@ -430,7 +448,7 @@
         </main>
 
         <footer class="d-footer">
-            <div><a href="hauptseite.html">www.anton-familienpop.de</a></div>
+            <div><a href="index.html">www.anton-familienpop.de</a></div>
             <div><a href="impressum.html">Impressum</a> | <a href="datenschutz.html">Datenschutz</a></div>
         </footer>
     </div>
@@ -447,7 +465,7 @@
         </div>
 
         <nav class="m-sidebar" id="m-sidebar">
-            <div class="m-nav-item"><a href="hauptseite.html"><i class="fa-solid fa-house"></i><span class="mobile-tag">Start</span></a></div>
+            <div class="m-nav-item"><a href="index.html"><i class="fa-solid fa-house"></i><span class="mobile-tag">Start</span></a></div>
             <div class="m-nav-item"><a href="veroffentlichungen.html"><i class="fa-solid fa-music"></i><span class="mobile-tag">Musik</span></a></div>
             <div class="m-nav-item"><a href="shop.html"><i class="fa-solid fa-cart-shopping"></i><span class="mobile-tag">Shop</span></a></div>
             <div class="m-nav-item"><a href="kontakt.html"><i class="fa-solid fa-envelope"></i><span class="mobile-tag">Kontakt</span></a></div>
@@ -459,7 +477,8 @@
                 <div class="m-bento-box">
                     <h2>Booking</h2>
                     <p>Du möchtest Anton live erleben? Wir freuen uns auf deine Anfrage für Konzerte und Events.</p>
-                    <a href="mailto:booking@anton-familienpop.de">Anfrage senden</a>
+                    <!-- ✅ GEÄNDERT: organizer@anton-familienpop.de -->
+                    <a href="/cdn-cgi/l/email-protection#8de2ffeaece3e4f7e8ffcdece3f9e2e3a0ebece0e4e1e4e8e3fde2fda3e9e8">Anfrage senden</a>
                 </div>
                 <div class="m-bento-box">
                     <h2>Presse</h2>
@@ -467,11 +486,13 @@
                 </div>
                 <div class="m-bento-box">
                     <h2>Schreib mir</h2>
-                    <form class="contact-form" action="#" method="post">
-                        <input type="text" name="name" placeholder="Dein Name" required>
-                        <input type="email" name="email" placeholder="Deine E-Mail Adresse" required>
-                        <input type="text" name="subject" placeholder="Betreff">
-                        <textarea name="message" rows="4" placeholder="Deine Nachricht an Anton..." required></textarea>
+                    <!-- ✅ GEÄNDERT: action auf info@anton-familienpop.de, enctype für korrekte Übertragung -->
+                    <div id="m-feedback" class="form-feedback"></div>
+                    <form class="contact-form" id="m-contact-form" action="send_mail.php" method="post">
+                        <input type="text" name="Name" placeholder="Dein Name" required>
+                        <input type="email" name="E-Mail" placeholder="Deine E-Mail Adresse" required>
+                        <input type="text" name="Betreff" placeholder="Betreff">
+                        <textarea name="Nachricht" rows="4" placeholder="Deine Nachricht an Anton..." required></textarea>
                         <button type="submit">Nachricht Absenden</button>
                     </form>
                 </div>
@@ -496,7 +517,34 @@
         </aside>
     </div>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        /* --- FEEDBACK AUS URL AUSLESEN --- */
+        (function() {
+            const params = new URLSearchParams(window.location.search);
+            const status = params.get('status');
+            const msg    = params.get('msg');
+            if (!status) return;
+
+            const isSuccess = status === 'success';
+            const text = isSuccess
+                ? '✅ Danke! Deine Nachricht wurde erfolgreich gesendet.'
+                : '❌ ' + (msg || 'Es ist ein Fehler aufgetreten. Bitte versuche es nochmal.');
+            const cls = isSuccess ? 'success' : 'error';
+
+            ['d-feedback', 'm-feedback'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) { el.textContent = text; el.className = 'form-feedback ' + cls + ' visible'; }
+            });
+
+            if (isSuccess) {
+                ['d-contact-form', 'm-contact-form'].forEach(id => {
+                    const f = document.getElementById(id);
+                    if (f) f.reset();
+                });
+            }
+            window.history.replaceState({}, '', window.location.pathname);
+        })();
+
         /* --- GLOBAL VARIABLES & HELPER --- */
         let dSidebarTimeout;
         const dSidebar = document.getElementById('d-sidebar');
@@ -616,10 +664,4 @@
         });
 
         /* --- MOBILE HEADER HIDE AFTER 3s --- */
-        setTimeout(() => {
-            const mh = document.getElementById('m-header-main');
-            if (mh && window.innerWidth <= 800) mh.style.transform = 'translateY(-100%)';
-        }, 3000);
-    </script>
-</body>
-</html>
+        setTimeo
