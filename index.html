@@ -103,8 +103,8 @@
             .d-nav-item-epk a { color: var(--anton-red) !important; font-weight: bold; }
             
             .d-sidebar-right { position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 50px; display: flex; flex-direction: column; align-items: center; gap: 15px; z-index: 999; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(3px); padding: 25px 0; border-radius: 20px 0 0 20px; }
-            .d-sidebar-right a i { color: #000; font-size: 1.2rem; transition: transform 0.4s ease-in-out, color 0.4s ease-in-out; animation: ultraFlowWave 6s linear infinite; }
-            @keyframes ultraFlowWave { 0% { transform: scale(1); color: #000; } 9.33% { transform: scale(1.55); color: var(--brand-color); } 23.33%, 100% { transform: scale(1); color: #000; } }
+            .d-sidebar-right a i { color: #000; font-size: 1.2rem; transition: transform 0.4s ease-in-out, color 0.4s ease-in-out; animation: ultraFlowWaveDesktop 6s linear infinite; }
+            @keyframes ultraFlowWaveDesktop { 0% { transform: scale(1); color: #000; } 9.33% { transform: scale(1.55); color: var(--brand-color, #000); } 23.33%, 100% { transform: scale(1); color: #000; } }
             
             .d-sidebar-right a:nth-child(1) i { --brand-color: #f00; animation-delay: 0.0s; }
             .d-sidebar-right a:nth-child(2) i { --brand-color: #25F4EE; animation-delay: 0.25s; }
@@ -128,18 +128,17 @@
             .box-pause2  { width: 10%; height: 30%; top: 34%; left: 60%; transform: rotate(1deg); }
             .box-pause3  { width: 5%;  height: 18%; top: 21%; left: 66%; transform: rotate(45deg); }
 
-            /* ── NEWS BOX DESKTOP: kompakter ── */
             .d-news-box {
                 position: fixed;
                 bottom: 60px;
                 left: 50%;
                 transform: translateX(-50%);
-                width: clamp(200px, 22%, 320px); /* vorher 34% / 440px */
+                width: clamp(200px, 22%, 320px);
                 background: rgba(255, 255, 255, 0.90);
                 border: 3px solid #000;
                 box-shadow: 6px 6px 0 #000;
                 border-radius: 18px;
-                padding: 12px 16px 10px 16px; /* etwas weniger padding */
+                padding: 12px 16px 10px 16px;
                 z-index: 20;
                 backdrop-filter: blur(8px);
                 box-sizing: border-box;
@@ -176,6 +175,57 @@
             .d-footer-links { display: flex; flex-direction: column; align-items: center; gap: 4px; }
             .d-footer a { color: #000; text-decoration: none; margin: 0 12px; font-weight: bold; transition: all 0.3s ease; }
             .d-footer a:hover { color: var(--anton-yellow) !important; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; }
+        }
+
+        /* ================================================================= */
+        /* MOBILE – GEMEINSAME BASIS-STILE (Portrait + Landscape)            */
+        /* Android Chrome: CSS custom properties in @keyframes werden        */
+        /* NICHT unterstützt → Farb-Animation per JS gesteuert (siehe unten) */
+        /* ================================================================= */
+        @media (max-width: 800px), (orientation: landscape) and (max-height: 500px) {
+
+            /* Basis-Animation ohne var() – Android Chrome-kompatibel */
+            @keyframes ultraFlowWaveMobile {
+                0%           { transform: scale(1);   }
+                9.33%        { transform: scale(1.4); }
+                23.33%, 100% { transform: scale(1);   }
+            }
+
+            .m-sidebar-right a i {
+                color: #000;
+                font-size: 1.5rem;
+                display: inline-block;
+                animation: ultraFlowWaveMobile 6s linear infinite;
+            }
+
+            .m-sidebar-right a:nth-child(1) i { animation-delay: 0.00s; }
+            .m-sidebar-right a:nth-child(2) i { animation-delay: 0.25s; }
+            .m-sidebar-right a:nth-child(3) i { animation-delay: 0.50s; }
+            .m-sidebar-right a:nth-child(4) i { animation-delay: 0.75s; }
+            .m-sidebar-right a:nth-child(5) i { animation-delay: 1.00s; }
+            .m-sidebar-right a:nth-child(6) i { animation-delay: 1.25s; }
+            .m-sidebar-right a:nth-child(7) i { animation-delay: 1.50s; }
+            .m-sidebar-right a:nth-child(8) i { animation-delay: 1.75s; }
+            .m-sidebar-right a:nth-child(9) i { animation-delay: 2.00s; }
+
+            /* Links niemals als blauen Browser-Standard sichtbar */
+            .m-sidebar-right a,
+            .m-sidebar a,
+            .m-id-panel a,
+            .m-news-box a {
+                color: inherit;
+                text-decoration: none !important;
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            /* Android Chrome: backdrop-filter Fallback */
+            .m-header,
+            .m-sidebar-right,
+            .m-id-panel,
+            .m-news-box {
+                -webkit-backdrop-filter: blur(8px);
+                backdrop-filter: blur(8px);
+            }
         }
 
         /* ================================================================= */
@@ -240,14 +290,13 @@
             .m-id-panel.open { right: 0; }
             .m-id-panel a { color: #000; text-decoration: none; margin: 0 8px; text-transform: uppercase; }
 
-            /* ── NEWS BOX MOBILE PORTRAIT ── */
             .m-news-box {
                 position: fixed;
                 bottom: 75px;
                 left: 50%;
                 transform: translateX(-50%);
-                width: calc(100% - 80px); /* etwas schmaler */
-                max-width: 280px;          /* vorher 340px */
+                width: calc(100% - 80px);
+                max-width: 280px;
                 background: rgba(255, 255, 255, 0.90);
                 border: 3px solid #000;
                 box-shadow: 5px 5px 0 #000;
@@ -257,37 +306,16 @@
                 backdrop-filter: blur(8px);
                 box-sizing: border-box;
             }
-            .m-news-box h3 {
-                margin: 0 0 3px 0;
-                font-size: 0.65rem;
-                text-transform: uppercase;
-                letter-spacing: 0.12em;
-                color: var(--anton-red);
-            }
-            .m-news-box h2 {
-                margin: 0 0 5px 0;
-                font-size: 0.92rem;
-                color: #000;
-            }
-            .m-news-box p {
-                margin: 0;
-                font-size: 0.72rem;
-                line-height: 1.45;
-                color: #222;
-            }
+            .m-news-box h3 { margin: 0 0 3px 0; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--anton-red); }
+            .m-news-box h2 { margin: 0 0 5px 0; font-size: 0.92rem; color: #000; }
+            .m-news-box p  { margin: 0; font-size: 0.72rem; line-height: 1.45; color: #222; }
 
-            .m-sidebar-right { position: fixed; bottom: 0; left: 0; width: 100%; height: 65px; display: flex; flex-direction: row; align-items: center; z-index: 999; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(8px); border-top: 2px solid #000; padding: 0 10px; justify-content: space-evenly; }
-            .m-sidebar-right a i { color: #000; font-size: 1.5rem; display: inline-block; animation: ultraFlowWaveMobile 6s linear infinite; }
-            @keyframes ultraFlowWaveMobile { 0% { transform: scale(1); color: #000; } 9.33% { transform: scale(1.4); color: var(--brand-color); } 23.33%, 100% { transform: scale(1); color: #000; } }
-            .m-sidebar-right a:nth-child(1) i { --brand-color: #f00; animation-delay: 0.0s; }
-            .m-sidebar-right a:nth-child(2) i { --brand-color: #25F4EE; animation-delay: 0.25s; }
-            .m-sidebar-right a:nth-child(3) i { --brand-color: #E1306C; animation-delay: 0.5s; }
-            .m-sidebar-right a:nth-child(4) i { --brand-color: #25D366; animation-delay: 0.75s; }
-            .m-sidebar-right a:nth-child(5) i { --brand-color: #1877F2; animation-delay: 1.0s; }
-            .m-sidebar-right a:nth-child(6) i { --brand-color: #1DB954; animation-delay: 1.25s; }
-            .m-sidebar-right a:nth-child(7) i { --brand-color: var(--apple-gray); animation-delay: 1.5s; }
-            .m-sidebar-right a:nth-child(8) i { --brand-color: #f00; animation-delay: 1.75s; }
-            .m-sidebar-right a:nth-child(9) i { --brand-color: var(--amazon-blue); animation-delay: 2.0s; }
+            .m-sidebar-right { 
+                position: fixed; bottom: 0; left: 0; width: 100%; height: 65px; 
+                display: flex; flex-direction: row; align-items: center; z-index: 999; 
+                background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(8px); 
+                border-top: 2px solid #000; padding: 0 10px; justify-content: space-evenly; 
+            }
         }
 
         /* ================================================================= */
@@ -297,21 +325,29 @@
             #desktop-wrapper { display: none !important; }
             #mobile-wrapper  { display: block !important; }
 
-            body { overflow-y: auto !important; position: static !important; height: auto !important; }
+            body { 
+                overflow-y: auto !important; 
+                position: static !important; 
+                height: auto !important;
+                /* JS touch-parallax deaktivieren */
+            }
 
+            /* ── Hintergrund: einfacher Fix ohne JS-Transform-Trick ── */
             #mobile-wrapper #m-bg-fix { 
                 display: block !important;
                 position: fixed !important;
-                top: 0 !important; left: 0 !important; 
-                width: 100% !important; height: 100% !important; 
+                top: 0 !important;
+                left: 0 !important; 
+                width: 100% !important;
+                height: 100% !important;
                 background: url('Background.jpg') no-repeat center center !important;
                 background-size: cover !important;
                 z-index: -1 !important;
-                will-change: unset !important; 
+                will-change: unset !important;
                 transform: none !important;
             }
 
-            /* Invisible click boxes – landscape-optimiert */
+            /* Invisible click boxes */
             .invisible-box { position: fixed; z-index: 10; background: transparent; border: none; cursor: pointer; }
             .box-ertappt { width: 16%; height: 55%; top: 12%; left: 14%; transform: rotate(-4deg); }
             .box-mitte   { width: 17%; height: 54%; top: 12%; left: 32%; transform: rotate(3deg); z-index: 1001; }
@@ -329,7 +365,7 @@
             #mobile-wrapper .m-header-logo { top: 140% !important; max-height: 150px !important; }
             #mobile-wrapper .m-menu-btn { top: 6px !important; left: 10px !important; width: 36px !important; height: 36px !important; }
 
-            /* Sidebar – vertikale Leiste links */
+            /* ── Sidebar: vertikale Leiste links ── */
             #mobile-wrapper .m-sidebar { 
                 top: 0 !important;
                 left: -190px !important;
@@ -350,17 +386,19 @@
                 top: 0 !important;
             }
             #mobile-wrapper .m-nav-item { flex: none !important; width: 100%; text-align: left; margin-bottom: 12px; }
-            #mobile-wrapper .m-nav-item a { flex-direction: row !important; gap: 8px; font-size: 0.8rem; }
+            #mobile-wrapper .m-nav-item a { flex-direction: row !important; gap: 8px; font-size: 0.8rem; color: #000 !important; text-decoration: none !important; }
             #mobile-wrapper .m-nav-item a i { font-size: 0.9rem; width: 18px; text-align: center; }
             #mobile-wrapper .mobile-tag { font-size: 0.68rem; writing-mode: horizontal-tb !important; transform: none !important; margin-top: 0; }
 
             #mobile-wrapper .m-epk-container { 
                 position: static !important;
-                width: 100% !important; height: auto !important;
+                width: 100% !important; 
+                height: auto !important;
                 background: transparent !important; 
                 border-left: none !important; 
                 border-top: 1px solid rgba(0,0,0,0.15) !important;
-                padding-top: 10px !important; margin-top: auto !important;
+                padding-top: 10px !important; 
+                margin-top: auto !important;
                 justify-content: flex-start !important;
             }
             #mobile-wrapper .m-epk-text { 
@@ -369,7 +407,7 @@
                 font-size: 0.75rem;
             }
 
-            /* Social-Leiste rechts */
+            /* ── Social-Leiste rechts: vertikale Anordnung ── */
             #mobile-wrapper .m-sidebar-right { 
                 position: fixed !important;
                 top: 0 !important;
@@ -384,25 +422,16 @@
                 border-bottom: none !important;
                 border-left: 2px solid #000 !important;
                 border-radius: 0 !important;
-                padding: 0 !important;
+                padding: 8px 0 !important;
                 gap: 0 !important;
                 justify-content: space-evenly !important;
                 background: rgba(255, 255, 255, 0.2) !important;
                 backdrop-filter: blur(3px) !important;
             }
+            /* Icons im Landscape etwas kleiner */
             #mobile-wrapper .m-sidebar-right a i { font-size: 1.1rem !important; }
-            @keyframes ultraFlowWaveMobile { 0% { transform: scale(1); color: #000; } 9.33% { transform: scale(1.4); color: var(--brand-color); } 23.33%, 100% { transform: scale(1); color: #000; } }
-            #mobile-wrapper .m-sidebar-right a:nth-child(1) i { --brand-color: #f00; animation-delay: 0.0s; }
-            #mobile-wrapper .m-sidebar-right a:nth-child(2) i { --brand-color: #25F4EE; animation-delay: 0.25s; }
-            #mobile-wrapper .m-sidebar-right a:nth-child(3) i { --brand-color: #E1306C; animation-delay: 0.5s; }
-            #mobile-wrapper .m-sidebar-right a:nth-child(4) i { --brand-color: #25D366; animation-delay: 0.75s; }
-            #mobile-wrapper .m-sidebar-right a:nth-child(5) i { --brand-color: #1877F2; animation-delay: 1.0s; }
-            #mobile-wrapper .m-sidebar-right a:nth-child(6) i { --brand-color: #1DB954; animation-delay: 1.25s; }
-            #mobile-wrapper .m-sidebar-right a:nth-child(7) i { --brand-color: var(--apple-gray); animation-delay: 1.5s; }
-            #mobile-wrapper .m-sidebar-right a:nth-child(8) i { --brand-color: #f00; animation-delay: 1.75s; }
-            #mobile-wrapper .m-sidebar-right a:nth-child(9) i { --brand-color: var(--amazon-blue); animation-delay: 2.0s; }
 
-            /* I/D verstecken, stattdessen fixe Leiste unten */
+            /* ── I/D: ausgeblendet, stattdessen fixe Leiste unten ── */
             #mobile-wrapper .m-id-button { display: none !important; }
             #mobile-wrapper .m-id-panel { 
                 position: fixed !important;
@@ -424,15 +453,20 @@
                 align-items: center !important;
                 justify-content: center !important;
             }
-            #mobile-wrapper .m-id-panel a { color: #000; text-decoration: none; margin: 0 8px; text-transform: uppercase; }
+            #mobile-wrapper .m-id-panel a { 
+                color: #000 !important; 
+                text-decoration: none !important; 
+                margin: 0 8px; 
+                text-transform: uppercase; 
+            }
 
-            /* News-Box Landscape: schmal & flach, mittig positioniert */
+            /* ── News-Box Landscape ── */
             #mobile-wrapper .m-news-box {
                 display: block !important;
                 position: fixed !important;
-                bottom: 36px !important;   /* über der I/D-Leiste */
-                left: 50px !important;     /* Platz für linke sidebar */
-                right: 50px !important;    /* Platz für rechte social-bar */
+                bottom: 36px !important;
+                left: 50px !important;
+                right: 50px !important;
                 transform: none !important;
                 width: auto !important;
                 max-width: none !important;
@@ -445,9 +479,9 @@
                 backdrop-filter: blur(8px) !important;
                 box-sizing: border-box !important;
             }
-            #mobile-wrapper .m-news-box h3 { font-size: 0.55rem !important; margin: 0 0 1px 0 !important; letter-spacing: 0.1em !important; }
-            #mobile-wrapper .m-news-box h2 { font-size: 0.72rem !important; margin: 0 0 2px 0 !important; }
-            #mobile-wrapper .m-news-box p  { font-size: 0.6rem !important; line-height: 1.3 !important; }
+            #mobile-wrapper .m-news-box h3 { font-size: 0.55rem !important; margin: 0 0 1px 0 !important; letter-spacing: 0.1em !important; color: var(--anton-red) !important; }
+            #mobile-wrapper .m-news-box h2 { font-size: 0.72rem !important; margin: 0 0 2px 0 !important; color: #000 !important; }
+            #mobile-wrapper .m-news-box p  { font-size: 0.6rem !important; line-height: 1.3 !important; color: #222 !important; }
         }
     </style>
 </head>
@@ -559,6 +593,9 @@
     </div>
 
     <script>
+        /* ============================================================
+           DESKTOP SIDEBAR
+        ============================================================ */
         let dSidebarTimeout;
         const dSidebar = document.getElementById('d-sidebar');
 
@@ -582,7 +619,7 @@
         }
 
         document.addEventListener('click', function(e) {
-            if(window.innerWidth > 800) {
+            if (window.innerWidth > 800) {
                 const btn = document.querySelector(".d-menu-btn");
                 if (dSidebar && !dSidebar.contains(e.target) && btn && !btn.contains(e.target) && dSidebar.classList.contains("open")) {
                     dSidebar.classList.remove("open");
@@ -591,102 +628,215 @@
             }
         });
 
-        const mSidebar = document.getElementById('m-sidebar');
-        const mMenuBtn = document.getElementById('m-menu-trigger');
-        const mIdBtn = document.getElementById('m-id-btn');
-        const mIdPanel = document.getElementById('m-id-panel');
-        const mBg = document.getElementById('m-bg-fix');
+        /* ============================================================
+           SOCIAL ICON FARB-ANIMATION per JS
+           Android Chrome unterstützt keine CSS Custom Properties
+           innerhalb von @keyframes – daher JS-gesteuert
+        ============================================================ */
+        (function() {
+            const brandColors = ['#ff0000','#25F4EE','#E1306C','#25D366','#1877F2','#1DB954','#A2AAAD','#ff0000','#00A8E1'];
+            const delays      = [0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0];
+            const period      = 6000; // ms – muss @keyframes-Dauer entsprechen
+            const peakStart   = 0.0933; // 9.33%
+            const peakEnd     = 0.2333; // 23.33%
+
+            function hexToRgb(hex) {
+                const r = parseInt(hex.slice(1,3),16);
+                const g = parseInt(hex.slice(3,5),16);
+                const b = parseInt(hex.slice(5,7),16);
+                return [r,g,b];
+            }
+
+            function lerp(a, b, t) { return Math.round(a + (b - a) * t); }
+
+            function tick() {
+                const now = performance.now();
+                document.querySelectorAll('.m-sidebar-right a i').forEach((icon, idx) => {
+                    const delay    = delays[idx] * 1000;
+                    const progress = ((now - delay) % period) / period;
+                    const p        = ((progress % 1) + 1) % 1;
+                    let color = '#000000';
+                    const brand = hexToRgb(brandColors[idx]);
+
+                    if (p < peakStart) {
+                        // 0 → peak: fade to brand
+                        const t = p / peakStart;
+                        color = `rgb(${lerp(0,brand[0],t)},${lerp(0,brand[1],t)},${lerp(0,brand[2],t)})`;
+                    } else if (p < peakEnd) {
+                        // peak → end: hold brand
+                        color = `rgb(${brand[0]},${brand[1]},${brand[2]})`;
+                    } else {
+                        // end → 100%: fade back to black
+                        const t = (p - peakEnd) / (1 - peakEnd);
+                        color = `rgb(${lerp(brand[0],0,t)},${lerp(brand[1],0,t)},${lerp(brand[2],0,t)})`;
+                    }
+                    icon.style.color = color;
+                });
+                requestAnimationFrame(tick);
+            }
+
+            // Nur auf Mobile starten
+            if (window.innerWidth <= 800 || (window.innerHeight <= 500 && window.innerWidth > window.innerHeight)) {
+                requestAnimationFrame(tick);
+            }
+        })();
+
+        /* ============================================================
+           MOBILE LOGIC
+        ============================================================ */
+        const mSidebar  = document.getElementById('m-sidebar');
+        const mMenuBtn  = document.getElementById('m-menu-trigger');
+        const mIdBtn    = document.getElementById('m-id-btn');
+        const mIdPanel  = document.getElementById('m-id-panel');
+        const mBg       = document.getElementById('m-bg-fix');
         let mMenuTimeout, mIdTimeout;
 
+        /**
+         * Landscape-Detection: kombiniert innerHeight-Check (klassisch)
+         * mit screen.orientation API (Android Chrome zuverlässiger)
+         */
         function isLandscapeMobile() {
-            return window.innerHeight <= 500 && window.innerWidth > window.innerHeight;
+            const bySize = window.innerHeight <= 500 && window.innerWidth > window.innerHeight;
+            const byOrientation = (screen.orientation && screen.orientation.type)
+                ? screen.orientation.type.startsWith('landscape')
+                : (window.orientation === 90 || window.orientation === -90);
+            // Nur als Landscape wenn BEIDE Signale oder explizit kleine Höhe
+            return bySize || (byOrientation && window.innerWidth <= 900);
         }
 
         function mCloseAllMenus() {
-            if(mSidebar) mSidebar.classList.remove('open');
-            if(mMenuBtn) mMenuBtn.classList.remove('active');
-            if(mMenuTimeout) clearTimeout(mMenuTimeout);
-            if(!isLandscapeMobile()) {
-                if(mIdPanel) mIdPanel.classList.remove('open');
-                if(mIdBtn) mIdBtn.classList.remove('hidden');
-                if(mIdTimeout) clearTimeout(mIdTimeout);
+            if (mSidebar)  mSidebar.classList.remove('open');
+            if (mMenuBtn)  mMenuBtn.classList.remove('active');
+            clearTimeout(mMenuTimeout);
+            if (!isLandscapeMobile()) {
+                if (mIdPanel) mIdPanel.classList.remove('open');
+                if (mIdBtn)   mIdBtn.classList.remove('hidden');
+                clearTimeout(mIdTimeout);
             }
         }
 
         function mToggleMenu(e) { 
             e.stopPropagation();
-            if (mSidebar.classList.contains('open')) { mCloseAllMenus(); } 
-            else { mCloseAllMenus(); mSidebar.classList.add('open'); mMenuBtn.classList.add('active'); mMenuTimeout = setTimeout(mCloseAllMenus, 5000); }
+            if (mSidebar.classList.contains('open')) {
+                mCloseAllMenus();
+            } else {
+                mCloseAllMenus();
+                mSidebar.classList.add('open');
+                mMenuBtn.classList.add('active');
+                mMenuTimeout = setTimeout(mCloseAllMenus, 5000);
+            }
         }
 
         function mOpenIDMenu(e) {
-            e.stopPropagation(); mCloseAllMenus();
-            if(mIdBtn) mIdBtn.classList.add('hidden'); 
-            if(mIdPanel) mIdPanel.classList.add('open');
+            e.stopPropagation();
+            mCloseAllMenus();
+            if (mIdBtn)   mIdBtn.classList.add('hidden'); 
+            if (mIdPanel) mIdPanel.classList.add('open');
             mIdTimeout = setTimeout(mCloseAllMenus, 5000);
         }
 
         function applyLandscapeState() {
-            if(isLandscapeMobile()) {
-                if(mIdPanel) mIdPanel.style.cssText = '';
-                if(mIdBtn)   mIdBtn.style.display = 'none';
+            if (isLandscapeMobile()) {
+                /* Im Landscape: I/D-Button verstecken, Panel immer sichtbar */
+                if (mIdBtn)   mIdBtn.style.display = 'none';
+                if (mIdPanel) {
+                    mIdPanel.style.cssText = '';
+                    mIdPanel.classList.remove('open');
+                }
+                /* Hintergrund-Transform neutralisieren */
+                if (mBg) {
+                    mBg.style.transform = 'none';
+                    mBg.style.left      = '0';
+                    mBg.style.width     = '100%';
+                }
+                /* Android Chrome: body-Scroll freigeben */
+                document.body.style.overflow   = '';
+                document.body.style.position   = '';
+                document.body.style.height      = '';
             } else {
-                if(mIdBtn)   mIdBtn.style.display = '';
-                if(mIdPanel) { mIdPanel.classList.remove('open'); }
+                if (mIdBtn)   mIdBtn.style.display = '';
+                if (mIdPanel) mIdPanel.classList.remove('open');
+                /* Portrait: body wieder fixieren */
+                if (window.innerWidth <= 800) {
+                    document.body.style.overflow = 'hidden';
+                    document.body.style.position = 'fixed';
+                    document.body.style.height   = '100vh';
+                }
             }
         }
-        window.addEventListener('resize', applyLandscapeState);
-        window.addEventListener('orientationchange', () => setTimeout(applyLandscapeState, 100));
+
+        /* Android Chrome feuert bei Address-Bar-Ein/Ausblenden ein resize-Event –
+           kurze Verzögerung verhindert falsche Landscape-Erkennung */
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(applyLandscapeState, 100);
+        });
+        window.addEventListener('orientationchange', () => setTimeout(applyLandscapeState, 300));
         applyLandscapeState();
 
+        /* ── Touch-Parallax (nur Portrait) ── */
         let touchStartX = 0, touchStartY = 0, currentTranslateX = 0;
 
         document.addEventListener('touchstart', e => { 
-            touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY; 
-        }, {passive: true});
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
 
         document.addEventListener('touchmove', e => {
-            if(window.innerWidth <= 800 && !isLandscapeMobile()) {
-                const moveX = e.touches[0].clientX, moveY = e.touches[0].clientY;
-                const diffX = moveX - touchStartX, diffY = moveY - touchStartY;
+            if (window.innerWidth <= 800 && !isLandscapeMobile()) {
+                const moveX = e.touches[0].clientX;
+                const moveY = e.touches[0].clientY;
+                const diffX = moveX - touchStartX;
+                const diffY = moveY - touchStartY;
+
                 if (Math.abs(diffX) > 10 || Math.abs(diffY) > 10) { 
                     if (!mSidebar.contains(e.target)) mCloseAllMenus(); 
                 }
-                if (Math.abs(diffX) > Math.abs(diffY)) {
+                if (Math.abs(diffX) > Math.abs(diffY) && mBg) {
                     let newX = currentTranslateX + diffX;
                     const limit = window.innerWidth; 
-                    if (newX > limit) newX = limit;
-                    if (newX < -limit) newX = -limit;
-                    if(mBg) mBg.style.transform = `translateX(${newX}px)`;
+                    newX = Math.max(-limit, Math.min(limit, newX));
+                    mBg.style.transform = `translateX(${newX}px)`;
                 }
             }
-        }, {passive: true});
+        }, { passive: true });
 
-        document.addEventListener('touchend', e => {
-            if(window.innerWidth <= 800 && !isLandscapeMobile() && mBg) {
-                const style = window.getComputedStyle(mBg);
-                const matrix = new WebKitCSSMatrix(style.transform);
-                currentTranslateX = matrix.m41;
+        document.addEventListener('touchend', () => {
+            if (window.innerWidth <= 800 && !isLandscapeMobile() && mBg) {
+                try {
+                    // DOMMatrix (Android Chrome) mit WebKitCSSMatrix (Safari) Fallback
+                    const transformStr = window.getComputedStyle(mBg).transform;
+                    const MatrixCtor   = window.DOMMatrix || window.WebKitCSSMatrix;
+                    if (MatrixCtor) {
+                        currentTranslateX = new MatrixCtor(transformStr).m41;
+                    }
+                } catch(e) { currentTranslateX = 0; }
             }
-        }, {passive: true});
+        }, { passive: true });
 
         document.addEventListener('click', (e) => {
-            if(window.innerWidth <= 800) {
+            if (window.innerWidth <= 800) {
                 if (mSidebar && !mSidebar.contains(e.target) && 
-                    mMenuBtn && !mMenuBtn.contains(e.target) && 
-                    mIdPanel && !mIdPanel.contains(e.target) && 
-                    mIdBtn   && !mIdBtn.contains(e.target)) mCloseAllMenus();
+                    mMenuBtn  && !mMenuBtn.contains(e.target)  && 
+                    mIdPanel  && !mIdPanel.contains(e.target)  && 
+                    mIdBtn    && !mIdBtn.contains(e.target)) {
+                    mCloseAllMenus();
+                }
             }
         });
 
-        (function() {
+        /* ============================================================
+           DYNAMISCHER HINTERGRUND (Jahreszeit + Tageszeit)
+        ============================================================ */
+        (function () {
             const now   = new Date();
             const hour  = now.getHours();
             const month = now.getMonth();
 
             function getSeason(m) {
-                if (m >= 2 && m <= 4) return 'fruehling';
-                if (m >= 5 && m <= 7) return 'sommer';
+                if (m >= 2 && m <= 4)  return 'fruehling';
+                if (m >= 5 && m <= 7)  return 'sommer';
                 if (m >= 8 && m <= 10) return 'herbst';
                 return 'winter';
             }
@@ -698,36 +848,25 @@
                 return 'nacht';
             }
 
-            const season  = getSeason(month);
-            const daytime = getDaytime(hour);
-            const filename = `bg-${season}-${daytime}.jpg`;
+            const filename = `bg-${getSeason(month)}-${getDaytime(hour)}.jpg`;
 
             function setBackground(src, fallback) {
-                const isDesktop = window.innerWidth > 800;
+                const isDesktop = window.innerWidth > 800 && window.innerHeight > 500;
 
                 if (isDesktop) {
                     const layerA = document.getElementById('bg-layer-a');
                     const layerB = document.getElementById('bg-layer-b');
                     if (!layerA) return;
                     const img = new Image();
-                    img.onload = function() {
-                        layerA.style.backgroundImage = `url('${src}')`;
-                        layerA.style.opacity = '1';
-                        if (layerB) layerB.style.opacity = '0';
-                    };
-                    img.onerror = function() {
-                        if (fallback) {
-                            layerA.style.backgroundImage = `url('${fallback}')`;
-                            layerA.style.opacity = '1';
-                        }
-                    };
+                    img.onload  = () => { layerA.style.backgroundImage = `url('${src}')`; layerA.style.opacity = '1'; if (layerB) layerB.style.opacity = '0'; };
+                    img.onerror = () => { if (fallback) layerA.style.backgroundImage = `url('${fallback}')`; };
                     img.src = src;
                 } else {
                     const mBgEl = document.getElementById('m-bg-fix');
                     if (!mBgEl) return;
                     const img = new Image();
-                    img.onload = function() { mBgEl.style.backgroundImage = `url('${src}')`; };
-                    img.onerror = function() { if (fallback) mBgEl.style.backgroundImage = `url('${fallback}')`; };
+                    img.onload  = () => { mBgEl.style.backgroundImage = `url('${src}')`; };
+                    img.onerror = () => { if (fallback) mBgEl.style.backgroundImage = `url('${fallback}')`; };
                     img.src = src;
                 }
             }
@@ -735,9 +874,12 @@
             setBackground(filename, 'Background.jpg');
         })();
 
-        setTimeout(() => { 
+        /* ============================================================
+           HEADER SLIDE-IN / SLIDE-OUT (Mobile)
+        ============================================================ */
+        setTimeout(() => {
             const mh = document.getElementById('m-header-main');
-            if(mh && (window.innerWidth <= 800 || isLandscapeMobile())) {
+            if (mh && (window.innerWidth <= 800 || isLandscapeMobile())) {
                 mh.style.transform = 'translateY(0)';
                 setTimeout(() => { mh.style.transform = 'translateY(-100%)'; }, 3000);
             }
