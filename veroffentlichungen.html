@@ -694,17 +694,21 @@
         /* ================================================================= */
         (function() {
             /* Rohdaten aller Slides */
+            /* Desktop dreht links-herum: nächstes Item kommt von rechts.
+               Mobile wischt nach links für "weiter". Damit beide Richtungen
+               dieselbe Abfolge zeigen, ist das Mobile-Array gespiegelt:
+               Hunger → Monsterparty → Ertappt → … (älteste zuerst nach Hunger) */
             const SLIDES = [
                 { src: 'Hunger.JPG',                                    label: 'neue Single (Februar 2026)', link: 'neuesingle.html' },
-                { src: 'fanny-furzfliege-ecover-3k-srgb-lzwjpg.jpg',   label: 'Single (2025)' },
-                { src: 'anton-cover-single-weihnachtenjpg.jpg',         label: 'Single (2023)' },
-                { src: 'anton-eiswurfel-coverjpg.jpg',                  label: 'Single (2023)' },
-                { src: 'anton-cover-single-raumschiff-1jpg.jpg',        label: 'Single (2023)' },
-                { src: 'cover-mein-name-ist-hase-esinglejpg.jpg',       label: 'Meist gehört (2023)' },
+                { src: 'monsterparty-anton.jpg',                        label: 'Debütsingle (2020)' },
+                { src: 'Album Ertappt.jpg',                             label: 'Debütalbum (2021)' },
                 { src: 'anton-noch-5-minuten.jpg',                      label: 'Single (2021)' },
                 { src: 'anton-album-cover-grosse-pause-vjpg.jpg',       label: '2. Album (2023)' },
-                { src: 'Album Ertappt.jpg',                             label: 'Debütalbum (2021)' },
-                { src: 'monsterparty-anton.jpg',                        label: 'Debütsingle (2020)' },
+                { src: 'cover-mein-name-ist-hase-esinglejpg.jpg',       label: 'Meist gehört (2023)' },
+                { src: 'anton-cover-single-raumschiff-1jpg.jpg',        label: 'Single (2023)' },
+                { src: 'anton-eiswurfel-coverjpg.jpg',                  label: 'Single (2023)' },
+                { src: 'anton-cover-single-weihnachtenjpg.jpg',         label: 'Single (2023)' },
+                { src: 'fanny-furzfliege-ecover-3k-srgb-lzwjpg.jpg',   label: 'Single (2025)' },
             ];
 
             const N          = SLIDES.length;
