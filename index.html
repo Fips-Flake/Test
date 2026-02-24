@@ -190,6 +190,10 @@
             .m-nav-item { flex: 1; text-align: center; }
             .m-nav-item a { text-decoration: none; color: #000; display: flex; flex-direction: column; align-items: center; }
             .mobile-tag { font-size: 0.55rem; text-transform: uppercase; font-weight: bold; margin-top: 4px; }
+            /* Portrait: normaler Musik-Link sichtbar, Button+Untermenü versteckt */
+            .m-musik-link { display: flex; }
+            .m-sub-toggle { display: none; }
+            .m-submenu { display: none; }
             .m-epk-container { position: absolute; right: 0; top: 0; height: 100%; width: 45px; background: #fff; border-left: 3px solid #000; display: flex; align-items: center; justify-content: center; }
             .m-epk-text { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 0.7rem; color: var(--anton-red); font-weight: bold; text-decoration: none; }
             .m-id-button { position: fixed; right: 0; bottom: 150px; width: 38px; height: 38px; background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(4px); border: 2px solid #000; border-right: none; border-radius: 6px 0 0 6px; display: flex; align-items: center; justify-content: center; z-index: 1300; font-weight: bold; font-size: 0.85rem; color: #000; cursor: pointer; transition: transform 0.4s ease-in-out; }
@@ -293,6 +297,9 @@
             #mobile-wrapper .m-nav-item a { flex-direction: row !important; gap: 10px; font-size: 0.85rem; color: #000; text-decoration: none; }
             #mobile-wrapper .m-nav-item a i { font-size: 1rem; width: 22px; text-align: center; }
             #mobile-wrapper .mobile-tag { font-size: 0.72rem; writing-mode: horizontal-tb !important; transform: none !important; margin-top: 0; }
+            /* Landscape: normaler Musik-Link weg, Button+Untermenü aktiv */
+            #mobile-wrapper .m-musik-link { display: none !important; }
+            #mobile-wrapper .m-sub-toggle { display: flex !important; }
 
             /* Untermenü in der Landscape-Sidebar */
             #mobile-wrapper .m-submenu {
@@ -379,25 +386,23 @@
             ──────────────────────────────────────────────────────────── */
             #mobile-wrapper .m-news-box {
                 position: fixed !important;
-                top: 62px !important;           /* direkt unter dem Header */
-                right: 48px !important;         /* links der Social-Sidebar (46px) */
-                bottom: 0 !important;
+                top: 62px !important;
+                right: 48px !important;
+                bottom: auto !important;
                 left: auto !important;
-                width: 105px !important;        /* schmale Hochkant-Spalte */
+                width: 105px !important;
                 max-width: none !important;
+                height: auto !important;
                 transform: none !important;
-                /* Transparenz wie portrait/desktop boxes */
                 background: rgba(255, 255, 255, 0.55) !important;
                 border: 2px solid #000 !important;
-                border-bottom: none !important;
-                border-radius: 10px 10px 0 0 !important;
+                border-radius: 10px !important;
                 box-shadow: none !important;
                 backdrop-filter: blur(8px) !important;
                 -webkit-backdrop-filter: blur(8px) !important;
                 padding: 10px 9px 8px 9px !important;
                 box-sizing: border-box !important;
                 z-index: 20 !important;
-                /* Inhalt vertikal gestapelt, von oben */
                 display: flex !important;
                 flex-direction: column !important;
                 align-items: flex-start !important;
@@ -512,6 +517,8 @@
         <nav class="m-sidebar" id="m-sidebar">
             <div class="m-nav-item"><a href="index.html"><i class="fa-solid fa-house"></i><span class="mobile-tag">Start</span></a></div>
             <div class="m-nav-item" id="m-musik-item">
+                <!-- Portrait: normaler Link; Landscape: Button mit Untermenü -->
+                <a href="meinemusik.html" class="m-musik-link"><i class="fa-solid fa-music"></i><span class="mobile-tag">Musik</span></a>
                 <button class="m-sub-toggle" onclick="mToggleSubMenu(event)">
                     <i class="fa-solid fa-music"></i>
                     <span class="mobile-tag">Musik</span>
