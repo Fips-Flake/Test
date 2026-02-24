@@ -374,58 +374,61 @@
 
             /* ────────────────────────────────────────────────────────────
                NEUIGKEITEN BOX – LANDSCAPE
-               Schmale Box rechts neben der linken Sidebar, am unteren Rand.
-               Mehrzeilig gestapelt, nicht einzeilig.
+               Hochkant, rechts: zwischen großem Pause-Bild und rechter 
+               Social-Sidebar. Transparenz wie die anderen Boxen (0.55).
             ──────────────────────────────────────────────────────────── */
             #mobile-wrapper .m-news-box {
-                display: block !important;
                 position: fixed !important;
+                top: 62px !important;           /* direkt unter dem Header */
+                right: 48px !important;         /* links der Social-Sidebar (46px) */
                 bottom: 0 !important;
-                left: 46px !important;
-                right: 46px !important;
+                left: auto !important;
+                width: 105px !important;        /* schmale Hochkant-Spalte */
+                max-width: none !important;
                 transform: none !important;
-                width: auto !important;
-                max-width: 260px !important;       /* schmaler begrenzen */
-                margin: 0 !important;
+                /* Transparenz wie portrait/desktop boxes */
+                background: rgba(255, 255, 255, 0.55) !important;
                 border: 2px solid #000 !important;
                 border-bottom: none !important;
                 border-radius: 10px 10px 0 0 !important;
                 box-shadow: none !important;
-                background: rgba(255, 255, 255, 0.88) !important;
                 backdrop-filter: blur(8px) !important;
-                padding: 6px 12px 7px 12px !important;
+                -webkit-backdrop-filter: blur(8px) !important;
+                padding: 10px 9px 8px 9px !important;
                 box-sizing: border-box !important;
                 z-index: 20 !important;
-                /* Gestapelt statt einzeilig */
+                /* Inhalt vertikal gestapelt, von oben */
+                display: flex !important;
                 flex-direction: column !important;
                 align-items: flex-start !important;
-                gap: 2px !important;
+                justify-content: flex-start !important;
+                gap: 5px !important;
+                overflow: hidden !important;
             }
             #mobile-wrapper .m-news-box h3 {
-                font-size: 0.52rem !important;
-                margin: 0 0 1px 0 !important;
+                font-size: 0.5rem !important;
+                margin: 0 !important;
                 color: var(--anton-red) !important;
                 text-transform: uppercase !important;
                 letter-spacing: 0.1em !important;
                 white-space: nowrap !important;
             }
             #mobile-wrapper .m-news-box h2 {
-                font-size: 0.72rem !important;
-                margin: 0 0 3px 0 !important;
+                font-size: 0.7rem !important;
+                margin: 0 !important;
                 color: #000 !important;
                 white-space: normal !important;
-                line-height: 1.2 !important;
+                line-height: 1.25 !important;
+                word-break: break-word !important;
             }
             #mobile-wrapper .m-news-box p {
                 font-size: 0.58rem !important;
                 margin: 0 !important;
-                color: #333 !important;
-                line-height: 1.35 !important;
+                color: #222 !important;
+                line-height: 1.4 !important;
                 white-space: normal !important;
+                word-break: break-word !important;
                 overflow: hidden !important;
-                display: -webkit-box !important;
-                -webkit-line-clamp: 2 !important;
-                -webkit-box-orient: vertical !important;
             }
 
             /* Seite im Landscape scrollbar */
