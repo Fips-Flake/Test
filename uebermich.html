@@ -78,8 +78,9 @@
             .image-container { flex-shrink: 0; }
             .album-cover { width: 200px; border: 3px solid #000; border-radius: 12px; overflow: hidden; box-shadow: 5px 5px 0 #000; }
             .album-cover img { width: 100%; height: auto; display: block; }
-            .album-text p { margin: 0 0 12px 0; font-size: 0.95rem; line-height: 1.6; }
-            .album-text p.intro { font-size: 1.05rem; font-weight: bold; color: var(--anton-red); }
+            .album-text { text-align: left; }
+            .album-text p { margin: 0 0 12px 0; font-size: 0.95rem; line-height: 1.6; text-align: left; }
+            .album-text p.intro { font-size: 1.05rem; font-weight: bold; color: var(--anton-red); text-align: left; }
 
             .d-footer { width: 100%; padding: 15px 0; background: rgba(255,255,255,0.95); border-top: 1.5px solid #000; text-align: center; font-size: 0.75rem; z-index: 100; position: fixed; bottom: 0; left: 0; }
             .d-footer a { color: #000; text-decoration: none; margin: 0 12px; font-weight: bold; transition: all 0.3s ease; }
@@ -143,8 +144,9 @@
             .detail-bento { display: flex; flex-direction: column; gap: 20px; background: rgba(255,255,255,0.92); border: 3px solid #000; box-shadow: 5px 5px 0 #000; border-radius: 16px; padding: 20px; }
             .album-cover { width: 120px; border: 3px solid #000; border-radius: 12px; overflow: hidden; box-shadow: 4px 4px 0 #000; }
             .album-cover img { width: 100%; height: auto; display: block; }
-            .album-text p { margin: 0 0 10px 0; font-size: 0.85rem; line-height: 1.55; }
-            .album-text p.intro { font-size: 0.92rem; font-weight: bold; color: var(--anton-red); }
+            .album-text { text-align: left; }
+            .album-text p { margin: 0 0 10px 0; font-size: 0.85rem; line-height: 1.55; text-align: left; }
+            .album-text p.intro { font-size: 0.92rem; font-weight: bold; color: var(--anton-red); text-align: left; }
         }
 
         /* ================================================================= */
@@ -187,10 +189,10 @@
             #mobile-wrapper .m-epk-container { position: static !important; width: 100% !important; height: auto !important; background: transparent !important; border-left: none !important; border-top: 1px solid rgba(0,0,0,0.15) !important; padding-top: 12px !important; margin-top: auto !important; justify-content: flex-start !important; }
             #mobile-wrapper .m-epk-text { writing-mode: horizontal-tb !important; transform: none !important; font-size: 0.78rem; }
 
-            /* Body-Hintergrund transparent – das Hintergrundbild kommt vom fixed #m-bg-fix */
+            /* Body-Hintergrund transparent */
             body { background-color: transparent !important; }
 
-            /* Content – kein weißer Hintergrund, sauberer Abstand */
+            /* Content */
             #mobile-wrapper .m-content-scroll {
                 display: block !important; position: static !important;
                 margin-top: 60px !important; margin-bottom: 0 !important;
@@ -200,7 +202,7 @@
                 background: transparent !important;
             }
 
-            /* Detail-Box: schmaler (75%), zentriert, etwas mehr Tiefe */
+            /* Detail-Box */
             #mobile-wrapper .detail-bento {
                 display: flex !important; flex-direction: row !important;
                 gap: 14px !important; align-items: flex-start !important;
@@ -221,9 +223,10 @@
             #mobile-wrapper .album-text {
                 overflow-y: auto !important;
                 max-height: calc(100vh - 90px) !important;
+                text-align: left !important;
             }
-            #mobile-wrapper .album-text p { margin: 0 0 6px 0 !important; font-size: 0.68rem !important; line-height: 1.4 !important; }
-            #mobile-wrapper .album-text p.intro { font-size: 0.75rem !important; font-weight: bold !important; color: var(--anton-red) !important; }
+            #mobile-wrapper .album-text p { margin: 0 0 6px 0 !important; font-size: 0.68rem !important; line-height: 1.4 !important; text-align: left !important; }
+            #mobile-wrapper .album-text p.intro { font-size: 0.75rem !important; font-weight: bold !important; color: var(--anton-red) !important; text-align: left !important; }
 
             /* Social: vertikale Leiste rechts */
             #mobile-wrapper .m-sidebar-right {
