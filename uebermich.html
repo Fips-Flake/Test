@@ -9,7 +9,7 @@
     <style>
         :root { --anton-red: #ff0000; --anton-yellow: #ffeb3b; --sidebar-width: 240px; --apple-gray: #A2AAAD; --amazon-blue: #00A8E1; }
 
-        html, body { margin: 0; padding: 0; background-color: #fff; font-family: 'Special Elite', cursive; height: 100%; width: 100%; }
+        html, body { margin: 0; padding: 0; background-color: #fff; font-family: 'Special Elite', cursive; width: 100%; }
 
         a { color: inherit; text-decoration: none; -webkit-tap-highlight-color: transparent; }
 
@@ -20,13 +20,14 @@
             #mobile-wrapper { display: none !important; }
             #desktop-wrapper { display: block !important; }
 
+            html { background-color: transparent !important; }
+
             body {
-                background: #fff url('Background.jpg') no-repeat center center fixed;
+                background: url('Background.jpg') no-repeat center center fixed;
                 background-size: cover !important;
+                background-color: transparent !important;
                 overflow-x: hidden; overflow-y: auto;
             }
-
-            #desktop-wrapper { min-height: 100vh; }
 
             .d-header { position: fixed; top: 0; width: 100%; height: 80px; display: flex; justify-content: center; align-items: center; z-index: 100; background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); border-bottom: 2px solid #000; }
             .d-header-logo { max-height: 285px; width: auto; object-fit: contain; filter: brightness(0) saturate(100%) invert(13%) sepia(95%) saturate(7408%) hue-rotate(359deg) brightness(97%) contrast(113%); transform: translateY(82px); }
