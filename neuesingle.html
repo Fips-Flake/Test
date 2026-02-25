@@ -275,6 +275,8 @@
         /* ================================================================= */
         @media (orientation: landscape) and (max-height: 500px) {
 
+            /* Seite scrollbar machen */
+            #mobile-wrapper { overflow-y: auto !important; }
             body { overflow-y: auto !important; position: static !important; height: auto !important; }
 
             #mobile-wrapper #m-bg-fix {
@@ -287,77 +289,94 @@
             }
 
             /* Header schmaler */
-            #mobile-wrapper .m-header { height: 60px !important; }
-            #mobile-wrapper .m-header-logo { top: 145% !important; }
-            #mobile-wrapper .m-menu-btn { top: 8px !important; left: 12px !important; width: 38px !important; height: 38px !important; }
+            #mobile-wrapper .m-header { height: 50px !important; }
+            #mobile-wrapper .m-header-logo { top: 145% !important; max-height: 150px !important; }
+            #mobile-wrapper .m-menu-btn { top: 6px !important; left: 10px !important; width: 36px !important; height: 36px !important; }
 
-            /* Nav: Slide from LEFT (wie index.html) */
+            /* Nav: Slide from LEFT */
             #mobile-wrapper .m-sidebar {
-                top: 0 !important; left: -220px !important;
-                width: 200px !important; height: 100% !important;
+                top: 0 !important; left: -190px !important;
+                width: 175px !important; height: 100% !important;
                 flex-direction: column !important;
                 justify-content: flex-start !important; align-items: flex-start !important;
-                padding: 80px 15px 20px 15px !important;
+                padding: 60px 12px 15px 12px !important;
                 border-bottom: none !important; border-right: 3px solid #000 !important;
                 box-sizing: border-box !important;
                 transition: left 0.5s cubic-bezier(0.4,0,0.2,1) !important;
+                overflow-y: auto !important;
             }
             #mobile-wrapper .m-sidebar.open { left: 0 !important; top: 0 !important; }
-            #mobile-wrapper .m-nav-item { flex: none !important; width: 100%; text-align: left; margin-bottom: 16px; }
-            #mobile-wrapper .m-nav-item a { flex-direction: row !important; gap: 10px; font-size: 0.85rem; }
-            #mobile-wrapper .m-nav-item a i { font-size: 1rem; width: 22px; text-align: center; }
-            #mobile-wrapper .mobile-tag { font-size: 0.72rem; writing-mode: horizontal-tb !important; transform: none !important; margin-top: 0; }
+            #mobile-wrapper .m-nav-item { flex: none !important; width: 100%; text-align: left; margin-bottom: 12px; }
+            #mobile-wrapper .m-nav-item a { flex-direction: row !important; gap: 8px; font-size: 0.8rem; }
+            #mobile-wrapper .m-nav-item a i { font-size: 0.9rem; width: 18px; text-align: center; }
+            #mobile-wrapper .mobile-tag { font-size: 0.68rem; writing-mode: horizontal-tb !important; transform: none !important; margin-top: 0; }
             #mobile-wrapper .m-epk-container {
                 position: static !important; width: 100% !important; height: auto !important;
                 background: transparent !important; border-left: none !important;
                 border-top: 1px solid rgba(0,0,0,0.15) !important;
-                padding-top: 12px !important; margin-top: auto !important;
+                padding-top: 10px !important; margin-top: auto !important;
                 justify-content: flex-start !important;
             }
-            #mobile-wrapper .m-epk-text { writing-mode: horizontal-tb !important; transform: none !important; font-size: 0.78rem; }
+            #mobile-wrapper .m-epk-text { writing-mode: horizontal-tb !important; transform: none !important; font-size: 0.75rem; }
 
-            /* Content scrollbar */
+            /* Content-Wrapper: scrollbar, unterhalb Header */
             #mobile-wrapper .m-content-scroll {
-                display: block !important; position: static !important;
-                margin-top: 60px !important; margin-bottom: 0 !important;
-                padding: 15px 55px 30px 15px !important;
-                overflow-y: visible !important; flex: none !important;
+                display: block !important;
+                position: static !important;
+                margin-top: 50px !important;
+                margin-bottom: 0 !important;
+                padding: 10px 50px 30px 12px !important;
+                overflow-y: visible !important;
+                flex: none !important;
                 box-sizing: border-box !important;
             }
 
-            /* Detail-Box im Landscape: horizontal layout, kompakt */
+            /* Detail-Box: horizontal layout, kompakt */
             #mobile-wrapper .m-detail-bento {
                 margin: 0 !important;
                 background: rgba(255,255,255,0.88) !important;
                 border: 2px solid #000 !important;
-                box-shadow: 4px 4px 0 #000 !important;
-                border-radius: 14px !important;
-                padding: 14px !important;
+                box-shadow: 3px 3px 0 #000 !important;
+                border-radius: 12px !important;
+                padding: 10px !important;
                 display: flex !important;
                 flex-direction: row !important;
                 align-items: flex-start !important;
-                gap: 16px !important;
+                gap: 12px !important;
             }
 
+            /* Bild: fixe kleine Breite, kein overflow */
             #mobile-wrapper .m-album-cover {
-                width: 120px !important; max-width: none !important; flex-shrink: 0 !important;
-                border: 2px solid #000 !important; border-radius: 10px !important;
-                box-shadow: 3px 3px 0 var(--anton-yellow) !important;
+                width: 80px !important;
+                min-width: 80px !important;
+                max-width: 80px !important;
+                flex-shrink: 0 !important;
+                border: 2px solid #000 !important;
+                border-radius: 8px !important;
+                box-shadow: 2px 2px 0 var(--anton-yellow) !important;
+                overflow: hidden !important;
+            }
+            #mobile-wrapper .m-album-cover img {
+                width: 100% !important;
+                height: auto !important;
+                display: block !important;
             }
             #mobile-wrapper .m-image-source {
-                font-size: 0.55rem !important; margin-top: 4px !important;
+                font-size: 0.5rem !important;
+                margin-top: 4px !important;
                 text-align: left !important;
+                white-space: normal !important;
             }
 
-            /* Text-Bereich scrollbar wenn nötig */
+            /* Text: klein, linksbündig */
             #mobile-wrapper .m-album-text {
                 text-align: left !important;
-                font-size: 0.72rem !important;
-                line-height: 1.45 !important;
-                overflow-y: auto !important;
-                max-height: calc(100vh - 120px) !important;
+                font-size: 0.68rem !important;
+                line-height: 1.4 !important;
+                flex: 1 !important;
+                min-width: 0 !important;
             }
-            #mobile-wrapper .m-album-text p { margin-bottom: 8px !important; }
+            #mobile-wrapper .m-album-text p { margin-bottom: 6px !important; }
             #mobile-wrapper .m-album-text p:last-child { margin-bottom: 0 !important; }
 
             /* Social: vertikale Leiste rechts */
@@ -365,7 +384,7 @@
                 position: fixed !important;
                 top: 0 !important; bottom: 0 !important;
                 left: auto !important; right: 0 !important;
-                width: 46px !important; height: 100% !important;
+                width: 42px !important; height: 100% !important;
                 flex-direction: column !important;
                 border-top: none !important; border-bottom: none !important;
                 border-left: 2px solid #000 !important; border-radius: 0 !important;
@@ -379,20 +398,20 @@
                 align-items: center !important; justify-content: center !important;
                 width: 100% !important;
             }
-            #mobile-wrapper .m-sidebar-right a i { font-size: 1.1rem !important; }
+            #mobile-wrapper .m-sidebar-right a i { font-size: 1.0rem !important; }
 
-            /* I/D Button weg, Panel immer sichtbar unten */
+            /* I/D Button weg, Panel immer sichtbar unten-mittig */
             #mobile-wrapper .m-id-button { display: none !important; }
             #mobile-wrapper .m-id-panel {
                 position: fixed !important; bottom: 0 !important;
                 left: 50% !important; right: auto !important;
                 transform: translateX(-50%) !important;
-                width: 220px !important; height: 34px !important;
+                width: 200px !important; height: 30px !important;
                 border-radius: 8px 8px 0 0 !important;
                 border: 2px solid #000 !important; border-bottom: none !important;
                 background: rgba(255,255,255,0.35) !important;
                 backdrop-filter: blur(8px) !important;
-                font-size: 0.72rem !important; opacity: 1 !important;
+                font-size: 0.68rem !important; opacity: 1 !important;
                 display: flex !important; align-items: center !important; justify-content: center !important;
                 transition: none !important;
             }
