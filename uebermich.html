@@ -183,24 +183,29 @@
             #mobile-wrapper .m-epk-container { position: static !important; width: 100% !important; height: auto !important; background: transparent !important; border-left: none !important; border-top: 1px solid rgba(0,0,0,0.15) !important; padding-top: 12px !important; margin-top: auto !important; justify-content: flex-start !important; }
             #mobile-wrapper .m-epk-text { writing-mode: horizontal-tb !important; transform: none !important; font-size: 0.78rem; }
 
-            /* Content */
+            /* Body-Hintergrund transparent – das Hintergrundbild kommt vom fixed #m-bg-fix */
+            body { background-color: transparent !important; }
+
+            /* Content – kein weißer Hintergrund, sauberer Abstand */
             #mobile-wrapper .m-content-scroll {
                 display: block !important; position: static !important;
                 margin-top: 60px !important; margin-bottom: 0 !important;
-                padding: 12px 55px 30px 12px !important;
+                padding: 10px 50px 20px 10px !important;
                 overflow-y: visible !important; flex: none !important;
                 box-sizing: border-box !important;
+                background: transparent !important;
             }
 
-            /* Detail-Box: horizontal, kompakt */
+            /* Detail-Box: horizontal, kompakt, kein weißer Balken-Effekt */
             #mobile-wrapper .detail-bento {
                 display: flex !important; flex-direction: row !important;
-                gap: 16px !important; align-items: flex-start !important;
+                gap: 14px !important; align-items: flex-start !important;
                 background: rgba(255,255,255,0.88) !important;
                 border: 2px solid #000 !important;
                 box-shadow: 3px 3px 0 #000 !important;
-                border-radius: 14px !important; padding: 14px !important;
+                border-radius: 12px !important; padding: 12px !important;
                 margin: 0 !important;
+                width: 100% !important; box-sizing: border-box !important;
             }
             #mobile-wrapper .image-container { flex-shrink: 0 !important; width: auto !important; }
             #mobile-wrapper .album-cover {
