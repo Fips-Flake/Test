@@ -7,280 +7,199 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap&subset=latin-ext" rel="stylesheet">
     <style>
-        :root { 
-            --anton-red: #ff0000; 
-            --anton-yellow: #ffeb3b; 
-            --sidebar-width: 240px; 
-            --apple-gray: #A2AAAD;
-            --amazon-blue: #00A8E1;
+        :root { --anton-red:#ff0000; --anton-yellow:#ffeb3b; --sidebar-width:240px; --apple-gray:#A2AAAD; --amazon-blue:#00A8E1; }
+        html,body { margin:0; padding:0; background-color:#fff; font-family:'Special Elite',cursive; height:100%; width:100%; }
+
+        /* ── DESKTOP ─────────────────────────────────────────── */
+        @media (min-width:801px) and (min-height:500px) {
+            #mobile-wrapper { display:none !important; }
+            body { background:#fff url('Background.jpg') no-repeat center center fixed; background-size:cover !important; overflow-x:hidden; overflow-y:auto; min-height:100vh; }
+            .d-header { position:fixed; top:0; width:100%; height:80px; display:flex; justify-content:center; align-items:center; z-index:100; background:rgba(255,255,255,0.8); backdrop-filter:blur(10px); border-bottom:2px solid #000; }
+            .d-header-logo { max-height:285px; width:auto; object-fit:contain; filter:brightness(0) saturate(100%) invert(13%) sepia(95%) saturate(7408%) hue-rotate(359deg) brightness(97%) contrast(113%); transform:translateY(82px); }
+            .d-menu-btn { position:fixed; top:18px; left:20px; font-size:24px; cursor:pointer; z-index:210; background:#000; color:#fff; width:45px; height:45px; display:flex; align-items:center; justify-content:center; border-radius:5px; transition:all 0.3s ease; border:2px solid #000; overflow:hidden; }
+            .d-menu-btn:hover { background:var(--anton-yellow); color:#000; }
+            .d-menu-btn span { transition:opacity 0.2s; }
+            .d-menu-btn::after { content:'A'; position:absolute; font-weight:bold; font-size:28px; opacity:0; transition:opacity 0.2s; }
+            .d-menu-btn:hover span { opacity:0; }
+            .d-menu-btn:hover::after { opacity:1; }
+            .d-sidebar-left { position:fixed; top:0; bottom:0; left:-300px; width:var(--sidebar-width); background:rgba(255,235,59,0.98); z-index:200; display:flex; flex-direction:column; padding:100px 15px 30px 15px; transition:left 0.4s ease-in-out; border-right:2px solid #000; box-sizing:border-box; }
+            .d-sidebar-left.open { left:0; }
+            .d-nav-item { margin-bottom:20px; width:100%; }
+            .d-sidebar-left a { display:flex; align-items:center; color:#000; text-decoration:none; font-size:1.1rem; width:100%; transition:color 0.3s; }
+            .d-sidebar-left a:hover { color:var(--anton-red); }
+            .d-nav-label { display:flex; align-items:center; width:100%; }
+            .d-nav-label i.main-icon { width:30px; text-align:center; margin-right:10px; }
+            .d-arrow-wrapper { margin-left:auto; padding-right:5px; }
+            .d-submenu-indicator { font-size:0.8rem; transition:transform 0.3s; }
+            .d-nav-item:hover .d-submenu-indicator { transform:rotate(180deg); }
+            .d-submenu { display:none; flex-direction:column; padding-left:35px; margin-top:10px; width:100%; box-sizing:border-box; }
+            .d-nav-item:hover .d-submenu { display:flex; }
+            .d-submenu a { font-size:0.85rem; margin-bottom:12px; white-space:nowrap; justify-content:flex-start; padding-top:4px; }
+            .d-submenu a i { margin-right:10px; width:18px; text-align:center; }
+            .d-nav-item-epk { margin-top:auto; border-top:1px solid rgba(0,0,0,0.1); padding-top:15px; }
+            .d-nav-item-epk a { color:var(--anton-red) !important; font-weight:bold; }
+            .d-sidebar-right { position:fixed; top:50%; right:0; transform:translateY(-50%); width:50px; display:flex; flex-direction:column; align-items:center; gap:15px; z-index:999; background:rgba(255,255,255,0.2); backdrop-filter:blur(3px); padding:25px 0; border-radius:20px 0 0 20px; }
+            .d-sidebar-right a { text-decoration:none; }
+            .d-sidebar-right a i { color:#000; font-size:1.2rem; transition:transform 0.4s,color 0.4s; animation:ultraFlowWave 6s linear infinite; }
+            @keyframes ultraFlowWave { 0%{transform:scale(1);color:#000} 9.33%{transform:scale(1.55);color:var(--brand-color)} 23.33%,100%{transform:scale(1);color:#000} }
+            .d-sidebar-right a:nth-child(1) i{--brand-color:#f00;animation-delay:.0s}
+            .d-sidebar-right a:nth-child(2) i{--brand-color:#25F4EE;animation-delay:.25s}
+            .d-sidebar-right a:nth-child(3) i{--brand-color:#E1306C;animation-delay:.5s}
+            .d-sidebar-right a:nth-child(4) i{--brand-color:#25D366;animation-delay:.75s}
+            .d-sidebar-right a:nth-child(5) i{--brand-color:#1877F2;animation-delay:1s}
+            .d-sidebar-right a:nth-child(6) i{--brand-color:#1DB954;animation-delay:1.25s}
+            .d-sidebar-right a:nth-child(7) i{--brand-color:var(--apple-gray);animation-delay:1.5s}
+            .d-sidebar-right a:nth-child(8) i{--brand-color:#f00;animation-delay:1.75s}
+            .d-sidebar-right a:nth-child(9) i{--brand-color:var(--amazon-blue);animation-delay:2s}
+            .d-sidebar-right:hover a i{animation-play-state:paused !important;transform:scale(1) !important;color:#000 !important}
+            .d-sidebar-right a:hover i{color:var(--brand-color) !important;transform:scale(1.55) !important}
+            main { padding:110px 80px 100px 80px; max-width:1100px; margin:0 auto; z-index:10; width:100%; box-sizing:border-box; }
+            .bento-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:25px; }
+            .bento-box { background:rgba(255,255,255,0.95); border:3px solid #000; box-shadow:6px 6px 0 #000; padding:30px; border-radius:20px; transition:all 0.3s ease; color:inherit; display:flex; flex-direction:column; justify-content:center; text-align:center; }
+            .bento-box:hover { transform:translateY(-5px); background:var(--anton-yellow); }
+            .bento-box h2 { margin:0 0 10px 0; color:var(--anton-red); text-transform:uppercase; font-size:1.5rem; }
+            .bento-box p { margin:0 0 10px 0; font-size:0.95rem; }
+            .box-full { grid-column:span 2; }
+            .contact-form { display:flex; flex-direction:column; gap:15px; text-align:left; }
+            .contact-form input,.contact-form textarea { font-family:'Special Elite',cursive; padding:12px; border:2px solid #000; border-radius:10px; background:#fff; font-size:1rem; outline:none; }
+            .contact-form input:focus,.contact-form textarea:focus { background:var(--anton-yellow); }
+            .contact-form button { font-family:'Special Elite',cursive; background:#000; color:#fff; padding:15px; border:none; border-radius:10px; cursor:pointer; text-transform:uppercase; font-weight:bold; font-size:1rem; transition:all 0.3s ease; }
+            .contact-form button:hover { background:var(--anton-red); transform:scale(1.02); }
+            .d-footer { width:100%; padding:15px 0; background:rgba(255,255,255,0.95); border-top:1.5px solid #000; text-align:center; font-size:0.75rem; z-index:100; position:fixed; bottom:0; left:0; }
+            .d-footer a { color:#000; text-decoration:none; margin:0 12px; font-weight:bold; transition:all 0.3s ease; }
+            .d-footer a:hover { color:var(--anton-yellow) !important; text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000; }
         }
 
-        html, body { 
-            margin: 0; padding: 0; background-color: #ffffff; 
-            font-family: 'Special Elite', cursive; height: 100%; width: 100%;
+        /* ── MOBILE PORTRAIT ─────────────────────────────────── */
+        @media (max-width:800px) and (orientation:portrait) {
+            #desktop-wrapper { display:none !important; }
+            body { height:100vh; width:100vw; overflow:hidden !important; position:fixed; display:flex; flex-direction:column; touch-action:pan-y; overscroll-behavior-x:none; }
+            #m-bg-fix { display:block; position:fixed; top:0; left:-100%; width:300%; height:100%; background:url('Background.jpg') no-repeat center center; background-size:cover; z-index:-1; will-change:transform; }
+            .m-header { position:fixed; top:0; width:100%; height:80px; display:flex; justify-content:center; align-items:center; z-index:1000; background:rgba(255,255,255,0.8); backdrop-filter:blur(10px); border-bottom:2px solid #000; transition:transform 0.6s ease-in-out; }
+            .m-header-logo { position:absolute; top:120%; transform:translateY(-50%); max-height:185px; width:auto; filter:brightness(0) saturate(100%) invert(13%) sepia(95%) saturate(7408%) hue-rotate(359deg) brightness(97%) contrast(113%); }
+            .m-menu-btn { position:fixed; top:18px; left:15px; z-index:1500; background:#000; width:45px; height:45px; border-radius:5px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; cursor:pointer; border:2px solid #000; }
+            .m-menu-btn span { display:block; width:22px; height:3px; background:#fff; transition:0.3s; }
+            .m-menu-btn.active { background:var(--anton-yellow); }
+            .m-menu-btn.active span { display:none; }
+            .m-menu-btn.active::after { content:'A'; color:#000; font-weight:bold; font-size:28px; }
+            .m-sidebar { position:fixed; left:0; top:-120px; width:100%; height:95px; background:var(--anton-yellow); z-index:1100; display:flex; flex-direction:row; padding:0 55px 0 75px; box-sizing:border-box; border-bottom:3px solid #000; justify-content:space-between; align-items:center; transition:top 0.5s cubic-bezier(0.4,0,0.2,1); }
+            .m-sidebar.open { top:0 !important; }
+            .m-nav-item { flex:1; text-align:center; }
+            .m-nav-item a { text-decoration:none; color:#000; display:flex; flex-direction:column; align-items:center; }
+            .mobile-tag { font-size:0.55rem; text-transform:uppercase; font-weight:bold; margin-top:4px; }
+            .m-epk-container { position:absolute; right:0; top:0; height:100%; width:45px; background:#fff; border-left:3px solid #000; display:flex; align-items:center; justify-content:center; }
+            .m-epk-text { writing-mode:vertical-rl; transform:rotate(180deg); font-size:0.7rem; color:var(--anton-red); font-weight:bold; text-decoration:none; }
+            .m-content-scroll { flex:1; margin-top:80px; margin-bottom:65px; overflow-y:auto; padding:20px 15px; -webkit-overflow-scrolling:touch; box-sizing:border-box; }
+            .m-bento-grid { display:flex; flex-direction:column; gap:15px; }
+            .m-bento-box { background:rgba(255,255,255,0.92); border:3px solid #000; box-shadow:5px 5px 0 #000; padding:20px; border-radius:16px; }
+            .m-bento-box h2 { margin:0 0 8px 0; color:var(--anton-red); text-transform:uppercase; font-size:1.2rem; }
+            .m-bento-box p { margin:0 0 10px 0; font-size:0.9rem; }
+            .m-bento-box a { color:#000; font-weight:bold; font-size:0.9rem; }
+            .contact-form { display:flex; flex-direction:column; gap:12px; }
+            .contact-form input,.contact-form textarea { font-family:'Special Elite',cursive; padding:12px; border:2px solid #000; border-radius:10px; background:#fff; font-size:1rem; outline:none; box-sizing:border-box; width:100%; }
+            .contact-form input:focus,.contact-form textarea:focus { background:var(--anton-yellow); }
+            .contact-form button { font-family:'Special Elite',cursive; background:#000; color:#fff; padding:14px; border:none; border-radius:10px; cursor:pointer; text-transform:uppercase; font-weight:bold; font-size:1rem; transition:all 0.3s ease; }
+            .contact-form button:active { background:var(--anton-red); }
+            .m-id-button { position:fixed; right:0; bottom:150px; width:38px; height:38px; background:rgba(255,255,255,0.4); backdrop-filter:blur(4px); border:2px solid #000; border-right:none; border-radius:6px 0 0 6px; display:flex; align-items:center; justify-content:center; z-index:1300; font-weight:bold; font-size:0.85rem; color:#000; cursor:pointer; transition:transform 0.4s ease-in-out; font-family:'Special Elite',cursive; }
+            .m-id-button.hidden { transform:translateX(100%); }
+            .m-id-panel { position:fixed; right:-270px; bottom:150px; height:45px; width:250px; background:rgba(255,255,255,0.7); backdrop-filter:blur(8px); border:2px solid #000; border-right:none; display:flex; align-items:center; justify-content:center; z-index:1299; transition:right 0.5s cubic-bezier(0.4,0,0.2,1); border-radius:8px 0 0 8px; font-weight:bold; font-size:0.85rem; overflow:hidden; }
+            .m-id-panel.open { right:0; }
+            .m-id-panel a { color:#000; text-decoration:none; margin:0 8px; text-transform:uppercase; }
+            .m-sidebar-right { position:fixed; bottom:0; left:0; width:100%; height:65px; display:flex; flex-direction:row; align-items:center; z-index:999; background:rgba(255,255,255,0.7); backdrop-filter:blur(8px); border-top:2px solid #000; padding:0 10px; justify-content:space-evenly; }
+            .m-sidebar-right a { text-decoration:none; }
+            .m-sidebar-right a i { color:#000; font-size:1.5rem; display:inline-block; animation:ultraFlowWaveMobile 6s linear infinite; }
+            @keyframes ultraFlowWaveMobile { 0%{transform:scale(1);color:#000} 9.33%{transform:scale(1.4);color:var(--brand-color)} 23.33%,100%{transform:scale(1);color:#000} }
+            .m-sidebar-right a:nth-child(1) i{--brand-color:#f00;animation-delay:.0s}
+            .m-sidebar-right a:nth-child(2) i{--brand-color:#25F4EE;animation-delay:.25s}
+            .m-sidebar-right a:nth-child(3) i{--brand-color:#E1306C;animation-delay:.5s}
+            .m-sidebar-right a:nth-child(4) i{--brand-color:#25D366;animation-delay:.75s}
+            .m-sidebar-right a:nth-child(5) i{--brand-color:#1877F2;animation-delay:1s}
+            .m-sidebar-right a:nth-child(6) i{--brand-color:#1DB954;animation-delay:1.25s}
+            .m-sidebar-right a:nth-child(7) i{--brand-color:var(--apple-gray);animation-delay:1.5s}
+            .m-sidebar-right a:nth-child(8) i{--brand-color:#f00;animation-delay:1.75s}
+            .m-sidebar-right a:nth-child(9) i{--brand-color:var(--amazon-blue);animation-delay:2s}
         }
 
-        /* ================================================================= */
-        /* DESKTOP                                                            */
-        /* ================================================================= */
-        @media (min-width: 801px) and (min-height: 500px) {
-            #mobile-wrapper { display: none !important; }
-            html { height: 100%; }
-            body { 
-                background: url('Background.jpg') no-repeat center center fixed; 
-                background-size: cover !important; overflow-x: hidden; overflow-y: auto; min-height: 100%;
-            }
-            .d-header { position: fixed; top: 0; width: 100%; height: 80px; display: flex; justify-content: center; align-items: center; z-index: 100; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border-bottom: 2px solid #000; }
-            .d-header-logo { max-height: 285px; width: auto; object-fit: contain; filter: brightness(0) saturate(100%) invert(13%) sepia(95%) saturate(7408%) hue-rotate(359deg) brightness(97%) contrast(113%); transform: translateY(82px); }
-            .d-menu-btn { position: fixed; top: 18px; left: 20px; font-size: 24px; cursor: pointer; z-index: 210; background: #000; color: #fff; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 5px; transition: all 0.3s ease; border: 2px solid #000; overflow: hidden; }
-            .d-menu-btn:hover { background: var(--anton-yellow); color: #000; }
-            .d-menu-btn span { transition: opacity 0.2s; }
-            .d-menu-btn::after { content: 'A'; position: absolute; font-weight: bold; font-size: 28px; opacity: 0; transition: opacity 0.2s; }
-            .d-menu-btn:hover span { opacity: 0; }
-            .d-menu-btn:hover::after { opacity: 1; }
-            .d-sidebar-left { position: fixed; top: 0; bottom: 0; left: -300px; width: var(--sidebar-width); background: rgba(255, 235, 59, 0.98); z-index: 200; display: flex; flex-direction: column; padding: 100px 15px 30px 15px; transition: left 0.4s ease-in-out; border-right: 2px solid #000; box-sizing: border-box; }
-            .d-sidebar-left.open { left: 0; }
-            .d-nav-item { margin-bottom: 20px; width: 100%; }
-            .d-sidebar-left a { display: flex; align-items: center; color: #000; text-decoration: none; font-size: 1.1rem; width: 100%; transition: color 0.3s; }
-            .d-sidebar-left a:hover { color: var(--anton-red); }
-            .d-nav-label { display: flex; align-items: center; width: 100%; }
-            .d-nav-label i.main-icon { width: 30px; text-align: center; margin-right: 10px; }
-            .d-arrow-wrapper { margin-left: auto; padding-right: 5px; }
-            .d-submenu-indicator { font-size: 0.8rem; transition: transform 0.3s; }
-            .d-nav-item:hover .d-submenu-indicator { transform: rotate(180deg); }
-            .d-submenu { display: none; flex-direction: column; padding-left: 35px; margin-top: 10px; width: 100%; box-sizing: border-box; }
-            .d-nav-item:hover .d-submenu { display: flex; }
-            .d-submenu a { font-size: 0.85rem; margin-bottom: 12px; white-space: nowrap; justify-content: flex-start; padding-top: 4px; }
-            .d-submenu a i { margin-right: 10px; width: 18px; text-align: center; }
-            .d-nav-item-epk { margin-top: auto; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 15px; }
-            .d-nav-item-epk a { color: var(--anton-red) !important; font-weight: bold; }
-            .d-sidebar-right { position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 50px; display: flex; flex-direction: column; align-items: center; gap: 15px; z-index: 999; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(3px); padding: 25px 0; border-radius: 20px 0 0 20px; }
-            .d-sidebar-right a { text-decoration: none; }
-            .d-sidebar-right a i { color: #000; font-size: 1.2rem; transition: transform 0.4s ease-in-out, color 0.4s ease-in-out; animation: ultraFlowWave 6s linear infinite; }
-            @keyframes ultraFlowWave { 0% { transform: scale(1); color: #000; } 9.33% { transform: scale(1.55); color: var(--brand-color); } 23.33%, 100% { transform: scale(1); color: #000; } }
-            .d-sidebar-right a:nth-child(1) i { --brand-color: #f00; animation-delay: 0.0s; }
-            .d-sidebar-right a:nth-child(2) i { --brand-color: #25F4EE; animation-delay: 0.25s; }
-            .d-sidebar-right a:nth-child(3) i { --brand-color: #E1306C; animation-delay: 0.5s; }
-            .d-sidebar-right a:nth-child(4) i { --brand-color: #25D366; animation-delay: 0.75s; }
-            .d-sidebar-right a:nth-child(5) i { --brand-color: #1877F2; animation-delay: 1.0s; }
-            .d-sidebar-right a:nth-child(6) i { --brand-color: #1DB954; animation-delay: 1.25s; }
-            .d-sidebar-right a:nth-child(7) i { --brand-color: var(--apple-gray); animation-delay: 1.5s; }
-            .d-sidebar-right a:nth-child(8) i { --brand-color: #f00; animation-delay: 1.75s; }
-            .d-sidebar-right a:nth-child(9) i { --brand-color: var(--amazon-blue); animation-delay: 2.0s; }
-            .d-sidebar-right:hover a i { animation-play-state: paused !important; transform: scale(1) !important; color: #000 !important; }
-            .d-sidebar-right a:hover i { color: var(--brand-color) !important; transform: scale(1.55) !important; }
-
-            main { padding: 110px 20px 100px 20px; z-index: 5; width: 100%; box-sizing: border-box; }
-            .detail-bento { max-width: 1100px; margin: 0 auto; background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(15px); padding: 40px; border: 3px solid #000; border-radius: 20px; box-shadow: 8px 8px 0 #000; display: flex; gap: 50px; align-items: flex-start; }
-            .image-container { flex-shrink: 0; width: 175px; position: sticky; top: 110px; }
-            .album-cover { border: 2px solid #000; border-radius: 15px; overflow: hidden; box-shadow: 5px 5px 0 var(--anton-yellow); background: #fff; }
-            .album-cover img { width: 100%; height: auto; display: block; }
-            .album-text { color: #000; line-height: 1.6; font-size: 1.15rem; flex: 1; }
-            .album-text p { margin-bottom: 20px; }
-            .album-text p:last-child { margin-bottom: 0; }
-            .album-text .intro { font-weight: bold; color: var(--anton-red); font-size: 1.25rem; }
-
-            .d-footer { width: 100%; padding: 15px 0; background: rgba(255,255,255,0.95); border-top: 1.5px solid #000; text-align: center; font-size: 0.75rem; z-index: 100; position: fixed; bottom: 0; left: 0; }
-            .d-footer a { color: #000; text-decoration: none; margin: 0 12px; font-weight: bold; transition: all 0.3s ease; }
-            .d-footer a:hover { color: var(--anton-yellow) !important; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; }
-        }
-
-        /* ================================================================= */
-        /* MOBILE PORTRAIT                                                    */
-        /* ================================================================= */
-        @media (max-width: 800px) and (orientation: portrait) {
-            #desktop-wrapper { display: none !important; }
-            html, body { height: 100%; overflow: hidden; }
-            body { position: fixed; top: 0; left: 0; right: 0; bottom: 0; touch-action: pan-y; }
-
-            #m-bg-fix { display: block; position: fixed; top: 0; left: -100%; width: 300%; height: 100%; background: url('Background.jpg') no-repeat center center; background-size: cover; z-index: -1; will-change: transform; }
-
-            .m-header { position: fixed; top: 0; left: 0; width: 100%; height: 80px; display: flex; justify-content: center; align-items: center; z-index: 1000; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border-bottom: 2px solid #000; transition: transform 0.6s ease-in-out; }
-            .m-header-logo { position: absolute; top: 120%; transform: translateY(-50%); max-height: 185px; width: auto; filter: brightness(0) saturate(100%) invert(13%) sepia(95%) saturate(7408%) hue-rotate(359deg) brightness(97%) contrast(113%); }
-            .m-menu-btn { position: fixed; top: 18px; left: 15px; z-index: 1500; background: #000; width: 45px; height: 45px; border-radius: 5px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; cursor: pointer; border: 2px solid #000; }
-            .m-menu-btn span { display: block; width: 22px; height: 3px; background: #fff; transition: 0.3s; }
-            .m-menu-btn.active { background: var(--anton-yellow); }
-            .m-menu-btn.active span { display: none; }
-            .m-menu-btn.active::after { content: 'A'; color: #000; font-weight: bold; font-size: 28px; }
-            .m-sidebar { position: fixed; left: 0; top: -120px; width: 100%; height: 95px; background: var(--anton-yellow); z-index: 1100; display: flex; flex-direction: row; padding: 0 55px 0 75px; box-sizing: border-box; border-bottom: 3px solid #000; justify-content: space-between; align-items: center; transition: top 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
-            .m-sidebar.open { top: 0 !important; }
-            .m-nav-item { flex: 1; text-align: center; }
-            .m-nav-item a { text-decoration: none; color: #000; display: flex; flex-direction: column; align-items: center; }
-            .mobile-tag { font-size: 0.55rem; text-transform: uppercase; font-weight: bold; margin-top: 4px; }
-            .m-epk-container { position: absolute; right: 0; top: 0; height: 100%; width: 45px; background: #fff; border-left: 3px solid #000; display: flex; align-items: center; justify-content: center; }
-            .m-epk-text { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 0.7rem; color: var(--anton-red); font-weight: bold; text-decoration: none; }
-
-            main { position: fixed; top: 80px; bottom: 65px; left: 0; right: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 20px 15px; box-sizing: border-box; z-index: 10; }
-            .detail-bento { flex-direction: column; padding: 20px; gap: 15px; align-items: center; background: rgba(255, 255, 255, 0.92); border: 3px solid #000; box-shadow: 5px 5px 0 #000; border-radius: 18px; }
-            .image-container { width: 140px; position: relative; top: 0; flex-shrink: 0; }
-            .album-cover { border: 2px solid #000; border-radius: 12px; overflow: hidden; box-shadow: 4px 4px 0 var(--anton-yellow); background: #fff; }
-            .album-cover img { width: 100%; height: auto; display: block; }
-            .album-text { color: #000; line-height: 1.6; font-size: 0.95rem; text-align: center; }
-            .album-text p { margin-bottom: 15px; }
-            .album-text p:last-child { margin-bottom: 0; }
-            .album-text .intro { font-weight: bold; color: var(--anton-red); font-size: 1.05rem; }
-
-            .m-id-button { position: fixed; right: 0; bottom: 150px; width: 38px; height: 38px; background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(4px); border: 2px solid #000; border-right: none; border-radius: 6px 0 0 6px; display: flex; align-items: center; justify-content: center; z-index: 1300; font-weight: bold; font-size: 0.85rem; color: #000; cursor: pointer; transition: transform 0.4s ease-in-out; font-family: 'Special Elite', cursive; }
-            .m-id-button.hidden { transform: translateX(100%); }
-            .m-id-panel { position: fixed; right: -250px; bottom: 150px; height: 45px; width: 230px; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(8px); border: 2px solid #000; border-right: none; display: flex; align-items: center; justify-content: center; z-index: 1299; transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1); border-radius: 8px 0 0 8px; font-weight: bold; font-size: 0.85rem; }
-            .m-id-panel.open { right: 0; }
-            .m-id-panel a { color: #000; text-decoration: none; margin: 0 8px; text-transform: uppercase; }
-
-            .m-sidebar-right { position: fixed; bottom: 0; left: 0; width: 100%; height: 65px; display: flex; flex-direction: row; align-items: center; z-index: 999; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(8px); border-top: 2px solid #000; padding: 0 10px; justify-content: space-evenly; box-sizing: border-box; }
-            .m-sidebar-right a { text-decoration: none; }
-            .m-sidebar-right a i { color: #000; font-size: 1.5rem; display: inline-block; animation: ultraFlowWaveMobile 6s linear infinite; }
-            @keyframes ultraFlowWaveMobile { 0% { transform: scale(1); color: #000; } 9.33% { transform: scale(1.4); color: var(--brand-color); } 23.33%, 100% { transform: scale(1); color: #000; } }
-            .m-sidebar-right a:nth-child(1) i { --brand-color: #f00; animation-delay: 0.0s; }
-            .m-sidebar-right a:nth-child(2) i { --brand-color: #25F4EE; animation-delay: 0.25s; }
-            .m-sidebar-right a:nth-child(3) i { --brand-color: #E1306C; animation-delay: 0.5s; }
-            .m-sidebar-right a:nth-child(4) i { --brand-color: #25D366; animation-delay: 0.75s; }
-            .m-sidebar-right a:nth-child(5) i { --brand-color: #1877F2; animation-delay: 1.0s; }
-            .m-sidebar-right a:nth-child(6) i { --brand-color: #1DB954; animation-delay: 1.25s; }
-            .m-sidebar-right a:nth-child(7) i { --brand-color: var(--apple-gray); animation-delay: 1.5s; }
-            .m-sidebar-right a:nth-child(8) i { --brand-color: #f00; animation-delay: 1.75s; }
-            .m-sidebar-right a:nth-child(9) i { --brand-color: var(--amazon-blue); animation-delay: 2.0s; }
-        }
-
-        /* ================================================================= */
-        /* LANDSCAPE MOBILE                                                   */
-        /* ================================================================= */
-        @media (orientation: landscape) and (max-height: 500px) {
-            #desktop-wrapper { display: none !important; }
-            #mobile-wrapper  { display: block !important; }
-
-            body { overflow-y: auto !important; position: static !important; height: auto !important; }
-
-            #mobile-wrapper #m-bg-fix {
-                display: block !important; position: fixed !important;
-                top: 0 !important; left: 0 !important;
-                width: 100% !important; height: 100% !important;
-                background: url('Background.jpg') no-repeat center center !important;
-                background-size: cover !important; z-index: -1 !important;
-                will-change: unset !important; transform: none !important;
-            }
-
+        /* ── LANDSCAPE MOBILE ────────────────────────────────── */
+        @media (orientation:landscape) and (max-height:500px) {
+            #desktop-wrapper { display:none !important; }
+            #mobile-wrapper  { display:block !important; }
+            body { overflow-y:auto !important; position:static !important; height:auto !important; }
+            #mobile-wrapper #m-bg-fix { display:block !important; position:fixed !important; top:0 !important; left:0 !important; width:100% !important; height:100% !important; background:url('Background.jpg') no-repeat center center !important; background-size:cover !important; z-index:-1 !important; will-change:unset !important; transform:none !important; }
             /* Header */
-            #mobile-wrapper .m-header { height: 50px !important; position: fixed !important; top: 0 !important; transition: transform 0.6s ease-in-out; }
-            #mobile-wrapper .m-header-logo { top: 140% !important; max-height: 150px !important; }
-            #mobile-wrapper .m-menu-btn { top: 6px !important; left: 10px !important; width: 36px !important; height: 36px !important; }
-
-            /* Sidebar links */
-            #mobile-wrapper .m-sidebar {
-                top: 0 !important; left: -190px !important;
-                width: 175px !important; height: 100% !important;
-                flex-direction: column !important;
-                justify-content: flex-start !important; align-items: flex-start !important;
-                padding: 60px 12px 15px 12px !important;
-                border-bottom: none !important; border-right: 3px solid #000 !important;
-                box-sizing: border-box !important;
-                transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
-                overflow-y: auto !important;
-            }
-            #mobile-wrapper .m-sidebar.open { left: 0 !important; top: 0 !important; }
-            #mobile-wrapper .m-nav-item { flex: none !important; width: 100%; text-align: left; margin-bottom: 12px; }
-            #mobile-wrapper .m-nav-item a { flex-direction: row !important; gap: 8px; font-size: 0.8rem; }
-            #mobile-wrapper .m-nav-item a i { font-size: 0.9rem; width: 18px; text-align: center; }
-            #mobile-wrapper .mobile-tag { font-size: 0.68rem; writing-mode: horizontal-tb !important; transform: none !important; margin-top: 0; }
-            #mobile-wrapper .m-epk-container { position: static !important; width: 100% !important; height: auto !important; background: transparent !important; border-left: none !important; border-top: 1px solid rgba(0,0,0,0.15) !important; padding-top: 10px !important; margin-top: auto !important; justify-content: flex-start !important; }
-            #mobile-wrapper .m-epk-text { writing-mode: horizontal-tb !important; transform: none !important; font-size: 0.75rem; }
-
-            /* Scrollbarer Content-Bereich */
-            #mobile-wrapper main {
-                position: fixed !important;
-                top: 50px !important;
-                bottom: 34px !important;   /* Platz für I/D-Leiste */
-                left: 0 !important;
-                right: 42px !important;    /* Platz für Social-Bar */
-                overflow-y: auto !important;
-                -webkit-overflow-scrolling: touch !important;
-                padding: 10px 14px !important;
-                box-sizing: border-box !important;
-            }
-
-            /* Bento: horizontal nebeneinander */
-            #mobile-wrapper .detail-bento {
-                flex-direction: row !important;
-                align-items: flex-start !important;
-                padding: 14px !important;
-                gap: 14px !important;
-                border-width: 2px !important;
-                box-shadow: 3px 3px 0 #000 !important;
-                border-radius: 14px !important;
-                background: rgba(255, 255, 255, 0.92) !important;
-            }
-            #mobile-wrapper .image-container {
-                width: 90px !important;
-                flex-shrink: 0 !important;
-                position: relative !important;
-                top: 0 !important;
-            }
-            #mobile-wrapper .album-cover { border-radius: 8px !important; box-shadow: 3px 3px 0 var(--anton-yellow) !important; }
-            #mobile-wrapper .album-text {
-                font-size: 0.75rem !important;
-                line-height: 1.45 !important;
-                text-align: left !important;
-            }
-            #mobile-wrapper .album-text p { margin-bottom: 8px !important; }
-            #mobile-wrapper .album-text .intro { font-size: 0.82rem !important; }
-
-            /* Social-Leiste rechts */
-            #mobile-wrapper .m-sidebar-right {
-                position: fixed !important; top: 0 !important; bottom: 0 !important;
-                left: auto !important; right: 0 !important;
-                width: 42px !important; height: 100% !important;
-                flex-direction: column !important;
-                border-top: none !important; border-bottom: none !important;
-                border-left: 2px solid #000 !important; border-radius: 0 !important;
-                padding: 0 !important; gap: 0 !important;
-                justify-content: space-evenly !important;
-                background: rgba(255, 255, 255, 0.2) !important;
-                backdrop-filter: blur(3px) !important;
-            }
-            #mobile-wrapper .m-sidebar-right a i { font-size: 1.1rem !important; }
-            @keyframes ultraFlowWaveMobile { 0% { transform: scale(1); color: #000; } 9.33% { transform: scale(1.4); color: var(--brand-color); } 23.33%, 100% { transform: scale(1); color: #000; } }
-            #mobile-wrapper .m-sidebar-right a:nth-child(1) i { --brand-color: #f00; animation-delay: 0.0s; }
-            #mobile-wrapper .m-sidebar-right a:nth-child(2) i { --brand-color: #25F4EE; animation-delay: 0.25s; }
-            #mobile-wrapper .m-sidebar-right a:nth-child(3) i { --brand-color: #E1306C; animation-delay: 0.5s; }
-            #mobile-wrapper .m-sidebar-right a:nth-child(4) i { --brand-color: #25D366; animation-delay: 0.75s; }
-            #mobile-wrapper .m-sidebar-right a:nth-child(5) i { --brand-color: #1877F2; animation-delay: 1.0s; }
-            #mobile-wrapper .m-sidebar-right a:nth-child(6) i { --brand-color: #1DB954; animation-delay: 1.25s; }
-            #mobile-wrapper .m-sidebar-right a:nth-child(7) i { --brand-color: var(--apple-gray); animation-delay: 1.5s; }
-            #mobile-wrapper .m-sidebar-right a:nth-child(8) i { --brand-color: #f00; animation-delay: 1.75s; }
-            #mobile-wrapper .m-sidebar-right a:nth-child(9) i { --brand-color: var(--amazon-blue); animation-delay: 2.0s; }
-
-            /* I/D: immer sichtbare Leiste ganz unten */
-            #mobile-wrapper .m-id-button { display: none !important; }
-            #mobile-wrapper .m-id-panel {
-                position: fixed !important;
-                bottom: 0 !important; left: 50% !important; right: auto !important;
-                transform: translateX(-50%) !important;
-                width: 240px !important; height: 32px !important;
-                border-radius: 8px 8px 0 0 !important;
-                border: 2px solid #000 !important; border-bottom: none !important;
-                background: rgba(255, 255, 255, 0.35) !important;
-                backdrop-filter: blur(8px) !important;
-                font-size: 0.7rem !important; opacity: 1 !important; overflow: hidden !important;
-                display: flex !important; align-items: center !important; justify-content: center !important;
-            }
-            #mobile-wrapper .m-id-panel a { color: #000; text-decoration: none; margin: 0 8px; text-transform: uppercase; }
+            #mobile-wrapper .m-header { height:50px !important; position:fixed !important; top:0 !important; transition:transform 0.6s ease-in-out; }
+            #mobile-wrapper .m-header-logo { top:140% !important; max-height:150px !important; }
+            #mobile-wrapper .m-menu-btn { top:6px !important; left:10px !important; width:36px !important; height:36px !important; }
+            /* Nav sidebar: slides in from LEFT */
+            #mobile-wrapper .m-sidebar { top:0 !important; left:-190px !important; width:175px !important; height:100% !important; flex-direction:column !important; justify-content:flex-start !important; align-items:flex-start !important; padding:60px 12px 15px 12px !important; border-bottom:none !important; border-right:3px solid #000 !important; box-sizing:border-box !important; transition:left 0.5s cubic-bezier(0.4,0,0.2,1) !important; overflow-y:auto !important; }
+            #mobile-wrapper .m-sidebar.open { left:0 !important; top:0 !important; }
+            #mobile-wrapper .m-nav-item { flex:none !important; width:100% !important; text-align:left !important; margin-bottom:12px !important; }
+            #mobile-wrapper .m-nav-item a { flex-direction:row !important; gap:8px !important; font-size:0.8rem !important; }
+            #mobile-wrapper .m-nav-item a i { font-size:0.9rem !important; width:18px !important; text-align:center !important; }
+            #mobile-wrapper .mobile-tag { font-size:0.68rem !important; writing-mode:horizontal-tb !important; transform:none !important; margin-top:0 !important; }
+            #mobile-wrapper .m-epk-container { position:static !important; width:100% !important; height:auto !important; background:transparent !important; border-left:none !important; border-top:1px solid rgba(0,0,0,0.15) !important; padding-top:10px !important; margin-top:auto !important; justify-content:flex-start !important; }
+            #mobile-wrapper .m-epk-text { writing-mode:horizontal-tb !important; transform:none !important; font-size:0.75rem !important; }
+            /* Content */
+            #mobile-wrapper .m-content-scroll { display:block !important; position:static !important; margin-top:50px !important; margin-bottom:0 !important; padding:10px 50px 40px 12px !important; overflow-y:visible !important; flex:none !important; }
+            #mobile-wrapper .m-bento-grid { display:grid !important; grid-template-columns:1fr 1fr !important; gap:10px !important; }
+            #mobile-wrapper .m-bento-box { padding:12px !important; border-radius:12px !important; box-shadow:3px 3px 0 #000 !important; border-width:2px !important; }
+            #mobile-wrapper .m-bento-box h2 { font-size:0.9rem !important; margin-bottom:4px !important; }
+            #mobile-wrapper .m-bento-box p  { font-size:0.7rem !important; margin-bottom:5px !important; line-height:1.35 !important; }
+            #mobile-wrapper .m-bento-box a  { font-size:0.72rem !important; }
+            #mobile-wrapper .contact-form { gap:6px !important; }
+            #mobile-wrapper .contact-form input  { padding:7px 10px !important; font-size:0.8rem !important; }
+            #mobile-wrapper .contact-form textarea { padding:7px 10px !important; font-size:0.8rem !important; }
+            #mobile-wrapper .contact-form button { padding:8px !important; font-size:0.8rem !important; }
+            /* Social bar: vertical RIGHT strip */
+            #mobile-wrapper .m-sidebar-right { position:fixed !important; top:0 !important; bottom:0 !important; left:auto !important; right:0 !important; width:42px !important; height:100% !important; flex-direction:column !important; border-top:none !important; border-bottom:none !important; border-left:2px solid #000 !important; border-radius:0 !important; padding:0 !important; gap:0 !important; justify-content:space-evenly !important; background:rgba(255,255,255,0.2) !important; backdrop-filter:blur(3px) !important; }
+            #mobile-wrapper .m-sidebar-right a i { font-size:1.1rem !important; }
+            /* I/D */
+            #mobile-wrapper .m-id-button { display:none !important; }
+            #mobile-wrapper .m-id-panel { position:fixed !important; bottom:0 !important; left:50% !important; right:auto !important; transform:translateX(-50%) !important; width:260px !important; height:34px !important; border-radius:8px 8px 0 0 !important; border:2px solid #000 !important; border-bottom:none !important; background:rgba(255,255,255,0.35) !important; backdrop-filter:blur(8px) !important; font-size:0.72rem !important; opacity:1 !important; overflow:hidden !important; display:flex !important; align-items:center !important; justify-content:center !important; transition:none !important; }
+            #mobile-wrapper .m-id-panel a { color:#000; text-decoration:none; margin:0 8px; text-transform:uppercase; }
         }
-    </style>
+    
+        /* ── Über mich: Detail Layout Desktop ── */
+        @media (min-width:801px) and (min-height:500px) {
+            .detail-bento { display:flex; gap:40px; align-items:flex-start; background:rgba(255,255,255,0.95); border:3px solid #000; box-shadow:6px 6px 0 #000; padding:40px; border-radius:20px; margin-top:20px; }
+            .image-container { flex-shrink:0; }
+            .album-cover { width:200px; border:3px solid #000; border-radius:12px; overflow:hidden; box-shadow:5px 5px 0 #000; }
+            .album-cover img { width:100%; height:auto; display:block; }
+            .album-text p { margin:0 0 12px 0; font-size:0.95rem; line-height:1.6; }
+            .album-text p.intro { font-size:1.05rem; font-weight:bold; color:var(--anton-red); }
+            main { padding:110px 80px 100px 80px; max-width:1100px; margin:0 auto; width:100%; box-sizing:border-box; }
+        }
+        /* ── Über mich: Detail Layout Mobile Portrait ── */
+        @media (max-width:800px) and (orientation:portrait) {
+            .detail-bento { display:flex; flex-direction:column; gap:20px; }
+            .album-cover { width:120px; border:3px solid #000; border-radius:12px; overflow:hidden; box-shadow:4px 4px 0 #000; }
+            .album-cover img { width:100%; height:auto; display:block; }
+            .album-text p { margin:0 0 10px 0; font-size:0.85rem; line-height:1.55; }
+            .album-text p.intro { font-size:0.92rem; font-weight:bold; color:var(--anton-red); }
+            main { padding:20px 15px 0; }
+        }
+        /* ── Über mich: Detail Layout Landscape ── */
+        @media (orientation:landscape) and (max-height:500px) {
+            #mobile-wrapper .detail-bento { display:flex !important; flex-direction:row !important; gap:14px !important; align-items:flex-start !important; }
+            #mobile-wrapper .album-cover { width:85px !important; border:2px solid #000 !important; border-radius:8px !important; box-shadow:3px 3px 0 #000 !important; flex-shrink:0 !important; }
+            #mobile-wrapper .album-cover img { width:100% !important; height:auto !important; display:block !important; }
+            #mobile-wrapper .album-text p { margin:0 0 5px 0 !important; font-size:0.68rem !important; line-height:1.4 !important; }
+            #mobile-wrapper .album-text p.intro { font-size:0.75rem !important; font-weight:bold !important; color:var(--anton-red) !important; }
+            #mobile-wrapper main { padding:8px 10px !important; }
+        }
+</style>
 </head>
 <body>
-
-    <!-- ======================== DESKTOP ======================== -->
+    <!-- DESKTOP -->
     <div id="desktop-wrapper">
-        <header class="d-header">
-            <img src="Antonlogo.png" alt="ANTON Logo" class="d-header-logo">
-        </header>
+        <header class="d-header"><img src="Antonlogo.png" alt="ANTON Logo" class="d-header-logo"></header>
         <div class="d-menu-btn" onclick="toggleDesktopMenu()"><span>☰</span></div>
-        
         <nav class="d-sidebar-left" id="d-sidebar">
             <div class="d-nav-item"><a href="index.html"><span class="d-nav-label"><i class="fa-solid fa-house main-icon"></i> START</span></a></div>
             <div class="d-nav-item">
                 <a href="meinemusik.html"><span class="d-nav-label"><i class="fa-solid fa-music main-icon"></i> MEINE MUSIK</span><div class="d-arrow-wrapper"><i class="fa-solid fa-caret-down d-submenu-indicator"></i></div></a>
                 <div class="d-submenu">
-                    <a href="uebermich.html" style="color: var(--anton-red); font-weight: bold;"><i class="fa-regular fa-face-smile"></i> ÜBER MICH</a>
+                    <a href="uebermich.html"><i class="fa-regular fa-face-smile"></i> ÜBER MICH</a>
                     <a href="veroffentlichungen.html"><i class="fa-solid fa-volume-high"></i> VERÖFFENTLICHUNGEN</a>
                     <a href="konzerte.html"><i class="fa-solid fa-microphone-lines"></i> KONZERTE</a>
                 </div>
@@ -289,7 +208,6 @@
             <div class="d-nav-item"><a href="kontakt.html"><span class="d-nav-label"><i class="fa-solid fa-envelope main-icon"></i> KONTAKT</span></a></div>
             <div class="d-nav-item d-nav-item-epk"><a href="epk.html"><span class="d-nav-label"><i class="fa-solid fa-bullhorn main-icon"></i> EPK / PRESSE</span></a></div>
         </nav>
-
         <aside class="d-sidebar-right">
             <a href="https://www.youtube.com/@antonmusikvevo3861" target="_blank" rel="noopener"><i class="fa-brands fa-youtube"></i></a>
             <a href="https://www.tiktok.com/@anton.familienpop" target="_blank" rel="noopener"><i class="fa-brands fa-tiktok"></i></a>
@@ -301,7 +219,6 @@
             <a href="https://music.youtube.com/channel/UCv-LSCzk64M7Ri9pkzqsiQg" target="_blank" rel="noopener"><i class="fa-solid fa-circle-play"></i></a>
             <a href="https://music.amazon.de/artists/B0GF2ZR9RR" target="_blank" rel="noopener"><i class="fa-brands fa-amazon"></i></a>
         </aside>
-
         <main>
             <div class="detail-bento">
                 <div class="image-container">
@@ -321,24 +238,17 @@
                 </div>
             </div>
         </main>
-
         <footer class="d-footer">
             <div><a href="index.html">www.anton-familienpop.de</a></div>
             <div><a href="impressum.html">Impressum</a> | <a href="datenschutz.html">Datenschutz</a></div>
         </footer>
     </div>
 
-    <!-- ======================== MOBILE ======================== -->
+    <!-- MOBILE -->
     <div id="mobile-wrapper">
         <div id="m-bg-fix"></div>
-
-        <header class="m-header" id="m-header-main">
-            <img src="Antonlogo.png" alt="ANTON Logo" class="m-header-logo">
-        </header>
-        <div class="m-menu-btn" id="m-menu-trigger" onclick="mToggleMenu(event)">
-            <span></span><span></span><span></span>
-        </div>
-
+        <header class="m-header" id="m-header-main"><img src="Antonlogo.png" alt="ANTON Logo" class="m-header-logo"></header>
+        <div class="m-menu-btn" id="m-menu-trigger" onclick="mToggleMenu(event)"><span></span><span></span><span></span></div>
         <nav class="m-sidebar" id="m-sidebar">
             <div class="m-nav-item"><a href="index.html"><i class="fa-solid fa-house"></i><span class="mobile-tag">Start</span></a></div>
             <div class="m-nav-item"><a href="meinemusik.html"><i class="fa-solid fa-music"></i><span class="mobile-tag">Musik</span></a></div>
@@ -346,8 +256,7 @@
             <div class="m-nav-item"><a href="kontakt.html"><i class="fa-solid fa-envelope"></i><span class="mobile-tag">Kontakt</span></a></div>
             <div class="m-epk-container"><a href="epk.html" class="m-epk-text">EPK/PRESSE</a></div>
         </nav>
-
-        <main>
+        <div class="m-content-scroll">
             <div class="detail-bento">
                 <div class="image-container">
                     <div class="album-cover"><img src="Ich.jpg" alt="ANTON"></div>
@@ -365,13 +274,11 @@
                     <p>Anton gehört nicht dazu.</p>
                 </div>
             </div>
-        </main>
-
+        </div>
         <div class="m-id-button" id="m-id-btn" onclick="mOpenIDMenu(event)">I/D</div>
         <div class="m-id-panel" id="m-id-panel">
             <a href="impressum.html">Impressum</a><span>|</span><a href="datenschutz.html">Datenschutz</a>
         </div>
-
         <aside class="m-sidebar-right">
             <a href="https://www.youtube.com/@antonmusikvevo3861" target="_blank" rel="noopener"><i class="fa-brands fa-youtube"></i></a>
             <a href="https://www.tiktok.com/@anton.familienpop" target="_blank" rel="noopener"><i class="fa-brands fa-tiktok"></i></a>
@@ -386,47 +293,18 @@
     </div>
 
     <script>
-        /* ── Helpers ─────────────────────────────────────────── */
-        function isMobileDevice() {
-            // True for portrait mobile AND landscape mobile (phones rotated)
-            // Uses CSS media-query logic: landscape mobile has height ≤ 500px
-            return window.innerWidth <= 800 || (window.innerHeight <= 500 && window.innerWidth > window.innerHeight);
-        }
-        function isLandscapeMobile() {
-            return window.innerHeight <= 500 && window.innerWidth > window.innerHeight;
-        }
-
-        /* ── Desktop sidebar ─────────────────────────────────── */
         let dSidebarTimeout;
         const dSidebar = document.getElementById('d-sidebar');
-
-        function resetDSidebarTimer() {
-            clearTimeout(dSidebarTimeout);
-            if (dSidebar && dSidebar.classList.contains('open'))
-                dSidebarTimeout = setTimeout(() => dSidebar.classList.remove('open'), 5000);
-        }
-        function toggleDesktopMenu() {
-            if (dSidebar) {
-                dSidebar.classList.toggle('open');
-                if (dSidebar.classList.contains('open')) resetDSidebarTimer();
-            }
-        }
-        if (dSidebar) {
-            dSidebar.addEventListener('mousemove', resetDSidebarTimer);
-            dSidebar.addEventListener('click', resetDSidebarTimer);
-        }
-        // Only close desktop sidebar on click-outside when actually on desktop
+        function resetDSidebarTimer() { clearTimeout(dSidebarTimeout); if (dSidebar && dSidebar.classList.contains('open')) dSidebarTimeout = setTimeout(() => { dSidebar.classList.remove('open'); }, 5000); }
+        function toggleDesktopMenu() { if (dSidebar) { dSidebar.classList.toggle('open'); if (dSidebar.classList.contains('open')) resetDSidebarTimer(); } }
+        if (dSidebar) { dSidebar.addEventListener('mousemove', resetDSidebarTimer); dSidebar.addEventListener('click', resetDSidebarTimer); }
         document.addEventListener('click', function(e) {
-            if (!isMobileDevice()) {
+            if (window.innerWidth > 800) {
                 const btn = document.querySelector('.d-menu-btn');
-                if (dSidebar && !dSidebar.contains(e.target) && btn && !btn.contains(e.target) && dSidebar.classList.contains('open')) {
-                    dSidebar.classList.remove('open');
-                    clearTimeout(dSidebarTimeout);
-                }
+                if (dSidebar && !dSidebar.contains(e.target) && btn && !btn.contains(e.target) && dSidebar.classList.contains('open')) { dSidebar.classList.remove('open'); clearTimeout(dSidebarTimeout); }
             }
         });
 
-        /* ── Mobile sidebar / menus ──────────────────────────── */
         const mSidebar = document.getElementById('m-sidebar');
         const mMenuBtn = document.getElementById('m-menu-trigger');
         const mIdBtn   = document.getElementById('m-id-btn');
@@ -434,99 +312,68 @@
         const mBg      = document.getElementById('m-bg-fix');
         let mMenuTimeout, mIdTimeout;
 
+        function isLandscapeMobile() { return window.innerHeight <= 500 && window.innerWidth > window.innerHeight; }
+
         function mCloseAllMenus() {
             if (mSidebar) mSidebar.classList.remove('open');
             if (mMenuBtn) mMenuBtn.classList.remove('active');
-            clearTimeout(mMenuTimeout);
+            if (mMenuTimeout) clearTimeout(mMenuTimeout);
             if (!isLandscapeMobile()) {
                 if (mIdPanel) mIdPanel.classList.remove('open');
                 if (mIdBtn)   mIdBtn.classList.remove('hidden');
-                clearTimeout(mIdTimeout);
+                if (mIdTimeout) clearTimeout(mIdTimeout);
             }
         }
         function mToggleMenu(e) {
             e.stopPropagation();
-            if (mSidebar && mSidebar.classList.contains('open')) {
-                mCloseAllMenus();
-            } else {
-                mCloseAllMenus();
-                if (mSidebar) mSidebar.classList.add('open');
-                if (mMenuBtn) mMenuBtn.classList.add('active');
-                mMenuTimeout = setTimeout(mCloseAllMenus, 5000);
-            }
+            if (mSidebar.classList.contains('open')) { mCloseAllMenus(); }
+            else { mCloseAllMenus(); mSidebar.classList.add('open'); mMenuBtn.classList.add('active'); mMenuTimeout = setTimeout(mCloseAllMenus, 5000); }
         }
         function mOpenIDMenu(e) {
-            e.stopPropagation();
-            mCloseAllMenus();
+            e.stopPropagation(); mCloseAllMenus();
             if (mIdBtn)   mIdBtn.classList.add('hidden');
             if (mIdPanel) mIdPanel.classList.add('open');
             mIdTimeout = setTimeout(mCloseAllMenus, 5000);
         }
 
-        // Close mobile menus on outside click – works for ALL mobile (portrait + landscape)
-        document.addEventListener('click', e => {
-            if (isMobileDevice()) {
-                const insideSidebar = mSidebar && mSidebar.contains(e.target);
-                const insideBtn     = mMenuBtn && mMenuBtn.contains(e.target);
-                const insideIdPanel = mIdPanel && mIdPanel.contains(e.target);
-                const insideIdBtn   = mIdBtn   && mIdBtn.contains(e.target);
-                if (!insideSidebar && !insideBtn && !insideIdPanel && !insideIdBtn) {
-                    mCloseAllMenus();
-                }
-            }
-        });
-
-        /* ── Swipe / parallax (portrait only) ───────────────── */
-        let touchStartX = 0, touchStartY = 0, currentTranslateX = 0;
-
-        document.addEventListener('touchstart', e => {
-            touchStartX = e.touches[0].clientX;
-            touchStartY = e.touches[0].clientY;
-        }, { passive: true });
-
-        document.addEventListener('touchmove', e => {
-            if (isMobileDevice() && !isLandscapeMobile()) {
-                const diffX = e.touches[0].clientX - touchStartX;
-                const diffY = e.touches[0].clientY - touchStartY;
-                if (Math.abs(diffX) > 10 || Math.abs(diffY) > 10) {
-                    if (mSidebar && !mSidebar.contains(e.target)) mCloseAllMenus();
-                }
-                if (mBg && Math.abs(diffX) > Math.abs(diffY)) {
-                    let newX = currentTranslateX + diffX;
-                    const limit = window.innerWidth;
-                    if (newX >  limit) newX =  limit;
-                    if (newX < -limit) newX = -limit;
-                    mBg.style.transform = `translateX(${newX}px)`;
-                }
-            }
-        }, { passive: true });
-
-        document.addEventListener('touchend', () => {
-            if (isMobileDevice() && !isLandscapeMobile() && mBg) {
-                const matrix = new WebKitCSSMatrix(window.getComputedStyle(mBg).transform);
-                currentTranslateX = matrix.m41;
-            }
-        }, { passive: true });
-
-        /* ── I/D panel landscape state ───────────────────────── */
         function applyLandscapeState() {
             if (isLandscapeMobile()) {
+                if (mIdPanel) mIdPanel.style.cssText = '';
                 if (mIdBtn)   mIdBtn.style.display = 'none';
-                // panel is always visible via CSS in landscape, clear any inline styles
-                if (mIdPanel) { mIdPanel.style.cssText = ''; }
             } else {
                 if (mIdBtn)   mIdBtn.style.display = '';
                 if (mIdPanel) mIdPanel.classList.remove('open');
             }
         }
         window.addEventListener('resize', applyLandscapeState);
-        window.addEventListener('orientationchange', () => setTimeout(applyLandscapeState, 200));
+        window.addEventListener('orientationchange', () => setTimeout(applyLandscapeState, 100));
         applyLandscapeState();
 
-        /* ── Header auto-hide after 3s on mobile ─────────────── */
+        let touchStartX = 0, touchStartY = 0, currentTranslateX = 0;
+        document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY; }, { passive: true });
+        document.addEventListener('touchmove', e => {
+            if (window.innerWidth <= 800 && !isLandscapeMobile()) {
+                const diffX = e.touches[0].clientX - touchStartX, diffY = e.touches[0].clientY - touchStartY;
+                if (Math.abs(diffX) > 10 || Math.abs(diffY) > 10) { if (!mSidebar.contains(e.target)) mCloseAllMenus(); }
+                if (Math.abs(diffX) > Math.abs(diffY)) {
+                    let newX = currentTranslateX + diffX;
+                    const limit = window.innerWidth;
+                    if (newX > limit) newX = limit; if (newX < -limit) newX = -limit;
+                    if (mBg) mBg.style.transform = `translateX(${newX}px)`;
+                }
+            }
+        }, { passive: true });
+        document.addEventListener('touchend', () => { if (window.innerWidth <= 800 && !isLandscapeMobile() && mBg) { const matrix = new WebKitCSSMatrix(window.getComputedStyle(mBg).transform); currentTranslateX = matrix.m41; } }, { passive: true });
+
+        document.addEventListener('click', e => {
+            if (window.innerWidth <= 800 || isLandscapeMobile()) {
+                if (mSidebar && !mSidebar.contains(e.target) && mMenuBtn && !mMenuBtn.contains(e.target) && mIdPanel && !mIdPanel.contains(e.target) && mIdBtn && !mIdBtn.contains(e.target)) mCloseAllMenus();
+            }
+        });
+
         setTimeout(() => {
             const mh = document.getElementById('m-header-main');
-            if (mh && isMobileDevice()) {
+            if (mh && (window.innerWidth <= 800 || isLandscapeMobile())) {
                 mh.style.transform = 'translateY(0)';
                 setTimeout(() => { mh.style.transform = 'translateY(-100%)'; }, 3000);
             }
