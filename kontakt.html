@@ -219,50 +219,19 @@
                 background: transparent !important;
             }
 
-            /* Bento-Grid: Booking + Presse oben nebeneinander, Formular darunter zentriert */
-            #mobile-wrapper .m-bento-grid {
-                display: flex !important;
-                flex-direction: column !important;
-                gap: 8px !important;
-                align-items: center !important;
-            }
-
-            /* Zeile 1: Booking + Presse nebeneinander */
-            #mobile-wrapper .m-bento-box-booking,
-            #mobile-wrapper .m-bento-box-presse {
-                width: 50% !important;
-            }
-            #mobile-wrapper .m-bento-box-booking { align-self: auto !important; }
-            #mobile-wrapper .m-bento-box-presse  { align-self: auto !important; }
-
-            /* Wrapper für die obere Zeile */
-            #mobile-wrapper .m-bento-grid { position: relative !important; }
-
-            /* Trick: Booking + Presse in einer eigenen Flex-Zeile */
-            #mobile-wrapper .m-bento-box-booking,
-            #mobile-wrapper .m-bento-box-presse {
-                display: inline-flex !important;
-                flex-direction: column !important;
-            }
-
-            /* Eigentliche Lösung: grid für die zwei oberen, flex für alles */
+            /* Bento-Grid: 80% breit, zentriert – dann sind Booking/Presse + Formular automatisch bündig */
             #mobile-wrapper .m-bento-grid {
                 display: grid !important;
                 grid-template-columns: 1fr 1fr !important;
                 grid-template-rows: auto auto !important;
                 gap: 8px !important;
                 align-items: start !important;
+                width: 80% !important;
+                margin: 0 auto !important;
             }
             #mobile-wrapper .m-bento-box-booking { grid-column: 1 !important; grid-row: 1 !important; }
             #mobile-wrapper .m-bento-box-presse  { grid-column: 2 !important; grid-row: 1 !important; }
-            /* Formular: volle Breite, zentriert mit seitlichem Einzug */
-            #mobile-wrapper .m-bento-box-form {
-                grid-column: 1 / -1 !important;
-                grid-row: 2 !important;
-                width: 80% !important;
-                margin: 0 auto !important;
-                box-sizing: border-box !important;
-            }
+            #mobile-wrapper .m-bento-box-form    { grid-column: 1 / -1 !important; grid-row: 2 !important; }
 
             #mobile-wrapper .m-bento-box {
                 background: rgba(255,255,255,0.92) !important;
@@ -276,15 +245,14 @@
             #mobile-wrapper .m-bento-box p  { font-size: 0.68rem !important; margin: 0 0 5px 0 !important; line-height: 1.35 !important; }
             #mobile-wrapper .m-bento-box a  { font-size: 0.7rem !important; font-weight: bold !important; }
 
-            /* Formular: 2-spaltig, größere Felder */
+            /* Formular: 2-spaltig, großzügige Felder */
             #mobile-wrapper .contact-form {
                 display: grid !important;
                 grid-template-columns: 1fr 1fr !important;
                 gap: 8px !important;
             }
             #mobile-wrapper .contact-form input {
-                padding: 9px 11px !important;
-                font-size: 0.82rem !important;
+                padding: 9px 11px !important; font-size: 0.82rem !important;
                 border: 2px solid #000 !important; border-radius: 8px !important;
                 background: #fff !important; font-family: 'Special Elite', cursive !important;
                 outline: none !important; box-sizing: border-box !important; width: 100% !important;
@@ -292,13 +260,12 @@
             #mobile-wrapper .contact-form input:focus { background: var(--anton-yellow) !important; }
             #mobile-wrapper .contact-form textarea {
                 grid-column: 1 / -1 !important;
-                padding: 9px 11px !important;
-                font-size: 0.82rem !important;
+                padding: 9px 11px !important; font-size: 0.82rem !important;
                 border: 2px solid #000 !important; border-radius: 8px !important;
                 background: #fff !important; font-family: 'Special Elite', cursive !important;
                 outline: none !important; box-sizing: border-box !important;
                 width: 100% !important; resize: none !important;
-                height: 80px !important; /* doppelt so hoch wie vorher */
+                height: 110px !important;
             }
             #mobile-wrapper .contact-form textarea:focus { background: var(--anton-yellow) !important; }
             #mobile-wrapper .contact-form button {
