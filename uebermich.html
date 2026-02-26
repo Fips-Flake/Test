@@ -140,16 +140,18 @@
 
             .m-content-scroll { flex: 1; min-height: 0; margin-top: 80px; margin-bottom: 65px; overflow-y: auto !important; -webkit-overflow-scrolling: touch; padding: 20px 15px; box-sizing: border-box; }
 
-            .detail-bento { background: rgba(255,255,255,0.92); border: 3px solid #000; box-shadow: 5px 5px 0 #000; border-radius: 16px; padding: 16px; display: grid; grid-template-columns: 120px 1fr; grid-template-rows: auto auto; gap: 8px 12px; }
-            .image-container { grid-column: 1; grid-row: 1; }
+            .detail-bento { background: rgba(255,255,255,0.92); border: 3px solid #000; box-shadow: 5px 5px 0 #000; border-radius: 16px; padding: 16px; display: grid; grid-template-columns: 120px 1fr; grid-template-rows: auto auto auto; gap: 6px 12px; }
+            .image-container { grid-column: 1; grid-row: 1 / span 2; }
             .m-intro-col { grid-column: 2; grid-row: 1; }
-            .m-intro-text { font-size: 0.68rem !important; font-weight: bold !important; color: #ff0000 !important; line-height: 1.5 !important; margin: 0 !important; display: block !important; }
-            .album-text { grid-column: 1 / span 2; grid-row: 2; border-top: 1px solid rgba(0,0,0,0.15); padding-top: 8px; }
+            .m-first-para { grid-column: 2; grid-row: 2; }
+            .album-text { grid-column: 1 / span 2; grid-row: 3; }
             .album-text p.intro { display: none; }
+            .album-text p:first-of-type { display: none; }
+            .m-intro-text { font-size: 0.68rem !important; font-weight: bold !important; color: #ff0000 !important; line-height: 1.5 !important; margin: 0 !important; display: block !important; }
+            .m-first-para { font-size: 0.68rem; line-height: 1.5; margin: 0; }
             .album-cover { width: 120px; border: 2px solid #000; border-radius: 10px; overflow: hidden; box-shadow: 3px 3px 0 #000; }
             .album-cover img { width: 100%; height: auto; display: block; }
-            .album-text p { margin: 0 0 10px 0; font-size: 0.68rem; line-height: 1.5; }
-            .album-text p.intro { font-size: 0.68rem; font-weight: bold; color: var(--anton-red); }
+            .album-text p { margin: 0 0 8px 0; font-size: 0.68rem; line-height: 1.5; }
         }
 
         /* ================================================================= */
@@ -359,8 +361,9 @@
                     <div class="album-cover"><img src="Konzert2.jpg" alt="ANTON"></div>
                 </div>
                 <div class="m-intro-col">
-                    <p class="m-intro-text">Ihr wollt mehr<br>über mich und mein<br>laaaanges Leben<br>wissen? Wer Anton<br>ist? Na dann<br>passt mal auf:</p>
+                    <p class="m-intro-text">Ihr wollt mehr über mich und mein laaaanges Leben wissen? Wer Anton ist? Na dann passt mal auf:</p>
                 </div>
+                <p class="m-first-para">Anton ist Papa. Und Bruder. Geboren wurde er als Anton Nachtwey in Berlin-Friedenau.</p>
                 <div class="album-text">
                     <p class="intro">Ihr wollt mehr über mich und mein laaaanges Leben wissen? Wer Anton ist? Na dann passt mal auf:</p>
                     <p>Anton ist Papa. Und Bruder. Geboren wurde er als Anton Nachtwey in Berlin-Friedenau.</p>
