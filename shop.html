@@ -6,6 +6,10 @@
     <title>ANTON | SHOP</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap&subset=latin-ext" rel="stylesheet">
+
+    <!-- PayPal Cart Script -->
+    <script src="https://www.paypalobjects.com/ncp/cart/cart.js" data-merchant-id="ZTBGBVKBM4U2G"></script>
+
     <style>
         :root {
             --anton-red: #ff0000;
@@ -25,8 +29,9 @@
         }
 
         /* ================================================================= */
-        /* BAUSTELLEN-OVERLAY                                                 */
+        /* BAUSTELLEN-OVERLAY (DEAKTIVIERT – bei Bedarf wieder aktivieren)    */
         /* ================================================================= */
+        /*
         .construction-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -37,7 +42,6 @@
             justify-content: center;
         }
 
-        /* Diagonales Absperrband-Muster im Hintergrund */
         .construction-overlay::before {
             content: '';
             position: absolute;
@@ -61,7 +65,6 @@
             padding: 0 20px;
         }
 
-        /* Absperrband oben */
         .tape {
             width: min(700px, 90vw);
             height: 46px;
@@ -83,7 +86,6 @@
             transform: rotate(1.5deg);
         }
 
-        /* Baustellenschild */
         .construction-sign {
             background: #ffeb3b;
             border: 5px solid #000;
@@ -128,13 +130,17 @@
             display: inline;
         }
 
-        /* Nur der Seiteninhalt unscharf – Navigation bleibt nutzbar */
         #desktop-wrapper main,
         #desktop-wrapper .d-footer {
             filter: blur(4px);
             pointer-events: none;
             user-select: none;
         }
+        */
+        /* ================================================================= */
+        /* ENDE BAUSTELLEN-OVERLAY                                            */
+        /* ================================================================= */
+
 
         /* ================================================================= */
         /* 1. DESKTOP STYLES                                                  */
@@ -232,19 +238,13 @@
 
             main {
                 flex: 1;
-                padding: 120px 80px 80px 80px;
-                max-width: 1100px;
+                padding: 110px 80px 80px 80px;
+                max-width: 1200px;
                 margin: 0 auto;
                 z-index: 10;
                 width: 100%;
                 box-sizing: border-box;
             }
-
-            .bento-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; }
-            .bento-box { background: rgba(255, 255, 255, 0.95); border: 3px solid #000; box-shadow: 6px 6px 0 #000; padding: 30px; border-radius: 20px; transition: all 0.3s ease; color: inherit; display: flex; flex-direction: column; justify-content: center; text-align: center; }
-            .bento-box:hover { transform: translateY(-5px); background: var(--anton-yellow); }
-            .bento-box h2 { margin: 0 0 10px 0; color: var(--anton-red); text-transform: uppercase; font-size: 1.5rem; }
-            .box-full { grid-column: span 2; }
 
             .d-footer {
                 width: 100%; padding: 15px 0; background: rgba(255,255,255,0.95);
@@ -253,13 +253,6 @@
             }
             .d-footer a { color: #000; text-decoration: none; margin: 0 12px; font-weight: bold; transition: all 0.3s ease; }
             .d-footer a:hover { color: var(--anton-yellow) !important; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; }
-
-            /* Overlay höher als content aber sidebar noch drüber */
-            .construction-overlay { z-index: 400; }
-            .d-sidebar-left { z-index: 600; }
-            .d-menu-btn { z-index: 610; }
-            .d-sidebar-right { z-index: 999; }
-            .d-footer { z-index: 550; }
         }
 
         /* ================================================================= */
@@ -332,18 +325,11 @@
                 margin-top: 80px;
                 margin-bottom: 65px;
                 overflow-y: auto;
+                overflow-x: hidden;
                 padding: 20px 15px;
                 -webkit-overflow-scrolling: touch;
                 box-sizing: border-box;
-                display: flex;
-                align-items: flex-start;
             }
-
-            .m-content-scroll { filter: blur(4px); pointer-events: none; user-select: none; }
-            .m-bento-box { background: rgba(255, 255, 255, 0.92); border: 3px solid #000; box-shadow: 5px 5px 0 #000; padding: 20px; border-radius: 16px; }
-            .m-bento-box:active { background: var(--anton-yellow); }
-            .m-bento-box h2 { margin: 0 0 8px 0; color: var(--anton-red); text-transform: uppercase; font-size: 1.2rem; }
-            .m-bento-box p { margin: 0; font-size: 0.9rem; }
 
             .m-id-button {
                 position: fixed; right: 0; bottom: 150px; width: 38px; height: 38px;
@@ -393,23 +379,289 @@
             .m-sidebar-right a:nth-child(8) i  { --brand-color: #f00;               animation-delay: 1.75s; }
             .m-sidebar-right a:nth-child(9) i  { --brand-color: var(--amazon-blue); animation-delay: 2.0s;  }
 
-            /* Mobile: Overlay über Content, unter Sidebar/Nav */
-            .construction-overlay { z-index: 800; }
             .m-menu-btn  { z-index: 1500; }
             .m-sidebar   { z-index: 1100; }
             .m-sidebar-right { z-index: 999; }
             .m-id-button,
             .m-id-panel  { z-index: 1300; }
+        }
 
-            /* Baustellenschild kleiner auf Mobile */
-            .sign-text { font-size: clamp(0.85rem, 3vw, 1.1rem); }
-            .tape { height: 36px; }
+        /* ================================================================= */
+        /* SHOP STYLES (DESKTOP + MOBILE)                                    */
+        /* ================================================================= */
+
+        /* Shop Header Banner */
+        .shop-banner {
+            background: var(--anton-yellow);
+            border: 3px solid #000;
+            box-shadow: 6px 6px 0 #000;
+            border-radius: 16px;
+            padding: 20px 30px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .shop-banner h1 {
+            margin: 0;
+            font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #000;
+        }
+
+        .shop-banner .cart-icon-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            font-weight: bold;
+        }
+
+        .shop-banner .cart-icon-wrap i {
+            font-size: 1.8rem;
+            color: var(--anton-red);
+        }
+
+        /* Category Tabs */
+        .shop-cats {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 28px;
+        }
+
+        .shop-cat-btn {
+            background: rgba(255,255,255,0.9);
+            border: 2px solid #000;
+            box-shadow: 3px 3px 0 #000;
+            border-radius: 30px;
+            padding: 7px 18px;
+            font-family: 'Special Elite', cursive;
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.2s ease;
+            color: #000;
+        }
+
+        .shop-cat-btn:hover,
+        .shop-cat-btn.active {
+            background: var(--anton-yellow);
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0 #000;
+        }
+
+        /* Product Grid */
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 22px;
+            padding-bottom: 20px;
+        }
+
+        @media (max-width: 800px) {
+            .shop-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 14px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .shop-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Product Card */
+        .product-card {
+            background: rgba(255,255,255,0.96);
+            border: 3px solid #000;
+            box-shadow: 5px 5px 0 #000;
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.22s ease, box-shadow 0.22s ease;
+        }
+
+        .product-card:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 8px 8px 0 #000;
+        }
+
+        .product-img-wrap {
+            background: var(--anton-yellow);
+            border-bottom: 3px solid #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 28px 20px;
+            min-height: 160px;
+            position: relative;
+        }
+
+        .product-emoji {
+            font-size: 5rem;
+            line-height: 1;
+            user-select: none;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-emoji {
+            transform: scale(1.12) rotate(-4deg);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--anton-red);
+            color: #fff;
+            font-size: 0.65rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 9px;
+            border-radius: 20px;
+            border: 2px solid #000;
+        }
+
+        .product-info {
+            padding: 16px 18px 18px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            gap: 8px;
+        }
+
+        .product-name {
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #000;
+            margin: 0;
+        }
+
+        .product-desc {
+            font-size: 0.8rem;
+            color: #555;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        /* Color / Size Selects */
+        .product-selects {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-top: 4px;
+        }
+
+        .product-selects label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #888;
+            font-weight: bold;
+        }
+
+        .product-selects select {
+            font-family: 'Special Elite', cursive;
+            font-size: 0.8rem;
+            padding: 5px 8px;
+            border: 2px solid #000;
+            border-radius: 6px;
+            background: #fff;
+            cursor: pointer;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .product-selects select:focus { outline: none; border-color: var(--anton-red); }
+
+        .product-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: auto;
+            padding-top: 10px;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--anton-red);
+        }
+
+        /* PayPal Add-to-Cart Button styling */
+        .paypal-btn-wrap {
+            /* PayPal button injects its own element; we style the wrapper */
+        }
+
+        /* Custom Add-to-Cart button fallback look */
+        .btn-add-cart {
+            background: #000;
+            color: var(--anton-yellow);
+            border: 2px solid #000;
+            border-radius: 8px;
+            padding: 9px 16px;
+            font-family: 'Special Elite', cursive;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            transition: background 0.2s, color 0.2s, transform 0.15s;
+            white-space: nowrap;
+        }
+
+        .btn-add-cart:hover {
+            background: var(--anton-yellow);
+            color: #000;
+            transform: scale(1.04);
+        }
+
+        .btn-add-cart i { font-size: 1rem; }
+
+        /* PayPal Cart Button – floating fixed position */
+        .cart-float-paypal {
+            position: fixed;
+            bottom: 60px;
+            right: 60px;
+            z-index: 500;
+        }
+
+        @media (max-width: 800px) {
+            .cart-float-paypal { right: 12px; bottom: 75px; }
+        }
+
+        /* SHOP PAGE HEADLINE on mobile */
+        .shop-banner { margin-bottom: 20px; }
+
+        @media (max-width: 800px) {
+            .shop-banner { padding: 14px 18px; border-radius: 12px; }
+            .shop-cats { gap: 7px; margin-bottom: 16px; }
+            .shop-cat-btn { font-size: 0.75rem; padding: 6px 12px; }
+            .product-info { padding: 12px 14px 14px; }
+            .product-emoji { font-size: 3.6rem; }
+            .product-img-wrap { min-height: 120px; padding: 20px 14px; }
+            .product-name { font-size: 0.95rem; }
+            .product-price { font-size: 1.1rem; }
+            .btn-add-cart { font-size: 0.75rem; padding: 8px 11px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ======================== BAUSTELLEN-OVERLAY ======================== -->
+    <!-- ======================== BAUSTELLEN-OVERLAY (DEAKTIVIERT) ========================
     <div class="construction-overlay">
         <div class="construction-banner">
             <div class="tape"></div>
@@ -422,6 +674,8 @@
             <div class="tape tape-bottom"></div>
         </div>
     </div>
+    ======================== ENDE BAUSTELLEN-OVERLAY ======================== -->
+
 
     <!-- ======================== DESKTOP ======================== -->
     <div id="desktop-wrapper">
@@ -458,20 +712,7 @@
         </aside>
 
         <main>
-            <div class="bento-grid">
-                <div class="bento-box box-full">
-                    <h2>Neuheiten</h2>
-                    <p>Das neue Album "Familienpop" jetzt vorbestellen!</p>
-                </div>
-                <div class="bento-box">
-                    <h2>Merchandise</h2>
-                    <p>T-Shirts, Caps und mehr für die ganze Familie.</p>
-                </div>
-                <div class="bento-box">
-                    <h2>Musik</h2>
-                    <p>CDs, Vinyl und digitale Downloads.</p>
-                </div>
-            </div>
+            <div id="d-shop-content"><!-- injected by JS --></div>
         </main>
 
         <footer class="d-footer">
@@ -500,20 +741,7 @@
         </nav>
 
         <div class="m-content-scroll">
-            <div class="m-bento-grid">
-                <div class="m-bento-box">
-                    <h2>Neuheiten</h2>
-                    <p>Das neue Album "Familienpop" jetzt vorbestellen!</p>
-                </div>
-                <div class="m-bento-box">
-                    <h2>Merchandise</h2>
-                    <p>T-Shirts, Caps und mehr für die ganze Familie.</p>
-                </div>
-                <div class="m-bento-box">
-                    <h2>Musik</h2>
-                    <p>CDs, Vinyl und digitale Downloads.</p>
-                </div>
-            </div>
+            <div id="m-shop-content"><!-- injected by JS --></div>
         </div>
 
         <div class="m-id-button" id="m-id-btn" onclick="mOpenIDMenu(event)">I/D</div>
@@ -534,123 +762,327 @@
         </aside>
     </div>
 
+    <!-- PayPal View-Cart Button -->
+    <div class="cart-float-paypal">
+        <paypal-cart-button data-id="pp-view-cart"></paypal-cart-button>
+    </div>
+
     <script>
-        /* --- DESKTOP LOGIC --- */
-        let dSidebarTimeout;
-        const dSidebar = document.getElementById('d-sidebar');
-
-        function resetDSidebarTimer() {
-            clearTimeout(dSidebarTimeout);
-            if (dSidebar && dSidebar.classList.contains('open')) {
-                dSidebarTimeout = setTimeout(() => dSidebar.classList.remove('open'), 5000);
-            }
+    /* =================================================================
+       PRODUCT DATA
+    ================================================================= */
+    const products = [
+        {
+            id: 'cap',
+            name: 'Cap',
+            desc: 'Stylische Snapback-Cap mit ANTON-Logo – für die ganze Familie.',
+            emoji: '🧢',
+            price: 24.99,
+            badge: 'NEU',
+            category: 'kleidung',
+            options: { Größe: ['Einheitsgröße'], Farbe: ['Schwarz', 'Weiß', 'Rot', 'Gelb'] }
+        },
+        {
+            id: 'tshirt',
+            name: 'T-Shirt',
+            desc: 'Hochwertiges Baumwoll-Shirt mit großem ANTON-Frontprint.',
+            emoji: '👕',
+            price: 29.99,
+            badge: null,
+            category: 'kleidung',
+            options: { Größe: ['XS','S','M','L','XL','XXL'], Farbe: ['Schwarz','Weiß','Rot'] }
+        },
+        {
+            id: 'hoodie',
+            name: 'Hoodie',
+            desc: 'Kuscheliger Kapuzenpulli – perfekt für Konzerte und Familienausflüge.',
+            emoji: '🧥',
+            price: 49.99,
+            badge: 'BELIEBT',
+            category: 'kleidung',
+            options: { Größe: ['XS','S','M','L','XL','XXL'], Farbe: ['Schwarz','Grau','Gelb'] }
+        },
+        {
+            id: 'schluessel',
+            name: 'Schlüsselanhänger',
+            desc: 'Stabiler Metall-Anhänger mit ANTON-Logo – das perfekte kleine Geschenk.',
+            emoji: '🔑',
+            price: 9.99,
+            badge: null,
+            category: 'accessoires',
+            options: { Ausführung: ['Silber','Gold','Schwarz'] }
+        },
+        {
+            id: 'brotdose',
+            name: 'Brotdose',
+            desc: 'BPA-freie Lunchbox mit buntem ANTON-Design – Lunchbox-Spaß für Kids.',
+            emoji: '🍱',
+            price: 18.99,
+            badge: 'KIDS',
+            category: 'kueche',
+            options: { Motiv: ['ANTON Classic','ANTON Bunt'] }
+        },
+        {
+            id: 'trinkflasche',
+            name: 'Trinkflasche',
+            desc: 'Auslaufsichere Edelstahl-Flasche (500 ml) – hält Getränke kalt oder heiß.',
+            emoji: '🧃',
+            price: 22.99,
+            badge: null,
+            category: 'kueche',
+            options: { Farbe: ['Schwarz','Gelb','Rot'], Größe: ['500 ml','750 ml'] }
+        },
+        {
+            id: 'fruehstuecksbrett',
+            name: 'Frühstücksbrett',
+            desc: 'Personalisiertes Holzbrett mit ANTON-Gravur – macht jedes Frühstück besonders.',
+            emoji: '🪵',
+            price: 27.99,
+            badge: 'PERSONALISIERBAR',
+            category: 'kueche',
+            options: { Motiv: ['ANTON Logo','ANTON & Name'] }
         }
+    ];
 
-        function toggleDesktopMenu() {
-            if (dSidebar) {
-                dSidebar.classList.toggle('open');
-                if (dSidebar.classList.contains('open')) resetDSidebarTimer();
-            }
+    const categories = [
+        { key: 'alle',       label: 'Alle Artikel' },
+        { key: 'kleidung',   label: 'Kleidung' },
+        { key: 'accessoires',label: 'Accessoires' },
+        { key: 'kueche',     label: 'Küche & Kids' }
+    ];
+
+    let activeCategory = 'alle';
+
+    /* =================================================================
+       RENDER SHOP HTML
+    ================================================================= */
+    function buildShopHTML() {
+        const catBtns = categories.map(c =>
+            `<button class="shop-cat-btn${c.key === activeCategory ? ' active' : ''}"
+                onclick="filterCat('${c.key}')">${c.label}</button>`
+        ).join('');
+
+        const visible = activeCategory === 'alle'
+            ? products
+            : products.filter(p => p.category === activeCategory);
+
+        const cards = visible.map(p => {
+            const badge = p.badge ? `<span class="product-badge">${p.badge}</span>` : '';
+            const selects = Object.entries(p.options).map(([label, opts]) => `
+                <div>
+                    <label>${label}</label>
+                    <select id="sel-${p.id}-${label.toLowerCase()}" aria-label="${label} für ${p.name}">
+                        ${opts.map(o => `<option value="${o}">${o}</option>`).join('')}
+                    </select>
+                </div>
+            `).join('');
+
+            return `
+            <div class="product-card" data-id="${p.id}">
+                <div class="product-img-wrap">
+                    <span class="product-emoji">${p.emoji}</span>
+                    ${badge}
+                </div>
+                <div class="product-info">
+                    <p class="product-name">${p.name}</p>
+                    <p class="product-desc">${p.desc}</p>
+                    <div class="product-selects">${selects}</div>
+                    <div class="product-footer">
+                        <span class="product-price">${p.price.toFixed(2).replace('.', ',')} €</span>
+                        <button class="btn-add-cart" onclick="addToCart('${p.id}')">
+                            <i class="fa-solid fa-cart-plus"></i> In den Warenkorb
+                        </button>
+                    </div>
+                </div>
+            </div>`;
+        }).join('');
+
+        return `
+            <div class="shop-banner">
+                <h1><i class="fa-solid fa-cart-shopping" style="color:var(--anton-red);margin-right:12px;"></i>ANTON Shop</h1>
+                <div class="cart-icon-wrap">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span>Merchandise & Musik</span>
+                </div>
+            </div>
+            <div class="shop-cats">${catBtns}</div>
+            <div class="shop-grid">${cards}</div>
+        `;
+    }
+
+    function renderShop() {
+        const html = buildShopHTML();
+        const d = document.getElementById('d-shop-content');
+        const m = document.getElementById('m-shop-content');
+        if (d) d.innerHTML = html;
+        if (m) m.innerHTML = html;
+        updateCartLabel();
+    }
+
+    function filterCat(key) {
+        activeCategory = key;
+        renderShop();
+    }
+
+    /* =================================================================
+       CART LOGIC (PayPal NCP Cart – cartPaypal API)
+    ================================================================= */
+    // Initialise the PayPal view-cart button
+    cartPaypal.Cart({ id: "pp-view-cart" });
+
+    function addToCart(productId) {
+        const p = products.find(x => x.id === productId);
+        if (!p) return;
+
+        // Collect selected options for item name
+        const optionParts = Object.entries(p.options).map(([label]) => {
+            const sel = [...document.querySelectorAll(`[id="sel-${p.id}-${label.toLowerCase()}"]`)][0];
+            return sel ? `${label}: ${sel.value}` : null;
+        }).filter(Boolean).join(' | ');
+
+        const itemName = optionParts ? `${p.name} (${optionParts})` : p.name;
+
+        // Add item via official cartPaypal API
+        cartPaypal.addItem({
+            name: `ANTON – ${itemName}`,
+            price: p.price,
+            quantity: 1,
+            currency: 'EUR'
+        });
+
+        flashCartBtn();
+    }
+
+    function flashCartBtn() {
+        const wrap = document.querySelector('.cart-float-paypal');
+        if (!wrap) return;
+        wrap.style.transform = 'scale(1.15)';
+        setTimeout(() => { wrap.style.transform = ''; }, 350);
+    }
+
+    /* =================================================================
+       DESKTOP MENU LOGIC
+    ================================================================= */
+    let dSidebarTimeout;
+    const dSidebar = document.getElementById('d-sidebar');
+
+    function resetDSidebarTimer() {
+        clearTimeout(dSidebarTimeout);
+        if (dSidebar && dSidebar.classList.contains('open')) {
+            dSidebarTimeout = setTimeout(() => dSidebar.classList.remove('open'), 5000);
         }
+    }
 
+    function toggleDesktopMenu() {
         if (dSidebar) {
-            dSidebar.addEventListener('mousemove', resetDSidebarTimer);
-            dSidebar.addEventListener('click', resetDSidebarTimer);
+            dSidebar.classList.toggle('open');
+            if (dSidebar.classList.contains('open')) resetDSidebarTimer();
         }
+    }
 
-        document.addEventListener('click', function(e) {
-            if (window.innerWidth > 800) {
-                const btn = document.querySelector('.d-menu-btn');
-                if (dSidebar && !dSidebar.contains(e.target) && btn && !btn.contains(e.target) && dSidebar.classList.contains('open')) {
-                    dSidebar.classList.remove('open');
-                    clearTimeout(dSidebarTimeout);
-                }
-            }
-        });
+    if (dSidebar) {
+        dSidebar.addEventListener('mousemove', resetDSidebarTimer);
+        dSidebar.addEventListener('click', resetDSidebarTimer);
+    }
 
-        /* --- MOBILE LOGIC --- */
-        const mSidebar = document.getElementById('m-sidebar');
-        const mMenuBtn = document.getElementById('m-menu-trigger');
-        const mIdBtn   = document.getElementById('m-id-btn');
-        const mIdPanel = document.getElementById('m-id-panel');
-        const mBg      = document.getElementById('m-bg-fix');
-        let mMenuTimeout, mIdTimeout;
-
-        function mCloseAllMenus() {
-            if (mSidebar)  mSidebar.classList.remove('open');
-            if (mMenuBtn)  mMenuBtn.classList.remove('active');
-            if (mMenuTimeout) clearTimeout(mMenuTimeout);
-            if (mIdPanel)  mIdPanel.classList.remove('open');
-            if (mIdBtn)    mIdBtn.classList.remove('hidden');
-            if (mIdTimeout) clearTimeout(mIdTimeout);
-        }
-
-        function mToggleMenu(e) {
-            e.stopPropagation();
-            if (mSidebar.classList.contains('open')) {
-                mCloseAllMenus();
-            } else {
-                mCloseAllMenus();
-                mSidebar.classList.add('open');
-                mMenuBtn.classList.add('active');
-                mMenuTimeout = setTimeout(mCloseAllMenus, 5000);
+    document.addEventListener('click', function(e) {
+        if (window.innerWidth > 800) {
+            const btn = document.querySelector('.d-menu-btn');
+            if (dSidebar && !dSidebar.contains(e.target) && btn && !btn.contains(e.target) && dSidebar.classList.contains('open')) {
+                dSidebar.classList.remove('open');
+                clearTimeout(dSidebarTimeout);
             }
         }
+    });
 
-        function mOpenIDMenu(e) {
-            e.stopPropagation();
+    /* =================================================================
+       MOBILE LOGIC
+    ================================================================= */
+    const mSidebar = document.getElementById('m-sidebar');
+    const mMenuBtn = document.getElementById('m-menu-trigger');
+    const mIdBtn   = document.getElementById('m-id-btn');
+    const mIdPanel = document.getElementById('m-id-panel');
+    const mBg      = document.getElementById('m-bg-fix');
+    let mMenuTimeout, mIdTimeout;
+
+    function mCloseAllMenus() {
+        if (mSidebar)  mSidebar.classList.remove('open');
+        if (mMenuBtn)  mMenuBtn.classList.remove('active');
+        if (mMenuTimeout) clearTimeout(mMenuTimeout);
+        if (mIdPanel)  mIdPanel.classList.remove('open');
+        if (mIdBtn)    mIdBtn.classList.remove('hidden');
+        if (mIdTimeout) clearTimeout(mIdTimeout);
+    }
+
+    function mToggleMenu(e) {
+        e.stopPropagation();
+        if (mSidebar.classList.contains('open')) {
             mCloseAllMenus();
-            if (mIdBtn)   mIdBtn.classList.add('hidden');
-            if (mIdPanel) mIdPanel.classList.add('open');
-            mIdTimeout = setTimeout(mCloseAllMenus, 5000);
+        } else {
+            mCloseAllMenus();
+            mSidebar.classList.add('open');
+            mMenuBtn.classList.add('active');
+            mMenuTimeout = setTimeout(mCloseAllMenus, 5000);
         }
+    }
 
-        /* --- MOBILE TOUCH & SWIPE --- */
-        let touchStartX = 0, touchStartY = 0, currentTranslateX = 0;
+    function mOpenIDMenu(e) {
+        e.stopPropagation();
+        mCloseAllMenus();
+        if (mIdBtn)   mIdBtn.classList.add('hidden');
+        if (mIdPanel) mIdPanel.classList.add('open');
+        mIdTimeout = setTimeout(mCloseAllMenus, 5000);
+    }
 
-        document.addEventListener('touchstart', e => {
-            touchStartX = e.touches[0].clientX;
-            touchStartY = e.touches[0].clientY;
-        }, { passive: true });
+    let touchStartX = 0, touchStartY = 0, currentTranslateX = 0;
 
-        document.addEventListener('touchmove', e => {
-            if (window.innerWidth <= 800) {
-                const diffX = e.touches[0].clientX - touchStartX;
-                const diffY = e.touches[0].clientY - touchStartY;
-                if (Math.abs(diffX) > 10 || Math.abs(diffY) > 10) {
-                    if (mSidebar && !mSidebar.contains(e.target)) mCloseAllMenus();
-                }
-                if (Math.abs(diffX) > Math.abs(diffY)) {
-                    let newX = currentTranslateX + diffX;
-                    const limit = window.innerWidth;
-                    if (newX >  limit) newX =  limit;
-                    if (newX < -limit) newX = -limit;
-                    if (mBg) mBg.style.transform = `translateX(${newX}px)`;
-                }
+    document.addEventListener('touchstart', e => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    document.addEventListener('touchmove', e => {
+        if (window.innerWidth <= 800) {
+            const diffX = e.touches[0].clientX - touchStartX;
+            const diffY = e.touches[0].clientY - touchStartY;
+            if (Math.abs(diffX) > 10 || Math.abs(diffY) > 10) {
+                if (mSidebar && !mSidebar.contains(e.target)) mCloseAllMenus();
             }
-        }, { passive: true });
-
-        document.addEventListener('touchend', () => {
-            if (window.innerWidth <= 800 && mBg) {
-                const matrix = new WebKitCSSMatrix(window.getComputedStyle(mBg).transform);
-                currentTranslateX = matrix.m41;
+            if (Math.abs(diffX) > Math.abs(diffY)) {
+                let newX = currentTranslateX + diffX;
+                const limit = window.innerWidth;
+                if (newX >  limit) newX =  limit;
+                if (newX < -limit) newX = -limit;
+                if (mBg) mBg.style.transform = `translateX(${newX}px)`;
             }
-        }, { passive: true });
+        }
+    }, { passive: true });
 
-        document.addEventListener('click', e => {
-            if (window.innerWidth <= 800) {
-                if (mSidebar && !mSidebar.contains(e.target) &&
-                    mMenuBtn && !mMenuBtn.contains(e.target) &&
-                    mIdPanel && !mIdPanel.contains(e.target) &&
-                    mIdBtn   && !mIdBtn.contains(e.target)) mCloseAllMenus();
-            }
-        });
+    document.addEventListener('touchend', () => {
+        if (window.innerWidth <= 800 && mBg) {
+            const matrix = new WebKitCSSMatrix(window.getComputedStyle(mBg).transform);
+            currentTranslateX = matrix.m41;
+        }
+    }, { passive: true });
 
-        /* --- MOBILE HEADER HIDE AFTER 3s --- */
-        setTimeout(() => {
-            const mh = document.getElementById('m-header-main');
-            if (mh && window.innerWidth <= 800) mh.style.transform = 'translateY(-100%)';
-        }, 3000);
+    document.addEventListener('click', e => {
+        if (window.innerWidth <= 800) {
+            if (mSidebar && !mSidebar.contains(e.target) &&
+                mMenuBtn && !mMenuBtn.contains(e.target) &&
+                mIdPanel && !mIdPanel.contains(e.target) &&
+                mIdBtn   && !mIdBtn.contains(e.target)) mCloseAllMenus();
+        }
+    });
+
+    setTimeout(() => {
+        const mh = document.getElementById('m-header-main');
+        if (mh && window.innerWidth <= 800) mh.style.transform = 'translateY(-100%)';
+    }, 3000);
+
+    /* =================================================================
+       INIT
+    ================================================================= */
+    renderShop();
     </script>
 </body>
 </html>
