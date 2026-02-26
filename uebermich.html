@@ -153,9 +153,10 @@
             .m-first-para   { grid-column: 2; grid-row: 2; }
             .m-second-para  { grid-column: 2; grid-row: 3; }
             .album-text     { grid-column: 1 / span 2; grid-row: 4; }
-            .album-text p.intro      { display: none; }
-            .album-text p:first-of-type { display: none; }
+            .album-text p.intro          { display: none; }
+            .album-text p:first-of-type  { display: none; }
             .album-text p:nth-of-type(2) { display: none; }
+            .album-text p:nth-of-type(3) { display: none; } /* "Tonleitern," endet schon in m-second-para */
 
             /* ── SCHRIFT ETWAS GRÖẞER (war 0.68rem, jetzt 0.78rem) ── */
             .m-intro-text  { font-size: 0.78rem !important; font-weight: bold !important; color: #ff0000 !important; line-height: 1.5 !important; margin: 0 !important; display: block !important; }
@@ -251,6 +252,7 @@
             #mobile-wrapper .album-text p.intro { font-size: 0.62rem !important; font-weight: bold !important; color: #ff0000 !important; display: block !important; }
             #mobile-wrapper .album-text p:first-of-type  { display: block !important; }
             #mobile-wrapper .album-text p:nth-of-type(2) { display: block !important; }
+            #mobile-wrapper .album-text p:nth-of-type(3) { display: block !important; }
 
             #mobile-wrapper .m-sidebar-right {
                 position: fixed !important; top: 0 !important; bottom: 0 !important;
@@ -374,13 +376,14 @@
                 </div>
                 <!-- Zeile 2 neben dem Bild: erster Absatz -->
                 <p class="m-first-para">Anton ist Papa. Und Bruder. Großer und kleiner – je nachdem, wen man fragt. Geboren wurde er als Anton Nachtwey in Berlin-Friedenau.</p>
-                <!-- Zeile 3 neben dem Bild: zweiter Absatz -->
-                <p class="m-second-para">Mit sechs sitzt er am Klavier, und bleibt da auch erst mal zwölf Jahre. Klassische Ausbildung, Tonleitern, Disziplin. Seit seinem zehnten Lebensjahr steht er außerdem auf Bühnen – als Sänger, als Performer, als jemand, der offensichtlich lieber vorne steht als hinten.</p>
+                <!-- Zeile 3 neben dem Bild: zweiter Absatz – endet bei "Tonleitern," -->
+                <p class="m-second-para">Mit sechs sitzt er am Klavier, und bleibt da auch erst mal zwölf Jahre. Klassische Ausbildung, Tonleitern,</p>
                 <!-- Rest läuft unter dem Bild weiter (volle Breite) -->
                 <div class="album-text">
                     <p class="intro">Ihr wollt mehr über mich und mein laaaanges Leben wissen? Wer Anton ist? Na dann passt mal auf:</p>
                     <p>Anton ist Papa. Und Bruder. Großer und kleiner – je nachdem, wen man fragt. Geboren wurde er als Anton Nachtwey in Berlin-Friedenau.</p>
-                    <p>Mit sechs sitzt er am Klavier, und bleibt da auch erst mal zwölf Jahre. Klassische Ausbildung, Tonleitern, Disziplin. Seit seinem zehnten Lebensjahr steht er außerdem auf Bühnen – als Sänger, als Performer, als jemand, der offensichtlich lieber vorne steht als hinten.</p>
+                    <p>Mit sechs sitzt er am Klavier, und bleibt da auch erst mal zwölf Jahre. Klassische Ausbildung, Tonleitern,</p>
+                    <p>Disziplin. Seit seinem zehnten Lebensjahr steht er außerdem auf Bühnen – als Sänger, als Performer, als jemand, der offensichtlich lieber vorne steht als hinten.</p>
                     <p>Irgendwann merkt er: Ein Klavier passt schlecht in einen Rucksack. Also bringt er sich selbst Gitarre bei. Autodidaktisch, nach Gehör, nach Gefühl. Ende der 90er baut er sein eigenes Studio auf, schreibt Songs, produziert – dreht an Knöpfen, bis es nach ihm klingt.</p>
                     <p>2004 macht Anton seinen Abschluss als Audio Engineer. Er weiß jetzt offiziell, was er da eigentlich die ganze Zeit schon macht. 2005 läuft er dann bei Unser Block auf VIVA im Fernsehen – als Hauptdarsteller.</p>
                     <p>Danach wird's voll. Studios. Nächte. Bühnen. Lautsprecher, die größer sind als Wohnzimmer. Er arbeitet mit Leuten wie Mark Forster, Havoc (Mobb Deep), Kool Savas. Nicht als Fan. Sondern mittendrin.</p>
