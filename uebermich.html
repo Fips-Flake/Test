@@ -140,15 +140,16 @@
 
             .m-content-scroll { flex: 1; min-height: 0; margin-top: 80px; margin-bottom: 65px; overflow-y: auto !important; -webkit-overflow-scrolling: touch; padding: 20px 15px; box-sizing: border-box; }
 
-            .detail-bento { background: rgba(255,255,255,0.92); border: 3px solid #000; box-shadow: 5px 5px 0 #000; border-radius: 16px; padding: 16px; display: grid; grid-template-columns: 90px 1fr; grid-template-rows: auto auto; gap: 8px 12px; }
+            .detail-bento { background: rgba(255,255,255,0.92); border: 3px solid #000; box-shadow: 5px 5px 0 #000; border-radius: 16px; padding: 16px; display: grid; grid-template-columns: 120px 1fr; grid-template-rows: auto auto; gap: 8px 12px; }
             .image-container { grid-column: 1; grid-row: 1; }
             .m-intro-col { grid-column: 2; grid-row: 1; }
-            .m-intro-text { font-size: 0.65rem !important; font-weight: bold !important; color: #ff0000 !important; line-height: 1.35 !important; margin: 0 !important; display: block !important; }
+            .m-intro-text { font-size: 0.68rem !important; font-weight: bold !important; color: #ff0000 !important; line-height: 1.5 !important; margin: 0 !important; display: block !important; }
             .album-text { grid-column: 1 / span 2; grid-row: 2; border-top: 1px solid rgba(0,0,0,0.15); padding-top: 8px; }
-            .album-cover { width: 90px; border: 2px solid #000; border-radius: 10px; overflow: hidden; box-shadow: 3px 3px 0 #000; }
+            .album-text p.intro { display: none; }
+            .album-cover { width: 120px; border: 2px solid #000; border-radius: 10px; overflow: hidden; box-shadow: 3px 3px 0 #000; }
             .album-cover img { width: 100%; height: auto; display: block; }
-            .album-text p { margin: 0 0 10px 0; font-size: 0.85rem; line-height: 1.55; }
-            .album-text p.intro { font-size: 0.92rem; font-weight: bold; color: var(--anton-red); }
+            .album-text p { margin: 0 0 10px 0; font-size: 0.68rem; line-height: 1.5; }
+            .album-text p.intro { font-size: 0.68rem; font-weight: bold; color: var(--anton-red); }
         }
 
         /* ================================================================= */
@@ -193,60 +194,49 @@
 
             body { background-color: transparent !important; }
 
-            /* Content – kein weißer Hintergrund, sauberer Abstand */
+            /* Content – scrollbar mit genug Platz unten */
             #mobile-wrapper .m-content-scroll {
-                display: flex !important; align-items: flex-start !important;
-                justify-content: center !important;
+                display: block !important;
                 position: static !important;
-                margin-top: 65px !important; margin-bottom: 0 !important;
-                padding: 8px 52px 8px 10px !important;
-                overflow-y: auto !important; flex: none !important;
+                margin-top: 60px !important;
+                margin-bottom: 0 !important;
+                padding: 8px 52px 60px 10px !important;
+                overflow-y: auto !important;
+                flex: none !important;
                 box-sizing: border-box !important;
                 background: transparent !important;
-                height: calc(100vh - 65px) !important;
+                height: calc(100vh - 60px) !important;
             }
 
-            /* Detail-Box: 3 Spalten nebeneinander – Bild | roter Text | schwarzer Text */
+            /* Detail-Box: wie Desktop – Bild links, Text rechts */
             #mobile-wrapper .detail-bento {
-                display: grid !important;
-                grid-template-columns: 80px 100px 1fr !important;
-                grid-template-rows: 1fr !important;
-                gap: 0 10px !important; align-items: start !important;
+                display: flex !important;
+                flex-direction: row !important;
+                gap: 16px !important;
+                align-items: flex-start !important;
                 background: rgba(255,255,255,0.88) !important;
                 border: 2px solid #000 !important;
                 box-shadow: 3px 3px 0 #000 !important;
-                border-radius: 12px !important; padding: 10px !important;
-                width: 90% !important; box-sizing: border-box !important;
-                overflow: hidden !important;
+                border-radius: 12px !important;
+                padding: 12px !important;
+                width: 90% !important;
+                margin: 0 auto !important;
+                box-sizing: border-box !important;
+                overflow: visible !important;
             }
             #mobile-wrapper .image-container {
-                grid-column: 1 !important; grid-row: 1 !important;
-                width: auto !important;
-            }
-            #mobile-wrapper .m-intro-col {
-                grid-column: 2 !important; grid-row: 1 !important;
-                border-left: 1px solid rgba(0,0,0,0.15) !important;
-                border-right: 1px solid rgba(0,0,0,0.15) !important;
-                padding: 0 8px !important;
-            }
-            #mobile-wrapper .m-intro-text {
-                font-size: 0.6rem !important; font-weight: bold !important;
-                color: #ff0000 !important; line-height: 1.4 !important;
-                margin: 0 !important; display: block !important;
-            }
-            #mobile-wrapper .album-text {
-                grid-column: 3 !important; grid-row: 1 !important;
-                overflow-y: auto !important;
-                max-height: calc(100vh - 90px) !important;
-                padding-left: 2px !important;
+                flex-shrink: 0 !important; width: auto !important;
             }
             #mobile-wrapper .album-cover {
-                width: 80px !important;
+                width: 110px !important;
                 border: 2px solid #000 !important; border-radius: 8px !important;
-                box-shadow: 2px 2px 0 #000 !important;
+                box-shadow: 3px 3px 0 #000 !important;
             }
             #mobile-wrapper .album-cover img { width: 100% !important; height: auto !important; display: block !important; }
+            #mobile-wrapper .m-intro-col { display: none !important; }
+            #mobile-wrapper .album-text { overflow: visible !important; max-height: none !important; }
             #mobile-wrapper .album-text p { margin: 0 0 5px 0 !important; font-size: 0.62rem !important; line-height: 1.35 !important; }
+            #mobile-wrapper .album-text p.intro { font-size: 0.62rem !important; font-weight: bold !important; color: #ff0000 !important; }
 
             /* Social: vertikale Leiste rechts */
             #mobile-wrapper .m-sidebar-right {
@@ -369,9 +359,10 @@
                     <div class="album-cover"><img src="Konzert2.jpg" alt="ANTON"></div>
                 </div>
                 <div class="m-intro-col">
-                    <p class="m-intro-text">Ihr wollt mehr über mich und mein laaaanges Leben wissen? Wer Anton ist? Na dann passt mal auf:</p>
+                    <p class="m-intro-text">Ihr wollt mehr<br>über mich und mein<br>laaaanges Leben<br>wissen? Wer Anton<br>ist? Na dann<br>passt mal auf:</p>
                 </div>
                 <div class="album-text">
+                    <p class="intro">Ihr wollt mehr über mich und mein laaaanges Leben wissen? Wer Anton ist? Na dann passt mal auf:</p>
                     <p>Anton ist Papa. Und Bruder. Geboren wurde er als Anton Nachtwey in Berlin-Friedenau.</p>
                     <p>Mit sechs sitzt er am Klavier, und bleibt da auch erst mal zwölf Jahre. Klassische Ausbildung, Tonleitern, Disziplin. Seit seinem zehnten Lebensjahr steht er außerdem auf Bühnen.</p>
                     <p>Irgendwann merkt er: Ein Klavier passt schlecht in einen Rucksack. Also bringt er sich selbst Gitarre bei. Autodidaktisch, nach Gehör, nach Gefühl. Ende der 90er baut er sein eigenes Studio auf, schreibt Songs, produziert.</p>
