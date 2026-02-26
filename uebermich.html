@@ -154,7 +154,8 @@
             .m-second-para  { display: none; }
             .album-text     { grid-column: 1 / span 2; grid-row: 3; }
             .album-text p.intro          { display: none; }
-            .album-text p:first-of-type  { display: none; }
+            .album-text p:first-of-type  { display: none; } /* "Anton ist Papa..." kurz – schon in m-first-para */
+            .album-text p:nth-of-type(2) { display: none; } /* "Anton ist Papa..." kurz – Duplikat */
 
             /* ── SCHRIFT GRÖẞER (0.86rem) ── */
             .m-intro-text  { font-size: 0.86rem !important; font-weight: bold !important; color: #ff0000 !important; line-height: 1.5 !important; margin: 0 !important; display: block !important; }
@@ -250,6 +251,7 @@
             #mobile-wrapper .album-text p:first-of-type  { display: block !important; }
             #mobile-wrapper .album-text p:nth-of-type(2) { display: block !important; }
             #mobile-wrapper .album-text p:nth-of-type(3) { display: block !important; }
+            #mobile-wrapper .album-text p:nth-of-type(4) { display: block !important; }
 
             #mobile-wrapper .m-sidebar-right {
                 position: fixed !important; top: 0 !important; bottom: 0 !important;
@@ -371,12 +373,13 @@
                 <div class="m-intro-col">
                     <p class="m-intro-text">Ihr wollt mehr über mich und mein laaaanges Leben wissen? Wer Anton ist?<br><br>Na dann passt mal auf:</p>
                 </div>
-                <!-- Zeile 2 neben dem Bild: erster Absatz -->
-                <p class="m-first-para">Anton ist Papa. Und Bruder. Großer und kleiner – je nachdem, wen man fragt. Geboren wurde er als Anton Nachtwey in Berlin-Friedenau.</p>
+                <!-- Zeile 2 neben dem Bild: nur erster Satz -->
+                <p class="m-first-para">Anton ist Papa. Und Bruder. Großer und kleiner – je nachdem, wen man fragt.</p>
                 <!-- Rest läuft unter dem Bild weiter (volle Breite) -->
                 <div class="album-text">
                     <p class="intro">Ihr wollt mehr über mich und mein laaaanges Leben wissen? Wer Anton ist? Na dann passt mal auf:</p>
-                    <p>Anton ist Papa. Und Bruder. Großer und kleiner – je nachdem, wen man fragt. Geboren wurde er als Anton Nachtwey in Berlin-Friedenau.</p>
+                    <p>Anton ist Papa. Und Bruder. Großer und kleiner – je nachdem, wen man fragt.</p>
+                    <p>Geboren wurde er als Anton Nachtwey in Berlin-Friedenau.</p>
                     <p>Mit sechs sitzt er am Klavier, und bleibt da auch erst mal zwölf Jahre. Klassische Ausbildung, Tonleitern,</p>
                     <p>Disziplin. Seit seinem zehnten Lebensjahr steht er außerdem auf Bühnen – als Sänger, als Performer, als jemand, der offensichtlich lieber vorne steht als hinten.</p>
                     <p>Irgendwann merkt er: Ein Klavier passt schlecht in einen Rucksack. Also bringt er sich selbst Gitarre bei. Autodidaktisch, nach Gehör, nach Gefühl. Ende der 90er baut er sein eigenes Studio auf, schreibt Songs, produziert – dreht an Knöpfen, bis es nach ihm klingt.</p>
