@@ -128,10 +128,6 @@
         }
 
         /* 3. LANDSCAPE */
-        /*
-         * NACHT-ANIMATION (gespeichert):
-         * @keyframes ultraFlowWaveNight { 0% { transform: scale(1); color: #aaa; } 9.33% { transform: scale(1.4); color: var(--brand-color); filter: drop-shadow(0 0 6px var(--brand-color)); } 23.33%, 100% { transform: scale(1); color: #aaa; } }
-         */
         @media (orientation: landscape) and (max-height: 500px) {
             #mobile-wrapper #m-bg-fix { display: block !important; position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; background: url('Background.jpg') no-repeat center center !important; background-size: cover !important; z-index: -1 !important; will-change: unset !important; transform: none !important; }
             #mobile-wrapper .m-header { height: 60px; }
@@ -173,7 +169,7 @@
             </div>
             <div class="d-nav-item"><a href="shop.html"><span class="d-nav-label"><i class="fa-solid fa-cart-shopping main-icon"></i> SHOP</span></a></div>
             <div class="d-nav-item"><a href="kontakt.html"><span class="d-nav-label"><i class="fa-solid fa-envelope main-icon"></i> KONTAKT</span></a></div>
-            <div class="d-nav-item d-nav-item-epk"><a href="epk.html"><span class="d-nav-label"><i class="fa-solid fa-bullhorn main-icon"></i> EPK / PRESSE</span></a></div>
+            <div class="d-nav-item d-nav-item-epk"><a href="https://www.dropbox.com/scl/fo/uaqmqoexqsd3do0sy4fni/AG1t5A5kO9ciFFuF1Ecyh8U?rlkey=amb618zoq017jjk54914jlnkb&st=xapx5uvl&dl=0" target="_blank" rel="noopener"><span class="d-nav-label"><i class="fa-solid fa-bullhorn main-icon"></i> EPK / PRESSE</span></a></div>
         </nav>
 
         <aside class="d-sidebar-right">
@@ -228,7 +224,7 @@
             <div class="m-nav-item"><a href="meinemusik.html"><i class="fa-solid fa-music"></i><span class="mobile-tag">Musik</span></a></div>
             <div class="m-nav-item"><a href="shop.html"><i class="fa-solid fa-cart-shopping"></i><span class="mobile-tag">Shop</span></a></div>
             <div class="m-nav-item"><a href="kontakt.html"><i class="fa-solid fa-envelope"></i><span class="mobile-tag">Kontakt</span></a></div>
-            <div class="m-epk-container"><a href="epk.html" class="m-epk-text">EPK/PRESSE</a></div>
+            <div class="m-epk-container"><a href="https://www.dropbox.com/scl/fo/uaqmqoexqsd3do0sy4fni/AG1t5A5kO9ciFFuF1Ecyh8U?rlkey=amb618zoq017jjk54914jlnkb&st=xapx5uvl&dl=0" target="_blank" rel="noopener" class="m-epk-text">EPK/PRESSE</a></div>
         </nav>
 
         <div class="m-id-button" id="m-id-btn" onclick="mOpenIDMenu(event)">I/D</div>
@@ -404,7 +400,6 @@
                 }
             }
             setBackground(filename, 'Background.jpg');
-            console.log('[ANTON BG] Saison: ' + season + ' | Tageszeit: ' + daytime + ' | Bild: ' + filename);
         })();
 
         setTimeout(function() {
