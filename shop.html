@@ -630,12 +630,42 @@
 
         .btn-add-cart i { font-size: 1rem; }
 
-        /* Floating Cart Button */
-        .cart-float-paypal {
+        /* ---- Toast ---- */
+        #cart-toast {
+            position: fixed;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-20px);
+            background: #000;
+            color: var(--anton-yellow);
+            border: 2px solid #000;
+            border-radius: 40px;
+            padding: 12px 24px;
+            font-family: 'Special Elite', cursive;
+            font-size: 0.95rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s, transform 0.3s;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.3);
+            white-space: nowrap;
+        }
+        #cart-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        #cart-toast i { color: #00c853; font-size: 1.1rem; }
+
+        /* ---- Floating Cart Button ---- */
+        .cart-float-btn {
             position: fixed;
             bottom: 60px;
             right: 60px;
-            z-index: 500;
+            z-index: 1200;
             background: var(--anton-yellow);
             border: 3px solid #000;
             box-shadow: 5px 5px 0 #000;
@@ -651,12 +681,204 @@
             transition: transform 0.2s, box-shadow 0.2s;
             user-select: none;
         }
-        .cart-float-paypal:hover { transform: translate(-2px,-2px); box-shadow: 7px 7px 0 #000; }
-        .cart-float-paypal i { font-size: 1.2rem; color: var(--anton-red); }
+        .cart-float-btn:hover { transform: translate(-2px,-2px); box-shadow: 7px 7px 0 #000; }
+        .cart-float-btn i { font-size: 1.2rem; color: var(--anton-red); }
+
+        .cart-badge {
+            background: var(--anton-red);
+            color: #fff;
+            border-radius: 50%;
+            width: 22px; height: 22px;
+            font-size: 0.75rem;
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #000;
+            margin-left: -4px;
+        }
 
         @media (max-width: 800px) {
-            .cart-float-paypal { right: 12px; bottom: 75px; font-size: 0.8rem; padding: 8px 16px; }
+            .cart-float-btn { right: 12px; bottom: 75px; font-size: 0.8rem; padding: 8px 14px; }
         }
+
+        /* ---- Cart Overlay ---- */
+        .cart-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.45);
+            z-index: 1400;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        .cart-overlay.open { opacity: 1; pointer-events: all; }
+
+        /* ---- Cart Drawer ---- */
+        .cart-drawer {
+            position: fixed;
+            top: 0; right: -420px; bottom: 0;
+            width: 400px;
+            max-width: 95vw;
+            background: #fff;
+            border-left: 3px solid #000;
+            box-shadow: -8px 0 30px rgba(0,0,0,0.15);
+            z-index: 1500;
+            display: flex;
+            flex-direction: column;
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Special Elite', cursive;
+        }
+        .cart-drawer.open { right: 0; }
+
+        .cart-drawer-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 22px;
+            border-bottom: 3px solid #000;
+            background: var(--anton-yellow);
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .cart-drawer-header i { margin-right: 8px; color: var(--anton-red); }
+
+        .cart-close-btn {
+            background: #000;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            width: 34px; height: 34px;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.2s;
+        }
+        .cart-close-btn:hover { background: var(--anton-red); }
+
+        .cart-drawer-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+            font-size: 1rem;
+        }
+        .cart-empty i { font-size: 3rem; display: block; margin-bottom: 14px; color: #ddd; }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #fafafa;
+            border: 2px solid #000;
+            border-radius: 12px;
+            padding: 12px 14px;
+            transition: background 0.2s;
+        }
+        .cart-item:hover { background: #fffde7; }
+
+        .cart-item-emoji { font-size: 2.2rem; flex-shrink: 0; }
+
+        .cart-item-info { flex: 1; min-width: 0; }
+        .cart-item-name { font-size: 0.9rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; }
+        .cart-item-variant { font-size: 0.75rem; color: #777; margin-top: 2px; }
+        .cart-item-price { font-size: 0.95rem; color: var(--anton-red); font-weight: bold; margin-top: 4px; }
+
+        .cart-item-qty {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+        .qty-btn {
+            background: #000;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            width: 26px; height: 26px;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.15s;
+            font-family: 'Special Elite', cursive;
+        }
+        .qty-btn:hover { background: var(--anton-red); }
+        .qty-num { font-size: 0.95rem; font-weight: bold; min-width: 18px; text-align: center; }
+
+        .cart-item-del {
+            background: none;
+            border: none;
+            color: #ccc;
+            font-size: 1rem;
+            cursor: pointer;
+            padding: 4px;
+            transition: color 0.2s;
+            flex-shrink: 0;
+        }
+        .cart-item-del:hover { color: var(--anton-red); }
+
+        /* ---- Cart Footer ---- */
+        .cart-drawer-footer {
+            padding: 18px 22px;
+            border-top: 3px solid #000;
+            background: #fafafa;
+        }
+        .cart-total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 14px;
+        }
+        .cart-total-price { font-size: 1.3rem; color: var(--anton-red); }
+
+        .btn-checkout {
+            width: 100%;
+            background: #000;
+            color: var(--anton-yellow);
+            border: 2px solid #000;
+            border-radius: 10px;
+            padding: 14px;
+            font-family: 'Special Elite', cursive;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: background 0.2s, color 0.2s, transform 0.15s;
+            box-shadow: 4px 4px 0 #000;
+        }
+        .btn-checkout:hover { background: var(--anton-yellow); color: #000; transform: translate(-2px,-2px); box-shadow: 6px 6px 0 #000; }
+
+        .btn-cart-clear {
+            width: 100%;
+            margin-top: 8px;
+            background: none;
+            border: none;
+            font-family: 'Special Elite', cursive;
+            font-size: 0.78rem;
+            color: #aaa;
+            cursor: pointer;
+            text-decoration: underline;
+            text-align: center;
+            transition: color 0.2s;
+        }
+        .btn-cart-clear:hover { color: var(--anton-red); }
 
         /* SHOP PAGE HEADLINE on mobile */
         .shop-banner { margin-bottom: 20px; }
@@ -777,10 +999,28 @@
         </aside>
     </div>
 
-    <!-- PayPal View-Cart floating button -->
-    <div class="cart-float-paypal" id="cart-float-btn" onclick="viewCart()" title="Warenkorb anzeigen">
+    <!-- Toast Notification -->
+    <div id="cart-toast">
+        <i class="fa-solid fa-circle-check"></i>
+        <span id="toast-text">Artikel hinzugefügt!</span>
+    </div>
+
+    <!-- Floating Cart Button -->
+    <div class="cart-float-btn" id="cart-float-btn" onclick="openCartDrawer()" title="Warenkorb anzeigen">
         <i class="fa-solid fa-cart-shopping"></i>
         <span id="cart-label">Warenkorb</span>
+        <span class="cart-badge" id="cart-badge" style="display:none">0</span>
+    </div>
+
+    <!-- Cart Drawer -->
+    <div class="cart-overlay" id="cart-overlay" onclick="closeCartDrawer()"></div>
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-drawer-header">
+            <span><i class="fa-solid fa-cart-shopping"></i> Dein Warenkorb</span>
+            <button class="cart-close-btn" onclick="closeCartDrawer()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-drawer-items" id="cart-drawer-items"></div>
+        <div class="cart-drawer-footer" id="cart-drawer-footer"></div>
     </div>
 
     <script>
@@ -932,7 +1172,6 @@
         const m = document.getElementById('m-shop-content');
         if (d) d.innerHTML = html;
         if (m) m.innerHTML = html;
-        updateCartLabel();
     }
 
     function filterCat(key) {
@@ -941,129 +1180,208 @@
     }
 
     /* =================================================================
-       CART LOGIC – PayPal Payments Standard (cmd=_cart)
-       Jedes Produkt wird via HTML-Form-POST zu PayPal gesendet.
-       Der „In den Warenkorb"-Button erstellt dynamisch ein Form-Element
-       und submitted es, ohne die Seite zu verlassen (target="_blank").
-       Der „Warenkorb anzeigen"-Button öffnet den PayPal-Cart in einem
-       neuen Tab mit cmd=_cart&display=1.
+       LOKALER WARENKORB – Artikel werden im Browser gesammelt.
+       Erst beim Checkout-Klick wird alles an PayPal übertragen.
     ================================================================= */
-    const PAYPAL_BUSINESS = 'ZTBGBVKBM4U2G'; // Merchant-ID
+    const PAYPAL_BUSINESS = 'ZTBGBVKBM4U2G';
     const PAYPAL_CURRENCY = 'EUR';
-    const PAYPAL_URL = 'https://www.paypal.com/cgi-bin/webscr';
-    const RETURN_URL  = window.location.href;
-    const CANCEL_URL  = window.location.href;
+    const PAYPAL_URL      = 'https://www.paypal.com/cgi-bin/webscr';
+    const RETURN_URL      = window.location.href;
+    const CANCEL_URL      = window.location.href;
 
-    let cartCount = 0;
+    // cart = array of { id, name, emoji, price, variant, qty }
+    let cart = JSON.parse(localStorage.getItem('anton_cart') || '[]');
 
+    function saveCart() {
+        localStorage.setItem('anton_cart', JSON.stringify(cart));
+    }
+
+    /* ---------- ADD TO CART ---------- */
     function addToCart(productId) {
         const p = products.find(x => x.id === productId);
         if (!p) return;
 
-        // Collect selected options
-        const optEntries = Object.entries(p.options);
-        const selVals = optEntries.map(([label]) => {
+        // read selected options
+        const variantParts = Object.entries(p.options).map(([label]) => {
             const sel = [...document.querySelectorAll(`[id="sel-${p.id}-${label.toLowerCase()}"]`)][0];
-            return sel ? { label, value: sel.value } : null;
+            return sel ? `${label}: ${sel.value}` : null;
         }).filter(Boolean);
+        const variant = variantParts.join(' | ');
 
-        // Build a hidden form and submit it to PayPal
-        const form = document.createElement('form');
-        form.method = 'post';
-        form.action = PAYPAL_URL;
-        form.target = 'paypal_cart'; // open in new tab (see window.open below)
+        // check if same product+variant already in cart
+        const key = productId + '|' + variant;
+        const existing = cart.find(i => i.key === key);
+        if (existing) {
+            existing.qty++;
+        } else {
+            cart.push({ key, id: productId, name: p.name, emoji: p.emoji, price: p.price, variant, qty: 1 });
+        }
 
-        const fields = {
-            cmd:           '_cart',
-            add:           '1',
-            business:      PAYPAL_BUSINESS,
-            item_name:     `ANTON – ${p.name}`,
-            amount:        p.price.toFixed(2),
-            currency_code: PAYPAL_CURRENCY,
-            shopping_url:  RETURN_URL,
-            cancel_return: CANCEL_URL,
-            return:        RETURN_URL,
-            lc:            'DE'
-        };
-
-        // Pass up to 2 option pairs (on0/os0, on1/os1) to PayPal
-        selVals.slice(0, 2).forEach((opt, i) => {
-            fields[`on${i}`] = opt.label;
-            fields[`os${i}`] = opt.value;
-        });
-
-        Object.entries(fields).forEach(([name, value]) => {
-            const inp = document.createElement('input');
-            inp.type  = 'hidden';
-            inp.name  = name;
-            inp.value = value;
-            form.appendChild(inp);
-        });
-
-        document.body.appendChild(form);
-
-        // Open a named window so subsequent clicks reuse the same cart tab
-        window.open('', 'paypal_cart');
-        form.submit();
-
-        document.body.removeChild(form);
-
-        // Update counter badge
-        cartCount++;
-        updateCartLabel();
+        saveCart();
+        updateCartUI();
+        showToast(`${p.emoji} ${p.name} wurde hinzugefügt!`);
         flashCartBtn();
     }
 
-    function viewCart() {
-        const form = document.createElement('form');
-        form.method = 'post';
-        form.action = PAYPAL_URL;
-        form.target = 'paypal_cart';
-
-        const fields = {
-            cmd:           '_cart',
-            display:       '1',
-            business:      PAYPAL_BUSINESS,
-            currency_code: PAYPAL_CURRENCY,
-            shopping_url:  RETURN_URL,
-            cancel_return: CANCEL_URL,
-            return:        RETURN_URL,
-            lc:            'DE'
-        };
-
-        Object.entries(fields).forEach(([name, value]) => {
-            const inp = document.createElement('input');
-            inp.type  = 'hidden';
-            inp.name  = name;
-            inp.value = value;
-            form.appendChild(inp);
-        });
-
-        document.body.appendChild(form);
-        window.open('', 'paypal_cart');
-        form.submit();
-        document.body.removeChild(form);
+    /* ---------- CHANGE QTY ---------- */
+    function changeQty(key, delta) {
+        const item = cart.find(i => i.key === key);
+        if (!item) return;
+        item.qty += delta;
+        if (item.qty <= 0) cart = cart.filter(i => i.key !== key);
+        saveCart();
+        updateCartUI();
     }
 
-    function updateCartLabel() {
-        const lbl = document.getElementById('cart-label');
-        if (!lbl) return;
-        lbl.textContent = cartCount > 0 ? `Warenkorb (${cartCount})` : 'Warenkorb';
+    /* ---------- REMOVE ---------- */
+    function removeItem(key) {
+        cart = cart.filter(i => i.key !== key);
+        saveCart();
+        updateCartUI();
     }
 
+    /* ---------- CLEAR ---------- */
+    function clearCart() {
+        cart = [];
+        saveCart();
+        updateCartUI();
+    }
+
+    /* ---------- UI UPDATE ---------- */
+    function updateCartUI() {
+        const totalQty   = cart.reduce((s, i) => s + i.qty, 0);
+        const totalPrice = cart.reduce((s, i) => s + i.price * i.qty, 0);
+
+        // badge + label
+        const badge = document.getElementById('cart-badge');
+        const label = document.getElementById('cart-label');
+        if (badge) {
+            badge.textContent = totalQty;
+            badge.style.display = totalQty > 0 ? 'flex' : 'none';
+        }
+        if (label) label.textContent = 'Warenkorb';
+
+        // drawer items
+        const itemsEl = document.getElementById('cart-drawer-items');
+        const footerEl = document.getElementById('cart-drawer-footer');
+        if (!itemsEl) return;
+
+        if (cart.length === 0) {
+            itemsEl.innerHTML = `<div class="cart-empty"><i class="fa-solid fa-cart-shopping"></i>Dein Warenkorb ist noch leer.</div>`;
+            if (footerEl) footerEl.innerHTML = '';
+            return;
+        }
+
+        itemsEl.innerHTML = cart.map(item => `
+            <div class="cart-item">
+                <span class="cart-item-emoji">${item.emoji}</span>
+                <div class="cart-item-info">
+                    <div class="cart-item-name">${item.name}</div>
+                    ${item.variant ? `<div class="cart-item-variant">${item.variant}</div>` : ''}
+                    <div class="cart-item-price">${(item.price * item.qty).toFixed(2).replace('.', ',')} €</div>
+                </div>
+                <div class="cart-item-qty">
+                    <button class="qty-btn" onclick="changeQty('${escKey(item.key)}', -1)">−</button>
+                    <span class="qty-num">${item.qty}</span>
+                    <button class="qty-btn" onclick="changeQty('${escKey(item.key)}', 1)">+</button>
+                </div>
+                <button class="cart-item-del" onclick="removeItem('${escKey(item.key)}')"><i class="fa-solid fa-trash"></i></button>
+            </div>
+        `).join('');
+
+        if (footerEl) {
+            footerEl.innerHTML = `
+                <div class="cart-total-row">
+                    <span>Gesamt</span>
+                    <span class="cart-total-price">${totalPrice.toFixed(2).replace('.', ',')} €</span>
+                </div>
+                <button class="btn-checkout" onclick="checkoutPayPal()">
+                    <i class="fa-brands fa-paypal"></i> Jetzt mit PayPal bezahlen
+                </button>
+                <button class="btn-cart-clear" onclick="clearCart()">Warenkorb leeren</button>
+            `;
+        }
+    }
+
+    function escKey(key) {
+        return key.replace(/'/g, "\\'");
+    }
+
+    /* ---------- DRAWER ---------- */
+    function openCartDrawer() {
+        document.getElementById('cart-drawer').classList.add('open');
+        document.getElementById('cart-overlay').classList.add('open');
+        updateCartUI();
+    }
+
+    function closeCartDrawer() {
+        document.getElementById('cart-drawer').classList.remove('open');
+        document.getElementById('cart-overlay').classList.remove('open');
+    }
+
+    /* ---------- TOAST ---------- */
+    let toastTimer;
+    function showToast(msg) {
+        const t = document.getElementById('cart-toast');
+        const txt = document.getElementById('toast-text');
+        if (!t) return;
+        txt.textContent = msg;
+        t.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => t.classList.remove('show'), 2400);
+    }
+
+    /* ---------- FLASH CART BTN ---------- */
     function flashCartBtn() {
         const btn = document.getElementById('cart-float-btn');
         if (!btn) return;
-        btn.style.transform = 'scale(1.18) translate(-2px,-2px)';
+        btn.style.transform  = 'scale(1.18) translate(-2px,-2px)';
         btn.style.background = '#000';
         btn.style.color      = '#fff';
-        btn.querySelector('i').style.color = 'var(--anton-yellow)';
         setTimeout(() => {
             btn.style.transform  = '';
             btn.style.background = '';
             btn.style.color      = '';
-            btn.querySelector('i').style.color = '';
-        }, 400);
+        }, 380);
+    }
+
+    /* ---------- PAYPAL CHECKOUT ---------- */
+    // Alle Artikel werden als item_name_N / amount_N / quantity_N übergeben.
+    // PayPal Payments Standard unterstützt bis zu 999 Positionen via _cart.
+    function checkoutPayPal() {
+        if (cart.length === 0) return;
+
+        const form = document.createElement('form');
+        form.method = 'post';
+        form.action = PAYPAL_URL;
+        form.target = '_blank';
+
+        function field(name, value) {
+            const inp = document.createElement('input');
+            inp.type = 'hidden';
+            inp.name = name;
+            inp.value = value;
+            form.appendChild(inp);
+        }
+
+        field('cmd',           '_cart');
+        field('upload',        '1');           // upload=1 → alle Items auf einmal
+        field('business',      PAYPAL_BUSINESS);
+        field('currency_code', PAYPAL_CURRENCY);
+        field('lc',            'DE');
+        field('return',        RETURN_URL);
+        field('cancel_return', CANCEL_URL);
+
+        cart.forEach((item, idx) => {
+            const n = idx + 1;
+            field(`item_name_${n}`, `ANTON – ${item.name}${item.variant ? ' (' + item.variant + ')' : ''}`);
+            field(`amount_${n}`,    item.price.toFixed(2));
+            field(`quantity_${n}`,  item.qty);
+        });
+
+        document.body.appendChild(form);
+        form.submit();
+        document.body.removeChild(form);
     }
 
     /* =================================================================
@@ -1189,6 +1507,7 @@
        INIT
     ================================================================= */
     renderShop();
+    updateCartUI();
     </script>
 </body>
 </html>
