@@ -13,7 +13,6 @@
             --sidebar-width: 240px;
             --apple-gray: #A2AAAD;
             --amazon-blue: #00A8E1;
-            /* Glass: weiß mit 25% weniger Opazität als vorher (0.88 → 0.66, 0.55 → 0.41, 0.5 → 0.38) */
             --glass: rgba(255,255,255,0.63);
             --glass-light: rgba(255,255,255,0.41);
             --glass-footer: rgba(255,255,255,0.38);
@@ -29,11 +28,9 @@
             html { background: url('Background.jpg') no-repeat center center fixed; background-size: cover; }
             body { background: transparent; overflow-x: hidden; display: flex; flex-direction: column; min-height: 100vh; }
 
-            /* ── Header ── */
             .d-header { position: fixed; top: 0; width: 100%; height: 80px; display: flex; justify-content: center; align-items: center; z-index: 100; background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); border-bottom: 2px solid #000; }
             .d-header-logo { max-height: 285px; width: auto; object-fit: contain; filter: brightness(0) saturate(100%) invert(13%) sepia(95%) saturate(7408%) hue-rotate(359deg) brightness(97%) contrast(113%); transform: translateY(82px); }
 
-            /* ── Menu btn ── */
             .d-menu-btn { position: fixed; top: 18px; left: 20px; font-size: 24px; cursor: pointer; z-index: 210; background: #000; color: #fff; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 5px; transition: all 0.3s ease; border: 2px solid #000; overflow: hidden; }
             .d-menu-btn:hover { background: var(--anton-yellow); color: #000; }
             .d-menu-btn span { transition: opacity 0.2s; }
@@ -41,7 +38,6 @@
             .d-menu-btn:hover span { opacity: 0; }
             .d-menu-btn:hover::after { opacity: 1; }
 
-            /* ── Left nav ── */
             .d-sidebar-left { position: fixed; top: 0; bottom: 0; left: -300px; width: var(--sidebar-width); background: rgba(255,235,59,0.98); z-index: 200; display: flex; flex-direction: column; padding: 100px 15px 30px 15px; transition: left 0.4s ease-in-out; border-right: 2px solid #000; box-sizing: border-box; }
             .d-sidebar-left.open { left: 0; }
             .d-nav-item { margin-bottom: 20px; width: 100%; }
@@ -59,7 +55,6 @@
             .d-nav-item-epk { margin-top: auto; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 15px; }
             .d-nav-item-epk a { color: var(--anton-red) !important; font-weight: bold; }
 
-            /* ── Social sidebar ── */
             .d-sidebar-right { position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 50px; display: flex; flex-direction: column; align-items: center; gap: 15px; z-index: 999; background: rgba(255,255,255,0.2); backdrop-filter: blur(3px); padding: 25px 0; border-radius: 20px 0 0 20px; }
             .d-sidebar-right a { text-decoration: none; }
             .d-sidebar-right a i { color: #000; font-size: 1.2rem; animation: ultraFlowWave 6s linear infinite; }
@@ -87,13 +82,39 @@
         /* ================================================================= */
         @media (max-width: 800px), (orientation: landscape) and (max-height: 500px) {
             #desktop-wrapper { display: none !important; }
-            #mobile-wrapper  { display: block !important; }
-            html { background: url('Background.jpg') no-repeat center center fixed; background-size: cover; }
-            body { height: 100vh; width: 100vw; overflow: hidden !important; position: fixed; display: flex; flex-direction: column; background: transparent; }
+            #mobile-wrapper  { display: flex !important; flex-direction: column; }
 
-            .m-header { position: fixed; top: 0; width: 100%; height: 80px; display: flex; justify-content: center; align-items: center; z-index: 1000; background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); border-bottom: 2px solid #000; transition: transform 0.6s ease-in-out; }
+            /* ─── CRITICAL FIX: html/body must NOT be fixed/overflow:hidden ─── */
+            html {
+                background: url('Background.jpg') no-repeat center center fixed;
+                background-size: cover;
+                height: 100%;
+                overflow: hidden; /* keep on html */
+            }
+            body {
+                height: 100%;
+                width: 100%;
+                overflow: hidden;
+                position: relative; /* NOT fixed */
+                display: flex;
+                flex-direction: column;
+                background: transparent;
+                margin: 0;
+                padding: 0;
+            }
+
+            #mobile-wrapper {
+                display: flex !important;
+                flex-direction: column;
+                height: 100%;
+                width: 100%;
+                overflow: hidden;
+                position: relative;
+            }
+
+            .m-header { position: relative; flex-shrink: 0; width: 100%; height: 80px; display: flex; justify-content: center; align-items: center; z-index: 1000; background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); border-bottom: 2px solid #000; }
             .m-header-logo { position: absolute; top: 120%; transform: translateY(-50%); max-height: 185px; width: auto; filter: brightness(0) saturate(100%) invert(13%) sepia(95%) saturate(7408%) hue-rotate(359deg) brightness(97%) contrast(113%); }
-            .m-menu-btn { position: fixed; top: 18px; left: 15px; z-index: 1500; background: #000; width: 45px; height: 45px; border-radius: 5px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; cursor: pointer; border: 2px solid #000; }
+            .m-menu-btn { position: absolute; top: 18px; left: 15px; z-index: 1500; background: #000; width: 45px; height: 45px; border-radius: 5px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; cursor: pointer; border: 2px solid #000; }
             .m-menu-btn span { display: block; width: 22px; height: 3px; background: #fff; transition: 0.3s; }
             .m-menu-btn.active { background: var(--anton-yellow); }
             .m-menu-btn.active span { display: none; }
@@ -107,18 +128,20 @@
             .m-epk-container { position: absolute; right: 0; top: 0; height: 100%; width: 45px; background: #fff; border-left: 3px solid #000; display: flex; align-items: center; justify-content: center; }
             .m-epk-text { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 0.7rem; color: var(--anton-red); font-weight: bold; text-decoration: none; }
 
-            /* Mobile scroll area: full height, scrollable */
+            /* ─── CRITICAL: scrollable content area ─── */
             .m-content-scroll {
                 flex: 1;
-                margin-top: 80px;
-                margin-bottom: 65px;
-                overflow-y: auto;
+                overflow-y: scroll;
                 overflow-x: hidden;
                 -webkit-overflow-scrolling: touch;
+                overscroll-behavior: contain;
                 box-sizing: border-box;
-                padding: 10px 8px;
-                /* allow touch scroll */
+                padding: 10px 8px 10px 8px;
                 touch-action: pan-y;
+                position: relative;
+                z-index: 1;
+                /* bottom bar height = 65px */
+                padding-bottom: 10px;
             }
 
             .m-id-button { position: fixed; right: 0; bottom: 150px; width: 38px; height: 38px; background: rgba(255,255,255,0.4); backdrop-filter: blur(4px); border: 2px solid #000; border-right: none; border-radius: 6px 0 0 6px; display: flex; align-items: center; justify-content: center; z-index: 1300; font-weight: bold; font-size: 0.85rem; color: #000; cursor: pointer; transition: transform 0.4s ease-in-out; font-family: 'Special Elite', cursive; }
@@ -127,7 +150,7 @@
             .m-id-panel.open { right: 0; }
             .m-id-panel a { color: #000; text-decoration: none; margin: 0 8px; text-transform: uppercase; }
 
-            .m-sidebar-right { position: fixed; bottom: 0; left: 0; width: 100%; height: 65px; display: flex; flex-direction: row; align-items: center; z-index: 999; background: rgba(255,255,255,0.7); backdrop-filter: blur(8px); border-top: 2px solid #000; padding: 0 10px; justify-content: space-evenly; }
+            .m-sidebar-right { position: fixed; bottom: 0; left: 0; width: 100%; height: 65px; display: flex; flex-direction: row; align-items: center; z-index: 999; background: rgba(255,255,255,0.7); backdrop-filter: blur(8px); border-top: 2px solid #000; padding: 0 10px; justify-content: space-evenly; flex-shrink: 0; }
             .m-sidebar-right a { text-decoration: none; }
             .m-sidebar-right a i { color: #000; font-size: 1.5rem; display: inline-block; animation: ultraFlowWaveMobile 6s linear infinite; }
             @keyframes ultraFlowWaveMobile { 0%{transform:scale(1);color:#000;}9.33%{transform:scale(1.4);color:var(--brand-color);}23.33%,100%{transform:scale(1);color:#000;} }
@@ -154,7 +177,7 @@
             #mobile-wrapper .mobile-tag { font-size: 0.72rem; writing-mode: horizontal-tb !important; transform: none !important; margin-top: 0; }
             #mobile-wrapper .m-epk-container { position: static !important; width: 100% !important; height: auto !important; background: transparent !important; border-left: none !important; border-top: 1px solid rgba(0,0,0,0.15) !important; padding-top: 12px !important; margin-top: auto !important; justify-content: flex-start !important; }
             #mobile-wrapper .m-epk-text { writing-mode: horizontal-tb !important; transform: none !important; font-size: 0.78rem; }
-            #mobile-wrapper .m-content-scroll { margin-top: 65px !important; margin-bottom: 0 !important; padding-right: 56px !important; }
+            #mobile-wrapper .m-content-scroll { padding-bottom: 10px !important; padding-right: 56px !important; }
             #mobile-wrapper .m-sidebar-right { position: fixed !important; top: 0 !important; bottom: 0 !important; left: auto !important; right: 0 !important; width: 46px !important; height: 100% !important; flex-direction: column !important; border-top: none !important; border-left: 2px solid #000 !important; border-radius: 0 !important; padding: 0 !important; gap: 0 !important; justify-content: space-evenly !important; background: rgba(255,255,255,0.2) !important; backdrop-filter: blur(3px) !important; }
             #mobile-wrapper .m-sidebar-right a i { font-size: 1.3rem !important; }
             #mobile-wrapper .m-id-button { display: none !important; }
@@ -172,10 +195,8 @@
             width: 100%;
         }
 
-        /* ── Produkt-Bereich ── */
         .shop-main { flex: 1; min-width: 0; }
 
-        /* ── Hero: geschlossene Box, seitlich 12% schmaler, Banner schräg ── */
         .shop-hero {
             position: relative;
             background: var(--glass);
@@ -191,9 +212,7 @@
             display: flex;
             align-items: center;
             padding: 0 28px;
-            /* Kein clip-path → Box ist geschlossen */
         }
-        /* Schräges Banner oben links */
         .shop-hero::before {
             content: 'Exklusiv';
             position: absolute;
@@ -220,7 +239,7 @@
         .shop-hero-emojis span:nth-child(3) { animation-delay: 0.8s; }
         @keyframes heroFloat { 0%,100%{transform:translateY(0);}50%{transform:translateY(-7px);} }
 
-        /* ── Produkt-Grid: 3 Spalten, feste Kartenbreite ── */
+        /* ── Produkt-Grid ── */
         .shop-bento-grid {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 220px));
@@ -243,19 +262,34 @@
         }
         .product-card:hover { transform: translate(-3px,-3px); box-shadow: 8px 8px 0 rgba(0,0,0,0.6); }
 
-        /* Oberer Teil: leicht transparent */
+        /* Product image area with real photo */
         .product-img-wrap {
-            background: var(--glass-light);
+            background: #f0ede8;
             border-bottom: 3px solid #000;
             display: flex; align-items: center; justify-content: center;
-            padding: 16px 12px; min-height: 105px; position: relative;
+            padding: 0; min-height: 140px; position: relative;
+            overflow: hidden;
         }
-        .product-emoji { font-size: 3rem; line-height: 1; user-select: none; transition: transform 0.3s ease; }
-        .product-card:hover .product-emoji { transform: scale(1.12) rotate(-4deg); }
+        .product-photo {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.35s ease;
+        }
+        .product-card:hover .product-photo { transform: scale(1.06); }
 
-        .product-badge { position: absolute; top: 7px; right: 7px; background: var(--anton-red); color: #fff; font-size: 0.5rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; padding: 2px 7px; border-radius: 20px; border: 2px solid #000; }
+        /* Overlay label on image */
+        .product-img-overlay {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 100%);
+            height: 55px;
+            pointer-events: none;
+        }
 
-        /* Unterer Teil: gelb */
+        .product-badge { position: absolute; top: 7px; right: 7px; background: var(--anton-red); color: #fff; font-size: 0.5rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; padding: 2px 7px; border-radius: 20px; border: 2px solid #000; z-index: 2; }
+
         .product-info { padding: 9px 11px 11px; display: flex; flex-direction: column; flex: 1; gap: 3px; background: var(--anton-yellow); }
         .product-name { font-size: 0.82rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; color: #000; margin: 0; }
         .product-desc { font-size: 0.63rem; color: #444; margin: 0; line-height: 1.3; }
@@ -263,7 +297,6 @@
         .product-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 7px; gap: 6px; }
         .product-price { font-size: 0.95rem; font-weight: bold; color: var(--anton-red); flex-shrink: 0; }
 
-        /* Qty stepper + Cart button */
         .product-cart-control { display: flex; align-items: center; gap: 0; flex-shrink: 0; }
         .qty-stepper { display: flex; align-items: center; height: 28px; }
         .qty-step-btn {
@@ -271,8 +304,7 @@
             border: 2px solid #000; width: 24px; height: 28px;
             font-family: 'Special Elite', cursive; font-size: 1rem;
             cursor: pointer; display: flex; align-items: center; justify-content: center;
-            transition: background 0.15s; padding: 0; line-height: 1;
-            flex-shrink: 0;
+            transition: background 0.15s; padding: 0; line-height: 1; flex-shrink: 0;
         }
         .qty-step-btn:first-child { border-radius: 7px 0 0 7px; border-right: none; }
         .qty-step-btn:last-child { border-radius: 0; border-left: none; border-right: none; }
@@ -296,7 +328,7 @@
         .btn-add-cart:hover { background: var(--anton-red); color: #fff; }
         .btn-add-cart i { font-size: 0.78rem; }
 
-        /* ── Warenkorb-Box (rechts) ── */
+        /* ── Warenkorb-Box ── */
         .cart-box {
             flex-shrink: 0;
             width: 200px;
@@ -325,7 +357,7 @@
         .cart-empty-msg i { font-size: 1.5rem; display: block; margin-bottom: 5px; color: #ddd; }
 
         .cart-item-row { display: flex; align-items: center; gap: 5px; background: var(--glass-light); border: 2px solid #000; border-radius: 9px; padding: 6px 7px; }
-        .ci-emoji { font-size: 1.3rem; flex-shrink: 0; }
+        .ci-emoji { font-size: 1.1rem; flex-shrink: 0; }
         .ci-info { flex: 1; min-width: 0; }
         .ci-name { font-size: 0.62rem; font-weight: bold; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .ci-price { font-size: 0.58rem; color: var(--anton-red); font-weight: bold; }
@@ -346,28 +378,67 @@
         .btn-cart-clear { width: 100%; margin-top: 4px; background: none; border: none; font-family: 'Special Elite', cursive; font-size: 0.62rem; color: #aaa; cursor: pointer; text-decoration: underline; text-align: center; transition: color 0.2s; }
         .btn-cart-clear:hover { color: var(--anton-red); }
 
+        /* ── CONFIRM DIALOG ── */
+        #confirm-overlay {
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.55);
+            backdrop-filter: blur(4px);
+            z-index: 5000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        #confirm-overlay.show { display: flex; }
+        .confirm-box {
+            background: #fff;
+            border: 3px solid #000;
+            border-radius: 18px;
+            box-shadow: 8px 8px 0 rgba(0,0,0,0.45);
+            padding: 28px 28px 20px;
+            max-width: 300px;
+            width: 88%;
+            text-align: center;
+            font-family: 'Special Elite', cursive;
+            animation: confirmPop 0.22s ease;
+        }
+        @keyframes confirmPop { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .confirm-icon { font-size: 2.2rem; margin-bottom: 10px; }
+        .confirm-title { font-size: 1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 7px; }
+        .confirm-text { font-size: 0.72rem; color: #555; margin-bottom: 18px; line-height: 1.5; }
+        .confirm-btns { display: flex; gap: 10px; justify-content: center; }
+        .confirm-btn-yes {
+            background: var(--anton-red); color: #fff;
+            border: 2px solid #000; border-radius: 9px;
+            padding: 8px 20px; font-family: 'Special Elite', cursive; font-size: 0.75rem;
+            text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
+            transition: background 0.2s; box-shadow: 3px 3px 0 #000;
+        }
+        .confirm-btn-yes:hover { background: #c00; }
+        .confirm-btn-no {
+            background: var(--anton-yellow); color: #000;
+            border: 2px solid #000; border-radius: 9px;
+            padding: 8px 20px; font-family: 'Special Elite', cursive; font-size: 0.75rem;
+            text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
+            transition: background 0.2s; box-shadow: 3px 3px 0 #000;
+        }
+        .confirm-btn-no:hover { background: #ffe000; }
+
         /* ── TOAST ── */
         #cart-toast { position: fixed; top: 90px; left: 50%; transform: translateX(-50%) translateY(-14px); background: #000; color: var(--anton-yellow); border: 2px solid #000; border-radius: 40px; padding: 8px 16px; font-family: 'Special Elite', cursive; font-size: 0.82rem; font-weight: bold; display: flex; align-items: center; gap: 7px; z-index: 3000; opacity: 0; pointer-events: none; transition: opacity 0.28s, transform 0.28s; box-shadow: 4px 4px 0 rgba(0,0,0,0.25); white-space: nowrap; }
         #cart-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
         #cart-toast i { color: #00c853; }
 
         /* ================================================================= */
-        /* MOBILE SHOP LAYOUT: 1 Artikel + Warenkorb nebeneinander          */
+        /* MOBILE SHOP LAYOUT                                                 */
         /* ================================================================= */
         @media (max-width: 800px) {
             .shop-outer {
                 flex-direction: row;
                 gap: 10px;
                 align-items: flex-start;
-                /* let mobile scroll area handle overflow */
-                min-height: 100%;
             }
 
-            /* Produktgrid: 1 Spalte, scrollt */
-            .shop-main {
-                flex: 1;
-                min-width: 0;
-            }
+            .shop-main { flex: 1; min-width: 0; }
 
             .shop-hero {
                 margin-left: 0; margin-right: 0;
@@ -388,20 +459,19 @@
                 justify-content: start;
             }
 
-            .product-img-wrap { min-height: 80px; padding: 12px 10px; }
-            .product-emoji { font-size: 2.6rem; }
+            .product-img-wrap { min-height: 110px; }
+            .product-photo { height: 110px; }
             .product-info { padding: 8px 9px 9px; }
             .product-name { font-size: 0.78rem; }
             .product-desc { font-size: 0.62rem; }
             .product-price { font-size: 0.88rem; }
 
-            /* Warenkorb-Box rechts, sticky */
             .cart-box {
                 width: 130px;
                 flex-shrink: 0;
                 position: sticky;
                 top: 8px;
-                max-height: calc(100vh - 160px);
+                max-height: calc(100vh - 155px);
                 align-self: flex-start;
             }
             .cart-box-header { padding: 9px 10px; font-size: 0.66rem; }
@@ -465,11 +535,11 @@
 <!-- ===================== MOBILE ===================== -->
 <div id="mobile-wrapper">
     <header class="m-header" id="m-header-main">
+        <div class="m-menu-btn" id="m-menu-trigger" onclick="mToggleMenu(event)">
+            <span></span><span></span><span></span>
+        </div>
         <img src="Antonlogo.png" alt="ANTON Logo" class="m-header-logo">
     </header>
-    <div class="m-menu-btn" id="m-menu-trigger" onclick="mToggleMenu(event)">
-        <span></span><span></span><span></span>
-    </div>
 
     <nav class="m-sidebar" id="m-sidebar">
         <div class="m-nav-item"><a href="index.html"><i class="fa-solid fa-house"></i><span class="mobile-tag">Start</span></a></div>
@@ -483,11 +553,7 @@
         <div id="m-shop-content"></div>
     </div>
 
-    <div class="m-id-button" id="m-id-btn" onclick="mOpenIDMenu(event)">I/D</div>
-    <div class="m-id-panel" id="m-id-panel">
-        <a href="impressum.html">Impressum</a><span>|</span><a href="datenschutz.html">Datenschutz</a>
-    </div>
-
+    <!-- bottom social bar: INSIDE mobile-wrapper so it doesn't affect flex layout -->
     <aside class="m-sidebar-right">
         <a href="https://www.youtube.com/@antonmusikvevo3861" target="_blank" rel="noopener"><i class="fa-brands fa-youtube"></i></a>
         <a href="https://www.tiktok.com/@anton.familienpop" target="_blank" rel="noopener"><i class="fa-brands fa-tiktok"></i></a>
@@ -499,6 +565,11 @@
         <a href="https://music.youtube.com/channel/UCv-LSCzk64M7Ri9pkzqsiQg" target="_blank" rel="noopener"><i class="fa-solid fa-circle-play"></i></a>
         <a href="https://music.amazon.de/artists/B0GF2ZR9RR" target="_blank" rel="noopener"><i class="fa-brands fa-amazon"></i></a>
     </aside>
+
+    <div class="m-id-button" id="m-id-btn" onclick="mOpenIDMenu(event)">I/D</div>
+    <div class="m-id-panel" id="m-id-panel">
+        <a href="impressum.html">Impressum</a><span>|</span><a href="datenschutz.html">Datenschutz</a>
+    </div>
 </div>
 
 <div id="cart-toast">
@@ -506,23 +577,72 @@
     <span id="toast-text">In den Warenkorb!</span>
 </div>
 
+<!-- ── CONFIRM DIALOG ── -->
+<div id="confirm-overlay" onclick="confirmNo()">
+    <div class="confirm-box" onclick="event.stopPropagation()">
+        <div class="confirm-icon">🗑️</div>
+        <div class="confirm-title">Warenkorb leeren?</div>
+        <div class="confirm-text">Bist du sicher, dass du alle Artikel aus deinem Warenkorb entfernen möchtest?</div>
+        <div class="confirm-btns">
+            <button class="confirm-btn-no" onclick="confirmNo()">Abbrechen</button>
+            <button class="confirm-btn-yes" onclick="confirmYes()">Ja, leeren</button>
+        </div>
+    </div>
+</div>
+
 <script>
 /* =================================================================
-   PRODUKTE
+   PRODUKTE – realistische Unsplash-Bilder
 ================================================================= */
 const products = [
-    { id:'cap',          name:'Cap',              desc:'Snapback mit ANTON-Logo.',                emoji:'🧢', price:24.99, badge:'NEU',       page:'shop-cap.html' },
-    { id:'tshirt',       name:'T-Shirt',          desc:'Baumwoll-Shirt mit ANTON-Frontprint.',    emoji:'👕', price:29.99, badge:null,         page:'shop-tshirt.html' },
-    { id:'hoodie',       name:'Hoodie',           desc:'Kapuzenpulli für Konzerte & Ausflüge.',   emoji:'🧥', price:49.99, badge:'BELIEBT',    page:'shop-hoodie.html' },
-    { id:'sweater',      name:'Sweatshirt',       desc:'Crewneck mit ANTON-Print auf Rücken.',    emoji:'🌟', price:39.99, badge:null,         page:'shop-sweatshirt.html' },
-    { id:'schluessel',   name:'Schlüsselanhänger',desc:'Metall-Anhänger mit ANTON-Logo.',         emoji:'🔑', price:9.99,  badge:null,         page:'shop-schluessel.html' },
-    { id:'sticker',      name:'Sticker-Set',      desc:'10 wetterfeste ANTON-Sticker.',           emoji:'🎨', price:6.99,  badge:'FAN-FAVE',   page:'shop-sticker.html' },
-    { id:'poster',       name:'Poster A2',        desc:'Hochwertiger ANTON-Kunstdruck.',          emoji:'🖼️', price:14.99, badge:null,         page:'shop-poster.html' },
-    { id:'armband',      name:'Armband',          desc:'Silikon-Konzertband im ANTON-Look.',      emoji:'📿', price:4.99,  badge:'KONZERT',    page:'shop-armband.html' },
-    { id:'brotdose',     name:'Brotdose',         desc:'BPA-freie Lunchbox mit ANTON-Design.',    emoji:'🍱', price:18.99, badge:'KIDS',       page:'shop-brotdose.html' },
-    { id:'trinkflasche', name:'Trinkflasche',     desc:'Edelstahl – hält kalt & heiß.',           emoji:'🧃', price:22.99, badge:null,         page:'shop-trinkflasche.html' },
-    { id:'brett',        name:'Frühstücksbrett',  desc:'Holzbrett mit ANTON-Gravur.',             emoji:'🪵', price:27.99, badge:'PERSONALIB.',page:'shop-brett.html' },
-    { id:'tasse',        name:'Tasse',            desc:'Keramik-Tasse mit ANTON-Logo.',           emoji:'☕', price:16.99, badge:null,         page:'shop-tasse.html' }
+    {
+        id:'cap', name:'Cap', desc:'Snapback mit ANTON-Logo.', emoji:'🧢', price:24.99, badge:'NEU', page:'shop-cap.html',
+        img:'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=400&q=80'
+    },
+    {
+        id:'tshirt', name:'T-Shirt', desc:'Baumwoll-Shirt mit ANTON-Frontprint.', emoji:'👕', price:29.99, badge:null, page:'shop-tshirt.html',
+        img:'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&q=80'
+    },
+    {
+        id:'hoodie', name:'Hoodie', desc:'Kapuzenpulli für Konzerte & Ausflüge.', emoji:'🧥', price:49.99, badge:'BELIEBT', page:'shop-hoodie.html',
+        img:'https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=400&q=80'
+    },
+    {
+        id:'sweater', name:'Sweatshirt', desc:'Crewneck mit ANTON-Print auf Rücken.', emoji:'🌟', price:39.99, badge:null, page:'shop-sweatshirt.html',
+        img:'https://images.unsplash.com/photo-1620799139507-2a76f79a2f4d?w=400&q=80'
+    },
+    {
+        id:'schluessel', name:'Schlüsselanhänger', desc:'Metall-Anhänger mit ANTON-Logo.', emoji:'🔑', price:9.99, badge:null, page:'shop-schluessel.html',
+        img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80'
+    },
+    {
+        id:'sticker', name:'Sticker-Set', desc:'10 wetterfeste ANTON-Sticker.', emoji:'🎨', price:6.99, badge:'FAN-FAVE', page:'shop-sticker.html',
+        img:'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=400&q=80'
+    },
+    {
+        id:'poster', name:'Poster A2', desc:'Hochwertiger ANTON-Kunstdruck.', emoji:'🖼️', price:14.99, badge:null, page:'shop-poster.html',
+        img:'https://images.unsplash.com/photo-1578926288207-a90a5366759d?w=400&q=80'
+    },
+    {
+        id:'armband', name:'Armband', desc:'Silikon-Konzertband im ANTON-Look.', emoji:'📿', price:4.99, badge:'KONZERT', page:'shop-armband.html',
+        img:'https://images.unsplash.com/photo-1573408301185-9519f94815d6?w=400&q=80'
+    },
+    {
+        id:'brotdose', name:'Brotdose', desc:'BPA-freie Lunchbox mit ANTON-Design.', emoji:'🍱', price:18.99, badge:'KIDS', page:'shop-brotdose.html',
+        img:'https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?w=400&q=80'
+    },
+    {
+        id:'trinkflasche', name:'Trinkflasche', desc:'Edelstahl – hält kalt & heiß.', emoji:'🧃', price:22.99, badge:null, page:'shop-trinkflasche.html',
+        img:'https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&q=80'
+    },
+    {
+        id:'brett', name:'Frühstücksbrett', desc:'Holzbrett mit ANTON-Gravur.', emoji:'🪵', price:27.99, badge:'PERSONALIB.', page:'shop-brett.html',
+        img:'https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=400&q=80'
+    },
+    {
+        id:'tasse', name:'Tasse', desc:'Keramik-Tasse mit ANTON-Logo.', emoji:'☕', price:16.99, badge:null, page:'shop-tasse.html',
+        img:'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=400&q=80'
+    }
 ];
 
 /* =================================================================
@@ -537,20 +657,21 @@ try { cart = JSON.parse(localStorage.getItem('anton_shop_cart') || '[]'); } catc
 function saveCart() { try { localStorage.setItem('anton_shop_cart', JSON.stringify(cart)); } catch(e) {} }
 
 function stepQty(id, delta) {
-    const el = document.getElementById('qty-' + id);
-    if (!el) return;
-    let v = parseInt(el.textContent) + delta;
-    if (v < 1) v = 1;
-    if (v > 5) v = 5;
-    el.textContent = v;
+    // update ALL qty displays for this product (desktop + mobile rendered)
+    document.querySelectorAll('#qty-' + id).forEach(el => {
+        let v = parseInt(el.textContent) + delta;
+        if (v < 1) v = 1;
+        if (v > 5) v = 5;
+        el.textContent = v;
+    });
 }
 
 function addToCart(productId, e) {
     if (e) { e.preventDefault(); e.stopPropagation(); }
     const p = products.find(x => x.id === productId);
     if (!p) return;
-    const qtyEl = document.getElementById('qty-' + productId);
-    const qty = qtyEl ? parseInt(qtyEl.textContent) || 1 : 1;
+    const qtyEls = document.querySelectorAll('#qty-' + productId);
+    const qty = qtyEls.length ? parseInt(qtyEls[0].textContent) || 1 : 1;
     const existing = cart.find(i => i.id === productId);
     if (existing) { existing.qty += qty; }
     else { cart.push({ id: productId, name: p.name, emoji: p.emoji, price: p.price, qty }); }
@@ -566,7 +687,18 @@ function changeQty(id, delta) {
     saveCart(); updateCartUI();
 }
 
-function clearCart() { cart = []; saveCart(); updateCartUI(); }
+/* ── Confirm Dialog ── */
+function askClearCart() {
+    document.getElementById('confirm-overlay').classList.add('show');
+}
+function confirmYes() {
+    document.getElementById('confirm-overlay').classList.remove('show');
+    cart = []; saveCart(); updateCartUI();
+}
+function confirmNo() {
+    document.getElementById('confirm-overlay').classList.remove('show');
+}
+
 function escId(k) { return k.replace(/\\/g,'\\\\').replace(/'/g,"\\'"); }
 
 function updateCartUI() {
@@ -609,7 +741,7 @@ function updateCartUI() {
             <button class="btn-checkout" onclick="checkoutPayPal()">
                 <i class="fa-solid fa-bag-shopping"></i> Zur Kasse
             </button>
-            <button class="btn-cart-clear" onclick="clearCart()">Warenkorb leeren</button>`;
+            <button class="btn-cart-clear" onclick="askClearCart()">Warenkorb leeren</button>`;
     });
 }
 
@@ -659,7 +791,9 @@ function buildShopHTML() {
         return `
             <div class="product-card" onclick="window.location='${p.page}'">
                 <div class="product-img-wrap">
-                    <span class="product-emoji">${p.emoji}</span>${badge}
+                    <img class="product-photo" src="${p.img}" alt="${p.name}" loading="lazy">
+                    <div class="product-img-overlay"></div>
+                    ${badge}
                 </div>
                 <div class="product-info">
                     <p class="product-name">${p.name}</p>
@@ -793,11 +927,6 @@ document.addEventListener('click', e => {
             mIdBtn   && !mIdBtn.contains(e.target)) mCloseAllMenus();
     }
 });
-
-setTimeout(() => {
-    const mh = document.getElementById('m-header-main');
-    if (mh && window.innerWidth <= 800) mh.style.transform = 'translateY(-100%)';
-}, 3000);
 
 renderShop();
 </script>
