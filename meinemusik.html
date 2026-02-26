@@ -22,9 +22,6 @@
             height: 100%; width: 100%;
         }
 
-        /* ================================================================= */
-        /* 1. DESKTOP                                                         */
-        /* ================================================================= */
         @media (min-width: 801px) {
             #mobile-wrapper { display: none !important; }
 
@@ -83,7 +80,6 @@
             .d-bento-box a { text-decoration: none; color: #000; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: bold; text-align: center; padding: 10px; font-size: 1.1rem; }
             .d-bento-box a i { font-size: 2.2rem; margin-bottom: 12px; }
 
-            /* Bild-Bentobox */
             .d-bento-img { position: relative; overflow: hidden; }
             .d-bento-img a { display: block; width: 100%; height: 100%; padding: 0; }
             .d-bento-img img.bento-cover { width: 100%; height: 100%; object-fit: cover; object-position: center 8%; display: block; transition: transform 0.35s ease; }
@@ -91,7 +87,6 @@
             .d-bento-img:hover::after { background: rgba(255,255,255,0.30); }
             .d-bento-label { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(255,255,255,0.88); font-weight: bold; font-size: 0.95rem; text-align: center; padding: 6px 4px; border-top: 2px solid #000; pointer-events: none; }
 
-            /* Veröffentlichungen Grid */
             .d-bento-grid { position: relative; overflow: hidden; }
             .d-bento-grid a { display: block; width: 100%; height: 100%; padding: 0; }
             .d-bento-grid-inner { display: grid; grid-template-columns: repeat(5, 1fr); grid-template-rows: repeat(2, 1fr); width: 100%; height: 100%; }
@@ -104,9 +99,6 @@
             .d-footer a:hover { color: var(--anton-yellow) !important; text-shadow: -1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000; }
         }
 
-        /* ================================================================= */
-        /* 2. MOBILE BASIS – Portrait UND Landscape                          */
-        /* ================================================================= */
         @media (max-width: 800px), (orientation: landscape) and (max-height: 500px) {
             #desktop-wrapper { display: none !important; }
             #mobile-wrapper  { display: block !important; }
@@ -134,7 +126,6 @@
             .m-bento-box a { text-decoration: none; color: #000; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: bold; font-size: 1rem; text-align: center; padding: 5px; }
             .m-bento-box a i { font-size: 1.8rem; margin-bottom: 8px; }
 
-            /* Mobile Bild-Bentobox */
             .m-bento-img { padding: 0 !important; position: relative; overflow: hidden; }
             .m-bento-img a { display: block; width: 100%; height: 100%; padding: 0 !important; }
             .m-bento-cover { width: 100%; height: 100%; object-fit: cover; object-position: center 10%; display: block; }
@@ -142,7 +133,6 @@
             .m-bento-img:active::after { background: rgba(255,255,255,0.18); }
             .m-bento-label-img { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(255,255,255,0.88); font-weight: bold; font-size: 0.78rem; text-align: center; padding: 4px; border-top: 2px solid #000; pointer-events: none; }
 
-            /* Mobile Grid Veröffentlichungen */
             .m-bento-grid-box { padding: 0 !important; position: relative; overflow: hidden; }
             .m-bento-grid-box a { display: block; width: 100%; height: 100%; padding: 0 !important; }
             .m-bento-grid-inner { display: grid; grid-template-columns: repeat(5, 1fr); grid-template-rows: repeat(2, 1fr); width: 100%; height: 100%; }
@@ -171,9 +161,6 @@
             .m-sidebar-right a:nth-child(9) i { --brand-color: var(--amazon-blue); animation-delay: 2.0s; }
         }
 
-        /* ================================================================= */
-        /* 2a. MOBILE PORTRAIT                                               */
-        /* ================================================================= */
         @media (max-width: 800px) and (orientation: portrait) {
             #m-bg-fix { 
                 display: block; position: fixed; top: 0; left: 0;
@@ -183,9 +170,6 @@
             #mobile-wrapper { display: flex !important; flex-direction: column; height: 100vh; overflow: hidden; }
         }
 
-        /* ================================================================= */
-        /* 3. MOBILE LANDSCAPE                                                */
-        /* ================================================================= */
         @media (orientation: landscape) and (max-height: 500px) {
 
             body { background-color: transparent !important; }
@@ -251,7 +235,7 @@
             </div>
             <div class="d-nav-item"><a href="shop.html"><span class="d-nav-label"><i class="fa-solid fa-cart-shopping main-icon"></i> SHOP</span></a></div>
             <div class="d-nav-item"><a href="kontakt.html"><span class="d-nav-label"><i class="fa-solid fa-envelope main-icon"></i> KONTAKT</span></a></div>
-            <div class="d-nav-item d-nav-item-epk"><a href="epk.html"><span class="d-nav-label"><i class="fa-solid fa-bullhorn main-icon"></i> EPK / PRESSE</span></a></div>
+            <div class="d-nav-item d-nav-item-epk"><a href="https://www.dropbox.com/scl/fo/uaqmqoexqsd3do0sy4fni/AG1t5A5kO9ciFFuF1Ecyh8U?rlkey=amb618zoq017jjk54914jlnkb&e=1&st=b6s5qhal&dl=0" target="_blank" rel="noopener"><span class="d-nav-label"><i class="fa-solid fa-bullhorn main-icon"></i> EPK / PRESSE</span></a></div>
         </nav>
 
         <aside class="d-sidebar-right">
@@ -267,7 +251,6 @@
         </aside>
 
         <main>
-            <!-- Über mich: Konzert1.jpg -->
             <div class="d-bento-box d-bento-img">
                 <a href="uebermich.html">
                     <img src="Konzert1.jpg" alt="Über mich" class="bento-cover">
@@ -275,7 +258,6 @@
                 </a>
             </div>
 
-            <!-- Veröffentlichungen: alle 10 Cover als Grid -->
             <div class="d-bento-box d-bento-grid">
                 <a href="veroffentlichungen.html">
                     <div class="d-bento-grid-inner">
@@ -294,7 +276,6 @@
                 </a>
             </div>
 
-            <!-- Konzerte: Konzert3.JPG -->
             <div class="d-bento-box d-bento-img">
                 <a href="konzerte.html">
                     <img src="Konzert3.JPG" alt="Konzerte" class="bento-cover">
@@ -318,7 +299,7 @@
             <div class="m-nav-item"><a href="meinemusik.html"><i class="fa-solid fa-music"></i><span class="mobile-tag">Musik</span></a></div>
             <div class="m-nav-item"><a href="shop.html"><i class="fa-solid fa-cart-shopping"></i><span class="mobile-tag">Shop</span></a></div>
             <div class="m-nav-item"><a href="kontakt.html"><i class="fa-solid fa-envelope"></i><span class="mobile-tag">Kontakt</span></a></div>
-            <div class="m-epk-container"><a href="epk.html" class="m-epk-text">EPK/PRESSE</a></div>
+            <div class="m-epk-container"><a href="https://www.dropbox.com/scl/fo/uaqmqoexqsd3do0sy4fni/AG1t5A5kO9ciFFuF1Ecyh8U?rlkey=amb618zoq017jjk54914jlnkb&e=1&st=b6s5qhal&dl=0" target="_blank" rel="noopener" class="m-epk-text">EPK/PRESSE</a></div>
         </nav>
 
         <div class="m-content-scroll">
