@@ -7,8 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap&subset=latin-ext" rel="stylesheet">
 
-    <!-- PayPal Cart Script -->
-    <script src="https://www.paypalobjects.com/ncp/cart/cart.js" data-merchant-id="ZTBGBVKBM4U2G"></script>
+    <!-- PayPal Payments Standard – kein externes Script nötig, rein per HTML-Form-POST -->
 
     <style>
         :root {
@@ -631,16 +630,32 @@
 
         .btn-add-cart i { font-size: 1rem; }
 
-        /* PayPal Cart Button – floating fixed position */
+        /* Floating Cart Button */
         .cart-float-paypal {
             position: fixed;
             bottom: 60px;
             right: 60px;
             z-index: 500;
+            background: var(--anton-yellow);
+            border: 3px solid #000;
+            box-shadow: 5px 5px 0 #000;
+            border-radius: 40px;
+            padding: 10px 22px;
+            font-size: 0.9rem;
+            font-family: 'Special Elite', cursive;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            user-select: none;
         }
+        .cart-float-paypal:hover { transform: translate(-2px,-2px); box-shadow: 7px 7px 0 #000; }
+        .cart-float-paypal i { font-size: 1.2rem; color: var(--anton-red); }
 
         @media (max-width: 800px) {
-            .cart-float-paypal { right: 12px; bottom: 75px; }
+            .cart-float-paypal { right: 12px; bottom: 75px; font-size: 0.8rem; padding: 8px 16px; }
         }
 
         /* SHOP PAGE HEADLINE on mobile */
@@ -762,9 +777,10 @@
         </aside>
     </div>
 
-    <!-- PayPal View-Cart Button -->
-    <div class="cart-float-paypal">
-        <paypal-cart-button data-id="pp-view-cart"></paypal-cart-button>
+    <!-- PayPal View-Cart floating button -->
+    <div class="cart-float-paypal" id="cart-float-btn" onclick="viewCart()" title="Warenkorb anzeigen">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span id="cart-label">Warenkorb</span>
     </div>
 
     <script>
@@ -925,39 +941,129 @@
     }
 
     /* =================================================================
-       CART LOGIC (PayPal NCP Cart – cartPaypal API)
+       CART LOGIC – PayPal Payments Standard (cmd=_cart)
+       Jedes Produkt wird via HTML-Form-POST zu PayPal gesendet.
+       Der „In den Warenkorb"-Button erstellt dynamisch ein Form-Element
+       und submitted es, ohne die Seite zu verlassen (target="_blank").
+       Der „Warenkorb anzeigen"-Button öffnet den PayPal-Cart in einem
+       neuen Tab mit cmd=_cart&display=1.
     ================================================================= */
-    // Initialise the PayPal view-cart button
-    cartPaypal.Cart({ id: "pp-view-cart" });
+    const PAYPAL_BUSINESS = 'ZTBGBVKBM4U2G'; // Merchant-ID
+    const PAYPAL_CURRENCY = 'EUR';
+    const PAYPAL_URL = 'https://www.paypal.com/cgi-bin/webscr';
+    const RETURN_URL  = window.location.href;
+    const CANCEL_URL  = window.location.href;
+
+    let cartCount = 0;
 
     function addToCart(productId) {
         const p = products.find(x => x.id === productId);
         if (!p) return;
 
-        // Collect selected options for item name
-        const optionParts = Object.entries(p.options).map(([label]) => {
+        // Collect selected options
+        const optEntries = Object.entries(p.options);
+        const selVals = optEntries.map(([label]) => {
             const sel = [...document.querySelectorAll(`[id="sel-${p.id}-${label.toLowerCase()}"]`)][0];
-            return sel ? `${label}: ${sel.value}` : null;
-        }).filter(Boolean).join(' | ');
+            return sel ? { label, value: sel.value } : null;
+        }).filter(Boolean);
 
-        const itemName = optionParts ? `${p.name} (${optionParts})` : p.name;
+        // Build a hidden form and submit it to PayPal
+        const form = document.createElement('form');
+        form.method = 'post';
+        form.action = PAYPAL_URL;
+        form.target = 'paypal_cart'; // open in new tab (see window.open below)
 
-        // Add item via official cartPaypal API
-        cartPaypal.addItem({
-            name: `ANTON – ${itemName}`,
-            price: p.price,
-            quantity: 1,
-            currency: 'EUR'
+        const fields = {
+            cmd:           '_cart',
+            add:           '1',
+            business:      PAYPAL_BUSINESS,
+            item_name:     `ANTON – ${p.name}`,
+            amount:        p.price.toFixed(2),
+            currency_code: PAYPAL_CURRENCY,
+            shopping_url:  RETURN_URL,
+            cancel_return: CANCEL_URL,
+            return:        RETURN_URL,
+            lc:            'DE'
+        };
+
+        // Pass up to 2 option pairs (on0/os0, on1/os1) to PayPal
+        selVals.slice(0, 2).forEach((opt, i) => {
+            fields[`on${i}`] = opt.label;
+            fields[`os${i}`] = opt.value;
         });
 
+        Object.entries(fields).forEach(([name, value]) => {
+            const inp = document.createElement('input');
+            inp.type  = 'hidden';
+            inp.name  = name;
+            inp.value = value;
+            form.appendChild(inp);
+        });
+
+        document.body.appendChild(form);
+
+        // Open a named window so subsequent clicks reuse the same cart tab
+        window.open('', 'paypal_cart');
+        form.submit();
+
+        document.body.removeChild(form);
+
+        // Update counter badge
+        cartCount++;
+        updateCartLabel();
         flashCartBtn();
     }
 
+    function viewCart() {
+        const form = document.createElement('form');
+        form.method = 'post';
+        form.action = PAYPAL_URL;
+        form.target = 'paypal_cart';
+
+        const fields = {
+            cmd:           '_cart',
+            display:       '1',
+            business:      PAYPAL_BUSINESS,
+            currency_code: PAYPAL_CURRENCY,
+            shopping_url:  RETURN_URL,
+            cancel_return: CANCEL_URL,
+            return:        RETURN_URL,
+            lc:            'DE'
+        };
+
+        Object.entries(fields).forEach(([name, value]) => {
+            const inp = document.createElement('input');
+            inp.type  = 'hidden';
+            inp.name  = name;
+            inp.value = value;
+            form.appendChild(inp);
+        });
+
+        document.body.appendChild(form);
+        window.open('', 'paypal_cart');
+        form.submit();
+        document.body.removeChild(form);
+    }
+
+    function updateCartLabel() {
+        const lbl = document.getElementById('cart-label');
+        if (!lbl) return;
+        lbl.textContent = cartCount > 0 ? `Warenkorb (${cartCount})` : 'Warenkorb';
+    }
+
     function flashCartBtn() {
-        const wrap = document.querySelector('.cart-float-paypal');
-        if (!wrap) return;
-        wrap.style.transform = 'scale(1.15)';
-        setTimeout(() => { wrap.style.transform = ''; }, 350);
+        const btn = document.getElementById('cart-float-btn');
+        if (!btn) return;
+        btn.style.transform = 'scale(1.18) translate(-2px,-2px)';
+        btn.style.background = '#000';
+        btn.style.color      = '#fff';
+        btn.querySelector('i').style.color = 'var(--anton-yellow)';
+        setTimeout(() => {
+            btn.style.transform  = '';
+            btn.style.background = '';
+            btn.style.color      = '';
+            btn.querySelector('i').style.color = '';
+        }, 400);
     }
 
     /* =================================================================
