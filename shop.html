@@ -239,9 +239,10 @@
         /* ── Produkt-Grid ── */
         .shop-bento-grid {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 18px;
+            grid-template-columns: repeat(3, 220px);
+            gap: 28px;
             padding-bottom: 50px;
+            justify-content: space-between;
         }
 
         /* ── Produkt-Karte ── */
@@ -368,8 +369,8 @@
         .cart-total-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.74rem; font-weight: bold; text-transform: uppercase; margin-bottom: 7px; letter-spacing: 0.5px; }
         .cart-total-price { color: var(--anton-red); font-size: 0.9rem; }
 
-        .btn-checkout { width: 100%; background: #000; color: #fff; border: 2px solid #000; border-radius: 9px; padding: 9px 4px; font-family: 'Special Elite', cursive; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 5px; transition: background 0.2s, color 0.2s, transform 0.15s; box-shadow: 3px 3px 0 #000; }
-        .btn-checkout:hover { background: #00b050; color: #fff; border-color: #000; transform: translate(-1px,-1px); box-shadow: 4px 4px 0 #000; }
+        .btn-checkout { width: 100%; background: #fff; color: #000; border: 2px solid #000; border-radius: 9px; padding: 9px 4px; font-family: 'Special Elite', cursive; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 5px; transition: background 0.2s, color 0.2s, transform 0.15s; box-shadow: 3px 3px 0 #000; }
+        .btn-checkout:hover { background: #00b050; color: #fff; border-color: #007a38; transform: translate(-1px,-1px); box-shadow: 4px 4px 0 #000; }
         .btn-checkout i { font-size: 0.85rem; }
         .btn-cart-clear { width: 100%; margin-top: 4px; background: none; border: none; font-family: 'Special Elite', cursive; font-size: 0.62rem; color: var(--anton-red); cursor: pointer; text-decoration: underline; text-align: center; transition: color 0.2s; }
         .btn-cart-clear:hover { color: #900; }
