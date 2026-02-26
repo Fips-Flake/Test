@@ -200,30 +200,45 @@
                 background: transparent !important;
             }
 
-            /* Detail-Box: schmaler (75%), zentriert, etwas mehr Tiefe */
+            /* Detail-Box: Bild oben links | roter Text oben rechts | schwarzer Text unten */
             #mobile-wrapper .detail-bento {
-                display: flex !important; flex-direction: row !important;
-                gap: 14px !important; align-items: flex-start !important;
+                display: grid !important;
+                grid-template-columns: 85px 1fr !important;
+                grid-template-rows: auto auto !important;
+                gap: 8px 10px !important; align-items: start !important;
                 background: rgba(255,255,255,0.88) !important;
                 border: 2px solid #000 !important;
                 box-shadow: 3px 3px 0 #000 !important;
-                border-radius: 12px !important; padding: 14px !important;
+                border-radius: 12px !important; padding: 12px !important;
                 margin: 0 auto !important;
-                width: 75% !important; box-sizing: border-box !important;
+                width: 92% !important; box-sizing: border-box !important;
             }
-            #mobile-wrapper .image-container { flex-shrink: 0 !important; width: auto !important; }
+            #mobile-wrapper .image-container {
+                grid-column: 1 !important; grid-row: 1 !important;
+                width: auto !important;
+            }
+            #mobile-wrapper .m-intro-col {
+                grid-column: 2 !important; grid-row: 1 !important;
+            }
+            #mobile-wrapper .m-intro-col .intro {
+                font-size: 0.62rem !important; font-weight: bold !important;
+                color: var(--anton-red) !important; line-height: 1.35 !important;
+                margin: 0 !important;
+            }
+            #mobile-wrapper .album-text {
+                grid-column: 1 / span 2 !important; grid-row: 2 !important;
+                overflow-y: auto !important;
+                max-height: calc(100vh - 90px) !important;
+                border-top: 1px solid rgba(0,0,0,0.15) !important;
+                padding-top: 8px !important;
+            }
             #mobile-wrapper .album-cover {
                 width: 85px !important;
                 border: 2px solid #000 !important; border-radius: 8px !important;
                 box-shadow: 3px 3px 0 #000 !important;
             }
             #mobile-wrapper .album-cover img { width: 100% !important; height: auto !important; display: block !important; }
-            #mobile-wrapper .album-text {
-                overflow-y: auto !important;
-                max-height: calc(100vh - 90px) !important;
-            }
             #mobile-wrapper .album-text p { margin: 0 0 6px 0 !important; font-size: 0.68rem !important; line-height: 1.4 !important; }
-            #mobile-wrapper .album-text p.intro { font-size: 0.75rem !important; font-weight: bold !important; color: var(--anton-red) !important; }
 
             /* Social: vertikale Leiste rechts */
             #mobile-wrapper .m-sidebar-right {
@@ -297,7 +312,7 @@
         <main>
             <div class="detail-bento">
                 <div class="image-container">
-                    <div class="album-cover"><img src="Konzert2.jpg" alt="ANTON"></div>
+                    <div class="album-cover"><img src="Konzert1.jpg" alt="ANTON"></div>
                 </div>
                 <div class="album-text">
                     <p class="intro">Ihr wollt mehr über mich und mein laaaanges Leben wissen? Wer Anton ist? Na dann passt mal auf:</p>
@@ -342,11 +357,13 @@
 
         <div class="m-content-scroll">
             <div class="detail-bento">
+                <div class="m-intro-col">
+                    <p class="intro">Ihr wollt mehr über mich und mein laaaanges Leben wissen? Wer Anton ist? Na dann passt mal auf:</p>
+                </div>
                 <div class="image-container">
                     <div class="album-cover"><img src="Konzert2.jpg" alt="ANTON"></div>
                 </div>
                 <div class="album-text">
-                    <p class="intro">Ihr wollt mehr über mich und mein laaaanges Leben wissen? Wer Anton ist? Na dann passt mal auf:</p>
                     <p>Anton ist Papa. Und Bruder. Geboren wurde er als Anton Nachtwey in Berlin-Friedenau.</p>
                     <p>Mit sechs sitzt er am Klavier, und bleibt da auch erst mal zwölf Jahre. Klassische Ausbildung, Tonleitern, Disziplin. Seit seinem zehnten Lebensjahr steht er außerdem auf Bühnen.</p>
                     <p>Irgendwann merkt er: Ein Klavier passt schlecht in einen Rucksack. Also bringt er sich selbst Gitarre bei. Autodidaktisch, nach Gehör, nach Gefühl. Ende der 90er baut er sein eigenes Studio auf, schreibt Songs, produziert.</p>
@@ -457,4 +474,3 @@
     </script>
 </body>
 </html>
-
