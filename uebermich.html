@@ -140,8 +140,12 @@
 
             .m-content-scroll { flex: 1; min-height: 0; margin-top: 80px; margin-bottom: 65px; overflow-y: auto !important; -webkit-overflow-scrolling: touch; padding: 20px 15px; box-sizing: border-box; }
 
-            .detail-bento { display: flex; flex-direction: column; gap: 20px; background: rgba(255,255,255,0.92); border: 3px solid #000; box-shadow: 5px 5px 0 #000; border-radius: 16px; padding: 20px; }
-            .album-cover { width: 120px; border: 3px solid #000; border-radius: 12px; overflow: hidden; box-shadow: 4px 4px 0 #000; }
+            .detail-bento { background: rgba(255,255,255,0.92); border: 3px solid #000; box-shadow: 5px 5px 0 #000; border-radius: 16px; padding: 16px; display: grid; grid-template-columns: 90px 1fr; grid-template-rows: auto auto; gap: 8px 12px; }
+            .image-container { grid-column: 1; grid-row: 1; }
+            .m-intro-col { grid-column: 2; grid-row: 1; }
+            .m-intro-text { font-size: 0.65rem !important; font-weight: bold !important; color: #ff0000 !important; line-height: 1.35 !important; margin: 0 !important; display: block !important; }
+            .album-text { grid-column: 1 / span 2; grid-row: 2; border-top: 1px solid rgba(0,0,0,0.15); padding-top: 8px; }
+            .album-cover { width: 90px; border: 2px solid #000; border-radius: 10px; overflow: hidden; box-shadow: 3px 3px 0 #000; }
             .album-cover img { width: 100%; height: auto; display: block; }
             .album-text p { margin: 0 0 10px 0; font-size: 0.85rem; line-height: 1.55; }
             .album-text p.intro { font-size: 0.92rem; font-weight: bold; color: var(--anton-red); }
@@ -187,31 +191,33 @@
             #mobile-wrapper .m-epk-container { position: static !important; width: 100% !important; height: auto !important; background: transparent !important; border-left: none !important; border-top: 1px solid rgba(0,0,0,0.15) !important; padding-top: 12px !important; margin-top: auto !important; justify-content: flex-start !important; }
             #mobile-wrapper .m-epk-text { writing-mode: horizontal-tb !important; transform: none !important; font-size: 0.78rem; }
 
-            /* Body-Hintergrund transparent – das Hintergrundbild kommt vom fixed #m-bg-fix */
             body { background-color: transparent !important; }
 
             /* Content – kein weißer Hintergrund, sauberer Abstand */
             #mobile-wrapper .m-content-scroll {
-                display: block !important; position: static !important;
-                margin-top: 60px !important; margin-bottom: 0 !important;
-                padding: 10px 50px 20px 10px !important;
-                overflow-y: visible !important; flex: none !important;
+                display: flex !important; align-items: flex-start !important;
+                justify-content: center !important;
+                position: static !important;
+                margin-top: 65px !important; margin-bottom: 0 !important;
+                padding: 8px 52px 8px 10px !important;
+                overflow-y: auto !important; flex: none !important;
                 box-sizing: border-box !important;
                 background: transparent !important;
+                height: calc(100vh - 65px) !important;
             }
 
-            /* Detail-Box: Bild oben links | roter Text oben rechts | schwarzer Text unten */
+            /* Detail-Box: 3 Spalten nebeneinander – Bild | roter Text | schwarzer Text */
             #mobile-wrapper .detail-bento {
                 display: grid !important;
-                grid-template-columns: 85px 1fr !important;
-                grid-template-rows: auto auto !important;
-                gap: 8px 10px !important; align-items: start !important;
+                grid-template-columns: 80px 100px 1fr !important;
+                grid-template-rows: 1fr !important;
+                gap: 0 10px !important; align-items: start !important;
                 background: rgba(255,255,255,0.88) !important;
                 border: 2px solid #000 !important;
                 box-shadow: 3px 3px 0 #000 !important;
-                border-radius: 12px !important; padding: 12px !important;
-                margin: 0 auto !important;
-                width: 92% !important; box-sizing: border-box !important;
+                border-radius: 12px !important; padding: 10px !important;
+                width: 90% !important; box-sizing: border-box !important;
+                overflow: hidden !important;
             }
             #mobile-wrapper .image-container {
                 grid-column: 1 !important; grid-row: 1 !important;
@@ -219,26 +225,28 @@
             }
             #mobile-wrapper .m-intro-col {
                 grid-column: 2 !important; grid-row: 1 !important;
+                border-left: 1px solid rgba(0,0,0,0.15) !important;
+                border-right: 1px solid rgba(0,0,0,0.15) !important;
+                padding: 0 8px !important;
             }
             #mobile-wrapper .m-intro-text {
-                font-size: 0.62rem !important; font-weight: bold !important;
-                color: var(--anton-red) !important; line-height: 1.35 !important;
-                margin: 0 !important;
+                font-size: 0.6rem !important; font-weight: bold !important;
+                color: #ff0000 !important; line-height: 1.4 !important;
+                margin: 0 !important; display: block !important;
             }
             #mobile-wrapper .album-text {
-                grid-column: 1 / span 2 !important; grid-row: 2 !important;
+                grid-column: 3 !important; grid-row: 1 !important;
                 overflow-y: auto !important;
                 max-height: calc(100vh - 90px) !important;
-                border-top: 1px solid rgba(0,0,0,0.15) !important;
-                padding-top: 8px !important;
+                padding-left: 2px !important;
             }
             #mobile-wrapper .album-cover {
-                width: 85px !important;
+                width: 80px !important;
                 border: 2px solid #000 !important; border-radius: 8px !important;
-                box-shadow: 3px 3px 0 #000 !important;
+                box-shadow: 2px 2px 0 #000 !important;
             }
             #mobile-wrapper .album-cover img { width: 100% !important; height: auto !important; display: block !important; }
-            #mobile-wrapper .album-text p { margin: 0 0 6px 0 !important; font-size: 0.68rem !important; line-height: 1.4 !important; }
+            #mobile-wrapper .album-text p { margin: 0 0 5px 0 !important; font-size: 0.62rem !important; line-height: 1.35 !important; }
 
             /* Social: vertikale Leiste rechts */
             #mobile-wrapper .m-sidebar-right {
