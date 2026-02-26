@@ -78,9 +78,8 @@
             .image-container { flex-shrink: 0; }
             .album-cover { width: 200px; border: 3px solid #000; border-radius: 12px; overflow: hidden; box-shadow: 5px 5px 0 #000; }
             .album-cover img { width: 100%; height: auto; display: block; }
-            .album-text { text-align: left; }
-            .album-text p { margin: 0 0 12px 0; font-size: 0.95rem; line-height: 1.6; text-align: left; }
-            .album-text p.intro { font-size: 1.05rem; font-weight: bold; color: var(--anton-red); text-align: left; }
+            .album-text p { margin: 0 0 12px 0; font-size: 0.95rem; line-height: 1.6; }
+            .album-text p.intro { font-size: 1.05rem; font-weight: bold; color: var(--anton-red); }
 
             .d-footer { width: 100%; padding: 15px 0; background: rgba(255,255,255,0.95); border-top: 1.5px solid #000; text-align: center; font-size: 0.75rem; z-index: 100; position: fixed; bottom: 0; left: 0; }
             .d-footer a { color: #000; text-decoration: none; margin: 0 12px; font-weight: bold; transition: all 0.3s ease; }
@@ -135,7 +134,7 @@
         /* ================================================================= */
         @media (max-width: 800px) and (orientation: portrait) {
             body { height: 100vh; width: 100vw; overflow: hidden !important; position: fixed; display: flex; flex-direction: column; touch-action: pan-y; overscroll-behavior-x: none; }
-            #m-bg-fix { display: block; position: fixed; top: 0; left: -100%; width: 300%; height: 100%; background: url('Background.jpg') no-repeat center center; background-size: cover; z-index: -1; will-change: transform; }
+            #m-bg-fix { display: block; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('Background.jpg') no-repeat center center; background-size: cover; z-index: -1; }
 
             #mobile-wrapper { display: flex !important; flex-direction: column; height: 100vh; overflow: hidden; }
 
@@ -144,9 +143,8 @@
             .detail-bento { display: flex; flex-direction: column; gap: 20px; background: rgba(255,255,255,0.92); border: 3px solid #000; box-shadow: 5px 5px 0 #000; border-radius: 16px; padding: 20px; }
             .album-cover { width: 120px; border: 3px solid #000; border-radius: 12px; overflow: hidden; box-shadow: 4px 4px 0 #000; }
             .album-cover img { width: 100%; height: auto; display: block; }
-            .album-text { text-align: left; }
-            .album-text p { margin: 0 0 10px 0; font-size: 0.85rem; line-height: 1.55; text-align: left; }
-            .album-text p.intro { font-size: 0.92rem; font-weight: bold; color: var(--anton-red); text-align: left; }
+            .album-text p { margin: 0 0 10px 0; font-size: 0.85rem; line-height: 1.55; }
+            .album-text p.intro { font-size: 0.92rem; font-weight: bold; color: var(--anton-red); }
         }
 
         /* ================================================================= */
@@ -189,10 +187,10 @@
             #mobile-wrapper .m-epk-container { position: static !important; width: 100% !important; height: auto !important; background: transparent !important; border-left: none !important; border-top: 1px solid rgba(0,0,0,0.15) !important; padding-top: 12px !important; margin-top: auto !important; justify-content: flex-start !important; }
             #mobile-wrapper .m-epk-text { writing-mode: horizontal-tb !important; transform: none !important; font-size: 0.78rem; }
 
-            /* Body-Hintergrund transparent */
+            /* Body-Hintergrund transparent – das Hintergrundbild kommt vom fixed #m-bg-fix */
             body { background-color: transparent !important; }
 
-            /* Content */
+            /* Content – kein weißer Hintergrund, sauberer Abstand */
             #mobile-wrapper .m-content-scroll {
                 display: block !important; position: static !important;
                 margin-top: 60px !important; margin-bottom: 0 !important;
@@ -202,7 +200,7 @@
                 background: transparent !important;
             }
 
-            /* Detail-Box */
+            /* Detail-Box: schmaler (75%), zentriert, etwas mehr Tiefe */
             #mobile-wrapper .detail-bento {
                 display: flex !important; flex-direction: row !important;
                 gap: 14px !important; align-items: flex-start !important;
@@ -223,10 +221,9 @@
             #mobile-wrapper .album-text {
                 overflow-y: auto !important;
                 max-height: calc(100vh - 90px) !important;
-                text-align: left !important;
             }
-            #mobile-wrapper .album-text p { margin: 0 0 6px 0 !important; font-size: 0.68rem !important; line-height: 1.4 !important; text-align: left !important; }
-            #mobile-wrapper .album-text p.intro { font-size: 0.75rem !important; font-weight: bold !important; color: var(--anton-red) !important; text-align: left !important; }
+            #mobile-wrapper .album-text p { margin: 0 0 6px 0 !important; font-size: 0.68rem !important; line-height: 1.4 !important; }
+            #mobile-wrapper .album-text p.intro { font-size: 0.75rem !important; font-weight: bold !important; color: var(--anton-red) !important; }
 
             /* Social: vertikale Leiste rechts */
             #mobile-wrapper .m-sidebar-right {
@@ -300,7 +297,7 @@
         <main>
             <div class="detail-bento">
                 <div class="image-container">
-                    <div class="album-cover"><img src="Ich.jpg" alt="ANTON"></div>
+                    <div class="album-cover"><img src="Konzert1.jpg" alt="ANTON"></div>
                 </div>
                 <div class="album-text">
                     <p class="intro">Ihr wollt mehr über mich und mein laaaanges Leben wissen? Wer Anton ist? Na dann passt mal auf:</p>
@@ -346,7 +343,7 @@
         <div class="m-content-scroll">
             <div class="detail-bento">
                 <div class="image-container">
-                    <div class="album-cover"><img src="Ich.jpg" alt="ANTON"></div>
+                    <div class="album-cover"><img src="Konzert1.jpg" alt="ANTON"></div>
                 </div>
                 <div class="album-text">
                     <p class="intro">Ihr wollt mehr über mich und mein laaaanges Leben wissen? Wer Anton ist? Na dann passt mal auf:</p>
@@ -441,27 +438,6 @@
         window.addEventListener('orientationchange', () => setTimeout(applyLandscapeState, 100));
         applyLandscapeState();
 
-        /* Swipe-Hintergrund (nur Portrait) */
-        let touchStartX = 0, touchStartY = 0, currentTranslateX = 0;
-        document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY; }, { passive: true });
-        document.addEventListener('touchmove', e => {
-            if (window.innerWidth <= 800 && !isLandscapeMobile()) {
-                const diffX = e.touches[0].clientX - touchStartX;
-                const diffY = e.touches[0].clientY - touchStartY;
-                if (Math.abs(diffX) > 10 || Math.abs(diffY) > 10) { if (mSidebar && !mSidebar.contains(e.target)) mCloseAllMenus(); }
-                if (Math.abs(diffX) > Math.abs(diffY)) {
-                    let newX = currentTranslateX + diffX;
-                    const limit = window.innerWidth;
-                    if (newX > limit) newX = limit; if (newX < -limit) newX = -limit;
-                    if (mBg) mBg.style.transform = `translateX(${newX}px)`;
-                }
-            }
-        }, { passive: true });
-        document.addEventListener('touchend', () => {
-            if (window.innerWidth <= 800 && !isLandscapeMobile() && mBg) {
-                try { const MatrixCtor = window.DOMMatrix || window.WebKitCSSMatrix; if (MatrixCtor) currentTranslateX = new MatrixCtor(window.getComputedStyle(mBg).transform).m41; } catch(e) { currentTranslateX = 0; }
-            }
-        }, { passive: true });
         document.addEventListener('click', e => {
             if (window.innerWidth <= 800 || isLandscapeMobile()) {
                 if (mSidebar && !mSidebar.contains(e.target) && mMenuBtn && !mMenuBtn.contains(e.target) &&
