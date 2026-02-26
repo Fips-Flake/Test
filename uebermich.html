@@ -140,15 +140,34 @@
 
             .m-content-scroll { flex: 1; min-height: 0; margin-top: 80px; margin-bottom: 65px; overflow-y: auto !important; -webkit-overflow-scrolling: touch; padding: 20px 15px; box-sizing: border-box; }
 
-            .detail-bento { background: rgba(255,255,255,0.92); border: 3px solid #000; box-shadow: 5px 5px 0 #000; border-radius: 16px; padding: 16px; display: grid; grid-template-columns: 120px 1fr; grid-template-rows: auto auto auto; gap: 6px 12px; }
-            .image-container { grid-column: 1; grid-row: 1 / span 2; }
-            .m-intro-col { grid-column: 2; grid-row: 1; }
-            .m-first-para { grid-column: 2; grid-row: 2; }
-            .album-text { grid-column: 1 / span 2; grid-row: 3; }
-            .album-text p.intro { display: none; }
-            .album-text p:first-of-type { display: none; }
-            .m-intro-text { font-size: 0.68rem !important; font-weight: bold !important; color: #ff0000 !important; line-height: 1.5 !important; margin: 0 !important; display: block !important; }
-            .m-first-para { font-size: 0.68rem; line-height: 1.5; margin: 0; }
+            /* Grid:
+               Spalte 1 = Bild (120px)
+               Spalte 2 = Texte neben dem Bild
+               Zeile 1  = Intro-Text (rot)
+               Zeile 2  = erster Absatz (Anton ist Papa...)
+               Zeile 3  = zweiter Absatz (Mit sechs sitzt er...)
+               Zeile 4  = rest (volle Breite)
+            */
+            .detail-bento {
+                background: rgba(255,255,255,0.92); border: 3px solid #000;
+                box-shadow: 5px 5px 0 #000; border-radius: 16px; padding: 16px;
+                display: grid;
+                grid-template-columns: 120px 1fr;
+                grid-template-rows: auto auto auto auto;
+                gap: 6px 12px;
+            }
+            .image-container { grid-column: 1; grid-row: 1 / span 3; }
+            .m-intro-col    { grid-column: 2; grid-row: 1; }
+            .m-first-para   { grid-column: 2; grid-row: 2; }
+            .m-second-para  { grid-column: 2; grid-row: 3; }
+            .album-text     { grid-column: 1 / span 2; grid-row: 4; }
+            .album-text p.intro      { display: none; }
+            .album-text p:first-of-type { display: none; }  /* Anton ist Papa – schon in m-first-para */
+            .album-text p:nth-of-type(2) { display: none; } /* Klavier-Absatz – schon in m-second-para */
+
+            .m-intro-text  { font-size: 0.68rem !important; font-weight: bold !important; color: #ff0000 !important; line-height: 1.5 !important; margin: 0 !important; display: block !important; }
+            .m-first-para  { font-size: 0.68rem; line-height: 1.5; margin: 0; }
+            .m-second-para { font-size: 0.68rem; line-height: 1.5; margin: 0; }
             .album-cover { width: 120px; border: 2px solid #000; border-radius: 10px; overflow: hidden; box-shadow: 3px 3px 0 #000; }
             .album-cover img { width: 100%; height: auto; display: block; }
             .album-text p { margin: 0 0 8px 0; font-size: 0.68rem; line-height: 1.5; }
@@ -235,10 +254,15 @@
                 box-shadow: 3px 3px 0 #000 !important;
             }
             #mobile-wrapper .album-cover img { width: 100% !important; height: auto !important; display: block !important; }
-            #mobile-wrapper .m-intro-col { display: none !important; }
+            #mobile-wrapper .m-intro-col   { display: none !important; }
+            #mobile-wrapper .m-first-para  { display: none !important; }
+            #mobile-wrapper .m-second-para { display: none !important; }
             #mobile-wrapper .album-text { overflow: visible !important; max-height: none !important; }
             #mobile-wrapper .album-text p { margin: 0 0 5px 0 !important; font-size: 0.62rem !important; line-height: 1.35 !important; }
-            #mobile-wrapper .album-text p.intro { font-size: 0.62rem !important; font-weight: bold !important; color: #ff0000 !important; }
+            #mobile-wrapper .album-text p.intro { font-size: 0.62rem !important; font-weight: bold !important; color: #ff0000 !important; display: block !important; }
+            /* Im Landscape alle Absätze wieder anzeigen (werden im Portrait ausgeblendet) */
+            #mobile-wrapper .album-text p:first-of-type  { display: block !important; }
+            #mobile-wrapper .album-text p:nth-of-type(2) { display: block !important; }
 
             /* Social: vertikale Leiste rechts */
             #mobile-wrapper .m-sidebar-right {
@@ -360,10 +384,15 @@
                 <div class="image-container">
                     <div class="album-cover"><img src="Konzert2.jpg" alt="ANTON"></div>
                 </div>
+                <!-- Zeile 1 neben dem Bild: Intro (rot) -->
                 <div class="m-intro-col">
                     <p class="m-intro-text">Ihr wollt mehr über mich und mein laaaanges Leben wissen? Wer Anton ist? Na dann passt mal auf:</p>
                 </div>
+                <!-- Zeile 2 neben dem Bild: erster Absatz -->
                 <p class="m-first-para">Anton ist Papa. Und Bruder. Geboren wurde er als Anton Nachtwey in Berlin-Friedenau.</p>
+                <!-- Zeile 3 neben dem Bild: zweiter Absatz -->
+                <p class="m-second-para">Mit sechs sitzt er am Klavier, und bleibt da auch erst mal zwölf Jahre. Klassische Ausbildung, Tonleitern, Disziplin. Seit seinem zehnten Lebensjahr steht er außerdem auf Bühnen.</p>
+                <!-- Rest läuft unter dem Bild weiter (volle Breite) -->
                 <div class="album-text">
                     <p class="intro">Ihr wollt mehr über mich und mein laaaanges Leben wissen? Wer Anton ist? Na dann passt mal auf:</p>
                     <p>Anton ist Papa. Und Bruder. Geboren wurde er als Anton Nachtwey in Berlin-Friedenau.</p>
