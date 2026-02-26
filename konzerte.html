@@ -24,9 +24,6 @@
             width: 100%;
         }
 
-        /* ================================================================= */
-        /* BAUSTELLEN-OVERLAY                                                 */
-        /* ================================================================= */
         .construction-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -116,7 +113,6 @@
             line-height: 1.4;
         }
 
-        /* Nur der Seiteninhalt unscharf – Navigation bleibt nutzbar */
         #desktop-wrapper main,
         #desktop-wrapper .d-footer {
             filter: blur(4px);
@@ -124,9 +120,6 @@
             user-select: none;
         }
 
-        /* ================================================================= */
-        /* 1. DESKTOP STYLES                                                  */
-        /* ================================================================= */
         @media (min-width: 801px) {
             #mobile-wrapper { display: none !important; }
 
@@ -249,9 +242,6 @@
             .d-footer a:hover { color: var(--anton-yellow) !important; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; }
         }
 
-        /* ================================================================= */
-        /* 2. MOBILE STYLES                                                   */
-        /* ================================================================= */
         @media (max-width: 800px) {
             #desktop-wrapper { display: none !important; }
 
@@ -391,7 +381,6 @@
 </head>
 <body>
 
-    <!-- ======================== BAUSTELLEN-OVERLAY ======================== -->
     <div class="construction-overlay">
         <div class="construction-banner">
             <div class="tape"></div>
@@ -405,7 +394,6 @@
         </div>
     </div>
 
-    <!-- ======================== DESKTOP ======================== -->
     <div id="desktop-wrapper">
         <header class="d-header">
             <img src="Antonlogo.png" alt="ANTON Logo" class="d-header-logo">
@@ -424,7 +412,7 @@
             </div>
             <div class="d-nav-item"><a href="shop.html"><span class="d-nav-label"><i class="fa-solid fa-cart-shopping main-icon"></i> SHOP</span></a></div>
             <div class="d-nav-item"><a href="kontakt.html"><span class="d-nav-label"><i class="fa-solid fa-envelope main-icon"></i> KONTAKT</span></a></div>
-            <div class="d-nav-item d-nav-item-epk"><a href="epk.html"><span class="d-nav-label"><i class="fa-solid fa-bullhorn main-icon"></i> EPK / PRESSE</span></a></div>
+            <div class="d-nav-item d-nav-item-epk"><a href="https://www.dropbox.com/scl/fo/uaqmqoexqsd3do0sy4fni/AG1t5A5kO9ciFFuF1Ecyh8U?rlkey=amb618zoq017jjk54914jlnkb&e=1&st=b6s5qhal&dl=0" target="_blank" rel="noopener"><span class="d-nav-label"><i class="fa-solid fa-bullhorn main-icon"></i> EPK / PRESSE</span></a></div>
         </nav>
 
         <aside class="d-sidebar-right">
@@ -462,7 +450,6 @@
         </footer>
     </div>
 
-    <!-- ======================== MOBILE ======================== -->
     <div id="mobile-wrapper">
         <div id="m-bg-fix"></div>
 
@@ -478,7 +465,7 @@
             <div class="m-nav-item"><a href="meinemusik.html"><i class="fa-solid fa-music"></i><span class="mobile-tag">Musik</span></a></div>
             <div class="m-nav-item"><a href="shop.html"><i class="fa-solid fa-cart-shopping"></i><span class="mobile-tag">Shop</span></a></div>
             <div class="m-nav-item"><a href="kontakt.html"><i class="fa-solid fa-envelope"></i><span class="mobile-tag">Kontakt</span></a></div>
-            <div class="m-epk-container"><a href="epk.html" class="m-epk-text">EPK/PRESSE</a></div>
+            <div class="m-epk-container"><a href="https://www.dropbox.com/scl/fo/uaqmqoexqsd3do0sy4fni/AG1t5A5kO9ciFFuF1Ecyh8U?rlkey=amb618zoq017jjk54914jlnkb&e=1&st=b6s5qhal&dl=0" target="_blank" rel="noopener" class="m-epk-text">EPK/PRESSE</a></div>
         </nav>
 
         <div class="m-content-scroll">
@@ -517,7 +504,6 @@
     </div>
 
     <script>
-        /* --- DESKTOP LOGIC --- */
         let dSidebarTimeout;
         const dSidebar = document.getElementById('d-sidebar');
 
@@ -550,7 +536,6 @@
             }
         });
 
-        /* --- MOBILE LOGIC --- */
         const mSidebar = document.getElementById('m-sidebar');
         const mMenuBtn = document.getElementById('m-menu-trigger');
         const mIdBtn   = document.getElementById('m-id-btn');
@@ -587,7 +572,6 @@
             mIdTimeout = setTimeout(mCloseAllMenus, 5000);
         }
 
-        /* --- MOBILE TOUCH & SWIPE --- */
         let touchStartX = 0, touchStartY = 0, currentTranslateX = 0;
 
         document.addEventListener('touchstart', e => {
@@ -628,7 +612,6 @@
             }
         });
 
-        /* --- MOBILE HEADER HIDE AFTER 3s --- */
         setTimeout(() => {
             const mh = document.getElementById('m-header-main');
             if (mh && window.innerWidth <= 800) mh.style.transform = 'translateY(-100%)';
