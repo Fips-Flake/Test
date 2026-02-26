@@ -26,20 +26,11 @@
 
         a { color: inherit; text-decoration: none; -webkit-tap-highlight-color: transparent; }
 
-        /* ================================================================= */
-        /* 1. DESKTOP STYLES                                                 */
-        /* ================================================================= */
         @media (min-width: 801px) and (min-height: 500px) {
             #mobile-wrapper { display: none !important; }
             #desktop-wrapper { display: block !important; }
 
-            body { 
-                background: #ffffff;
-                overflow-x: hidden;
-                display: flex;
-                flex-direction: column;
-                min-height: 100vh;
-            }
+            body { background: #ffffff; overflow-x: hidden; display: flex; flex-direction: column; min-height: 100vh; }
 
             #bg-layer-a, #bg-layer-b {
                 position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -50,38 +41,16 @@
             #bg-layer-a { background-image: url('Background.jpg'); }
             #bg-layer-b { opacity: 0; }
             
-            .d-header { 
-                position: fixed; top: 0; width: 100%; height: 80px; 
-                display: flex; justify-content: center; align-items: center; 
-                z-index: 100; background: rgba(255, 255, 255, 0.8); 
-                backdrop-filter: blur(10px); border-bottom: 2px solid #000; 
-            }
-            .d-header-logo {
-                max-height: 285px; 
-                width: auto;
-                object-fit: contain;
-                filter: brightness(0) saturate(100%) invert(13%) sepia(95%) saturate(7408%) hue-rotate(359deg) brightness(97%) contrast(113%);
-                transform: translateY(82px); 
-            }
-            .d-menu-btn { 
-                position: fixed; top: 18px; left: 20px; font-size: 24px; cursor: pointer; 
-                z-index: 210; background: #000; color: #fff; width: 45px; height: 45px; 
-                display: flex; align-items: center; justify-content: center; 
-                border-radius: 5px; transition: all 0.3s ease; border: 2px solid #000; 
-                overflow: hidden; 
-            }
+            .d-header { position: fixed; top: 0; width: 100%; height: 80px; display: flex; justify-content: center; align-items: center; z-index: 100; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border-bottom: 2px solid #000; }
+            .d-header-logo { max-height: 285px; width: auto; object-fit: contain; filter: brightness(0) saturate(100%) invert(13%) sepia(95%) saturate(7408%) hue-rotate(359deg) brightness(97%) contrast(113%); transform: translateY(82px); }
+            .d-menu-btn { position: fixed; top: 18px; left: 20px; font-size: 24px; cursor: pointer; z-index: 210; background: #000; color: #fff; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 5px; transition: all 0.3s ease; border: 2px solid #000; overflow: hidden; }
             .d-menu-btn:hover { background: var(--anton-yellow); color: #000; }
             .d-menu-btn span { transition: opacity 0.2s; }
             .d-menu-btn::after { content: 'A'; position: absolute; font-weight: bold; font-size: 28px; opacity: 0; transition: opacity 0.2s; }
             .d-menu-btn:hover span { opacity: 0; }
             .d-menu-btn:hover::after { opacity: 1; }
             
-            .d-sidebar-left { 
-                position: fixed; top: 0; bottom: 0; left: -300px; width: var(--sidebar-width); 
-                background: rgba(255, 235, 59, 0.98); z-index: 200; display: flex; 
-                flex-direction: column; padding: 100px 15px 30px 15px; 
-                transition: left 0.4s ease-in-out; border-right: 2px solid #000; box-sizing: border-box; 
-            }
+            .d-sidebar-left { position: fixed; top: 0; bottom: 0; left: -300px; width: var(--sidebar-width); background: rgba(255, 235, 59, 0.98); z-index: 200; display: flex; flex-direction: column; padding: 100px 15px 30px 15px; transition: left 0.4s ease-in-out; border-right: 2px solid #000; box-sizing: border-box; }
             .d-sidebar-left.open { left: 0; }
             .d-nav-item { margin-bottom: 20px; width: 100%; }
             .d-sidebar-left a { display: flex; align-items: center; color: #000; text-decoration: none; font-size: 1.1rem; width: 100%; transition: color 0.3s; }
@@ -122,39 +91,18 @@
             .box-pause2  { width: 10%; height: 30%; top: 34%; left: 60%; transform: rotate(1deg); }
             .box-pause3  { width: 5%;  height: 18%; top: 21%; left: 66%; transform: rotate(45deg); }
 
-            .d-news-box {
-                position: fixed;
-                bottom: 60px;
-                left: 50%;
-                transform: translateX(-50%);
-                width: clamp(260px, 34%, 440px);
-                background: rgba(255, 255, 255, 0.55);
-                border: 3px solid #000;
-                box-shadow: 6px 6px 0 #000;
-                border-radius: 18px;
-                padding: 16px 20px 14px 20px;
-                z-index: 20;
-                backdrop-filter: blur(8px);
-            }
+            .d-news-box { position: fixed; bottom: 60px; left: 50%; transform: translateX(-50%); width: clamp(260px, 34%, 440px); background: rgba(255, 255, 255, 0.55); border: 3px solid #000; box-shadow: 6px 6px 0 #000; border-radius: 18px; padding: 16px 20px 14px 20px; z-index: 20; backdrop-filter: blur(8px); }
             .d-news-box h3 { margin: 0 0 6px 0; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--anton-red); }
             .d-news-box h2 { margin: 0 0 8px 0; font-size: 1.15rem; color: #000; }
             .d-news-box p  { margin: 0; font-size: 0.82rem; line-height: 1.55; color: #222; }
 
-            .d-footer { 
-                width: 100%; padding: 15px 0; background: rgba(255,255,255,0.95); 
-                border-top: 1.5px solid #000; text-align: center; font-size: 0.75rem; 
-                z-index: 100; position: fixed; bottom: 0; left: 0;
-                display: flex; flex-direction: column; align-items: center; gap: 4px;
-            }
+            .d-footer { width: 100%; padding: 15px 0; background: rgba(255,255,255,0.95); border-top: 1.5px solid #000; text-align: center; font-size: 0.75rem; z-index: 100; position: fixed; bottom: 0; left: 0; display: flex; flex-direction: column; align-items: center; gap: 4px; }
             .d-footer-inner { width: 100%; display: flex; align-items: center; justify-content: center; position: relative; }
             .d-footer-links { display: flex; flex-direction: column; align-items: center; gap: 4px; }
             .d-footer a { color: #000; text-decoration: none; margin: 0 12px; font-weight: bold; transition: all 0.3s ease; }
             .d-footer a:hover { color: var(--anton-yellow) !important; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; }
         }
 
-        /* ================================================================= */
-        /* 2. MOBILE BASIS – gilt für Portrait UND Landscape                 */
-        /* ================================================================= */
         @media (max-width: 800px), (orientation: landscape) and (max-height: 500px) {
             #desktop-wrapper { display: none !important; }
             #mobile-wrapper  { display: block !important; }
@@ -166,18 +114,8 @@
             .box-pause2  { width: 10%; height: 30%; top: 34%; left: 60%; transform: rotate(1deg); }
             .box-pause3  { width: 5%;  height: 18%; top: 21%; left: 66%; transform: rotate(45deg); }
 
-            body { 
-                height: 100vh; width: 100vw; overflow: hidden !important; 
-                position: fixed; display: flex; flex-direction: column; touch-action: pan-y;
-                overscroll-behavior-x: none;
-            }
-            .m-header { 
-                position: fixed; top: 0; width: 100%; height: 80px; 
-                display: flex; justify-content: center; align-items: center; 
-                z-index: 1000; background: rgba(255, 255, 255, 0.8); 
-                backdrop-filter: blur(10px); border-bottom: 2px solid #000; 
-                transition: transform 0.6s ease-in-out; 
-            }
+            body { height: 100vh; width: 100vw; overflow: hidden !important; position: fixed; display: flex; flex-direction: column; touch-action: pan-y; overscroll-behavior-x: none; }
+            .m-header { position: fixed; top: 0; width: 100%; height: 80px; display: flex; justify-content: center; align-items: center; z-index: 1000; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border-bottom: 2px solid #000; transition: transform 0.6s ease-in-out; }
             .m-header-logo { position: absolute; top: 120%; transform: translateY(-50%); max-height: 185px; width: auto; filter: brightness(0) saturate(100%) invert(13%) sepia(95%) saturate(7408%) hue-rotate(359deg) brightness(97%) contrast(113%); }
             .m-menu-btn { position: fixed; top: 18px; left: 15px; z-index: 1500; background: #000; width: 45px; height: 45px; border-radius: 5px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; cursor: pointer; border: 2px solid #000; }
             .m-menu-btn span { display: block; width: 22px; height: 3px; background: #fff; transition: 0.3s; }
@@ -196,35 +134,11 @@
             .m-epk-text { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 0.7rem; color: var(--anton-red); font-weight: bold; text-decoration: none; }
             .m-id-button { position: fixed; right: 0; bottom: 150px; width: 38px; height: 38px; background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(4px); border: 2px solid #000; border-right: none; border-radius: 6px 0 0 6px; display: flex; align-items: center; justify-content: center; z-index: 1300; font-weight: bold; font-size: 0.85rem; color: #000; cursor: pointer; transition: transform 0.4s ease-in-out; }
             .m-id-button.hidden { transform: translateX(100%); }
-            .m-id-panel { 
-                position: fixed; right: -270px; bottom: 150px; 
-                height: 45px; width: 250px; 
-                background: rgba(255, 255, 255, 0.35); backdrop-filter: blur(8px); 
-                border: 2px solid #000; border-right: none; 
-                display: flex; align-items: center; justify-content: center;
-                z-index: 1299; transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
-                border-radius: 8px 0 0 8px; font-weight: bold; font-size: 0.85rem; 
-                overflow: hidden;
-            }
+            .m-id-panel { position: fixed; right: -270px; bottom: 150px; height: 45px; width: 250px; background: rgba(255, 255, 255, 0.35); backdrop-filter: blur(8px); border: 2px solid #000; border-right: none; display: flex; align-items: center; justify-content: center; z-index: 1299; transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1); border-radius: 8px 0 0 8px; font-weight: bold; font-size: 0.85rem; overflow: hidden; }
             .m-id-panel.open { right: 0; }
             .m-id-panel a { color: #000; text-decoration: none; margin: 0 8px; text-transform: uppercase; }
 
-            .m-news-box {
-                position: fixed;
-                bottom: 75px;
-                left: 50%;
-                transform: translateX(-50%);
-                width: calc(100% - 60px);
-                max-width: 340px;
-                background: rgba(255, 255, 255, 0.55);
-                border: 3px solid #000;
-                box-shadow: 5px 5px 0 #000;
-                border-radius: 16px;
-                padding: 12px 16px 10px 16px;
-                z-index: 20;
-                backdrop-filter: blur(8px);
-                box-sizing: border-box;
-            }
+            .m-news-box { position: fixed; bottom: 75px; left: 50%; transform: translateX(-50%); width: calc(100% - 60px); max-width: 340px; background: rgba(255, 255, 255, 0.55); border: 3px solid #000; box-shadow: 5px 5px 0 #000; border-radius: 16px; padding: 12px 16px 10px 16px; z-index: 20; backdrop-filter: blur(8px); box-sizing: border-box; }
             .m-news-box h3 { margin: 0 0 4px 0; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--anton-red); }
             .m-news-box h2 { margin: 0 0 6px 0; font-size: 1rem; color: #000; }
             .m-news-box p  { margin: 0; font-size: 0.76rem; line-height: 1.5; color: #222; }
@@ -243,52 +157,16 @@
             .m-sidebar-right a:nth-child(9) i { --brand-color: var(--amazon-blue); animation-delay: 2.0s; }
         }
 
-        /* ================================================================= */
-        /* 2a. MOBILE PORTRAIT – Swipe-Hintergrund                          */
-        /* ================================================================= */
         @media (max-width: 800px) and (orientation: portrait) {
-            #m-bg-fix { 
-                display: block; position: fixed; top: 0; left: -100%; 
-                width: 300%; height: 100%; background: url('Background.jpg') no-repeat center center; 
-                background-size: cover; z-index: -1; will-change: transform; 
-            }
+            #m-bg-fix { display: block; position: fixed; top: 0; left: -100%; width: 300%; height: 100%; background: url('Background.jpg') no-repeat center center; background-size: cover; z-index: -1; will-change: transform; }
         }
 
-        /* ================================================================= */
-        /* 3. MOBILE LANDSCAPE                                                */
-        /* ================================================================= */
         @media (orientation: landscape) and (max-height: 500px) {
-
-            #mobile-wrapper #m-bg-fix { 
-                display: block !important;
-                position: fixed !important;
-                top: 0 !important; left: 0 !important; 
-                width: 100% !important; height: 100% !important; 
-                background: url('Background.jpg') no-repeat center center !important;
-                background-size: cover !important;
-                z-index: -1 !important;
-                will-change: unset !important; 
-                transform: none !important;
-            }
-
+            #mobile-wrapper #m-bg-fix { display: block !important; position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; background: url('Background.jpg') no-repeat center center !important; background-size: cover !important; z-index: -1 !important; will-change: unset !important; transform: none !important; }
             #mobile-wrapper .m-header { height: 60px; }
             #mobile-wrapper .m-header-logo { top: 145%; }
             #mobile-wrapper .m-menu-btn { top: 8px; left: 12px; width: 38px; height: 38px; }
-
-            #mobile-wrapper .m-sidebar { 
-                top: 0 !important;
-                left: -220px !important;
-                width: 200px !important;
-                height: 100% !important;
-                flex-direction: column !important;
-                justify-content: flex-start !important;
-                align-items: flex-start !important;
-                padding: 80px 15px 20px 15px !important;
-                border-bottom: none !important;
-                border-right: 3px solid #000 !important;
-                box-sizing: border-box !important;
-                transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
-            }
+            #mobile-wrapper .m-sidebar { top: 0 !important; left: -220px !important; width: 200px !important; height: 100% !important; flex-direction: column !important; justify-content: flex-start !important; align-items: flex-start !important; padding: 80px 15px 20px 15px !important; border-bottom: none !important; border-right: 3px solid #000 !important; box-sizing: border-box !important; transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important; }
             #mobile-wrapper .m-sidebar.open { left: 0 !important; top: 0 !important; }
             #mobile-wrapper .m-nav-item { flex: none !important; width: 100%; text-align: left; margin-bottom: 16px; }
             #mobile-wrapper .m-nav-item a { flex-direction: row !important; gap: 10px; font-size: 0.85rem; color: #000; text-decoration: none; }
@@ -296,135 +174,24 @@
             #mobile-wrapper .mobile-tag { font-size: 0.72rem; writing-mode: horizontal-tb !important; transform: none !important; margin-top: 0; }
             #mobile-wrapper .m-musik-link { display: none !important; }
             #mobile-wrapper .m-sub-toggle { display: flex !important; }
-
-            #mobile-wrapper .m-submenu {
-                display: none;
-                flex-direction: column;
-                padding-left: 28px;
-                margin-top: 6px;
-                gap: 8px;
-            }
-            #mobile-wrapper .m-submenu a {
-                font-size: 0.75rem !important;
-                color: #000 !important;
-                text-decoration: none !important;
-                display: flex !important;
-                align-items: center !important;
-                gap: 8px !important;
-                flex-direction: row !important;
-            }
+            #mobile-wrapper .m-submenu { display: none; flex-direction: column; padding-left: 28px; margin-top: 6px; gap: 8px; }
+            #mobile-wrapper .m-submenu a { font-size: 0.75rem !important; color: #000 !important; text-decoration: none !important; display: flex !important; align-items: center !important; gap: 8px !important; flex-direction: row !important; }
             #mobile-wrapper .m-nav-item.sub-open > .m-submenu { display: flex !important; }
-            #mobile-wrapper .m-sub-toggle {
-                background: none; border: none; padding: 0; cursor: pointer;
-                font-family: 'Special Elite', cursive;
-                display: flex; align-items: center; gap: 10px;
-                font-size: 0.85rem; color: #000; width: 100%;
-            }
+            #mobile-wrapper .m-sub-toggle { background: none; border: none; padding: 0; cursor: pointer; font-family: 'Special Elite', cursive; display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: #000; width: 100%; }
             #mobile-wrapper .m-sub-arrow { margin-left: auto; font-size: 0.7rem; transition: transform 0.3s; }
             #mobile-wrapper .m-nav-item.sub-open .m-sub-arrow { transform: rotate(180deg); }
-
-            #mobile-wrapper .m-epk-container { 
-                position: static !important; width: 100% !important; height: auto !important;
-                background: transparent !important; border-left: none !important; 
-                border-top: 1px solid rgba(0,0,0,0.15) !important;
-                padding-top: 12px !important; margin-top: auto !important;
-                justify-content: flex-start !important;
-            }
+            #mobile-wrapper .m-epk-container { position: static !important; width: 100% !important; height: auto !important; background: transparent !important; border-left: none !important; border-top: 1px solid rgba(0,0,0,0.15) !important; padding-top: 12px !important; margin-top: auto !important; justify-content: flex-start !important; }
             #mobile-wrapper .m-epk-text { writing-mode: horizontal-tb !important; transform: none !important; font-size: 0.78rem; }
-
-            #mobile-wrapper .m-sidebar-right { 
-                position: fixed !important;
-                top: 0 !important; bottom: 0 !important; left: auto !important; right: 0 !important;
-                transform: none !important;
-                width: 46px !important; height: 100% !important;
-                flex-direction: column !important;
-                border-top: none !important; border-bottom: none !important;
-                border-left: 2px solid #000 !important; border-radius: 0 !important;
-                padding: 0 !important; gap: 0 !important;
-                justify-content: space-evenly !important;
-                background: rgba(255, 255, 255, 0.2) !important;
-                backdrop-filter: blur(3px) !important;
-            }
-            #mobile-wrapper .m-sidebar-right a { 
-                flex: 1 !important; 
-                display: flex !important; 
-                align-items: center !important; 
-                justify-content: center !important;
-                width: 100% !important;
-            }
+            #mobile-wrapper .m-sidebar-right { position: fixed !important; top: 0 !important; bottom: 0 !important; left: auto !important; right: 0 !important; transform: none !important; width: 46px !important; height: 100% !important; flex-direction: column !important; border-top: none !important; border-bottom: none !important; border-left: 2px solid #000 !important; border-radius: 0 !important; padding: 0 !important; gap: 0 !important; justify-content: space-evenly !important; background: rgba(255, 255, 255, 0.2) !important; backdrop-filter: blur(3px) !important; }
+            #mobile-wrapper .m-sidebar-right a { flex: 1 !important; display: flex !important; align-items: center !important; justify-content: center !important; width: 100% !important; }
             #mobile-wrapper .m-sidebar-right a i { font-size: 1.1rem !important; }
-
             #mobile-wrapper .m-id-button { display: none !important; }
-
-            #mobile-wrapper .m-id-panel { 
-                position: fixed !important;
-                bottom: 0 !important;
-                left: 50% !important; right: auto !important;
-                transform: translateX(-50%) !important;
-                width: 220px !important; height: 34px !important;
-                border-radius: 8px 8px 0 0 !important;
-                border: 2px solid #000 !important; border-bottom: none !important;
-                background: rgba(255, 255, 255, 0.35) !important;
-                backdrop-filter: blur(8px) !important;
-                font-size: 0.72rem !important;
-                opacity: 1 !important; overflow: hidden !important;
-                display: flex !important; align-items: center !important; justify-content: center !important;
-                transition: none !important;
-            }
+            #mobile-wrapper .m-id-panel { position: fixed !important; bottom: 0 !important; left: 50% !important; right: auto !important; transform: translateX(-50%) !important; width: 220px !important; height: 34px !important; border-radius: 8px 8px 0 0 !important; border: 2px solid #000 !important; border-bottom: none !important; background: rgba(255, 255, 255, 0.35) !important; backdrop-filter: blur(8px) !important; font-size: 0.72rem !important; opacity: 1 !important; overflow: hidden !important; display: flex !important; align-items: center !important; justify-content: center !important; transition: none !important; }
             #mobile-wrapper .m-id-panel a { color: #000; text-decoration: none; margin: 0 8px; text-transform: uppercase; }
-
-            #mobile-wrapper .m-news-box {
-                position: fixed !important;
-                top: 62px !important;
-                right: 48px !important;
-                bottom: auto !important;
-                left: auto !important;
-                width: 105px !important;
-                max-width: none !important;
-                height: auto !important;
-                transform: none !important;
-                background: rgba(255, 255, 255, 0.55) !important;
-                border: 2px solid #000 !important;
-                border-radius: 10px !important;
-                box-shadow: none !important;
-                backdrop-filter: blur(8px) !important;
-                -webkit-backdrop-filter: blur(8px) !important;
-                padding: 10px 9px 8px 9px !important;
-                box-sizing: border-box !important;
-                z-index: 20 !important;
-                display: flex !important;
-                flex-direction: column !important;
-                align-items: flex-start !important;
-                justify-content: flex-start !important;
-                gap: 5px !important;
-                overflow: hidden !important;
-            }
-            #mobile-wrapper .m-news-box h3 {
-                font-size: 0.5rem !important;
-                margin: 0 !important;
-                color: var(--anton-red) !important;
-                text-transform: uppercase !important;
-                letter-spacing: 0.1em !important;
-                white-space: nowrap !important;
-            }
-            #mobile-wrapper .m-news-box h2 {
-                font-size: 0.7rem !important;
-                margin: 0 !important;
-                color: #000 !important;
-                white-space: normal !important;
-                line-height: 1.25 !important;
-                word-break: break-word !important;
-            }
-            #mobile-wrapper .m-news-box p {
-                font-size: 0.58rem !important;
-                margin: 0 !important;
-                color: #222 !important;
-                line-height: 1.4 !important;
-                white-space: normal !important;
-                word-break: break-word !important;
-                overflow: hidden !important;
-            }
-
+            #mobile-wrapper .m-news-box { position: fixed !important; top: 62px !important; right: 48px !important; bottom: auto !important; left: auto !important; width: 105px !important; max-width: none !important; height: auto !important; transform: none !important; background: rgba(255, 255, 255, 0.55) !important; border: 2px solid #000 !important; border-radius: 10px !important; box-shadow: none !important; backdrop-filter: blur(8px) !important; -webkit-backdrop-filter: blur(8px) !important; padding: 10px 9px 8px 9px !important; box-sizing: border-box !important; z-index: 20 !important; display: flex !important; flex-direction: column !important; align-items: flex-start !important; justify-content: flex-start !important; gap: 5px !important; overflow: hidden !important; }
+            #mobile-wrapper .m-news-box h3 { font-size: 0.5rem !important; margin: 0 !important; color: var(--anton-red) !important; text-transform: uppercase !important; letter-spacing: 0.1em !important; white-space: nowrap !important; }
+            #mobile-wrapper .m-news-box h2 { font-size: 0.7rem !important; margin: 0 !important; color: #000 !important; white-space: normal !important; line-height: 1.25 !important; word-break: break-word !important; }
+            #mobile-wrapper .m-news-box p { font-size: 0.58rem !important; margin: 0 !important; color: #222 !important; line-height: 1.4 !important; white-space: normal !important; word-break: break-word !important; overflow: hidden !important; }
             #mobile-wrapper { overflow-y: auto !important; }
             body { overflow-y: auto !important; position: static !important; height: auto !important; }
         }
@@ -432,9 +199,6 @@
 </head>
 <body>
 
-    <!-- ================================================================= -->
-    <!-- DESKTOP WRAPPER                                                    -->
-    <!-- ================================================================= -->
     <div id="desktop-wrapper">
         <div id="bg-layer-a"></div>
         <div id="bg-layer-b"></div>
@@ -467,7 +231,7 @@
             </div>
             <div class="d-nav-item"><a href="shop.html"><span class="d-nav-label"><i class="fa-solid fa-cart-shopping main-icon"></i> SHOP</span></a></div>
             <div class="d-nav-item"><a href="kontakt.html"><span class="d-nav-label"><i class="fa-solid fa-envelope main-icon"></i> KONTAKT</span></a></div>
-            <div class="d-nav-item d-nav-item-epk"><a href="epk.html"><span class="d-nav-label"><i class="fa-solid fa-bullhorn main-icon"></i> EPK / PRESSE</span></a></div>
+            <div class="d-nav-item d-nav-item-epk"><a href="https://www.dropbox.com/scl/fo/uaqmqoexqsd3do0sy4fni/AG1t5A5kO9ciFFuF1Ecyh8U?rlkey=amb618zoq017jjk54914jlnkb&st=xapx5uvl&dl=0" target="_blank" rel="noopener"><span class="d-nav-label"><i class="fa-solid fa-bullhorn main-icon"></i> EPK / PRESSE</span></a></div>
         </nav>
 
         <aside class="d-sidebar-right">
@@ -494,9 +258,6 @@
         </footer>
     </div>
 
-    <!-- ================================================================= -->
-    <!-- MOBILE WRAPPER                                                     -->
-    <!-- ================================================================= -->
     <div id="mobile-wrapper">
         <div id="m-bg-fix"></div>
         <header class="m-header" id="m-header-main"><img src="Antonlogo.png" alt="ANTON Logo" class="m-header-logo"></header>
@@ -519,7 +280,7 @@
             </div>
             <div class="m-nav-item"><a href="shop.html"><i class="fa-solid fa-cart-shopping"></i><span class="mobile-tag">Shop</span></a></div>
             <div class="m-nav-item"><a href="kontakt.html"><i class="fa-solid fa-envelope"></i><span class="mobile-tag">Kontakt</span></a></div>
-            <div class="m-epk-container"><a href="epk.html" class="m-epk-text">EPK/PRESSE</a></div>
+            <div class="m-epk-container"><a href="https://www.dropbox.com/scl/fo/uaqmqoexqsd3do0sy4fni/AG1t5A5kO9ciFFuF1Ecyh8U?rlkey=amb618zoq017jjk54914jlnkb&st=xapx5uvl&dl=0" target="_blank" rel="noopener" class="m-epk-text">EPK/PRESSE</a></div>
         </nav>
 
         <div class="m-id-button" id="m-id-btn" onclick="mOpenIDMenu(event)">I/D</div>
@@ -681,7 +442,6 @@
             }
         });
 
-        /* DYNAMISCHES HINTERGRUNDBILD */
         (function() {
             const now   = new Date();
             const hour  = now.getHours();
