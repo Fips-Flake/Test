@@ -178,6 +178,7 @@
             #mobile-wrapper .m-epk-container { position: static !important; width: 100% !important; height: auto !important; background: transparent !important; border-left: none !important; border-top: 1px solid rgba(0,0,0,0.15) !important; padding-top: 12px !important; margin-top: auto !important; justify-content: flex-start !important; }
             #mobile-wrapper .m-epk-text { writing-mode: horizontal-tb !important; transform: none !important; font-size: 0.78rem; }
             #mobile-wrapper .m-content-scroll { padding-bottom: 10px !important; padding-right: 56px !important; }
+            #mobile-wrapper .cart-box { max-height: calc(100vh - 80px) !important; top: 6px !important; }
             #mobile-wrapper .m-sidebar-right { position: fixed !important; top: 0 !important; bottom: 0 !important; left: auto !important; right: 0 !important; width: 46px !important; height: 100% !important; flex-direction: column !important; border-top: none !important; border-left: 2px solid #000 !important; border-radius: 0 !important; padding: 0 !important; gap: 0 !important; justify-content: space-evenly !important; background: rgba(255,255,255,0.2) !important; backdrop-filter: blur(3px) !important; }
             #mobile-wrapper .m-sidebar-right a i { font-size: 1.3rem !important; }
             #mobile-wrapper .m-id-button { display: none !important; }
@@ -206,9 +207,9 @@
             border-radius: 18px;
             overflow: hidden;
             height: 150px;
-            margin-bottom: 20px;
-            margin-left: 6%;
-            margin-right: 6%;
+            margin-bottom: 18px;
+            margin-left: 0;
+            margin-right: 0;
             display: flex;
             align-items: center;
             padding: 0 28px;
@@ -231,21 +232,16 @@
             z-index: 2;
         }
         .shop-hero-text { display: flex; flex-direction: column; justify-content: center; padding-left: 32px; }
-        .shop-hero-title { font-size: clamp(0.9rem, 2vw, 1.4rem); color: #000; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 5px 0; line-height: 1.2; font-weight: bold; }
+        .shop-hero-title { font-size: clamp(0.75rem, 1.8vw, 1.3rem); color: #000; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 5px 0; line-height: 1.2; font-weight: bold; white-space: nowrap; }
         .shop-hero-sub { font-size: 0.7rem; color: #555; margin: 0; }
-        .shop-hero-emojis { position: absolute; right: 22px; top: 50%; transform: translateY(-50%); display: flex; gap: 6px; font-size: 2.2rem; }
-        .shop-hero-emojis span { display: inline-block; animation: heroFloat 3s ease-in-out infinite; }
-        .shop-hero-emojis span:nth-child(2) { animation-delay: 0.4s; }
-        .shop-hero-emojis span:nth-child(3) { animation-delay: 0.8s; }
-        @keyframes heroFloat { 0%,100%{transform:translateY(0);}50%{transform:translateY(-7px);} }
+        .shop-hero-img { position: absolute; right: 0; top: 0; height: 100%; width: 220px; object-fit: cover; object-position: center; display: block; }
 
         /* ── Produkt-Grid ── */
         .shop-bento-grid {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 220px));
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 18px;
             padding-bottom: 50px;
-            justify-content: start;
         }
 
         /* ── Produkt-Karte ── */
@@ -372,11 +368,11 @@
         .cart-total-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.74rem; font-weight: bold; text-transform: uppercase; margin-bottom: 7px; letter-spacing: 0.5px; }
         .cart-total-price { color: var(--anton-red); font-size: 0.9rem; }
 
-        .btn-checkout { width: 100%; background: #000; color: var(--anton-yellow); border: 2px solid #000; border-radius: 9px; padding: 9px 4px; font-family: 'Special Elite', cursive; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 5px; transition: background 0.2s, color 0.2s, transform 0.15s; box-shadow: 3px 3px 0 #000; }
-        .btn-checkout:hover { background: var(--anton-yellow); color: #000; transform: translate(-1px,-1px); box-shadow: 4px 4px 0 #000; }
+        .btn-checkout { width: 100%; background: #000; color: #fff; border: 2px solid #000; border-radius: 9px; padding: 9px 4px; font-family: 'Special Elite', cursive; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 5px; transition: background 0.2s, color 0.2s, transform 0.15s; box-shadow: 3px 3px 0 #000; }
+        .btn-checkout:hover { background: #00b050; color: #fff; border-color: #000; transform: translate(-1px,-1px); box-shadow: 4px 4px 0 #000; }
         .btn-checkout i { font-size: 0.85rem; }
-        .btn-cart-clear { width: 100%; margin-top: 4px; background: none; border: none; font-family: 'Special Elite', cursive; font-size: 0.62rem; color: #aaa; cursor: pointer; text-decoration: underline; text-align: center; transition: color 0.2s; }
-        .btn-cart-clear:hover { color: var(--anton-red); }
+        .btn-cart-clear { width: 100%; margin-top: 4px; background: none; border: none; font-family: 'Special Elite', cursive; font-size: 0.62rem; color: var(--anton-red); cursor: pointer; text-decoration: underline; text-align: center; transition: color 0.2s; }
+        .btn-cart-clear:hover { color: #900; }
 
         /* ── CONFIRM DIALOG ── */
         #confirm-overlay {
@@ -448,15 +444,14 @@
                 clip-path: none;
             }
             .shop-hero-text { padding-left: 28px; }
-            .shop-hero-title { font-size: 0.88rem; }
-            .shop-hero-emojis { font-size: 1.4rem; right: 8px; gap: 4px; }
+            .shop-hero-title { font-size: clamp(0.65rem, 3vw, 0.88rem); white-space: nowrap; }
+            .shop-hero-img { width: 140px; }
             .shop-hero-sub { display: none; }
 
             .shop-bento-grid {
                 grid-template-columns: 1fr;
                 gap: 10px;
                 padding-bottom: 20px;
-                justify-content: start;
             }
 
             .product-img-wrap { min-height: 110px; }
@@ -779,11 +774,9 @@ function buildShopHTML() {
     const hero = `
         <div class="shop-hero">
             <div class="shop-hero-text">
-                <h2 class="shop-hero-title">Onlineshop für eure<br>Fanartikel von Anton</h2>
+                <h2 class="shop-hero-title">Onlineshop für eure Fanartikel von Anton</h2>
             </div>
-            <div class="shop-hero-emojis">
-                <span>🧢</span><span>👕</span><span>🎶</span>
-            </div>
+            <img class="shop-hero-img" src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=500&q=80" alt="Fanartikel">
         </div>`;
 
     const cards = products.map(p => {
