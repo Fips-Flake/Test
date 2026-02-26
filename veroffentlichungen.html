@@ -147,7 +147,6 @@
                 animation: rotateCarousel var(--carousel-speed) infinite linear;
             }
 
-            /* Hover pausiert – Browser behält den Fortschritt, kein Neustart nötig */
             .carousel-viewport:hover .carousel-inner {
                 animation-play-state: paused;
             }
@@ -286,7 +285,6 @@
             .m-epk-container { position: absolute; right: 0; top: 0; height: 100%; width: 45px; background: #fff; border-left: 3px solid #000; display: flex; align-items: center; justify-content: center; }
             .m-epk-text { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 0.7rem; color: var(--anton-red); font-weight: bold; text-decoration: none; }
 
-            /* ---- BENTO BOX SWIPER (Mobile) ---- */
             .m-bento-container {
                 position: fixed;
                 top: 50%;
@@ -310,17 +308,14 @@
             .m-swiper-viewport {
                 width: 100%;
                 overflow: hidden;
-                /* Verhindert sichtbare Kanten beim Loop-Sprung */
                 -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
                 mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
             }
 
             .m-frame {
                 display: flex;
-                /* Breite wird per JS gesetzt */
                 transition: transform 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94);
                 will-change: transform;
-                /* touch-action auf dem Frame: horizontal swipe darf nicht vom Browser übernommen werden */
                 touch-action: none;
             }
 
@@ -330,7 +325,6 @@
                 justify-content: center;
                 align-items: center;
                 padding: 5px 0;
-                /* Breite wird per JS gesetzt */
             }
 
             .m-card {
@@ -466,7 +460,7 @@
             </div>
             <div class="d-nav-item"><a href="shop.html"><span class="d-nav-label"><i class="fa-solid fa-cart-shopping main-icon"></i> SHOP</span></a></div>
             <div class="d-nav-item"><a href="kontakt.html"><span class="d-nav-label"><i class="fa-solid fa-envelope main-icon"></i> KONTAKT</span></a></div>
-            <div class="d-nav-item d-nav-item-epk"><a href="epk.html"><span class="d-nav-label"><i class="fa-solid fa-bullhorn main-icon"></i> EPK / PRESSE</span></a></div>
+            <div class="d-nav-item d-nav-item-epk"><a href="https://www.dropbox.com/scl/fo/uaqmqoexqsd3do0sy4fni/AG1t5A5kO9ciFFuF1Ecyh8U?rlkey=amb618zoq017jjk54914jlnkb&e=1&st=b6s5qhal&dl=0" target="_blank" rel="noopener"><span class="d-nav-label"><i class="fa-solid fa-bullhorn main-icon"></i> EPK / PRESSE</span></a></div>
         </nav>
 
         <aside class="d-sidebar-right">
@@ -521,7 +515,7 @@
             <div class="m-nav-item"><a href="meinemusik.html"><i class="fa-solid fa-music"></i><span class="mobile-tag">Musik</span></a></div>
             <div class="m-nav-item"><a href="shop.html"><i class="fa-solid fa-cart-shopping"></i><span class="mobile-tag">Shop</span></a></div>
             <div class="m-nav-item"><a href="kontakt.html"><i class="fa-solid fa-envelope"></i><span class="mobile-tag">Kontakt</span></a></div>
-            <div class="m-epk-container"><a href="epk.html" class="m-epk-text">EPK/PRESSE</a></div>
+            <div class="m-epk-container"><a href="https://www.dropbox.com/scl/fo/uaqmqoexqsd3do0sy4fni/AG1t5A5kO9ciFFuF1Ecyh8U?rlkey=amb618zoq017jjk54914jlnkb&e=1&st=b6s5qhal&dl=0" target="_blank" rel="noopener" class="m-epk-text">EPK/PRESSE</a></div>
         </nav>
 
         <div class="m-bento-container">
@@ -631,7 +625,6 @@
                 restartAnimation();
             });
 
-            /* mouseleave: nichts tun – animation-play-state: running greift automatisch wieder */
             viewport.addEventListener('mouseleave', () => { /* intentionally empty */ });
 
             function restartAnimation() {
@@ -693,11 +686,6 @@
         /* MOBILE SWIPER – neu gebaut, zuverlässiger Endlos-Loop             */
         /* ================================================================= */
         (function() {
-            /* Rohdaten aller Slides */
-            /* Desktop dreht links-herum: nächstes Item kommt von rechts.
-               Mobile wischt nach links für "weiter". Damit beide Richtungen
-               dieselbe Abfolge zeigen, ist das Mobile-Array gespiegelt:
-               Hunger → Monsterparty → Ertappt → … (älteste zuerst nach Hunger) */
             const SLIDES = [
                 { src: 'Hunger.JPG',                                    label: 'neue Single (Februar 2026)', link: 'neuesingle.html' },
                 { src: 'monsterparty-anton.jpg',                        label: 'Debütsingle (2020)' },
@@ -717,7 +705,6 @@
             const swiperVP   = document.getElementById('m-swiper-viewport');
             if (!frame || !dotsWrap || !swiperVP) return;
 
-            /* ---- DOM aufbauen: [last clone] + originals + [first clone] ---- */
             function makeSlide(data) {
                 const slide = document.createElement('div');
                 slide.className = 'm-slide';
@@ -737,23 +724,15 @@
                 return slide;
             }
 
-            // Letzten Klon vorne einfügen
-            frame.appendChild(makeSlide(SLIDES[N - 1]));   // Platzhalter – wird gleich an Position 0 gesetzt
-            // Originale
+            frame.appendChild(makeSlide(SLIDES[N - 1]));
             SLIDES.forEach(d => frame.appendChild(makeSlide(d)));
-            // Ersten Klon hinten anfügen
             frame.appendChild(makeSlide(SLIDES[0]));
 
-            // Reihenfolge: [klonLast, orig0..origN-1, klonFirst]
-            // Gesamtanzahl Slides im DOM:
             const allSlides = Array.from(frame.querySelectorAll('.m-slide'));
-            // Index 0 = klonLast, Index 1..N = Originale, Index N+1 = klonFirst
-            // Start: zeige Original 0 → das ist allSlides[1]
-            let current  = 1;           // logischer Index im DOM-Array
-            let slideW   = 0;           // wird per getSlideWidth() befüllt
+            let current  = 1;
+            let slideW   = 0;
             let animating = false;
 
-            /* ---- Dots ---- */
             SLIDES.forEach((_, i) => {
                 const dot = document.createElement('div');
                 dot.className = 'm-dot' + (i === 0 ? ' active' : '');
@@ -762,26 +741,22 @@
             });
 
             function updateDots() {
-                /* current 1..N → dot 0..N-1 */
                 let di = current - 1;
                 if (di < 0) di = N - 1;
                 if (di >= N) di = 0;
                 dotsWrap.querySelectorAll('.m-dot').forEach((d, i) => d.classList.toggle('active', i === di));
             }
 
-            /* ---- Slide-Breite ermitteln ---- */
             function getSlideWidth() {
                 return swiperVP.offsetWidth || window.innerWidth * 0.88;
             }
 
-            /* ---- Alle Slide-Breiten setzen + Frame-Gesamtbreite ---- */
             function applyWidths() {
                 slideW = getSlideWidth();
                 allSlides.forEach(s => { s.style.width = slideW + 'px'; });
                 frame.style.width = (allSlides.length * slideW) + 'px';
             }
 
-            /* ---- Sofort an Position springen (kein Übergang) ---- */
             function jumpTo(index) {
                 frame.style.transition = 'none';
                 frame.style.transform  = `translateX(${-index * slideW}px)`;
@@ -789,7 +764,6 @@
                 updateDots();
             }
 
-            /* ---- Mit Animation zu Index navigieren ---- */
             function navigateTo(index) {
                 if (animating) return;
                 animating = true;
@@ -799,23 +773,18 @@
                 updateDots();
             }
 
-            /* ---- Nach Transition: Loop-Sprung wenn nötig ---- */
             frame.addEventListener('transitionend', () => {
                 animating = false;
                 if (current === 0) {
-                    /* War klonLast → springe zu echtem letzten Slide */
                     jumpTo(N);
                 } else if (current === N + 1) {
-                    /* War klonFirst → springe zu echtem ersten Slide */
                     jumpTo(1);
                 }
             });
 
-            /* ---- Init ---- */
             applyWidths();
-            jumpTo(1);  // startposition: erster echter Slide
+            jumpTo(1);
 
-            /* Resize: Breiten aktualisieren und Position ohne Animation neu setzen */
             let resizeTimer;
             window.addEventListener('resize', () => {
                 clearTimeout(resizeTimer);
@@ -825,10 +794,9 @@
                 }, 80);
             });
 
-            /* ---- Touch-Swipe ---- */
             let tStartX = 0, tStartY = 0, tDeltaX = 0, tDeltaY = 0;
-            let trackH  = false;    // tracken wir horizontal?
-            let decided = false;    // haben wir H/V entschieden?
+            let trackH  = false;
+            let decided = false;
 
             swiperVP.addEventListener('touchstart', e => {
                 if (animating) return;
@@ -850,7 +818,6 @@
                 }
 
                 if (trackH) {
-                    /* Echtzeit-Drag-Feedback */
                     frame.style.transition = 'none';
                     frame.style.transform  = `translateX(${(-current * slideW) + tDeltaX}px)`;
                 }
@@ -864,7 +831,6 @@
                 } else if (tDeltaX > threshold) {
                     navigateTo(current - 1);
                 } else {
-                    /* Nicht weit genug → zurückfedern */
                     navigateTo(current);
                 }
             }, { passive: true });
