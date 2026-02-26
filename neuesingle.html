@@ -24,9 +24,6 @@
 
         a { color: inherit; text-decoration: none; -webkit-tap-highlight-color: transparent; }
 
-        /* ================================================================= */
-        /* 1. DESKTOP                                                         */
-        /* ================================================================= */
         @media (min-width: 801px) and (min-height: 500px) {
             #mobile-wrapper { display: none !important; }
             #desktop-wrapper { display: block !important; }
@@ -136,9 +133,6 @@
             .d-footer a:hover { color: var(--anton-yellow) !important; text-shadow: -1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000; }
         }
 
-        /* ================================================================= */
-        /* 2. MOBILE BASIS – gilt für Portrait UND Landscape                  */
-        /* ================================================================= */
         @media (max-width: 800px), (orientation: landscape) and (max-height: 500px) {
             #desktop-wrapper { display: none !important; }
             #mobile-wrapper  { display: block !important; }
@@ -166,7 +160,6 @@
             .m-menu-btn.active span { display: none; }
             .m-menu-btn.active::after { content: 'A'; color: #000; font-weight: bold; font-size: 28px; }
 
-            /* Portrait-Nav: Slide down von oben */
             .m-sidebar {
                 position: fixed; left: 0; top: -120px; width: 100%; height: 95px;
                 background: var(--anton-yellow); z-index: 1100; display: flex;
@@ -185,7 +178,6 @@
             }
             .m-epk-text { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 0.7rem; color: var(--anton-red); font-weight: bold; text-decoration: none; }
 
-            /* I/D Button & Panel */
             .m-id-button {
                 position: fixed; right: 0; bottom: 150px; width: 38px; height: 38px;
                 background: rgba(255,255,255,0.4); backdrop-filter: blur(4px);
@@ -207,7 +199,6 @@
             .m-id-panel.open { right: 0; }
             .m-id-panel a { color: #000; text-decoration: none; margin: 0 8px; text-transform: uppercase; }
 
-            /* Social Bottom Bar */
             .m-sidebar-right {
                 position: fixed; bottom: 0; left: 0; width: 100%; height: 65px;
                 display: flex; flex-direction: row; align-items: center;
@@ -232,9 +223,6 @@
             .m-sidebar-right a:nth-child(9) i { --brand-color: var(--amazon-blue); animation-delay: 2.0s; }
         }
 
-        /* ================================================================= */
-        /* 2a. MOBILE PORTRAIT                                                */
-        /* ================================================================= */
         @media (max-width: 800px) and (orientation: portrait) {
             body {
                 height: 100vh; width: 100vw; overflow: hidden !important;
@@ -274,12 +262,8 @@
             .m-album-text p:last-child { margin-bottom: 0; }
         }
 
-        /* ================================================================= */
-        /* 3. MOBILE LANDSCAPE                                                */
-        /* ================================================================= */
         @media (orientation: landscape) and (max-height: 500px) {
 
-            /* Seite scrollbar machen */
             #mobile-wrapper { overflow-y: auto !important; }
             body {
                 overflow-y: auto !important; position: static !important;
@@ -295,12 +279,10 @@
                 will-change: unset !important; transform: none !important;
             }
 
-            /* Header schmaler */
             #mobile-wrapper .m-header { height: 50px !important; }
             #mobile-wrapper .m-header-logo { top: 145% !important; max-height: 150px !important; }
             #mobile-wrapper .m-menu-btn { top: 6px !important; left: 10px !important; width: 36px !important; height: 36px !important; }
 
-            /* Nav: Slide from LEFT */
             #mobile-wrapper .m-sidebar {
                 top: 0 !important; left: -190px !important;
                 width: 175px !important; height: 100% !important;
@@ -326,7 +308,6 @@
             }
             #mobile-wrapper .m-epk-text { writing-mode: horizontal-tb !important; transform: none !important; font-size: 0.75rem; }
 
-            /* Content-Wrapper: scrollbar, unterhalb Header */
             #mobile-wrapper .m-content-scroll {
                 display: block !important;
                 position: static !important;
@@ -338,7 +319,6 @@
                 box-sizing: border-box !important;
             }
 
-            /* Detail-Box: horizontal layout, kompakt */
             #mobile-wrapper .m-detail-bento {
                 margin: 0 !important;
                 background: rgba(255,255,255,0.88) !important;
@@ -352,7 +332,6 @@
                 gap: 12px !important;
             }
 
-            /* Bild: fixe kleine Breite, kein overflow */
             #mobile-wrapper .m-album-cover {
                 width: 80px !important;
                 min-width: 80px !important;
@@ -375,7 +354,6 @@
                 white-space: normal !important;
             }
 
-            /* Text: klein, linksbündig */
             #mobile-wrapper .m-album-text {
                 text-align: left !important;
                 font-size: 0.68rem !important;
@@ -386,7 +364,6 @@
             #mobile-wrapper .m-album-text p { margin-bottom: 6px !important; }
             #mobile-wrapper .m-album-text p:last-child { margin-bottom: 0 !important; }
 
-            /* Social: vertikale Leiste rechts */
             #mobile-wrapper .m-sidebar-right {
                 position: fixed !important;
                 top: 0 !important; bottom: 0 !important;
@@ -407,7 +384,6 @@
             }
             #mobile-wrapper .m-sidebar-right a i { font-size: 1.0rem !important; }
 
-            /* I/D Button weg, Panel immer sichtbar unten-mittig */
             #mobile-wrapper .m-id-button { display: none !important; }
             #mobile-wrapper .m-id-panel {
                 position: fixed !important; bottom: 0 !important;
@@ -428,7 +404,6 @@
 </head>
 <body>
 
-    <!-- ======================== DESKTOP ======================== -->
     <div id="desktop-wrapper">
         <header class="d-header">
             <img src="Antonlogo.png" alt="ANTON Logo" class="d-header-logo">
@@ -447,7 +422,7 @@
             </div>
             <div class="d-nav-item"><a href="shop.html"><span class="d-nav-label"><i class="fa-solid fa-cart-shopping main-icon"></i> SHOP</span></a></div>
             <div class="d-nav-item"><a href="kontakt.html"><span class="d-nav-label"><i class="fa-solid fa-envelope main-icon"></i> KONTAKT</span></a></div>
-            <div class="d-nav-item d-nav-item-epk"><a href="epk.html"><span class="d-nav-label"><i class="fa-solid fa-bullhorn main-icon"></i> EPK / PRESSE</span></a></div>
+            <div class="d-nav-item d-nav-item-epk"><a href="https://www.dropbox.com/scl/fo/uaqmqoexqsd3do0sy4fni/AG1t5A5kO9ciFFuF1Ecyh8U?rlkey=amb618zoq017jjk54914jlnkb&e=1&st=b6s5qhal&dl=0" target="_blank" rel="noopener"><span class="d-nav-label"><i class="fa-solid fa-bullhorn main-icon"></i> EPK / PRESSE</span></a></div>
         </nav>
 
         <aside class="d-sidebar-right">
@@ -488,7 +463,6 @@
         </footer>
     </div>
 
-    <!-- ======================== MOBILE ======================== -->
     <div id="mobile-wrapper">
         <div id="m-bg-fix"></div>
 
@@ -504,7 +478,7 @@
             <div class="m-nav-item"><a href="veroffentlichungen.html"><i class="fa-solid fa-music"></i><span class="mobile-tag">Musik</span></a></div>
             <div class="m-nav-item"><a href="shop.html"><i class="fa-solid fa-cart-shopping"></i><span class="mobile-tag">Shop</span></a></div>
             <div class="m-nav-item"><a href="kontakt.html"><i class="fa-solid fa-envelope"></i><span class="mobile-tag">Kontakt</span></a></div>
-            <div class="m-epk-container"><a href="epk.html" class="m-epk-text">EPK/PRESSE</a></div>
+            <div class="m-epk-container"><a href="https://www.dropbox.com/scl/fo/uaqmqoexqsd3do0sy4fni/AG1t5A5kO9ciFFuF1Ecyh8U?rlkey=amb618zoq017jjk54914jlnkb&e=1&st=b6s5qhal&dl=0" target="_blank" rel="noopener" class="m-epk-text">EPK/PRESSE</a></div>
         </nav>
 
         <div class="m-content-scroll">
@@ -544,7 +518,6 @@
     </div>
 
     <script>
-        /* ── DESKTOP ── */
         let dSidebarTimeout;
         const dSidebar = document.getElementById('d-sidebar');
 
@@ -566,7 +539,6 @@
             }
         });
 
-        /* ── MOBILE ── */
         const mSidebar = document.getElementById('m-sidebar');
         const mMenuBtn = document.getElementById('m-menu-trigger');
         const mIdBtn   = document.getElementById('m-id-btn');
@@ -611,7 +583,6 @@
         window.addEventListener('orientationchange', () => setTimeout(applyLandscapeState, 100));
         applyLandscapeState();
 
-        /* Swipe-Hintergrund (nur Portrait) */
         let touchStartX = 0, touchStartY = 0, currentTranslateX = 0;
         document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY; }, { passive: true });
         document.addEventListener('touchmove', e => {
@@ -639,7 +610,6 @@
             }
         });
 
-        /* Header nach 3s ausblenden */
         setTimeout(() => {
             const mh = document.getElementById('m-header-main');
             const isLandscape = isLandscapeMobile();
