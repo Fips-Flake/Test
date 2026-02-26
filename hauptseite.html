@@ -216,16 +216,16 @@
         <div class="d-news-box">
             <h3>Neuigkeiten</h3>
             <h2>Die neue Webseite ist da!</h2>
-            <p>Frisch gestaltet, übersichtlich und für alle Geräte optimiert – willkommen auf der neuen Seite von Anton. Hier findet ihr ab sofort Musik, Konzerttermine, den Shop und vieles mehr auf einen Blick.</p>
+            <p>Frisch gestaltet, übersichtlich und für alle Geräte optimiert!<br> <strong><u>Willkommen</u> auf der neuen Seite von Anton.</strong> Hier findet ihr ab sofort Musik, Konzerttermine, den Shop und vieles mehr auf einen Blick.</p>
         </div>
 
         <nav class="d-sidebar-left" id="d-sidebar">
-            <div class="d-nav-item"><a href="hauptseite.html"><span class="d-nav-label"><i class="fa-solid fa-house main-icon"></i> START</span></a></div>
+            <div class="d-nav-item"><a href="index.html"><span class="d-nav-label"><i class="fa-solid fa-house main-icon"></i> START</span></a></div>
             <div class="d-nav-item">
                 <a href="meinemusik.html"><span class="d-nav-label"><i class="fa-solid fa-music main-icon"></i> MEINE MUSIK</span><div class="d-arrow-wrapper"><i class="fa-solid fa-caret-down d-submenu-indicator"></i></div></a>
                 <div class="d-submenu">
-                    <a href="ueber-mich.html"><i class="fa-regular fa-face-smile"></i> ÜBER MICH</a>
-                    <a href="meinemusik.html"><i class="fa-solid fa-volume-high"></i> VERÖFFENTLICHUNGEN</a>
+                    <a href="uebermich.html"><i class="fa-regular fa-face-smile"></i> ÜBER MICH</a>
+                    <a href="veroffentlichungen.html"><i class="fa-solid fa-volume-high"></i> VERÖFFENTLICHUNGEN</a>
                     <a href="konzerte.html"><i class="fa-solid fa-microphone-lines"></i> KONZERTE</a>
                 </div>
             </div>
@@ -264,8 +264,20 @@
         <div class="m-menu-btn" id="m-menu-trigger" onclick="mToggleMenu(event)"><span></span><span></span><span></span></div>
 
         <nav class="m-sidebar" id="m-sidebar">
-            <div class="m-nav-item"><a href="hauptseite.html"><i class="fa-solid fa-house"></i><span class="mobile-tag">Start</span></a></div>
-            <div class="m-nav-item"><a href="meinemusik.html"><i class="fa-solid fa-music"></i><span class="mobile-tag">Musik</span></a></div>
+            <div class="m-nav-item"><a href="index.html"><i class="fa-solid fa-house"></i><span class="mobile-tag">Start</span></a></div>
+            <div class="m-nav-item" id="m-musik-item">
+                <a href="meinemusik.html" class="m-musik-link"><i class="fa-solid fa-music"></i><span class="mobile-tag">Musik</span></a>
+                <button class="m-sub-toggle" onclick="mToggleSubMenu(event)">
+                    <i class="fa-solid fa-music"></i>
+                    <span class="mobile-tag">Musik</span>
+                    <i class="fa-solid fa-caret-down m-sub-arrow"></i>
+                </button>
+                <div class="m-submenu">
+                    <a href="uebermich.html"><i class="fa-regular fa-face-smile"></i> Über mich</a>
+                    <a href="veroffentlichungen.html"><i class="fa-solid fa-volume-high"></i> Veröffentlichungen</a>
+                    <a href="konzerte.html"><i class="fa-solid fa-microphone-lines"></i> Konzerte</a>
+                </div>
+            </div>
             <div class="m-nav-item"><a href="shop.html"><i class="fa-solid fa-cart-shopping"></i><span class="mobile-tag">Shop</span></a></div>
             <div class="m-nav-item"><a href="kontakt.html"><i class="fa-solid fa-envelope"></i><span class="mobile-tag">Kontakt</span></a></div>
             <div class="m-epk-container"><a href="https://www.dropbox.com/scl/fo/uaqmqoexqsd3do0sy4fni/AG1t5A5kO9ciFFuF1Ecyh8U?rlkey=amb618zoq017jjk54914jlnkb&st=xapx5uvl&dl=0" target="_blank" rel="noopener" class="m-epk-text">EPK/PRESSE</a></div>
@@ -282,7 +294,7 @@
         <div class="m-news-box">
             <h3>Neuigkeiten</h3>
             <h2>Die neue Webseite ist da!</h2>
-            <p>Frisch gestaltet, übersichtlich und für alle Geräte optimiert – willkommen auf der neuen Seite von Anton. Hier findet ihr ab sofort Musik, Konzerttermine, den Shop und vieles mehr auf einen Blick.</p>
+            <p>Frisch gestaltet, übersichtlich und für alle Geräte optimiert …<br><strong><u>Willkommen</u> auf der neuen Seite von Anton.</strong> Hier findet ihr ab sofort Musik, Konzerttermine, den Shop und vieles mehr auf einen Blick.</p>
         </div>
 
         <div class="m-id-panel" id="m-id-panel">
@@ -363,6 +375,12 @@
             e.stopPropagation();
             if (mSidebar.classList.contains('open')) { mCloseAllMenus(); } 
             else { mCloseAllMenus(); mSidebar.classList.add('open'); mMenuBtn.classList.add('active'); mMenuTimeout = setTimeout(mCloseAllMenus, 5000); }
+        }
+
+        function mToggleSubMenu(e) {
+            e.stopPropagation();
+            const item = document.getElementById('m-musik-item');
+            if (item) item.classList.toggle('sub-open');
         }
 
         function mOpenIDMenu(e) {
