@@ -140,14 +140,6 @@
 
             .m-content-scroll { flex: 1; min-height: 0; margin-top: 80px; margin-bottom: 65px; overflow-y: auto !important; -webkit-overflow-scrolling: touch; padding: 20px 15px; box-sizing: border-box; }
 
-            /* Grid:
-               Spalte 1 = Bild (120px)
-               Spalte 2 = Texte neben dem Bild
-               Zeile 1  = Intro-Text (rot)
-               Zeile 2  = erster Absatz (Anton ist Papa...)
-               Zeile 3  = zweiter Absatz (Mit sechs sitzt er...)
-               Zeile 4  = rest (volle Breite)
-            */
             .detail-bento {
                 background: rgba(255,255,255,0.92); border: 3px solid #000;
                 box-shadow: 5px 5px 0 #000; border-radius: 16px; padding: 16px;
@@ -162,15 +154,16 @@
             .m-second-para  { grid-column: 2; grid-row: 3; }
             .album-text     { grid-column: 1 / span 2; grid-row: 4; }
             .album-text p.intro      { display: none; }
-            .album-text p:first-of-type { display: none; }  /* Anton ist Papa – schon in m-first-para */
-            .album-text p:nth-of-type(2) { display: none; } /* Klavier-Absatz – schon in m-second-para */
+            .album-text p:first-of-type { display: none; }
+            .album-text p:nth-of-type(2) { display: none; }
 
-            .m-intro-text  { font-size: 0.68rem !important; font-weight: bold !important; color: #ff0000 !important; line-height: 1.5 !important; margin: 0 !important; display: block !important; }
-            .m-first-para  { font-size: 0.68rem; line-height: 1.5; margin: 0; }
-            .m-second-para { font-size: 0.68rem; line-height: 1.5; margin: 0; }
+            /* ── SCHRIFT ETWAS GRÖẞER (war 0.68rem, jetzt 0.78rem) ── */
+            .m-intro-text  { font-size: 0.78rem !important; font-weight: bold !important; color: #ff0000 !important; line-height: 1.5 !important; margin: 0 !important; display: block !important; }
+            .m-first-para  { font-size: 0.78rem; line-height: 1.5; margin: 0; }
+            .m-second-para { font-size: 0.78rem; line-height: 1.5; margin: 0; }
             .album-cover { width: 120px; border: 2px solid #000; border-radius: 10px; overflow: hidden; box-shadow: 3px 3px 0 #000; }
             .album-cover img { width: 100%; height: auto; display: block; }
-            .album-text p { margin: 0 0 8px 0; font-size: 0.68rem; line-height: 1.5; }
+            .album-text p { margin: 0 0 8px 0; font-size: 0.78rem; line-height: 1.5; }
         }
 
         /* ================================================================= */
@@ -189,12 +182,10 @@
                 will-change: unset !important; transform: none !important;
             }
 
-            /* Header */
             #mobile-wrapper .m-header { height: 60px !important; }
             #mobile-wrapper .m-header-logo { top: 145% !important; }
             #mobile-wrapper .m-menu-btn { top: 8px !important; left: 12px !important; width: 38px !important; height: 38px !important; }
 
-            /* Nav: Slide from LEFT */
             #mobile-wrapper .m-sidebar {
                 top: 0 !important; left: -220px !important;
                 width: 200px !important; height: 100% !important;
@@ -215,7 +206,6 @@
 
             body { background-color: transparent !important; }
 
-            /* Content – scrollbar mit genug Platz unten */
             #mobile-wrapper .m-content-scroll {
                 display: block !important;
                 position: static !important;
@@ -229,7 +219,6 @@
                 height: calc(100vh - 60px) !important;
             }
 
-            /* Detail-Box: wie Desktop – Bild links, Text rechts */
             #mobile-wrapper .detail-bento {
                 display: flex !important;
                 flex-direction: row !important;
@@ -260,11 +249,9 @@
             #mobile-wrapper .album-text { overflow: visible !important; max-height: none !important; }
             #mobile-wrapper .album-text p { margin: 0 0 5px 0 !important; font-size: 0.62rem !important; line-height: 1.35 !important; }
             #mobile-wrapper .album-text p.intro { font-size: 0.62rem !important; font-weight: bold !important; color: #ff0000 !important; display: block !important; }
-            /* Im Landscape alle Absätze wieder anzeigen (werden im Portrait ausgeblendet) */
             #mobile-wrapper .album-text p:first-of-type  { display: block !important; }
             #mobile-wrapper .album-text p:nth-of-type(2) { display: block !important; }
 
-            /* Social: vertikale Leiste rechts */
             #mobile-wrapper .m-sidebar-right {
                 position: fixed !important; top: 0 !important; bottom: 0 !important;
                 left: auto !important; right: 0 !important;
@@ -280,7 +267,6 @@
             #mobile-wrapper .m-sidebar-right a { flex: 1 !important; display: flex !important; align-items: center !important; justify-content: center !important; width: 100% !important; }
             #mobile-wrapper .m-sidebar-right a i { font-size: 1.1rem !important; }
 
-            /* I/D */
             #mobile-wrapper .m-id-button { display: none !important; }
             #mobile-wrapper .m-id-panel {
                 position: fixed !important; bottom: 0 !important;
@@ -394,8 +380,7 @@
                 <div class="album-text">
                     <p class="intro">Ihr wollt mehr über mich und mein laaaanges Leben wissen? Wer Anton ist? Na dann passt mal auf:</p>
                     <p>Anton ist Papa. Und Bruder. Großer und kleiner – je nachdem, wen man fragt. Geboren wurde er als Anton Nachtwey in Berlin-Friedenau.</p>
-                    <p>Mit sechs sitzt er am Klavier, und bleibt da auch erst mal zwölf Jahre. Klassische Ausbildung, Tonleitern,</p>
-                    <p>Disziplin. Seit seinem zehnten Lebensjahr steht er außerdem auf Bühnen – als Sänger, als Performer, als jemand, der offensichtlich lieber vorne steht als hinten.</p>
+                    <p>Mit sechs sitzt er am Klavier, und bleibt da auch erst mal zwölf Jahre. Klassische Ausbildung, Tonleitern, Disziplin. Seit seinem zehnten Lebensjahr steht er außerdem auf Bühnen – als Sänger, als Performer, als jemand, der offensichtlich lieber vorne steht als hinten.</p>
                     <p>Irgendwann merkt er: Ein Klavier passt schlecht in einen Rucksack. Also bringt er sich selbst Gitarre bei. Autodidaktisch, nach Gehör, nach Gefühl. Ende der 90er baut er sein eigenes Studio auf, schreibt Songs, produziert – dreht an Knöpfen, bis es nach ihm klingt.</p>
                     <p>2004 macht Anton seinen Abschluss als Audio Engineer. Er weiß jetzt offiziell, was er da eigentlich die ganze Zeit schon macht. 2005 läuft er dann bei Unser Block auf VIVA im Fernsehen – als Hauptdarsteller.</p>
                     <p>Danach wird's voll. Studios. Nächte. Bühnen. Lautsprecher, die größer sind als Wohnzimmer. Er arbeitet mit Leuten wie Mark Forster, Havoc (Mobb Deep), Kool Savas. Nicht als Fan. Sondern mittendrin.</p>
