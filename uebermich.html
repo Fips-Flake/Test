@@ -13,9 +13,6 @@
 
         a { color: inherit; text-decoration: none; -webkit-tap-highlight-color: transparent; }
 
-        /* ================================================================= */
-        /* 1. DESKTOP                                                         */
-        /* ================================================================= */
         @media (min-width: 801px) and (min-height: 500px) {
             #mobile-wrapper { display: none !important; }
             #desktop-wrapper { display: block !important; }
@@ -86,9 +83,6 @@
             .d-footer a:hover { color: var(--anton-yellow) !important; text-shadow: -1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000; }
         }
 
-        /* ================================================================= */
-        /* 2. MOBILE BASIS – gilt für Portrait UND Landscape                  */
-        /* ================================================================= */
         @media (max-width: 800px), (orientation: landscape) and (max-height: 500px) {
             #desktop-wrapper { display: none !important; }
             #mobile-wrapper  { display: block !important; }
@@ -129,9 +123,6 @@
             .m-sidebar-right a:nth-child(9) i { --brand-color: var(--amazon-blue); animation-delay: 2.0s; }
         }
 
-        /* ================================================================= */
-        /* 2a. MOBILE PORTRAIT                                                */
-        /* ================================================================= */
         @media (max-width: 800px) and (orientation: portrait) {
             body { height: 100vh; width: 100vw; overflow: hidden !important; position: fixed; display: flex; flex-direction: column; touch-action: pan-y; overscroll-behavior-x: none; }
             #m-bg-fix { display: block; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('Background.jpg') no-repeat center center; background-size: cover; z-index: -1; }
@@ -154,10 +145,9 @@
             .m-second-para  { display: none; }
             .album-text     { grid-column: 1 / span 2; grid-row: 3; }
             .album-text p.intro          { display: none; }
-            .album-text p:first-of-type  { display: none; } /* "Anton ist Papa..." kurz – schon in m-first-para */
-            .album-text p:nth-of-type(2) { display: none; } /* "Anton ist Papa..." kurz – Duplikat */
+            .album-text p:first-of-type  { display: none; }
+            .album-text p:nth-of-type(2) { display: none; }
 
-            /* ── SCHRIFT GRÖẞER (0.86rem) ── */
             .m-intro-text  { font-size: 0.86rem !important; font-weight: bold !important; color: #ff0000 !important; line-height: 1.5 !important; margin: 0 !important; display: block !important; }
             .m-first-para  { font-size: 0.86rem; line-height: 1.5; margin: 0; }
             .album-cover { width: 120px; border: 2px solid #000; border-radius: 10px; overflow: hidden; box-shadow: 3px 3px 0 #000; }
@@ -165,9 +155,6 @@
             .album-text p { margin: 0 0 8px 0; font-size: 0.86rem; line-height: 1.5; }
         }
 
-        /* ================================================================= */
-        /* 3. MOBILE LANDSCAPE                                                */
-        /* ================================================================= */
         @media (orientation: landscape) and (max-height: 500px) {
 
             body { overflow-y: auto !important; position: static !important; height: auto !important; }
@@ -288,7 +275,6 @@
 </head>
 <body>
 
-    <!-- ======================== DESKTOP ======================== -->
     <div id="desktop-wrapper">
         <header class="d-header"><img src="Antonlogo.png" alt="ANTON Logo" class="d-header-logo"></header>
         <div class="d-menu-btn" onclick="toggleDesktopMenu()"><span>☰</span></div>
@@ -305,7 +291,7 @@
             </div>
             <div class="d-nav-item"><a href="shop.html"><span class="d-nav-label"><i class="fa-solid fa-cart-shopping main-icon"></i> SHOP</span></a></div>
             <div class="d-nav-item"><a href="kontakt.html"><span class="d-nav-label"><i class="fa-solid fa-envelope main-icon"></i> KONTAKT</span></a></div>
-            <div class="d-nav-item d-nav-item-epk"><a href="epk.html"><span class="d-nav-label"><i class="fa-solid fa-bullhorn main-icon"></i> EPK / PRESSE</span></a></div>
+            <div class="d-nav-item d-nav-item-epk"><a href="https://www.dropbox.com/scl/fo/uaqmqoexqsd3do0sy4fni/AG1t5A5kO9ciFFuF1Ecyh8U?rlkey=amb618zoq017jjk54914jlnkb&e=1&st=b6s5qhal&dl=0" target="_blank" rel="noopener"><span class="d-nav-label"><i class="fa-solid fa-bullhorn main-icon"></i> EPK / PRESSE</span></a></div>
         </nav>
 
         <aside class="d-sidebar-right">
@@ -345,7 +331,6 @@
         </footer>
     </div>
 
-    <!-- ======================== MOBILE ======================== -->
     <div id="mobile-wrapper">
         <div id="m-bg-fix"></div>
 
@@ -361,7 +346,7 @@
             <div class="m-nav-item"><a href="meinemusik.html"><i class="fa-solid fa-music"></i><span class="mobile-tag">Musik</span></a></div>
             <div class="m-nav-item"><a href="shop.html"><i class="fa-solid fa-cart-shopping"></i><span class="mobile-tag">Shop</span></a></div>
             <div class="m-nav-item"><a href="kontakt.html"><i class="fa-solid fa-envelope"></i><span class="mobile-tag">Kontakt</span></a></div>
-            <div class="m-epk-container"><a href="epk.html" class="m-epk-text">EPK/PRESSE</a></div>
+            <div class="m-epk-container"><a href="https://www.dropbox.com/scl/fo/uaqmqoexqsd3do0sy4fni/AG1t5A5kO9ciFFuF1Ecyh8U?rlkey=amb618zoq017jjk54914jlnkb&e=1&st=b6s5qhal&dl=0" target="_blank" rel="noopener" class="m-epk-text">EPK/PRESSE</a></div>
         </nav>
 
         <div class="m-content-scroll">
@@ -369,13 +354,10 @@
                 <div class="image-container">
                     <div class="album-cover"><img src="Konzert2.jpg" alt="ANTON"></div>
                 </div>
-                <!-- Zeile 1 neben dem Bild: Intro (rot) -->
                 <div class="m-intro-col">
                     <p class="m-intro-text">Ihr wollt mehr über mich und mein laaaanges Leben wissen? Wer Anton ist?<br><br>Na dann passt mal auf:</p>
                 </div>
-                <!-- Zeile 2 neben dem Bild: nur erster Satz -->
                 <p class="m-first-para">Anton ist Papa. Und Bruder. Großer und kleiner – je nachdem, wen man fragt.</p>
-                <!-- Rest läuft unter dem Bild weiter (volle Breite) -->
                 <div class="album-text">
                     <p class="intro">Ihr wollt mehr über mich und mein laaaanges Leben wissen? Wer Anton ist? Na dann passt mal auf:</p>
                     <p>Anton ist Papa. Und Bruder. Großer und kleiner – je nachdem, wen man fragt.</p>
@@ -411,7 +393,6 @@
     </div>
 
     <script>
-        /* ── DESKTOP ── */
         let dSidebarTimeout;
         const dSidebar = document.getElementById('d-sidebar');
         function resetDSidebarTimer() { clearTimeout(dSidebarTimeout); if (dSidebar && dSidebar.classList.contains('open')) dSidebarTimeout = setTimeout(() => dSidebar.classList.remove('open'), 5000); }
@@ -424,7 +405,6 @@
             }
         });
 
-        /* ── MOBILE ── */
         const mSidebar = document.getElementById('m-sidebar');
         const mMenuBtn = document.getElementById('m-menu-trigger');
         const mIdBtn   = document.getElementById('m-id-btn');
@@ -476,7 +456,6 @@
             }
         });
 
-        /* Header nach 3s ausblenden */
         setTimeout(() => {
             const mh = document.getElementById('m-header-main');
             const isLandscape = isLandscapeMobile();
