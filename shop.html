@@ -175,7 +175,7 @@
         /* ── Produkt-Bereich ── */
         .shop-main { flex: 1; min-width: 0; }
 
-        /* ── Hero: schmaler, weiß/transparent, unten 20% abgeschnitten ── */
+        /* ── Hero: geschlossene Box, seitlich 12% schmaler, Banner schräg ── */
         .shop-hero {
             position: relative;
             background: var(--glass);
@@ -184,32 +184,49 @@
             box-shadow: 5px 5px 0 rgba(0,0,0,0.55);
             border-radius: 18px;
             overflow: hidden;
-            height: 190px;
+            height: 150px;
             margin-bottom: 20px;
-            /* Seitlich 8% kleiner (4% je Seite), unten 20% abgeschnitten */
-            margin-left: 4%;
-            margin-right: 4%;
+            margin-left: 6%;
+            margin-right: 6%;
             display: flex;
             align-items: center;
             padding: 0 28px;
-            clip-path: inset(0 0 20% 0 round 18px 18px 0 0);
+            /* Kein clip-path → Box ist geschlossen */
         }
-        .shop-hero-text { display: flex; flex-direction: column; justify-content: center; }
-        .shop-hero-tag { background: var(--anton-red); color: #fff; font-size: 0.56rem; text-transform: uppercase; letter-spacing: 2px; padding: 3px 10px; border-radius: 20px; border: 2px solid #000; display: inline-block; margin-bottom: 6px; width: fit-content; }
-        .shop-hero-title { font-size: clamp(1.1rem, 2.5vw, 1.8rem); color: #000; text-transform: uppercase; letter-spacing: 3px; margin: 0 0 4px 0; line-height: 1.1; }
-        .shop-hero-sub { font-size: 0.72rem; color: #555; margin: 0; }
-        .shop-hero-emojis { position: absolute; right: 26px; top: 38%; transform: translateY(-50%); display: flex; gap: 7px; font-size: 2.4rem; }
+        /* Schräges Banner oben links */
+        .shop-hero::before {
+            content: 'Exklusiv';
+            position: absolute;
+            top: 18px; left: -28px;
+            background: var(--anton-yellow);
+            color: #000;
+            font-family: 'Special Elite', cursive;
+            font-size: 0.58rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 5px 40px;
+            transform: rotate(-45deg);
+            border-top: 2px solid #000;
+            border-bottom: 2px solid #000;
+            z-index: 2;
+        }
+        .shop-hero-text { display: flex; flex-direction: column; justify-content: center; padding-left: 32px; }
+        .shop-hero-title { font-size: clamp(0.9rem, 2vw, 1.4rem); color: #000; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 5px 0; line-height: 1.2; font-weight: bold; }
+        .shop-hero-sub { font-size: 0.7rem; color: #555; margin: 0; }
+        .shop-hero-emojis { position: absolute; right: 22px; top: 50%; transform: translateY(-50%); display: flex; gap: 6px; font-size: 2.2rem; }
         .shop-hero-emojis span { display: inline-block; animation: heroFloat 3s ease-in-out infinite; }
         .shop-hero-emojis span:nth-child(2) { animation-delay: 0.4s; }
         .shop-hero-emojis span:nth-child(3) { animation-delay: 0.8s; }
         @keyframes heroFloat { 0%,100%{transform:translateY(0);}50%{transform:translateY(-7px);} }
 
-        /* ── Produkt-Grid: 3 Spalten, mit Abstand ── */
+        /* ── Produkt-Grid: 3 Spalten, feste Kartenbreite ── */
         .shop-bento-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(3, minmax(0, 220px));
             gap: 18px;
             padding-bottom: 50px;
+            justify-content: start;
         }
 
         /* ── Produkt-Karte ── */
@@ -246,29 +263,38 @@
         .product-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 7px; gap: 6px; }
         .product-price { font-size: 0.95rem; font-weight: bold; color: var(--anton-red); flex-shrink: 0; }
 
-        /* Qty + Cart button */
+        /* Qty stepper + Cart button */
         .product-cart-control { display: flex; align-items: center; gap: 0; flex-shrink: 0; }
-        .qty-select {
-            width: 36px; height: 28px;
-            border: 2px solid #000; border-right: none;
-            border-radius: 7px 0 0 7px;
-            background: #fff; color: #000;
-            font-family: 'Special Elite', cursive; font-size: 0.72rem;
-            text-align: center; cursor: pointer;
-            appearance: none; -webkit-appearance: none;
-            padding: 0 4px;
+        .qty-stepper { display: flex; align-items: center; height: 28px; }
+        .qty-step-btn {
+            background: #000; color: var(--anton-yellow);
+            border: 2px solid #000; width: 24px; height: 28px;
+            font-family: 'Special Elite', cursive; font-size: 1rem;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            transition: background 0.15s; padding: 0; line-height: 1;
+            flex-shrink: 0;
         }
-        .qty-select:focus { outline: none; border-color: var(--anton-red); }
+        .qty-step-btn:first-child { border-radius: 7px 0 0 7px; border-right: none; }
+        .qty-step-btn:last-child { border-radius: 0; border-left: none; border-right: none; }
+        .qty-step-btn:hover { background: var(--anton-red); color: #fff; }
+        .qty-display {
+            width: 26px; height: 28px;
+            border: 2px solid #000; border-left: none; border-right: none;
+            background: #fff; color: #000;
+            font-family: 'Special Elite', cursive; font-size: 0.8rem; font-weight: bold;
+            text-align: center; display: flex; align-items: center; justify-content: center;
+            user-select: none;
+        }
         .btn-add-cart {
             background: #000; color: var(--anton-yellow);
             border: 2px solid #000; border-radius: 0 7px 7px 0;
-            padding: 5px 9px; height: 28px;
-            font-family: 'Special Elite', cursive; font-size: 0.68rem;
+            padding: 0 9px; height: 28px;
+            font-family: 'Special Elite', cursive; font-size: 0.72rem;
             display: flex; align-items: center; gap: 4px;
             transition: background 0.2s, color 0.2s; cursor: pointer; white-space: nowrap;
         }
         .btn-add-cart:hover { background: var(--anton-red); color: #fff; }
-        .btn-add-cart i { font-size: 0.75rem; }
+        .btn-add-cart i { font-size: 0.78rem; }
 
         /* ── Warenkorb-Box (rechts) ── */
         .cart-box {
@@ -314,9 +340,9 @@
         .cart-total-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.74rem; font-weight: bold; text-transform: uppercase; margin-bottom: 7px; letter-spacing: 0.5px; }
         .cart-total-price { color: var(--anton-red); font-size: 0.9rem; }
 
-        .btn-paypal { width: 100%; background: #0070ba; color: #fff; border: 2px solid #000; border-radius: 9px; padding: 9px 4px; font-family: 'Special Elite', cursive; font-size: 0.66rem; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 5px; transition: background 0.2s, transform 0.15s; box-shadow: 3px 3px 0 #000; }
-        .btn-paypal:hover { background: #005ea6; transform: translate(-1px,-1px); box-shadow: 4px 4px 0 #000; }
-        .btn-paypal i { font-size: 0.85rem; }
+        .btn-checkout { width: 100%; background: #000; color: var(--anton-yellow); border: 2px solid #000; border-radius: 9px; padding: 9px 4px; font-family: 'Special Elite', cursive; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 5px; transition: background 0.2s, color 0.2s, transform 0.15s; box-shadow: 3px 3px 0 #000; }
+        .btn-checkout:hover { background: var(--anton-yellow); color: #000; transform: translate(-1px,-1px); box-shadow: 4px 4px 0 #000; }
+        .btn-checkout i { font-size: 0.85rem; }
         .btn-cart-clear { width: 100%; margin-top: 4px; background: none; border: none; font-family: 'Special Elite', cursive; font-size: 0.62rem; color: #aaa; cursor: pointer; text-decoration: underline; text-align: center; transition: color 0.2s; }
         .btn-cart-clear:hover { color: var(--anton-red); }
 
@@ -345,20 +371,21 @@
 
             .shop-hero {
                 margin-left: 0; margin-right: 0;
-                height: 120px;
-                margin-bottom: 12px;
+                height: 110px;
+                margin-bottom: 10px;
                 padding: 0 14px;
-                clip-path: inset(0 0 20% 0 round 14px 14px 0 0);
+                clip-path: none;
             }
-            .shop-hero-title { font-size: 1rem; }
-            .shop-hero-emojis { font-size: 1.5rem; right: 8px; gap: 4px; }
-            .shop-hero-tag { font-size: 0.5rem; }
+            .shop-hero-text { padding-left: 28px; }
+            .shop-hero-title { font-size: 0.88rem; }
+            .shop-hero-emojis { font-size: 1.4rem; right: 8px; gap: 4px; }
             .shop-hero-sub { display: none; }
 
             .shop-bento-grid {
                 grid-template-columns: 1fr;
                 gap: 10px;
                 padding-bottom: 20px;
+                justify-content: start;
             }
 
             .product-img-wrap { min-height: 80px; padding: 12px 10px; }
@@ -383,7 +410,7 @@
             .ci-name { font-size: 0.58rem; }
             .ci-price { font-size: 0.55rem; }
             .cart-box-footer { padding: 7px; }
-            .btn-paypal { font-size: 0.58rem; padding: 7px 3px; }
+            .btn-checkout { font-size: 0.58rem; padding: 7px 3px; }
             .cart-total-row { font-size: 0.64rem; }
             .cart-total-price { font-size: 0.78rem; }
         }
@@ -509,10 +536,21 @@ let cart = [];
 try { cart = JSON.parse(localStorage.getItem('anton_shop_cart') || '[]'); } catch(e) {}
 function saveCart() { try { localStorage.setItem('anton_shop_cart', JSON.stringify(cart)); } catch(e) {} }
 
-function addToCart(productId, qty, e) {
+function stepQty(id, delta) {
+    const el = document.getElementById('qty-' + id);
+    if (!el) return;
+    let v = parseInt(el.textContent) + delta;
+    if (v < 1) v = 1;
+    if (v > 5) v = 5;
+    el.textContent = v;
+}
+
+function addToCart(productId, e) {
     if (e) { e.preventDefault(); e.stopPropagation(); }
     const p = products.find(x => x.id === productId);
     if (!p) return;
+    const qtyEl = document.getElementById('qty-' + productId);
+    const qty = qtyEl ? parseInt(qtyEl.textContent) || 1 : 1;
     const existing = cart.find(i => i.id === productId);
     if (existing) { existing.qty += qty; }
     else { cart.push({ id: productId, name: p.name, emoji: p.emoji, price: p.price, qty }); }
@@ -568,8 +606,8 @@ function updateCartUI() {
                 <span>Gesamt</span>
                 <span class="cart-total-price">${totalPrice.toFixed(2).replace('.',',')} €</span>
             </div>
-            <button class="btn-paypal" onclick="checkoutPayPal()">
-                <i class="fa-brands fa-paypal"></i> Mit PayPal zahlen
+            <button class="btn-checkout" onclick="checkoutPayPal()">
+                <i class="fa-solid fa-bag-shopping"></i> Zur Kasse
             </button>
             <button class="btn-cart-clear" onclick="clearCart()">Warenkorb leeren</button>`;
     });
@@ -609,9 +647,7 @@ function buildShopHTML() {
     const hero = `
         <div class="shop-hero">
             <div class="shop-hero-text">
-                <span class="shop-hero-tag"><i class="fa-solid fa-bolt"></i> ANTON Fan-Shop</span>
-                <h2 class="shop-hero-title">Dein Merch<br>für die Familie</h2>
-                <p class="shop-hero-sub">Limitiert &amp; liebevoll gemacht.</p>
+                <h2 class="shop-hero-title">Onlineshop für eure<br>Fanartikel von Anton</h2>
             </div>
             <div class="shop-hero-emojis">
                 <span>🧢</span><span>👕</span><span>🎶</span>
@@ -620,7 +656,6 @@ function buildShopHTML() {
 
     const cards = products.map(p => {
         const badge = p.badge ? `<span class="product-badge">${p.badge}</span>` : '';
-        const qtyOptions = [1,2,3,4,5].map(n => `<option value="${n}">${n}</option>`).join('');
         return `
             <div class="product-card" onclick="window.location='${p.page}'">
                 <div class="product-img-wrap">
@@ -631,11 +666,13 @@ function buildShopHTML() {
                     <p class="product-desc">${p.desc}</p>
                     <div class="product-footer">
                         <span class="product-price">${p.price.toFixed(2).replace('.',',')} €</span>
-                        <div class="product-cart-control">
-                            <select class="qty-select" id="qty-${p.id}" onclick="event.stopPropagation()">
-                                ${qtyOptions}
-                            </select>
-                            <button class="btn-add-cart" onclick="addToCart('${p.id}', parseInt(document.getElementById('qty-${p.id}').value), event)">
+                        <div class="product-cart-control" onclick="event.stopPropagation()">
+                            <div class="qty-stepper">
+                                <button class="qty-step-btn" onclick="stepQty('${p.id}',-1)">−</button>
+                                <span class="qty-display" id="qty-${p.id}">1</span>
+                                <button class="qty-step-btn" onclick="stepQty('${p.id}',1)">+</button>
+                            </div>
+                            <button class="btn-add-cart" onclick="addToCart('${p.id}', event)">
                                 <i class="fa-solid fa-cart-shopping"></i>
                             </button>
                         </div>
