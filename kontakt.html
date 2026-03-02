@@ -89,6 +89,22 @@
             .bento-box p { margin: 0 0 10px 0; }
             .box-full { grid-column: span 2; }
 
+            /* Booking Box mit Logo-Hintergrund */
+            .bento-box-booking {
+                background-image: url('Milchsalon-Logo.jpg');
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center center;
+                background-color: rgba(255,255,255,0.95);
+            }
+            .bento-box-booking:hover {
+                background-color: rgba(255,235,59,0.92);
+                background-image: url('Milchsalon-Logo.jpg');
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center center;
+            }
+
             .contact-form { display: flex; flex-direction: column; gap: 15px; text-align: left; }
             .contact-form input, .contact-form textarea { font-family: 'Special Elite', cursive; padding: 12px; border: 2px solid #000; border-radius: 10px; background: #fff; font-size: 1rem; outline: none; }
             .contact-form input:focus, .contact-form textarea:focus { background: var(--anton-yellow); }
@@ -156,6 +172,15 @@
             .m-bento-box h2 { margin: 0 0 8px 0; color: var(--anton-red); text-transform: uppercase; font-size: 1.2rem; }
             .m-bento-box p { margin: 0 0 10px 0; font-size: 0.9rem; }
             .m-bento-box a { color: #000; font-weight: bold; font-size: 0.9rem; }
+
+            /* Booking Box mit Logo-Hintergrund (Mobile Portrait) */
+            .m-bento-box-booking {
+                background-image: url('Milchsalon-Logo.jpg');
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center center;
+                background-color: rgba(255,255,255,0.92);
+            }
 
             .contact-form { display: flex; flex-direction: column; gap: 12px; }
             .contact-form input, .contact-form textarea { font-family: 'Special Elite', cursive; padding: 12px; border: 2px solid #000; border-radius: 10px; background: #fff; font-size: 1rem; outline: none; box-sizing: border-box; width: 100%; }
@@ -240,6 +265,16 @@
                 padding: 10px 12px !important;
                 box-sizing: border-box !important;
             }
+
+            /* Booking Box mit Logo-Hintergrund (Mobile Landscape) */
+            #mobile-wrapper .m-bento-box-booking {
+                background-image: url('Milchsalon-Logo.jpg') !important;
+                background-size: contain !important;
+                background-repeat: no-repeat !important;
+                background-position: center center !important;
+                background-color: rgba(255,255,255,0.92) !important;
+            }
+
             #mobile-wrapper .m-bento-box h2 { font-size: 0.82rem !important; margin: 0 0 4px 0 !important; color: var(--anton-red) !important; text-transform: uppercase !important; }
             #mobile-wrapper .m-bento-box p  { font-size: 0.68rem !important; margin: 0 0 5px 0 !important; line-height: 1.35 !important; }
             #mobile-wrapper .m-bento-box a  { font-size: 0.7rem !important; font-weight: bold !important; }
@@ -347,10 +382,10 @@
 
         <main>
             <div class="bento-grid">
-                <div class="bento-box">
+                <div class="bento-box bento-box-booking">
                     <h2>Booking</h2>
                     <p>Du möchtest Anton live erleben? Wir freuen uns auf deine Anfrage für Konzerte und Events.</p>
-                    <a href="mailto:info@anton-familienpop.de" style="font-weight:bold;">Anfrage senden</a>
+                    <a href="mailto:post@milchsalon.de" style="font-weight:bold;">Anfrage senden</a>
                 </div>
                 <div class="bento-box">
                     <h2>Presse</h2>
@@ -399,7 +434,7 @@
                 <div class="m-bento-box m-bento-box-booking">
                     <h2>Booking</h2>
                     <p>Du möchtest Anton live erleben? Wir freuen uns auf deine Anfrage für Konzerte und Events.</p>
-                    <a href="mailto:info@anton-familienpop.de">Anfrage senden</a>
+                    <a href="mailto:post@milchsalon.de">Anfrage senden</a>
                 </div>
                 <div class="m-bento-box m-bento-box-presse">
                     <h2>Presse</h2>
