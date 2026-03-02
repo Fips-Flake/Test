@@ -83,14 +83,15 @@
             main { padding: 110px 80px 100px 80px; max-width: 1100px; margin: 0 auto; width: 100%; box-sizing: border-box; }
 
             .bento-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; }
-            .bento-box { background-color: rgba(255,255,255,0.95); border: 3px solid #000; box-shadow: 6px 6px 0 #000; padding: 30px; border-radius: 20px; transition: all 0.3s ease; color: inherit; display: flex; flex-direction: column; justify-content: center; text-align: center; }
-            .bento-box:hover { transform: translateY(-5px); background-color: var(--anton-yellow); }
+            .bento-box { background: rgba(255,255,255,0.95); border: 3px solid #000; box-shadow: 6px 6px 0 #000; padding: 30px; border-radius: 20px; transition: all 0.3s ease; color: inherit; display: flex; flex-direction: column; justify-content: center; text-align: center; }
+            .bento-box:hover { transform: translateY(-5px); background: var(--anton-yellow); }
+            .bento-box-booking, .bento-box-booking:hover { background-color: transparent !important; }
             .bento-box h2 { margin: 0 0 10px 0; color: var(--anton-red); text-transform: uppercase; font-size: 1.5rem; }
             .bento-box p { margin: 0 0 10px 0; }
             .box-full { grid-column: span 2; }
 
-            /* ── BOOKING BOX Desktop – eigenständige Klasse, KEIN bento-box ── */
-            .bento-booking-desktop {
+            /* ── BOOKING BOX Desktop ── */
+            .bento-box-booking {
                 position: relative;
                 overflow: hidden;
                 padding: 0;
@@ -98,23 +99,15 @@
                 background-size: cover;
                 background-repeat: no-repeat;
                 background-position: center center;
-                background-color: #ccc;
+                background-color: transparent;
+                cursor: pointer;
+                min-height: 200px;
                 border: 3px solid #000;
                 box-shadow: 6px 6px 0 #000;
                 border-radius: 20px;
-                min-height: 200px;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                text-align: center;
-                transition: transform 0.3s ease;
-                color: inherit;
-                text-decoration: none;
             }
-            .bento-booking-desktop:hover { transform: translateY(-5px); }
-
-            /* Overlay – 35% weiß */
-            .bento-booking-desktop .booking-overlay {
+            /* Weißes Overlay 60% opak = 40% transparent */
+            .bento-box-booking .booking-overlay {
                 position: absolute;
                 inset: 0;
                 background: rgba(255,255,255,0.35);
@@ -128,17 +121,17 @@
                 z-index: 1;
                 text-align: center;
             }
-            .bento-booking-desktop .booking-overlay h2 {
+            .bento-box-booking .booking-overlay h2 {
                 margin: 0 0 8px 0;
                 color: var(--anton-red);
                 text-transform: uppercase;
                 font-size: 1.5rem;
             }
-            .bento-booking-desktop .booking-overlay p { margin: 0 0 8px 0; }
-            .bento-booking-desktop .booking-overlay .booking-link { font-weight: bold; }
+            .bento-box-booking .booking-overlay p { margin: 0 0 8px 0; }
+            .bento-box-booking .booking-overlay .booking-link { font-weight: bold; }
 
-            /* "Jetzt buchen" – erscheint beim Hover */
-            .bento-booking-desktop .booking-hover-text {
+            /* "Jetzt buchen" – versteckt, erscheint beim Hover */
+            .bento-box-booking .booking-hover-text {
                 position: absolute;
                 inset: 0;
                 display: flex;
@@ -156,9 +149,10 @@
                 pointer-events: none;
             }
 
-            /* Hover: Overlay ausblenden → Bild voll sichtbar, "Jetzt buchen" einblenden */
-            .bento-booking-desktop:hover .booking-overlay { opacity: 0; }
-            .bento-booking-desktop:hover .booking-hover-text { opacity: 1; }
+            /* Hover: Overlay-Text ausblenden, "Jetzt buchen" einblenden */
+            .bento-box-booking:hover { transform: translateY(-5px); background: transparent; }
+            .bento-box-booking:hover .booking-overlay { opacity: 0; }
+            .bento-box-booking:hover .booking-hover-text { opacity: 1; }
 
             .contact-form { display: flex; flex-direction: column; gap: 15px; text-align: left; }
             .contact-form input, .contact-form textarea { font-family: 'Special Elite', cursive; padding: 12px; border: 2px solid #000; border-radius: 10px; background: #fff; font-size: 1rem; outline: none; }
@@ -522,7 +516,7 @@
             <div class="bento-grid">
 
                 <!-- BOOKING BOX – Desktop: als Link ausgeführt -->
-                <a href="mailto:post@milchsalon.de" class="bento-booking-desktop">
+                <a href="/cdn-cgi/l/email-protection#0d7d627e794d6064616e657e6c616263236968" class="bento-box bento-box-booking">
                     <div class="booking-overlay">
                         <h2>Booking</h2>
                         <p>Du möchtest Anton live erleben? Wir freuen uns auf deine Anfrage für Konzerte und Events.</p>
@@ -577,7 +571,7 @@
             <div class="m-bento-grid">
 
                 <!-- BOOKING BOX – Mobile: als Link ausgeführt -->
-                <a href="mailto:post@milchsalon.de" class="m-bento-box m-bento-box-booking" id="m-booking-box">
+                <a href="/cdn-cgi/l/email-protection#cfbfa0bcbb8fa2a6a3aca7bcaea3a0a1e1abaa" class="m-bento-box m-bento-box-booking" id="m-booking-box">
                     <div class="booking-overlay">
                         <h2>Booking</h2>
                         <p>Du möchtest Anton live erleben? Wir freuen uns auf deine Anfrage für Konzerte und Events.</p>
