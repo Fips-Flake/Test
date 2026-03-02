@@ -97,6 +97,43 @@
             .d-footer { width: 100%; padding: 15px 0; background: rgba(255,255,255,0.95); border-top: 1.5px solid #000; text-align: center; font-size: 0.75rem; z-index: 100; position: fixed; bottom: 0; left: 0; display: flex; flex-direction: column; align-items: center; gap: 4px; }
             .d-footer a { color: #000; text-decoration: none; margin: 0 12px; font-weight: bold; transition: all 0.3s ease; }
             .d-footer a:hover { color: var(--anton-yellow) !important; text-shadow: -1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000; }
+
+            /* ── KONZERTE BOX – Desktop ── */
+            .d-bento-konzerte {
+                position: relative;
+                cursor: default !important; /* nicht klickbar */
+            }
+            /* Banner: diagonal von unten-links nach oben-rechts, nur bei Hover sichtbar */
+            .d-bento-konzerte .konzerte-banner {
+                position: absolute;
+                /* Positionierung: Banner-Mitte liegt über der unteren-linken Hälfte der Box */
+                bottom: 38px;
+                left: -52px;
+                width: 220px;
+                background: var(--anton-red);
+                color: #fff;
+                font-family: 'Special Elite', cursive;
+                font-size: 0.6rem;
+                font-weight: bold;
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+                text-align: center;
+                padding: 7px 0;
+                /* 45° Rotation erzeugt die Diagonale von unten-links nach oben-rechts */
+                transform: rotate(45deg);
+                transform-origin: center center;
+                border-top: 2px solid rgba(255,255,255,0.45);
+                border-bottom: 2px solid rgba(255,255,255,0.45);
+                z-index: 10;
+                opacity: 0;
+                transition: opacity 0.25s ease;
+                pointer-events: none;
+                white-space: nowrap;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+            }
+            .d-bento-konzerte:hover .konzerte-banner { opacity: 1; }
+            /* Hover-Farbe: leichtes Grau statt Gelb (Box ist nicht klickbar) */
+            .d-bento-konzerte:hover { background: rgba(225,225,225,0.95) !important; }
         }
 
         @media (max-width: 800px), (orientation: landscape) and (max-height: 500px) {
@@ -159,6 +196,45 @@
             .m-sidebar-right a:nth-child(7) i { --brand-color: var(--apple-gray); animation-delay: 1.5s; }
             .m-sidebar-right a:nth-child(8) i { --brand-color: #f00; animation-delay: 1.75s; }
             .m-sidebar-right a:nth-child(9) i { --brand-color: var(--amazon-blue); animation-delay: 2.0s; }
+
+            /* ── KONZERTE BOX – Mobile: Banner immer sichtbar, nicht klickbar ── */
+            .m-bento-konzerte {
+                position: relative !important;
+                cursor: default !important;
+            }
+            /* BACKUP-LINK: <a href="konzerte.html"> ist im HTML kommentiert,
+               zum Reaktivieren Kommentar entfernen und pointer-events-none vom span nehmen */
+            .m-bento-konzerte .konzerte-link-disabled {
+                display: block;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+            }
+            /* Banner immer sichtbar auf Mobile & Landscape */
+            .m-bento-konzerte .konzerte-banner {
+                position: absolute;
+                bottom: 26px;
+                left: -44px;
+                width: 190px;
+                background: var(--anton-red);
+                color: #fff;
+                font-family: 'Special Elite', cursive;
+                font-size: 0.52rem;
+                font-weight: bold;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                text-align: center;
+                padding: 6px 0;
+                transform: rotate(45deg);
+                transform-origin: center center;
+                border-top: 1.5px solid rgba(255,255,255,0.45);
+                border-bottom: 1.5px solid rgba(255,255,255,0.45);
+                z-index: 10;
+                opacity: 1; /* immer sichtbar */
+                pointer-events: none;
+                white-space: nowrap;
+                box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            }
         }
 
         @media (max-width: 800px) and (orientation: portrait) {
@@ -206,6 +282,15 @@
 
             #mobile-wrapper .m-content-scroll { margin-top: 65px !important; margin-bottom: 0 !important; padding-right: 56px !important; flex-direction: row !important; justify-content: center !important; align-items: center !important; gap: 20px !important; overflow-y: auto !important; }
             #mobile-wrapper .m-bento-box { width: 130px !important; height: 90px !important; flex-shrink: 0 !important; }
+
+            /* Banner-Anpassung für kleinere Landscape-Boxen */
+            #mobile-wrapper .m-bento-konzerte .konzerte-banner {
+                bottom: 20px !important;
+                left: -38px !important;
+                width: 160px !important;
+                font-size: 0.46rem !important;
+                padding: 5px 0 !important;
+            }
 
             #mobile-wrapper .m-sidebar-right { position: fixed !important; top: 0 !important; bottom: 0 !important; left: auto !important; right: 0 !important; transform: none !important; width: 46px !important; height: 100% !important; flex-direction: column !important; border-top: none !important; border-bottom: none !important; border-left: 2px solid #000 !important; border-radius: 0 !important; padding: 0 !important; gap: 0 !important; justify-content: space-evenly !important; background: rgba(255,255,255,0.2) !important; backdrop-filter: blur(3px) !important; }
             #mobile-wrapper .m-sidebar-right a i { font-size: 1.3rem !important; }
@@ -276,11 +361,19 @@
                 </a>
             </div>
 
-            <div class="d-bento-box d-bento-img">
-                <a href="konzerte.html">
+            <!--
+                KONZERTE – Desktop
+                Button ist deaktiviert (nicht klickbar).
+                BACKUP zum Reaktivieren: Klasse "d-bento-konzerte" entfernen,
+                den <span class="konzerte-link-disabled"> durch <a href="konzerte.html"> ersetzen,
+                und das <div class="konzerte-banner"> entfernen.
+            -->
+            <div class="d-bento-box d-bento-img d-bento-konzerte">
+                <span class="konzerte-link-disabled">
                     <img src="Konzert3.JPG" alt="Konzerte" class="bento-cover">
                     <div class="d-bento-label">Konzerte</div>
-                </a>
+                </span>
+                <div class="konzerte-banner">Termine bald verfügbar</div>
             </div>
         </main>
 
@@ -321,11 +414,20 @@
                     <div class="m-bento-label-img">Veröffentlichungen</div>
                 </a>
             </div>
-            <div class="m-bento-box m-bento-img">
-                <a href="konzerte.html">
+
+            <!--
+                KONZERTE – Mobile
+                Button ist deaktiviert (nicht klickbar).
+                BACKUP zum Reaktivieren: Klasse "m-bento-konzerte" entfernen,
+                den <span class="konzerte-link-disabled"> durch <a href="konzerte.html"> ersetzen,
+                und das <div class="konzerte-banner"> entfernen.
+            -->
+            <div class="m-bento-box m-bento-img m-bento-konzerte">
+                <span class="konzerte-link-disabled">
                     <img src="Konzert3.JPG" alt="Konzerte" class="m-bento-cover">
                     <div class="m-bento-label-img">Konzerte</div>
-                </a>
+                </span>
+                <div class="konzerte-banner">Termine bald verfügbar</div>
             </div>
         </div>
 
