@@ -108,7 +108,7 @@
             .bento-box-booking .booking-overlay {
                 position: absolute;
                 inset: 0;
-                background: rgba(255,255,255,0.6);
+                background: rgba(255,255,255,0.35);
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -147,7 +147,7 @@
                 pointer-events: none;
             }
 
-            /* Hover: Overlay ausblenden, "Jetzt buchen" einblenden */
+            /* Hover: Overlay-Text ausblenden, "Jetzt buchen" einblenden */
             .bento-box-booking:hover { transform: translateY(-5px); }
             .bento-box-booking:hover .booking-overlay { opacity: 0; }
             .bento-box-booking:hover .booking-hover-text { opacity: 1; }
@@ -235,7 +235,7 @@
             .m-bento-box-booking .booking-overlay {
                 position: absolute;
                 inset: 0;
-                background: rgba(255,255,255,0.6);
+                background: rgba(255,255,255,0.35);
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -374,7 +374,7 @@
             #mobile-wrapper .m-bento-box-booking .booking-overlay {
                 position: absolute !important;
                 inset: 0 !important;
-                background: rgba(255,255,255,0.6) !important;
+                background: rgba(255,255,255,0.35) !important;
                 display: flex !important;
                 flex-direction: column !important;
                 align-items: center !important;
@@ -514,7 +514,7 @@
             <div class="bento-grid">
 
                 <!-- BOOKING BOX – Desktop: als Link ausgeführt -->
-                <a href="mailto:post@milchsalon.de" class="bento-box bento-box-booking">
+                <a href="/cdn-cgi/l/email-protection#0d7d627e794d6064616e657e6c616263236968" class="bento-box bento-box-booking">
                     <div class="booking-overlay">
                         <h2>Booking</h2>
                         <p>Du möchtest Anton live erleben? Wir freuen uns auf deine Anfrage für Konzerte und Events.</p>
@@ -569,7 +569,7 @@
             <div class="m-bento-grid">
 
                 <!-- BOOKING BOX – Mobile: als Link ausgeführt -->
-                <a href="mailto:post@milchsalon.de" class="m-bento-box m-bento-box-booking" id="m-booking-box">
+                <a href="/cdn-cgi/l/email-protection#cfbfa0bcbb8fa2a6a3aca7bcaea3a0a1e1abaa" class="m-bento-box m-bento-box-booking" id="m-booking-box">
                     <div class="booking-overlay">
                         <h2>Booking</h2>
                         <p>Du möchtest Anton live erleben? Wir freuen uns auf deine Anfrage für Konzerte und Events.</p>
@@ -613,7 +613,7 @@
         </aside>
     </div>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         /* ── DESKTOP ── */
         let dSidebarTimeout;
         const dSidebar = document.getElementById('d-sidebar');
@@ -726,10 +726,3 @@
         setTimeout(() => {
             const mh = document.getElementById('m-header-main');
             if (mh && (window.innerWidth <= 800 || isLandscapeMobile())) {
-                mh.style.transform = 'translateY(0)';
-                setTimeout(() => { mh.style.transform = 'translateY(-100%)'; }, 3000);
-            }
-        }, 100);
-    </script>
-</body>
-</html>
