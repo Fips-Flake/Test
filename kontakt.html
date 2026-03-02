@@ -150,7 +150,13 @@
             }
 
             /* Hover: Overlay ausblenden, Hintergrundbild sichtbar – KEIN Text, KEIN gelber Hintergrund */
-            .bento-box-booking:hover { transform: translateY(-5px); background: transparent !important; }
+            .bento-box-booking:hover {
+                transform: translateY(-5px);
+                background-color: #000 !important;
+                background-image: url('Milchsalon-Logo.jpg') !important;
+                background-size: cover !important;
+                background-position: center center !important;
+            }
             .bento-box-booking:hover .booking-overlay { opacity: 0; }
             .bento-box-booking:hover .booking-hover-text { opacity: 0; }
 
