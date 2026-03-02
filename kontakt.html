@@ -106,7 +106,7 @@
                 box-shadow: 6px 6px 0 #000;
                 border-radius: 20px;
             }
-            /* Weißes Overlay 60% opak = 40% transparent */
+            /* Weißes Overlay */
             .bento-box-booking .booking-overlay {
                 position: absolute;
                 inset: 0;
@@ -130,7 +130,7 @@
             .bento-box-booking .booking-overlay p { margin: 0 0 8px 0; }
             .bento-box-booking .booking-overlay .booking-link { font-weight: bold; }
 
-            /* "Jetzt buchen" – versteckt, erscheint beim Hover */
+            /* "Jetzt buchen" – versteckt, bleibt beim Hover unsichtbar */
             .bento-box-booking .booking-hover-text {
                 position: absolute;
                 inset: 0;
@@ -149,10 +149,10 @@
                 pointer-events: none;
             }
 
-            /* Hover: Overlay-Text ausblenden, "Jetzt buchen" einblenden */
-            .bento-box-booking:hover { transform: translateY(-5px); background: transparent; }
+            /* Hover: Overlay ausblenden, Hintergrundbild sichtbar – KEIN Text, KEIN gelber Hintergrund */
+            .bento-box-booking:hover { transform: translateY(-5px); background: transparent !important; }
             .bento-box-booking:hover .booking-overlay { opacity: 0; }
-            .bento-box-booking:hover .booking-hover-text { opacity: 1; }
+            .bento-box-booking:hover .booking-hover-text { opacity: 0; }
 
             .contact-form { display: flex; flex-direction: column; gap: 15px; text-align: left; }
             .contact-form input, .contact-form textarea { font-family: 'Special Elite', cursive; padding: 12px; border: 2px solid #000; border-radius: 10px; background: #fff; font-size: 1rem; outline: none; }
@@ -272,9 +272,9 @@
                 letter-spacing: 3px;
                 pointer-events: none;
             }
-            /* Tap-Zustand für Mobile */
+            /* Tap-Zustand für Mobile: Overlay weg, kein Text, nur Bild */
             .m-bento-box-booking.tapped .booking-overlay { opacity: 0; }
-            .m-bento-box-booking.tapped .booking-hover-text { opacity: 1; }
+            .m-bento-box-booking.tapped .booking-hover-text { opacity: 0; }
 
             .contact-form { display: flex; flex-direction: column; gap: 12px; }
             .contact-form input, .contact-form textarea { font-family: 'Special Elite', cursive; padding: 12px; border: 2px solid #000; border-radius: 10px; background: #fff; font-size: 1rem; outline: none; box-sizing: border-box; width: 100%; }
@@ -404,8 +404,9 @@
                 letter-spacing: 2px !important;
                 pointer-events: none !important;
             }
+            /* Tap-Zustand Landscape: Overlay weg, kein Text, nur Bild */
             #mobile-wrapper .m-bento-box-booking.tapped .booking-overlay { opacity: 0 !important; }
-            #mobile-wrapper .m-bento-box-booking.tapped .booking-hover-text { opacity: 1 !important; }
+            #mobile-wrapper .m-bento-box-booking.tapped .booking-hover-text { opacity: 0 !important; }
 
             #mobile-wrapper .m-bento-box h2 { font-size: 0.82rem !important; margin: 0 0 4px 0 !important; color: var(--anton-red) !important; text-transform: uppercase !important; }
             #mobile-wrapper .m-bento-box p  { font-size: 0.68rem !important; margin: 0 0 5px 0 !important; line-height: 1.35 !important; }
@@ -515,7 +516,7 @@
         <main>
             <div class="bento-grid">
 
-                <!-- BOOKING BOX – Desktop: als Link ausgeführt -->
+                <!-- BOOKING BOX – Desktop -->
                 <a href="/cdn-cgi/l/email-protection#0d7d627e794d6064616e657e6c616263236968" class="bento-box bento-box-booking">
                     <div class="booking-overlay">
                         <h2>Booking</h2>
@@ -570,7 +571,7 @@
         <div class="m-content-scroll">
             <div class="m-bento-grid">
 
-                <!-- BOOKING BOX – Mobile: als Link ausgeführt -->
+                <!-- BOOKING BOX – Mobile -->
                 <a href="/cdn-cgi/l/email-protection#cfbfa0bcbb8fa2a6a3aca7bcaea3a0a1e1abaa" class="m-bento-box m-bento-box-booking" id="m-booking-box">
                     <div class="booking-overlay">
                         <h2>Booking</h2>
@@ -629,7 +630,7 @@
             }
         });
 
-        /* ── MOBILE BOOKING BOX: erster Tap zeigt "Jetzt buchen", zweiter navigiert ── */
+        /* ── MOBILE BOOKING BOX: erster Tap zeigt nur das Bild, zweiter navigiert ── */
         const mBookingBox = document.getElementById('m-booking-box');
         if (mBookingBox) {
             let tapped = false;
@@ -728,3 +729,9 @@
         setTimeout(() => {
             const mh = document.getElementById('m-header-main');
             if (mh && (window.innerWidth <= 800 || isLandscapeMobile())) {
+                mh.style.transform = 'translateY(0)';
+            }
+        }, 100);
+    </script>
+</body>
+</html>
