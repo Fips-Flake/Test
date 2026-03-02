@@ -539,11 +539,11 @@
                 </div>
                 <div class="bento-box box-full">
                     <h2>Schreib mir</h2>
-                    <form class="contact-form" action="#" method="post">
-                        <input type="text" name="name" placeholder="Dein Name" required>
-                        <input type="email" name="email" placeholder="Deine E-Mail Adresse" required>
-                        <input type="text" name="subject" placeholder="Betreff">
-                        <textarea name="message" rows="5" placeholder="Deine Nachricht an Anton..." required></textarea>
+                    <form class="contact-form" id="d-contact-form">
+                        <input type="text" name="name" id="d-name" placeholder="Dein Name" required>
+                        <input type="email" name="email" id="d-email" placeholder="Deine E-Mail Adresse" required>
+                        <input type="text" name="subject" id="d-subject" placeholder="Betreff">
+                        <textarea name="message" id="d-message" rows="5" placeholder="Deine Nachricht an Anton..." required></textarea>
                         <button type="submit">Nachricht Absenden</button>
                     </form>
                 </div>
@@ -594,11 +594,11 @@
                 </div>
                 <div class="m-bento-box m-bento-box-form">
                     <h2>Schreib mir</h2>
-                    <form class="contact-form" action="#" method="post">
-                        <input type="text" name="name" placeholder="Dein Name" required>
-                        <input type="email" name="email" placeholder="Deine E-Mail Adresse" required>
-                        <input type="text" name="subject" placeholder="Betreff">
-                        <textarea name="message" rows="3" placeholder="Deine Nachricht an Anton..." required></textarea>
+                    <form class="contact-form" id="m-contact-form">
+                        <input type="text" name="name" id="m-name" placeholder="Dein Name" required>
+                        <input type="email" name="email" id="m-email" placeholder="Deine E-Mail Adresse" required>
+                        <input type="text" name="subject" id="m-subject" placeholder="Betreff">
+                        <textarea name="message" id="m-message" rows="3" placeholder="Deine Nachricht an Anton..." required></textarea>
                         <button type="submit">Nachricht Absenden</button>
                     </form>
                 </div>
@@ -726,6 +726,26 @@
                     mIdPanel && !mIdPanel.contains(e.target) && mIdBtn && !mIdBtn.contains(e.target)) mCloseAllMenus();
             }
         });
+
+        /* ── KONTAKTFORMULAR → mailto ── */
+        function bindMailtoForm(formId, nameId, emailId, subjectId, messageId) {
+            const form = document.getElementById(formId);
+            if (!form) return;
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name    = document.getElementById(nameId).value.trim();
+                const email   = document.getElementById(emailId).value.trim();
+                const subject = document.getElementById(subjectId).value.trim();
+                const message = document.getElementById(messageId).value.trim();
+                const body = `Name: ${name}\nE-Mail: ${email}\n\n${message}`;
+                const mailtoLink = `mailto:post@milchsalon.de`
+                    + `?subject=${encodeURIComponent(subject || 'Nachricht von ' + name)}`
+                    + `&body=${encodeURIComponent(body)}`;
+                window.location.href = mailtoLink;
+            });
+        }
+        bindMailtoForm('d-contact-form', 'd-name', 'd-email', 'd-subject', 'd-message');
+        bindMailtoForm('m-contact-form', 'm-name', 'm-email', 'm-subject', 'm-message');
 
         document.querySelectorAll(".contact-form input, .contact-form textarea").forEach(el => {
             el.addEventListener("focus", () => {
