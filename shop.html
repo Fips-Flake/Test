@@ -71,7 +71,7 @@
             .d-sidebar-right:hover a i { animation-play-state:paused!important; transform:scale(1)!important; color:#000!important; }
             .d-sidebar-right a:hover i { color:var(--brand-color)!important; transform:scale(1.55)!important; }
 
-            main { flex: 1; padding: 95px 55px 35px 55px; z-index: 5; width: 100%; box-sizing: border-box; }
+            main { flex: 1; padding: 95px 55px 35px 55px; z-index: 5; width: 100%; box-sizing: border-box; position: relative; }
             .d-footer { width: 100%; padding: 12px 0; background: rgba(255,255,255,0.75); backdrop-filter: blur(10px); border-top: 1.5px solid #000; text-align: center; font-size: 0.75rem; z-index: 100; position: fixed; bottom: 0; left: 0; }
             .d-footer a { color: #000; text-decoration: none; margin: 0 12px; font-weight: bold; transition: all 0.3s ease; }
             .d-footer a:hover { color: var(--anton-yellow)!important; text-shadow: -1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000; }
@@ -84,18 +84,17 @@
             #desktop-wrapper { display: none !important; }
             #mobile-wrapper  { display: flex !important; flex-direction: column; }
 
-            /* ─── CRITICAL FIX: html/body must NOT be fixed/overflow:hidden ─── */
             html {
                 background: url('Background.jpg') no-repeat center center fixed;
                 background-size: cover;
                 height: 100%;
-                overflow: hidden; /* keep on html */
+                overflow: hidden;
             }
             body {
                 height: 100%;
                 width: 100%;
                 overflow: hidden;
-                position: relative; /* NOT fixed */
+                position: relative;
                 display: flex;
                 flex-direction: column;
                 background: transparent;
@@ -128,7 +127,6 @@
             .m-epk-container { position: absolute; right: 0; top: 0; height: 100%; width: 45px; background: #fff; border-left: 3px solid #000; display: flex; align-items: center; justify-content: center; }
             .m-epk-text { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 0.7rem; color: var(--anton-red); font-weight: bold; text-decoration: none; }
 
-            /* ─── CRITICAL: scrollable content area ─── */
             .m-content-scroll {
                 flex: 1;
                 overflow-y: scroll;
@@ -140,7 +138,6 @@
                 touch-action: pan-y;
                 position: relative;
                 z-index: 1;
-                /* bottom bar height = 65px */
                 padding-bottom: 10px;
             }
 
@@ -240,7 +237,6 @@
         .shop-hero-sub { font-size: 0.7rem; color: #555; margin: 0; }
         .shop-hero-img { position: absolute; right: 0; top: 0; height: 100%; width: 220px; object-fit: cover; object-position: center; display: block; }
 
-        /* ── Produkt-Grid Wrapper ── */
         .shop-grid-wrap {
             background: var(--glass);
             backdrop-filter: blur(8px);
@@ -252,7 +248,6 @@
             margin-bottom: 50px;
         }
 
-        /* ── Produkt-Grid ── */
         .shop-bento-grid {
             display: grid;
             grid-template-columns: repeat(3, 220px);
@@ -260,7 +255,6 @@
             justify-content: space-between;
         }
 
-        /* ── Produkt-Karte ── */
         .product-card {
             background: var(--glass);
             backdrop-filter: blur(8px);
@@ -274,7 +268,6 @@
         }
         .product-card:hover { transform: translate(-3px,-3px); box-shadow: 8px 8px 0 rgba(0,0,0,0.6); }
 
-        /* Product image area with real photo */
         .product-img-wrap {
             background: #f0ede8;
             border-bottom: 3px solid #000;
@@ -291,7 +284,6 @@
         }
         .product-card:hover .product-photo { transform: scale(1.06); }
 
-        /* Overlay label on image */
         .product-img-overlay {
             position: absolute;
             bottom: 0; left: 0; right: 0;
@@ -343,7 +335,6 @@
         .btn-add-cart:hover { background: var(--anton-red); color: #fff; }
         .btn-add-cart i { font-size: 0.8rem; }
 
-        /* ── Warenkorb-Box ── */
         .cart-box {
             flex-shrink: 0;
             width: 200px;
@@ -421,21 +412,9 @@
         .confirm-title { font-size: 1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 7px; }
         .confirm-text { font-size: 0.72rem; color: #555; margin-bottom: 18px; line-height: 1.5; }
         .confirm-btns { display: flex; gap: 10px; justify-content: center; }
-        .confirm-btn-yes {
-            background: var(--anton-red); color: #fff;
-            border: 2px solid #000; border-radius: 9px;
-            padding: 8px 20px; font-family: 'Special Elite', cursive; font-size: 0.75rem;
-            text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
-            transition: background 0.2s; box-shadow: 3px 3px 0 #000;
-        }
+        .confirm-btn-yes { background: var(--anton-red); color: #fff; border: 2px solid #000; border-radius: 9px; padding: 8px 20px; font-family: 'Special Elite', cursive; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: background 0.2s; box-shadow: 3px 3px 0 #000; }
         .confirm-btn-yes:hover { background: #c00; }
-        .confirm-btn-no {
-            background: var(--anton-yellow); color: #000;
-            border: 2px solid #000; border-radius: 9px;
-            padding: 8px 20px; font-family: 'Special Elite', cursive; font-size: 0.75rem;
-            text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
-            transition: background 0.2s; box-shadow: 3px 3px 0 #000;
-        }
+        .confirm-btn-no { background: var(--anton-yellow); color: #000; border: 2px solid #000; border-radius: 9px; padding: 8px 20px; font-family: 'Special Elite', cursive; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: background 0.2s; box-shadow: 3px 3px 0 #000; }
         .confirm-btn-no:hover { background: #ffe000; }
 
         /* ── TOAST ── */
@@ -447,48 +426,22 @@
         /* MOBILE SHOP LAYOUT                                                 */
         /* ================================================================= */
         @media (max-width: 800px) {
-            .shop-outer {
-                flex-direction: row;
-                gap: 10px;
-                align-items: flex-start;
-            }
-
+            .shop-outer { flex-direction: row; gap: 10px; align-items: flex-start; }
             .shop-main { flex: 1; min-width: 0; }
-
-            .shop-hero {
-                margin-left: 0; margin-right: 0;
-                height: 110px;
-                margin-bottom: 10px;
-                padding: 0 14px;
-                clip-path: none;
-            }
+            .shop-hero { margin-left: 0; margin-right: 0; height: 110px; margin-bottom: 10px; padding: 0 14px; clip-path: none; }
             .shop-hero-text { padding-left: 28px; }
             .shop-hero-title { font-size: clamp(0.65rem, 3vw, 0.88rem); white-space: nowrap; }
             .shop-hero-img { display: none; }
             .shop-hero-sub { display: none; }
-
             .shop-grid-wrap { margin-right: 0; padding: 10px; margin-bottom: 20px; }
-
-            .shop-bento-grid {
-                grid-template-columns: 1fr;
-                gap: 10px;
-            }
-
+            .shop-bento-grid { grid-template-columns: 1fr; gap: 10px; }
             .product-img-wrap { min-height: 110px; }
             .product-photo { height: 110px; }
             .product-info { padding: 8px 9px 9px; }
             .product-name { font-size: 0.78rem; }
             .product-desc { font-size: 0.62rem; }
             .product-price { font-size: 0.88rem; }
-
-            .cart-box {
-                width: 130px;
-                flex-shrink: 0;
-                position: sticky;
-                top: 8px;
-                max-height: calc(100vh - 155px);
-                align-self: flex-start;
-            }
+            .cart-box { width: 130px; flex-shrink: 0; position: sticky; top: 8px; max-height: calc(100vh - 155px); align-self: flex-start; }
             .cart-box-header { padding: 9px 10px; font-size: 0.66rem; }
             .cart-box-items { padding: 7px; gap: 6px; }
             .ci-emoji { font-size: 1.1rem; }
@@ -498,6 +451,168 @@
             .btn-checkout { font-size: 0.58rem; padding: 7px 3px; }
             .cart-total-row { font-size: 0.64rem; }
             .cart-total-price { font-size: 0.78rem; }
+        }
+
+        /* ================================================================= */
+        /* BAUSTELLEN-OVERLAY                                                 */
+        /* ================================================================= */
+
+        /* Wrapper um den Content-Bereich, der unscharf wird */
+        .content-blur-wrap {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Das Blur-Layer über dem Content */
+        .content-blur-wrap::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            background: rgba(0, 0, 0, 0.35);
+            z-index: 50;
+            border-radius: 0;
+            pointer-events: none;
+        }
+
+        /* Die Bento-Box Baustellen-Karte */
+        .construction-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 51;
+            width: min(480px, 88%);
+            background: #fff;
+            border: 4px solid #000;
+            border-radius: 22px;
+            box-shadow: 8px 8px 0 #000;
+            overflow: hidden;
+            font-family: 'Special Elite', cursive;
+            pointer-events: none;
+        }
+
+        /* Gelb-Schwarz Baustellenstreifen oben */
+        .construction-stripes {
+            height: 28px;
+            background: repeating-linear-gradient(
+                -45deg,
+                var(--anton-yellow) 0px,
+                var(--anton-yellow) 18px,
+                #000 18px,
+                #000 36px
+            );
+            border-bottom: 3px solid #000;
+        }
+
+        .construction-body {
+            padding: 24px 28px 22px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .construction-icon {
+            font-size: 3.2rem;
+            line-height: 1;
+        }
+
+        .construction-schild {
+            background: var(--anton-yellow);
+            border: 3px solid #000;
+            border-radius: 10px;
+            padding: 8px 22px;
+            box-shadow: 4px 4px 0 #000;
+            display: inline-block;
+        }
+
+        .construction-schild-text {
+            font-size: 1.25rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #000;
+            line-height: 1.1;
+        }
+
+        .construction-sub {
+            font-size: 0.78rem;
+            color: #555;
+            line-height: 1.6;
+            max-width: 340px;
+        }
+
+        .construction-sub strong {
+            color: var(--anton-red);
+        }
+
+        /* Baustellenstreifen unten */
+        .construction-stripes-bottom {
+            height: 20px;
+            background: repeating-linear-gradient(
+                -45deg,
+                var(--anton-yellow) 0px,
+                var(--anton-yellow) 14px,
+                #000 14px,
+                #000 28px
+            );
+            border-top: 3px solid #000;
+        }
+
+        /* Desktop: overlay positioned within main */
+        #desktop-wrapper main {
+            position: relative;
+        }
+
+        /* Mobile: overlay positioned within scroll area */
+        #mobile-wrapper .m-content-scroll {
+            position: relative;
+        }
+
+        /* Sicherstellen dass Overlay-Wrapper die volle Höhe füllt */
+        #desktop-wrapper .content-blur-wrap {
+            min-height: calc(100vh - 130px);
+        }
+
+        #mobile-wrapper .content-blur-wrap {
+            min-height: calc(100vh - 145px);
+        }
+
+        @media (max-width: 800px) {
+            .construction-overlay {
+                width: min(300px, 90%);
+            }
+            .construction-body {
+                padding: 16px 16px 14px;
+                gap: 8px;
+            }
+            .construction-icon { font-size: 2.2rem; }
+            .construction-schild-text { font-size: 0.95rem; letter-spacing: 2px; }
+            .construction-sub { font-size: 0.68rem; }
+            .construction-stripes { height: 20px; }
+        }
+
+        @media (orientation: landscape) and (max-height: 500px) {
+            .construction-overlay {
+                width: min(340px, 70%);
+                top: 50%;
+            }
+            .construction-body {
+                padding: 10px 16px 10px;
+                gap: 6px;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .construction-icon { font-size: 1.8rem; }
+            .construction-schild-text { font-size: 0.82rem; letter-spacing: 1.5px; }
+            .construction-sub { font-size: 0.62rem; max-width: 260px; }
+            .construction-stripes { height: 16px; }
+            .construction-stripes-bottom { height: 14px; }
         }
     </style>
 </head>
@@ -538,7 +653,27 @@
     </aside>
 
     <main>
-        <div id="d-shop-content"></div>
+        <!-- Blur-Wrapper: umschließt den Shop-Content, lässt Header/Footer/Sidebars unberührt -->
+        <div class="content-blur-wrap">
+            <div id="d-shop-content"></div>
+
+            <!-- Baustellen-Overlay Bento-Box -->
+            <div class="construction-overlay">
+                <div class="construction-stripes"></div>
+                <div class="construction-body">
+                    <div class="construction-icon">🚧</div>
+                    <div class="construction-schild">
+                        <div class="construction-schild-text">Baustelle</div>
+                    </div>
+                    <div class="construction-sub">
+                        Unser Shop ist gerade im Aufbau.<br>
+                        <strong>Bald gibt es hier exklusive Anton-Fanartikel!</strong><br>
+                        Schau bald wieder vorbei.
+                    </div>
+                </div>
+                <div class="construction-stripes-bottom"></div>
+            </div>
+        </div>
     </main>
 
     <footer class="d-footer">
@@ -564,11 +699,30 @@
         <div class="m-epk-container"><a href="https://www.dropbox.com/scl/fo/uaqmqoexqsd3do0sy4fni/AG1t5A5kO9ciFFuF1Ecyh8U?rlkey=amb618zoq017jjk54914jlnkb&e=1&st=b6s5qhal&dl=0" target="_blank" rel="noopener" class="m-epk-text">EPK/PRESSE</a></div>
     </nav>
 
+    <!-- Blur-Wrapper für Mobile -->
     <div class="m-content-scroll" id="m-scroll-area">
-        <div id="m-shop-content"></div>
+        <div class="content-blur-wrap">
+            <div id="m-shop-content"></div>
+
+            <!-- Baustellen-Overlay Bento-Box (Mobile) -->
+            <div class="construction-overlay">
+                <div class="construction-stripes"></div>
+                <div class="construction-body">
+                    <div class="construction-icon">🚧</div>
+                    <div class="construction-schild">
+                        <div class="construction-schild-text">Baustelle</div>
+                    </div>
+                    <div class="construction-sub">
+                        Unser Shop ist gerade im Aufbau.<br>
+                        <strong>Bald gibt es exklusive Anton-Fanartikel!</strong><br>
+                        Schau bald wieder vorbei.
+                    </div>
+                </div>
+                <div class="construction-stripes-bottom"></div>
+            </div>
+        </div>
     </div>
 
-    <!-- bottom social bar: INSIDE mobile-wrapper so it doesn't affect flex layout -->
     <aside class="m-sidebar-right">
         <a href="https://www.youtube.com/@antonmusikvevo3861" target="_blank" rel="noopener"><i class="fa-brands fa-youtube"></i></a>
         <a href="https://www.tiktok.com/@anton.familienpop" target="_blank" rel="noopener"><i class="fa-brands fa-tiktok"></i></a>
@@ -592,7 +746,6 @@
     <span id="toast-text">In den Warenkorb!</span>
 </div>
 
-<!-- ── CONFIRM DIALOG ── -->
 <div id="confirm-overlay" onclick="confirmNo()">
     <div class="confirm-box" onclick="event.stopPropagation()">
         <div class="confirm-icon">🗑️</div>
@@ -606,63 +759,21 @@
 </div>
 
 <script>
-/* =================================================================
-   PRODUKTE – realistische Unsplash-Bilder
-================================================================= */
 const products = [
-    {
-        id:'cap', name:'Cap', desc:'Snapback mit ANTON-Logo.', emoji:'🧢', price:24.99, badge:'NEU', page:'shop-cap.html',
-        img:'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=400&q=80'
-    },
-    {
-        id:'tshirt', name:'T-Shirt', desc:'Baumwoll-Shirt mit ANTON-Frontprint.', emoji:'👕', price:29.99, badge:null, page:'shop-tshirt.html',
-        img:'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&q=80'
-    },
-    {
-        id:'hoodie', name:'Hoodie', desc:'Kapuzenpulli für Konzerte & Ausflüge.', emoji:'🧥', price:49.99, badge:'BELIEBT', page:'shop-hoodie.html',
-        img:'https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=400&q=80'
-    },
-    {
-        id:'sweater', name:'Sweatshirt', desc:'Crewneck mit ANTON-Print auf Rücken.', emoji:'🌟', price:39.99, badge:null, page:'shop-sweatshirt.html',
-        img:'https://images.unsplash.com/photo-1620799139507-2a76f79a2f4d?w=400&q=80'
-    },
-    {
-        id:'schluessel', name:'Schlüsselanhänger', desc:'Metall-Anhänger mit ANTON-Logo.', emoji:'🔑', price:9.99, badge:null, page:'shop-schluessel.html',
-        img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80'
-    },
-    {
-        id:'sticker', name:'Sticker-Set', desc:'10 wetterfeste ANTON-Sticker.', emoji:'🎨', price:6.99, badge:'FAN-FAVE', page:'shop-sticker.html',
-        img:'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=400&q=80'
-    },
-    {
-        id:'poster', name:'Poster A2', desc:'Hochwertiger ANTON-Kunstdruck.', emoji:'🖼️', price:14.99, badge:null, page:'shop-poster.html',
-        img:'https://images.unsplash.com/photo-1578926288207-a90a5366759d?w=400&q=80'
-    },
-    {
-        id:'armband', name:'Armband', desc:'Silikon-Konzertband im ANTON-Look.', emoji:'📿', price:4.99, badge:'KONZERT', page:'shop-armband.html',
-        img:'https://images.unsplash.com/photo-1573408301185-9519f94815d6?w=400&q=80'
-    },
-    {
-        id:'brotdose', name:'Brotdose', desc:'BPA-freie Lunchbox mit ANTON-Design.', emoji:'🍱', price:18.99, badge:'KIDS', page:'shop-brotdose.html',
-        img:'https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?w=400&q=80'
-    },
-    {
-        id:'trinkflasche', name:'Trinkflasche', desc:'Edelstahl – hält kalt & heiß.', emoji:'🧃', price:22.99, badge:null, page:'shop-trinkflasche.html',
-        img:'https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&q=80'
-    },
-    {
-        id:'brett', name:'Frühstücksbrett', desc:'Holzbrett mit ANTON-Gravur.', emoji:'🪵', price:27.99, badge:'PERSONALIB.', page:'shop-brett.html',
-        img:'https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=400&q=80'
-    },
-    {
-        id:'tasse', name:'Tasse', desc:'Keramik-Tasse mit ANTON-Logo.', emoji:'☕', price:16.99, badge:null, page:'shop-tasse.html',
-        img:'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=400&q=80'
-    }
+    { id:'cap', name:'Cap', desc:'Snapback mit ANTON-Logo.', emoji:'🧢', price:24.99, badge:'NEU', page:'shop-cap.html', img:'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=400&q=80' },
+    { id:'tshirt', name:'T-Shirt', desc:'Baumwoll-Shirt mit ANTON-Frontprint.', emoji:'👕', price:29.99, badge:null, page:'shop-tshirt.html', img:'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&q=80' },
+    { id:'hoodie', name:'Hoodie', desc:'Kapuzenpulli für Konzerte & Ausflüge.', emoji:'🧥', price:49.99, badge:'BELIEBT', page:'shop-hoodie.html', img:'https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=400&q=80' },
+    { id:'sweater', name:'Sweatshirt', desc:'Crewneck mit ANTON-Print auf Rücken.', emoji:'🌟', price:39.99, badge:null, page:'shop-sweatshirt.html', img:'https://images.unsplash.com/photo-1620799139507-2a76f79a2f4d?w=400&q=80' },
+    { id:'schluessel', name:'Schlüsselanhänger', desc:'Metall-Anhänger mit ANTON-Logo.', emoji:'🔑', price:9.99, badge:null, page:'shop-schluessel.html', img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80' },
+    { id:'sticker', name:'Sticker-Set', desc:'10 wetterfeste ANTON-Sticker.', emoji:'🎨', price:6.99, badge:'FAN-FAVE', page:'shop-sticker.html', img:'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=400&q=80' },
+    { id:'poster', name:'Poster A2', desc:'Hochwertiger ANTON-Kunstdruck.', emoji:'🖼️', price:14.99, badge:null, page:'shop-poster.html', img:'https://images.unsplash.com/photo-1578926288207-a90a5366759d?w=400&q=80' },
+    { id:'armband', name:'Armband', desc:'Silikon-Konzertband im ANTON-Look.', emoji:'📿', price:4.99, badge:'KONZERT', page:'shop-armband.html', img:'https://images.unsplash.com/photo-1573408301185-9519f94815d6?w=400&q=80' },
+    { id:'brotdose', name:'Brotdose', desc:'BPA-freie Lunchbox mit ANTON-Design.', emoji:'🍱', price:18.99, badge:'KIDS', page:'shop-brotdose.html', img:'https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?w=400&q=80' },
+    { id:'trinkflasche', name:'Trinkflasche', desc:'Edelstahl – hält kalt & heiß.', emoji:'🧃', price:22.99, badge:null, page:'shop-trinkflasche.html', img:'https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&q=80' },
+    { id:'brett', name:'Frühstücksbrett', desc:'Holzbrett mit ANTON-Gravur.', emoji:'🪵', price:27.99, badge:'PERSONALIB.', page:'shop-brett.html', img:'https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=400&q=80' },
+    { id:'tasse', name:'Tasse', desc:'Keramik-Tasse mit ANTON-Logo.', emoji:'☕', price:16.99, badge:null, page:'shop-tasse.html', img:'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=400&q=80' }
 ];
 
-/* =================================================================
-   WARENKORB
-================================================================= */
 const PAYPAL_BUSINESS = 'ZTBGBVKBM4U2G';
 const PAYPAL_CURRENCY = 'EUR';
 const PAYPAL_URL      = 'https://www.paypal.com/cgi-bin/webscr';
@@ -672,7 +783,6 @@ try { cart = JSON.parse(localStorage.getItem('anton_shop_cart') || '[]'); } catc
 function saveCart() { try { localStorage.setItem('anton_shop_cart', JSON.stringify(cart)); } catch(e) {} }
 
 function stepQty(id, delta) {
-    // update ALL qty displays for this product (desktop + mobile rendered)
     document.querySelectorAll('#qty-' + id).forEach(el => {
         let v = parseInt(el.textContent) + delta;
         if (v < 1) v = 1;
@@ -702,17 +812,9 @@ function changeQty(id, delta) {
     saveCart(); updateCartUI();
 }
 
-/* ── Confirm Dialog ── */
-function askClearCart() {
-    document.getElementById('confirm-overlay').classList.add('show');
-}
-function confirmYes() {
-    document.getElementById('confirm-overlay').classList.remove('show');
-    cart = []; saveCart(); updateCartUI();
-}
-function confirmNo() {
-    document.getElementById('confirm-overlay').classList.remove('show');
-}
+function askClearCart() { document.getElementById('confirm-overlay').classList.add('show'); }
+function confirmYes() { document.getElementById('confirm-overlay').classList.remove('show'); cart = []; saveCart(); updateCartUI(); }
+function confirmNo() { document.getElementById('confirm-overlay').classList.remove('show'); }
 
 function escId(k) { return k.replace(/\\/g,'\\\\').replace(/'/g,"\\'"); }
 
@@ -787,9 +889,6 @@ function showToast(msg) {
     toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
 }
 
-/* =================================================================
-   RENDER
-================================================================= */
 function buildShopHTML() {
     const hero = `
         <div class="shop-hero">
@@ -866,9 +965,7 @@ function renderShop() {
     updateCartUI();
 }
 
-/* =================================================================
-   DESKTOP MENU
-================================================================= */
+/* DESKTOP MENU */
 let dSidebarTimeout;
 const dSidebar = document.getElementById('d-sidebar');
 function resetDSidebarTimer() {
@@ -889,9 +986,7 @@ document.addEventListener('click', function(e) {
     }
 });
 
-/* =================================================================
-   MOBILE LOGIC
-================================================================= */
+/* MOBILE LOGIC */
 const mSidebar = document.getElementById('m-sidebar');
 const mMenuBtn = document.getElementById('m-menu-trigger');
 const mIdBtn   = document.getElementById('m-id-btn');
