@@ -2,150 +2,92 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>3-Farben Stencil Pro</title>
+    <title>Stencil mit Basis-Platte</title>
     <style>
-        body {
-            background-color: #ffffff;
-            font-family: 'Segoe UI', sans-serif;
-            padding: 40px;
-            color: #222;
-        }
-        .ui-box {
-            background: #f9f9f9;
-            padding: 25px;
-            border-radius: 12px;
-            border: 1px solid #ddd;
-            margin-bottom: 30px;
-        }
-        .layer-container {
-            display: flex;
-            gap: 20px;
-            justify-content: space-around;
-            flex-wrap: wrap;
-        }
-        .layer-card {
-            background: white;
-            padding: 15px;
-            border: 1px solid #eee;
-            border-radius: 8px;
-            text-align: center;
-        }
-        canvas {
-            border: 1px solid #000;
-            max-width: 280px;
-            display: block;
-            margin-bottom: 10px;
-        }
-        button {
-            background: #222;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-        button:hover { background: #444; }
+        body { background-color: #ffffff; font-family: sans-serif; padding: 20px; }
+        .layer-box { display: inline-block; margin: 10px; border: 1px solid #ccc; padding: 10px; }
+        canvas { display: block; border: 1px solid #000; }
     </style>
 </head>
 <body>
-
-    <h2>3-Farben Stencil Filter & STL Export</h2>
-    
-    <div class="ui-box">
-        <input type="file" id="upload" accept="image/*">
-        <p><small>Das Bild wird automatisch in 3 Helligkeitsstufen (Ebenen) zerlegt.</small></p>
-    </div>
-
-    <div id="layers" class="layer-container"></div>
+    <h2>Stencil-Generator mit Verbindungs-Basis</h2>
+    <input type="file" id="upload" accept="image/*">
+    <div id="output"></div>
 
     <script>
-        const upload = document.getElementById('upload');
-        const layersDiv = document.getElementById('layers');
-
-        upload.onchange = (e) => {
+        document.getElementById('upload').onchange = (e) => {
             const reader = new FileReader();
             reader.onload = (event) => {
                 const img = new Image();
-                img.onload = () => process(img);
+                img.onload = () => processImage(img);
                 img.src = event.target.result;
             };
             reader.readAsDataURL(e.target.files[0]);
         };
 
-        function process(img) {
-            layersDiv.innerHTML = '';
-            const w = 400; // Standardbreite für Stabilität
-            const h = (img.height / img.width) * w;
+        function processImage(img) {
+            const output = document.getElementById('output');
+            output.innerHTML = '';
+            const w = 300, h = Math.floor((img.height / img.width) * w);
 
-            // Definition der 3 Zonen (Dunkel, Mittel, Hell)
-            const zones = [
-                { name: "Ebene 1 (Dunkel)", range: [0, 85] },
-                { name: "Ebene 2 (Mittel)", range: [86, 170] },
-                { name: "Ebene 3 (Hell)", range: [171, 255] }
-            ];
+            const canvas = document.createElement('canvas');
+            canvas.width = w; canvas.height = h;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, w, h);
+            const imgData = ctx.getImageData(0, 0, w, h);
 
-            zones.forEach((zone, idx) => {
-                const card = document.createElement('div');
-                card.className = 'layer-card';
+            // Drei Schichten erzeugen
+            for(let layer=1; layer<=3; layer++) {
+                const threshold = layer * 60;
+                const container = document.createElement('div');
+                container.className = 'layer-box';
+                container.innerHTML = `<h4>Ebene ${layer}</h4>`;
                 
-                const canvas = document.createElement('canvas');
-                canvas.width = w;
-                canvas.height = h;
-                const ctx = canvas.getContext('2d');
+                // Canvas für Vorschau
+                const c = document.createElement('canvas');
+                c.width = w; c.height = h;
+                const cCtx = c.getContext('2d');
+                cCtx.fillStyle = 'white'; cCtx.fillRect(0,0,w,h);
                 
-                ctx.drawImage(img, 0, 0, w, h);
-                const imgData = ctx.getImageData(0, 0, w, h);
-                const data = imgData.data;
-
-                for (let i = 0; i < data.length; i += 4) {
-                    const brightness = (data[i] + data[i+1] + data[i+2]) / 3;
-                    
-                    // Filter: Nur Pixel im Bereich der Zone werden schwarz (Material)
-                    // Alles andere wird weiß (Loch/Leerraum)
-                    const isInZone = brightness >= zone.range[0] && brightness <= zone.range[1];
-                    const val = isInZone ? 0 : 255;
-                    
-                    data[i] = data[i+1] = data[i+2] = val;
+                const pixels = imgData.data;
+                for(let i=0; i<pixels.length; i+=4) {
+                    const avg = (pixels[i]+pixels[i+1]+pixels[i+2])/3;
+                    if(avg < threshold) {
+                        cCtx.fillStyle = 'black';
+                        cCtx.fillRect((i/4)%w, Math.floor(i/4/w), 1, 1);
+                    }
                 }
-
-                ctx.putImageData(imgData, 0, 0);
-                
-                const title = document.createElement('h4');
-                title.innerText = zone.name;
                 
                 const btn = document.createElement('button');
-                btn.innerText = "Als STL speichern";
-                btn.onclick = () => downloadSTL(imgData, w, h, zone.name);
-
-                card.appendChild(title);
-                card.appendChild(canvas);
-                card.appendChild(btn);
-                layersDiv.appendChild(card);
-            });
+                btn.innerText = "STL mit Basis laden";
+                btn.onclick = () => exportSTL(cCtx.getImageData(0,0,w,h), w, h);
+                
+                container.appendChild(c);
+                container.appendChild(btn);
+                output.appendChild(container);
+            }
         }
 
-        function downloadSTL(imageData, w, h, name) {
+        function exportSTL(imgData, w, h) {
             let stl = "solid stencil\n";
-            const data = imageData.data;
-            const res = 2; // Auflösungs-Schrittweite (für Performance)
-
-            for (let y = 0; y < h; y += res) {
-                for (let x = 0; x < w; x += res) {
-                    const i = (Math.floor(y) * w + Math.floor(x)) * 4;
-                    if (data[i] === 0) {
-                        // Einfaches Quad-Mapping für STL
-                        stl += `facet normal 0 0 1\nouter loop\n`;
-                        stl += `vertex ${x} ${y} 1\nvertex ${x+res} ${y} 1\nvertex ${x} ${y+res} 1\n`;
-                        stl += `endloop\nendfacet\n`;
+            const d = imgData.data;
+            // Basis-Platte (Z=0.2mm)
+            for(let y=0; y<h; y+=2) {
+                for(let x=0; x<w; x+=2) {
+                    // Zeichne Basis
+                    stl += `facet normal 0 0 1\nouter loop\nvertex ${x} ${y} 0.2\nvertex ${x+2} ${y} 0.2\nvertex ${x} ${y+2} 0.2\nendloop\nendfacet\n`;
+                    // Zeichne Stencil-Element (Z=1.0mm)
+                    if(d[(y*w+x)*4] === 0) {
+                        stl += `facet normal 0 0 1\nouter loop\nvertex ${x} ${y} 1.0\nvertex ${x+2} ${y} 1.0\nvertex ${x} ${y+2} 1.0\nendloop\nendfacet\n`;
                     }
                 }
             }
             stl += "endsolid stencil";
-            const blob = new Blob([stl], {type: 'text/plain'});
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = `${name.replace(/\s+/g, '_')}.stl`;
-            link.click();
+            const blob = new Blob([stl], {type:'text/plain'});
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = "stencil_base.stl";
+            a.click();
         }
     </script>
 </body>
