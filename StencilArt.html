@@ -2,16 +2,21 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Stencil mit Basis-Platte</title>
+    <title>Stencil-Profi Generator</title>
     <style>
-        body { background-color: #ffffff; font-family: sans-serif; padding: 20px; }
-        .layer-box { display: inline-block; margin: 10px; border: 1px solid #ccc; padding: 10px; }
-        canvas { display: block; border: 1px solid #000; }
+        body { background-color: #ffffff; font-family: sans-serif; padding: 20px; color: #333; }
+        .layer-box { border: 2px solid #333; padding: 15px; margin: 10px; display: inline-block; width: 320px; }
+        canvas { display: block; border: 1px solid #999; margin-bottom: 10px; width: 100%; }
+        .info { background: #f0f0f0; padding: 10px; border-left: 5px solid #222; margin-bottom: 20px; }
     </style>
 </head>
 <body>
-    <h2>Stencil-Generator mit Verbindungs-Basis</h2>
-    <input type="file" id="upload" accept="image/*">
+    <h2>Stencil-Profi Generator</h2>
+    <div class="info">
+        <strong>Anleitung:</strong> Lade ein Bild hoch. Das Tool erstellt 3 Ebenen.<br>
+        <strong>Sprühen:</strong> Sprühe zuerst das Hellste, dann das Mittlere, zum Schluss das Dunkelste (Schatten).
+    </div>
+    <input type="file" id="upload" accept="image/*"><br><br>
     <div id="output"></div>
 
     <script>
@@ -19,75 +24,61 @@
             const reader = new FileReader();
             reader.onload = (event) => {
                 const img = new Image();
-                img.onload = () => processImage(img);
+                img.onload = () => process(img);
                 img.src = event.target.result;
             };
             reader.readAsDataURL(e.target.files[0]);
         };
 
-        function processImage(img) {
+        function process(img) {
             const output = document.getElementById('output');
             output.innerHTML = '';
-            const w = 300, h = Math.floor((img.height / img.width) * w);
+            const w = 300; const h = Math.floor((img.height / img.width) * w);
+            const layers = [
+                { name: "Highlight (Hell)", range: [171, 255], color: "Weiß oder Hellgrau" },
+                { name: "Mittelton (Mittel)", range: [86, 170], color: "Mittelgrau oder Blau" },
+                { name: "Schatten (Dunkel)", range: [0, 85], color: "Schwarz" }
+            ];
 
-            const canvas = document.createElement('canvas');
-            canvas.width = w; canvas.height = h;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(img, 0, 0, w, h);
-            const imgData = ctx.getImageData(0, 0, w, h);
-
-            // Drei Schichten erzeugen
-            for(let layer=1; layer<=3; layer++) {
-                const threshold = layer * 60;
-                const container = document.createElement('div');
-                container.className = 'layer-box';
-                container.innerHTML = `<h4>Ebene ${layer}</h4>`;
-                
-                // Canvas für Vorschau
-                const c = document.createElement('canvas');
-                c.width = w; c.height = h;
-                const cCtx = c.getContext('2d');
-                cCtx.fillStyle = 'white'; cCtx.fillRect(0,0,w,h);
-                
-                const pixels = imgData.data;
-                for(let i=0; i<pixels.length; i+=4) {
-                    const avg = (pixels[i]+pixels[i+1]+pixels[i+2])/3;
-                    if(avg < threshold) {
-                        cCtx.fillStyle = 'black';
-                        cCtx.fillRect((i/4)%w, Math.floor(i/4/w), 1, 1);
-                    }
+            layers.forEach((l, idx) => {
+                const div = document.createElement('div');
+                div.className = 'layer-box';
+                div.innerHTML = `<h4>Ebene ${idx+1}: ${l.name}</h4><p>Farbe: ${l.color}</p>`;
+                const canvas = document.createElement('canvas');
+                canvas.width = w; canvas.height = h;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, w, h);
+                const data = ctx.getImageData(0, 0, w, h).data;
+                for(let i=0; i<data.length; i+=4) {
+                    const avg = (data[i]+data[i+1]+data[i+2])/3;
+                    const val = (avg >= l.range[0] && avg <= l.range[1]) ? 0 : 255;
+                    data[i]=data[i+1]=data[i+2]=val;
                 }
-                
+                ctx.putImageData(new ImageData(data, w, h), 0, 0);
                 const btn = document.createElement('button');
-                btn.innerText = "STL mit Basis laden";
-                btn.onclick = () => exportSTL(cCtx.getImageData(0,0,w,h), w, h);
-                
-                container.appendChild(c);
-                container.appendChild(btn);
-                output.appendChild(container);
-            }
+                btn.innerText = "STL (mit 0.2mm Basis) laden";
+                btn.onclick = () => saveSTL(data, w, h, l.name);
+                div.appendChild(canvas); div.appendChild(btn);
+                output.appendChild(div);
+            });
         }
 
-        function exportSTL(imgData, w, h) {
+        function saveSTL(d, w, h, name) {
             let stl = "solid stencil\n";
-            const d = imgData.data;
-            // Basis-Platte (Z=0.2mm)
-            for(let y=0; y<h; y+=2) {
-                for(let x=0; x<w; x+=2) {
-                    // Zeichne Basis
-                    stl += `facet normal 0 0 1\nouter loop\nvertex ${x} ${y} 0.2\nvertex ${x+2} ${y} 0.2\nvertex ${x} ${y+2} 0.2\nendloop\nendfacet\n`;
-                    // Zeichne Stencil-Element (Z=1.0mm)
+            for(let y=0; y<h; y+=3) {
+                for(let x=0; x<w; x+=3) {
+                    // Basis
+                    stl += `facet normal 0 0 1\nouter loop\nvertex ${x} ${y} 0.2\nvertex ${x+3} ${y} 0.2\nvertex ${x} ${y+3} 0.2\nendloop\nendfacet\n`;
+                    // Stencil-Element
                     if(d[(y*w+x)*4] === 0) {
-                        stl += `facet normal 0 0 1\nouter loop\nvertex ${x} ${y} 1.0\nvertex ${x+2} ${y} 1.0\nvertex ${x} ${y+2} 1.0\nendloop\nendfacet\n`;
+                        stl += `facet normal 0 0 1\nouter loop\nvertex ${x} ${y} 1.0\nvertex ${x+3} ${y} 1.0\nvertex ${x} ${y+3} 1.0\nendloop\nendfacet\n`;
                     }
                 }
             }
             stl += "endsolid stencil";
-            const blob = new Blob([stl], {type:'text/plain'});
             const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = "stencil_base.stl";
-            a.click();
+            a.href = URL.createObjectURL(new Blob([stl], {type:'text/plain'}));
+            a.download = name + ".stl"; a.click();
         }
     </script>
 </body>
