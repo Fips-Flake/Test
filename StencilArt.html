@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Stencil Layer Generator</title>
+    <style>
+        body {
+            background-color: #ffffff;
+            font-family: sans-serif;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .canvas-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .layer-box {
+            text-align: center;
+            border: 1px solid #eee;
+            padding: 10px;
+        }
+        canvas {
+            max-width: 300px;
+            height: auto;
+            border: 1px solid #000;
+        }
+        input, button {
+            margin: 10px 0;
+            padding: 8px;
+        }
+        .note {
+            background-color: #fff3cd;
+            padding: 10px;
+            border-left: 5px solid #ffeeba;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Stencil-Layer-Generator für 3D-Druck</h2>
+    <div class="note">
+        <strong>Hinweis für den 3D-Druck:</strong> Achte darauf, dass freistehende Teile (Inseln) in deinem CAD-Programm mit kleinen Stegen (Bridges) verbunden werden müssen, damit sie beim Drucken nicht herausfallen!
+    </div>
+
+    <div class="container">
+        <label for="imageUpload">Wähle ein Bild aus:</label><br>
+        <input type="file" id="imageUpload" accept="image/*">
+        <br>
+        <button onclick="processImage()">Schichten generieren</button>
+    </div>
+
+    <div id="output" class="canvas-container">
+        </div>
+
+    <script>
+        function processImage() {
+            const input = document.getElementById('imageUpload');
+            const output = document.getElementById('output');
+            
+            if (!input.files[0]) {
+                alert("Bitte zuerst ein Bild auswählen.");
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const img = new Image();
+                img.onload = function() {
+                    output.innerHTML = ''; // Vorherige Ergebnisse löschen
+                    
+                    // Schwellenwerte für 3 Schichten (Schwarz/Dunkelgrau/Hellgrau)
+                    const thresholds = [64, 128, 192];
+                    
+                    thresholds.forEach((threshold, index) => {
+                        createLayer(img, threshold, `Schicht ${index + 1} (Schwellenwert: ${threshold})`);
+                    });
+                };
+                img.src = event.target.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+
+        function createLayer(img, threshold, title) {
+            const layerBox = document.createElement('div');
+            layerBox.className = 'layer-box';
+            
+            const label = document.createElement('p');
+            label.innerText = title;
+            
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = img.width;
+            canvas.height = img.height;
+            
+            ctx.drawImage(img, 0, 0);
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const data = imageData.data;
+
+            for (let i = 0; i < data.length; i += 4) {
+                // Durchschnittswert für Graustufen
+                const avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+                
+                // Wenn dunkler als Schwellenwert -> Schwarz, sonst Weiß
+                const val = avg < threshold ? 0 : 255;
+                
+                data[i] = val;     // R
+                data[i + 1] = val; // G
+                data[i + 2] = val; // B
+            }
+            
+            ctx.putImageData(imageData, 0, 0);
+            
+            layerBox.appendChild(label);
+            layerBox.appendChild(canvas);
+            
+            const downloadBtn = document.createElement('button');
+            downloadBtn.innerText = "Als Bild speichern";
+            downloadBtn.onclick = () => {
+                const link = document.createElement('a');
+                link.download = `stencil-layer-${threshold}.png`;
+                link.href = canvas.toDataURL();
+                link.click();
+            };
+            
+            layerBox.appendChild(document.createElement('br'));
+            layerBox.appendChild(downloadBtn);
+            document.getElementById('output').appendChild(layerBox);
+        }
+    </script>
+</body>
+</html>
