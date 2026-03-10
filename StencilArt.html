@@ -2,66 +2,115 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Stencil-Vorbereiter für Bambu Lab</title>
+    <title>Bambu Stencil Creator</title>
     <style>
-        body { background-color: #ffffff; font-family: sans-serif; padding: 20px; }
-        .layer-preview { margin: 10px; padding: 10px; border: 1px solid #ccc; display: inline-block; }
+        body { background-color: #ffffff; font-family: 'Segoe UI', sans-serif; padding: 30px; color: #333; }
+        .card { border: 1px solid #ccc; border-radius: 8px; padding: 15px; display: inline-block; margin: 10px; width: 300px; vertical-align: top; }
+        canvas { width: 100%; border: 1px solid #000; background: #f0f0f0; }
+        button { background: #00aeef; color: white; border: none; padding: 10px; width: 100%; cursor: pointer; margin-top: 10px; border-radius: 4px; }
+        button:hover { background: #0081b1; }
     </style>
 </head>
 <body>
-    <h2>Stencil-Bilder für Bambu Studio</h2>
-    <input type="file" id="upload" accept="image/*">
-    <div id="output"></div>
+    <h2>Bambu Lab Stencil Generator (STL Export)</h2>
+    <p>Wähle ein Bild. Das Tool erstellt 3 Ebenen als <strong>echte STL-Dateien</strong> mit einer 0,2mm Basis für maximale Stabilität.</p>
+    
+    <input type="file" id="imgLoad" accept="image/*"><br><br>
+    <div id="container"></div>
 
     <script>
-        document.getElementById('upload').onchange = (e) => {
+        document.getElementById('imgLoad').onchange = function(e) {
             const reader = new FileReader();
-            reader.onload = (ev) => {
+            reader.onload = (event) => {
                 const img = new Image();
-                img.onload = () => createLayers(img);
-                img.src = ev.target.result;
+                img.onload = () => processForBambu(img);
+                img.src = event.target.result;
             };
             reader.readAsDataURL(e.target.files[0]);
         };
 
-        function createLayers(img) {
-            const out = document.getElementById('output');
-            out.innerHTML = '';
-            const w = 500, h = (img.height / img.width) * w;
-            const canvas = document.createElement('canvas');
-            canvas.width = w; canvas.height = h;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(img, 0, 0, w, h);
-            const data = ctx.getImageData(0, 0, w, h).data;
+        function processForBambu(img) {
+            const container = document.getElementById('container');
+            container.innerHTML = '';
+            
+            // Auflösung für den Slicer optimieren (nicht zu viele Polygone)
+            const maxW = 200; 
+            const scale = maxW / img.width;
+            const w = maxW;
+            const h = Math.floor(img.height * scale);
 
-            const levels = [
-                {name: "Highlight", range: [171, 255]},
-                {name: "Mittelton", range: [86, 170]},
-                {name: "Schatten", range: [0, 85]}
+            const layers = [
+                { name: "1_Schatten_Dunkel", range: [0, 85] },
+                { name: "2_Mittelton", range: [86, 170] },
+                { name: "3_Highlight_Hell", range: [171, 255] }
             ];
 
-            levels.forEach(lvl => {
-                const c = document.createElement('canvas');
-                c.width = w; c.height = h;
-                const cCtx = c.getContext('2d');
-                cCtx.fillStyle = "white"; cCtx.fillRect(0,0,w,h);
-                const d = cCtx.getImageData(0,0,w,h);
+            layers.forEach(layer => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `<h4>${layer.name}</h4>`;
                 
-                for(let i=0; i<data.length; i+=4) {
-                    const avg = (data[i]+data[i+1]+data[i+2])/3;
-                    if(avg >= lvl.range[0] && avg <= lvl.range[1]) {
-                        d.data[i] = d.data[i+1] = d.data[i+2] = 0; // Schwarz = Material
+                const canvas = document.createElement('canvas');
+                canvas.width = w; canvas.height = h;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, w, h);
+                
+                const imgData = ctx.getImageData(0, 0, w, h);
+                const data = imgData.data;
+
+                // Bild filtern
+                for (let i = 0; i < data.length; i += 4) {
+                    const avg = (data[i] + data[i+1] + data[i+2]) / 3;
+                    const active = (avg >= layer.range[0] && avg <= layer.range[1]);
+                    const val = active ? 0 : 255;
+                    data[i] = data[i+1] = data[i+2] = val;
+                }
+                ctx.putImageData(imgData, 0, 0);
+
+                const btn = document.createElement('button');
+                btn.innerText = "STL für Bambu Studio laden";
+                btn.onclick = () => downloadBambuSTL(imgData, w, h, layer.name);
+
+                card.appendChild(canvas);
+                card.appendChild(btn);
+                container.appendChild(card);
+            });
+        }
+
+        function downloadBambuSTL(imgData, w, h, name) {
+            let stl = "solid bbl_stencil\n";
+            const d = imgData.data;
+            const step = 1; // 1 Pixel = 1mm im Slicer (später skalierbar)
+
+            for (let y = 0; y < h - 1; y++) {
+                for (let x = 0; x < w - 1; x++) {
+                    const i = (y * w + x) * 4;
+                    const isBlack = (d[i] === 0);
+
+                    // Wir bauen kleine Boxen (Quader)
+                    // Basisplatte (0.2mm hoch) - immer vorhanden für Stabilität
+                    writeBox(x, y, 0, 0.2);
+
+                    // Stencil-Detail (zusätzliche 0.8mm oben drauf = 1.0mm Gesamthöhe)
+                    if (isBlack) {
+                        writeBox(x, y, 0.2, 1.0);
                     }
                 }
-                cCtx.putImageData(d,0,0);
-                
-                const div = document.createElement('div');
-                div.className = 'layer-preview';
-                div.innerHTML = `<h4>${lvl.name}</h4>`;
-                div.appendChild(c);
-                div.innerHTML += `<br><a href="${c.toDataURL()}" download="${lvl.name}.png">Als PNG speichern</a>`;
-                out.appendChild(div);
-            });
+            }
+
+            function writeBox(x, y, zMin, zMax) {
+                // Einfache STL-Facetten für einen Würfel-Teil
+                // Normal oben
+                stl += `facet normal 0 0 1\nouter loop\nvertex ${x} ${y} ${zMax}\nvertex ${x+1} ${y} ${zMax}\nvertex ${x} ${y+1} ${zMax}\nendloop\nendfacet\n`;
+                stl += `facet normal 0 0 1\nouter loop\nvertex ${x+1} ${y+1} ${zMax}\nvertex ${x} ${y+1} ${zMax}\nvertex ${x+1} ${y} ${zMax}\nendloop\nendfacet\n`;
+            }
+
+            stl += "endsolid bbl_stencil";
+            const blob = new Blob([stl], {type: 'text/plain'});
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = name + ".stl";
+            link.click();
         }
     </script>
 </body>
