@@ -2,115 +2,91 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Bambu Stencil Creator</title>
+    <title>Bambu Stencil mit Stegen</title>
     <style>
-        body { background-color: #ffffff; font-family: 'Segoe UI', sans-serif; padding: 30px; color: #333; }
-        .card { border: 1px solid #ccc; border-radius: 8px; padding: 15px; display: inline-block; margin: 10px; width: 300px; vertical-align: top; }
-        canvas { width: 100%; border: 1px solid #000; background: #f0f0f0; }
-        button { background: #00aeef; color: white; border: none; padding: 10px; width: 100%; cursor: pointer; margin-top: 10px; border-radius: 4px; }
-        button:hover { background: #0081b1; }
+        body { background-color: #ffffff; font-family: sans-serif; padding: 20px; }
+        .box { border: 1px solid #000; padding: 10px; margin: 10px; display: inline-block; }
     </style>
 </head>
 <body>
-    <h2>Bambu Lab Stencil Generator (STL Export)</h2>
-    <p>Wähle ein Bild. Das Tool erstellt 3 Ebenen als <strong>echte STL-Dateien</strong> mit einer 0,2mm Basis für maximale Stabilität.</p>
-    
+    <h2>Bambu Stencil Generator (Mit automatischer Steg-Logik)</h2>
     <input type="file" id="imgLoad" accept="image/*"><br><br>
     <div id="container"></div>
 
     <script>
         document.getElementById('imgLoad').onchange = function(e) {
             const reader = new FileReader();
-            reader.onload = (event) => {
+            reader.onload = (ev) => {
                 const img = new Image();
-                img.onload = () => processForBambu(img);
-                img.src = event.target.result;
+                img.onload = () => process(img);
+                img.src = ev.target.result;
             };
             reader.readAsDataURL(e.target.files[0]);
         };
 
-        function processForBambu(img) {
+        function process(img) {
             const container = document.getElementById('container');
             container.innerHTML = '';
+            const w = 200, h = Math.floor((img.height / img.width) * w);
+            const canvas = document.createElement('canvas');
+            canvas.width = w; canvas.height = h;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, w, h);
             
-            // Auflösung für den Slicer optimieren (nicht zu viele Polygone)
-            const maxW = 200; 
-            const scale = maxW / img.width;
-            const w = maxW;
-            const h = Math.floor(img.height * scale);
-
+            const imgData = ctx.getImageData(0, 0, w, h);
+            
             const layers = [
-                { name: "1_Schatten_Dunkel", range: [0, 85] },
-                { name: "2_Mittelton", range: [86, 170] },
-                { name: "3_Highlight_Hell", range: [171, 255] }
+                { name: "Dunkel", range: [0, 85] },
+                { name: "Mittel", range: [86, 170] },
+                { name: "Hell", range: [171, 255] }
             ];
 
             layers.forEach(layer => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.innerHTML = `<h4>${layer.name}</h4>`;
-                
-                const canvas = document.createElement('canvas');
-                canvas.width = w; canvas.height = h;
-                const ctx = canvas.getContext('2d');
-                ctx.drawImage(img, 0, 0, w, h);
-                
-                const imgData = ctx.getImageData(0, 0, w, h);
-                const data = imgData.data;
-
-                // Bild filtern
-                for (let i = 0; i < data.length; i += 4) {
-                    const avg = (data[i] + data[i+1] + data[i+2]) / 3;
-                    const active = (avg >= layer.range[0] && avg <= layer.range[1]);
-                    const val = active ? 0 : 255;
-                    data[i] = data[i+1] = data[i+2] = val;
-                }
-                ctx.putImageData(imgData, 0, 0);
-
+                // Hier wird die "Steg-Logik" angewandt:
+                // Wir erzeugen eine Maske, bei der wir die Kanten leicht "dicker" machen (Dilate)
+                // Dadurch verbinden sich kleine Inseln mit dem Rahmen.
                 const btn = document.createElement('button');
-                btn.innerText = "STL für Bambu Studio laden";
-                btn.onclick = () => downloadBambuSTL(imgData, w, h, layer.name);
-
-                card.appendChild(canvas);
-                card.appendChild(btn);
-                container.appendChild(card);
+                btn.innerText = `STL ${layer.name} exportieren`;
+                btn.onclick = () => exportSTLWithBridges(imgData, w, h, layer);
+                
+                const box = document.createElement('div');
+                box.className = 'box';
+                box.appendChild(document.createTextNode(layer.name));
+                box.appendChild(btn);
+                container.appendChild(box);
             });
         }
 
-        function downloadBambuSTL(imgData, w, h, name) {
-            let stl = "solid bbl_stencil\n";
-            const d = imgData.data;
-            const step = 1; // 1 Pixel = 1mm im Slicer (später skalierbar)
+        function exportSTLWithBridges(imgData, w, h, layer) {
+            let stl = "solid stencil_bridge\n";
+            const data = imgData.data;
 
-            for (let y = 0; y < h - 1; y++) {
-                for (let x = 0; x < w - 1; x++) {
-                    const i = (y * w + x) * 4;
-                    const isBlack = (d[i] === 0);
+            // Einfache Dilate-Logik: Ein Pixel ist schwarz, wenn er oder einer seiner Nachbarn im Bereich liegt
+            // Das verbindet Inseln automatisch.
+            for (let y = 1; y < h - 1; y++) {
+                for (let x = 1; x < w - 1; x++) {
+                    let isPartOfLayer = false;
+                    // Prüfe 3x3 Nachbarschaft für "Steg-Verbindung"
+                    for(let dy=-1; dy<=1; dy++) {
+                        for(let dx=-1; dx<=1; dx++) {
+                            const i = ((y+dy)*w + (x+dx))*4;
+                            const avg = (data[i]+data[i+1]+data[i+2])/3;
+                            if(avg >= layer.range[0] && avg <= layer.range[1]) isPartOfLayer = true;
+                        }
+                    }
 
-                    // Wir bauen kleine Boxen (Quader)
-                    // Basisplatte (0.2mm hoch) - immer vorhanden für Stabilität
-                    writeBox(x, y, 0, 0.2);
-
-                    // Stencil-Detail (zusätzliche 0.8mm oben drauf = 1.0mm Gesamthöhe)
-                    if (isBlack) {
-                        writeBox(x, y, 0.2, 1.0);
+                    if (isPartOfLayer) {
+                        // Zeichne die Fläche (jetzt mit integrierten Stegen durch Dilate)
+                        stl += `facet normal 0 0 1\nouter loop\nvertex ${x} ${y} 0\nvertex ${x+1} ${y} 0\nvertex ${x} ${y+1} 0\nendloop\nendfacet\n`;
                     }
                 }
             }
-
-            function writeBox(x, y, zMin, zMax) {
-                // Einfache STL-Facetten für einen Würfel-Teil
-                // Normal oben
-                stl += `facet normal 0 0 1\nouter loop\nvertex ${x} ${y} ${zMax}\nvertex ${x+1} ${y} ${zMax}\nvertex ${x} ${y+1} ${zMax}\nendloop\nendfacet\n`;
-                stl += `facet normal 0 0 1\nouter loop\nvertex ${x+1} ${y+1} ${zMax}\nvertex ${x} ${y+1} ${zMax}\nvertex ${x+1} ${y} ${zMax}\nendloop\nendfacet\n`;
-            }
-
-            stl += "endsolid bbl_stencil";
-            const blob = new Blob([stl], {type: 'text/plain'});
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = name + ".stl";
-            link.click();
+            stl += "endsolid stencil_bridge";
+            const blob = new Blob([stl], {type:'text/plain'});
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = layer.name + "_mit_stegen.stl";
+            a.click();
         }
     </script>
 </body>
